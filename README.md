@@ -1,7 +1,7 @@
-# Matchr — Demo com WhatsApp
+# Matchr — Base Fake Realista 3.000 Imóveis
 
-Inclui botão funcional para enviar por WhatsApp a curadoria do cliente.
+Versão com aproximadamente 3.000 imóveis fictícios, 200 por bairro nobre de São Paulo.
 
-## Publicar
+Bairros incluídos: Jardim América, Jardim Europa, Jardim Paulistano, Itaim Bibi, Vila Nova Conceição, Alto de Pinheiros, Boaçava, Cidade Jardim, Higienópolis, Moema, Brooklin, Real Parque, Jardins, Pinheiros e Vila Madalena.
 
-Suba estes arquivos no GitHub. A Vercel fará o deploy automaticamente.
+Inclui botão de WhatsApp para compartilhar curadoria.
