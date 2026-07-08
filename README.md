@@ -1,17 +1,17 @@
-# Matchr Demo
+# MatchR Demo
 
-MVP estático em HTML, CSS e JavaScript, pronto para publicar no GitHub Pages.
+MVP estático do MatchR em HTML, CSS e JavaScript.
+
+## O que é
+
+O MatchR é uma plataforma que ajuda corretores imobiliários de alto padrão a encontrar o imóvel certo para cada cliente, com rapidez e eficiência sem perder tempo.
 
 ## Arquivos
 
-- `index.html`: aplicativo completo do MVP.
+- `index.html`: MVP completo, com layout, lógica, base simulada e logo embutido.
 - `.nojekyll`: evita processamento Jekyll no GitHub Pages.
-- `.gitignore`: ignora arquivos automáticos do macOS, como `.DS_Store`.
+- `.gitignore`: evita subir arquivos automáticos do macOS, como `.DS_Store`.
 
-## Publicação
+## Publicação no GitHub Pages
 
-1. Copie estes arquivos para a raiz do repositório `matchr-demo`.
-2. Faça commit no GitHub Desktop.
-3. Clique em Push origin.
-4. No GitHub, confira se o repositório tem `index.html` na raiz.
-5. Em Settings > Pages, publique pela branch `main` e pasta `/root`.
+Deixe o `index.html` na raiz do repositório e configure o GitHub Pages para publicar a branch `main` na pasta `/root`.
