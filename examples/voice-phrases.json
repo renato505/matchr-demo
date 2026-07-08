@@ -1,0 +1,37 @@
+[
+  {
+    "input": "Apartamento para compra na Vila Madalena até 1 milhão e meio, três quartos, duas suítes, duas vagas e varanda gourmet.",
+    "expectedHighlights": {
+      "transaction": "compra",
+      "propertyType": "apartamento",
+      "neighborhoods": ["Vila Madalena"],
+      "priceMax": 1500000,
+      "bedroomsMin": 3,
+      "suitesMin": 2,
+      "parkingSpacesMin": 2,
+      "mustHave": ["varanda gourmet"]
+    }
+  },
+  {
+    "input": "Cliente quer alugar studio em Pinheiros ou Jardins, perto do metrô, até 5 mil com condomínio incluso, sem térreo.",
+    "expectedHighlights": {
+      "transaction": "aluguel",
+      "propertyType": "studio",
+      "neighborhoods": ["Pinheiros", "Jardins"],
+      "priceMax": 5000,
+      "includesCondoOrFees": true,
+      "negative": ["térreo"]
+    }
+  },
+  {
+    "input": "Casa em condomínio em Florianópolis, acima de 250 metros, quatro suítes, piscina, urgente, até 3 milhões.",
+    "expectedHighlights": {
+      "propertyType": "casa",
+      "cities": ["Florianópolis"],
+      "areaMinM2": 250,
+      "suitesMin": 4,
+      "priceMax": 3000000,
+      "urgency": "alta"
+    }
+  }
+]
