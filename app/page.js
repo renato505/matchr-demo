@@ -12,8 +12,13 @@ export default function Page() {
   const [preco, setPreco] = useState("");
   const [suites, setSuites] = useState("");
   const [ordem, setOrdem] = useState("score");
+  const [clientOrder, setClientOrder] = useState("score");
+  const [compareIds, setCompareIds] = useState([]);
   const [toast, setToast] = useState("");
   const [selectedClient, setSelectedClient] = useState(null);
+  const [visitProperty, setVisitProperty] = useState(null);
+  const [visitDate, setVisitDate] = useState("");
+  const [visitTime, setVisitTime] = useState("");
   const [clients, setClients] = useState([
     { id: 1, nome: "Ana Paula", telefone: "+55 11 99999-9999", email: "ana.paula@email.com", busca: "Casa • Jardim América/Jardim Europa", budget: "R$ 35–45 mi", status: "quente", proximoPasso: "Enviar curadoria com top 6 casas e confirmar disponibilidade para visita." },
     { id: 2, nome: "Marcelo e Julia", telefone: "+55 11 98888-8888", email: "marcelo@email.com", busca: "Casa • Alto de Pinheiros", budget: "R$ 12–18 mi", status: "ativo", proximoPasso: "Agendar visita no sábado às 11h e validar preferência por rua fechada." },
@@ -47,6 +52,17 @@ export default function Page() {
     showToast("WhatsApp aberto com a curadoria.");
   };
 
+  const scheduleVisit = () => {
+    if (!visitDate || !visitTime) {
+      showToast("Escolha data e horário da visita.");
+      return;
+    }
+    showToast(`Visita solicitada para ${visitDate} às ${visitTime}.`);
+    setVisitProperty(null);
+    setVisitDate("");
+    setVisitTime("");
+  };
+
   const updateClient = (field, value) => {
     setSelectedClient((current) => ({ ...current, [field]: value }));
   };
@@ -63,11 +79,18 @@ export default function Page() {
     if (term) data = data.filter((x) => (x.bairro + x.endereco + x.tipo + x.diferenciais.join(" ") + x.descricao).toLowerCase().includes(term));
     if (bairro) data = data.filter((x) => x.bairro === bairro);
     if (tipo) data = data.filter((x) => x.tipo === tipo);
-    if (preco) data = data.filter((x) => x.preco <= Number(preco));
+    if (preco === "ate2") data = data.filter((x) => x.preco <= 2);
+    if (preco === "2a5") data = data.filter((x) => x.preco > 2 && x.preco <= 5);
+    if (preco === "5a8") data = data.filter((x) => x.preco > 5 && x.preco <= 8);
+    if (preco === "8a20") data = data.filter((x) => x.preco > 8 && x.preco <= 20);
+    if (preco === "acima20") data = data.filter((x) => x.preco > 20);
     if (suites) data = data.filter((x) => x.suites >= Number(suites));
     if (ordem === "score") data.sort((a, b) => b.score - a.score);
-    if (ordem === "preco") data.sort((a, b) => a.preco - b.preco);
-    if (ordem === "area") data.sort((a, b) => b.area - a.area);
+    if (ordem === "precoMenor") data.sort((a, b) => a.preco - b.preco);
+    if (ordem === "precoMaior") data.sort((a, b) => b.preco - a.preco);
+    if (ordem === "areaMenor") data.sort((a, b) => a.area - b.area);
+    if (ordem === "areaMaior") data.sort((a, b) => b.area - a.area);
+    if (ordem === "oportunidade") data.sort((a, b) => (b.score / b.preco) - (a.score / a.preco));
     return data;
   }, [q, bairro, tipo, preco, suites, ordem]);
 
@@ -79,6 +102,36 @@ export default function Page() {
   }, []);
 
   const money = (v) => "R$ " + v.toFixed(1).replace(".", ",") + " mi";
+  const pricePerM2 = (x) => Math.round((x.preco * 1000000) / x.area).toLocaleString("pt-BR");
+
+  const scoreReasons = (x) => {
+    const items = [];
+    if (["Jardim América", "Jardim Europa", "Jardim Paulistano"].includes(x.bairro)) items.push("bairro desejado");
+    if (x.preco >= 25 && x.preco <= 45) items.push("dentro do orçamento");
+    if (x.diferenciais.includes("muita luz natural")) items.push("muita luz natural");
+    if (x.diferenciais.includes("jardim")) items.push("jardim");
+    if (x.diferenciais.includes("rua tranquila")) items.push("rua tranquila");
+    if (x.suites >= 4) items.push(`${x.suites} suítes`);
+    if (x.vagas >= 4) items.push(`${x.vagas} vagas`);
+    return items.slice(0, 5);
+  };
+
+  const orderedClientMatches = useMemo(() => {
+    const data = [...topMatches];
+    if (clientOrder === "score") data.sort((a, b) => b.score - a.score);
+    if (clientOrder === "precoMenor") data.sort((a, b) => a.preco - b.preco);
+    if (clientOrder === "precoMaior") data.sort((a, b) => b.preco - a.preco);
+    if (clientOrder === "areaMenor") data.sort((a, b) => a.area - b.area);
+    if (clientOrder === "areaMaior") data.sort((a, b) => b.area - a.area);
+    if (clientOrder === "oportunidade") data.sort((a, b) => (b.score / b.preco) - (a.score / a.preco));
+    return data;
+  }, [topMatches, clientOrder]);
+
+  const toggleCompare = (id) => {
+    setCompareIds((ids) => ids.includes(id) ? ids.filter((x) => x !== id) : ids.length >= 4 ? ids : [...ids, id]);
+  };
+
+  const compareItems = orderedClientMatches.filter((x) => compareIds.includes(x.id));
 
   const ImovelCard = ({ x, client = false }) => (
     <div className={client ? "client-card" : "imovel"}>
@@ -90,11 +143,16 @@ export default function Page() {
         </div>
         <p style={{ fontSize: 13, margin: "10px 0" }}>{x.descricao}</p>
         <div><span className="score">Match {x.score}%</span> <b>{money(x.preco)}</b></div>
+        <div className="meta">R$ {pricePerM2(x)}/m²</div>
+        <div className="score-reasons">
+          {scoreReasons(x).map((reason) => <span key={reason}>✓ {reason}</span>)}
+        </div>
         <div className="tags">{x.diferenciais.slice(0, 4).map((t) => <span className="tag" key={t}>{t}</span>)}</div>
         {client ? (
           <div className="mini-actions">
             <button onClick={() => showToast("Gostei registrado.")}>❤️ Gostei</button>
-            <button onClick={() => showToast("Pedido de visita enviado.")}>👀 Visitar</button>
+            <button onClick={() => setVisitProperty(x)}>👀 Visitar</button>
+            <button onClick={() => toggleCompare(x.id)}>{compareIds.includes(x.id) ? "✓ Comparando" : "Comparar"}</button>
           </div>
         ) : (
           <div style={{ marginTop: 12 }}><button className="btn" onClick={() => showToast("Imóvel adicionado à curadoria.")}>Adicionar à curadoria</button></div>
@@ -144,9 +202,23 @@ export default function Page() {
             <input placeholder="Buscar por bairro, rua, diferencial..." value={q} onChange={(e) => setQ(e.target.value)} />
             <select value={bairro} onChange={(e) => setBairro(e.target.value)}><option value="">Todos bairros</option>{bairros.map((b) => <option key={b}>{b}</option>)}</select>
             <select value={tipo} onChange={(e) => setTipo(e.target.value)}><option value="">Todos tipos</option>{tipos.map((t) => <option key={t}>{t}</option>)}</select>
-            <select value={preco} onChange={(e) => setPreco(e.target.value)}><option value="">Preço</option><option value="10">Até R$ 10 mi</option><option value="20">Até R$ 20 mi</option><option value="40">Até R$ 40 mi</option></select>
+            <select value={preco} onChange={(e) => setPreco(e.target.value)}>
+              <option value="">Faixa de preço</option>
+              <option value="ate2">Até R$ 2 mi</option>
+              <option value="2a5">R$ 2–5 mi</option>
+              <option value="5a8">R$ 5–8 mi</option>
+              <option value="8a20">R$ 8–20 mi</option>
+              <option value="acima20">Acima de R$ 20 mi</option>
+            </select>
             <select value={suites} onChange={(e) => setSuites(e.target.value)}><option value="">Suítes</option><option value="3">3+</option><option value="4">4+</option><option value="5">5+</option></select>
-            <select value={ordem} onChange={(e) => setOrdem(e.target.value)}><option value="score">Score</option><option value="preco">Menor preço</option><option value="area">Maior área</option></select>
+            <select value={ordem} onChange={(e) => setOrdem(e.target.value)}>
+              <option value="score">Melhor Match</option>
+              <option value="precoMenor">Menor preço</option>
+              <option value="precoMaior">Maior preço</option>
+              <option value="areaMenor">Menor área</option>
+              <option value="areaMaior">Maior área</option>
+              <option value="oportunidade">Melhor oportunidade</option>
+            </select>
           </div>
           <p>{filtered.length} imóveis encontrados</p>
           <div className="inventory">{filtered.slice(0, 60).map((x) => <ImovelCard x={x} key={x.id} />)}</div>
@@ -215,8 +287,40 @@ export default function Page() {
         {view === "share" && <section>
           <div className="top"><div><h1>Página do cliente</h1><p>Link privado com imóveis selecionados e feedback.</p></div><div className="actions"><button className="btn whatsapp" onClick={sendWhatsApp}>Enviar por WhatsApp</button><button className="btn primary" onClick={copyLink}>Copiar link</button></div></div>
           <div className="clientpage">
-            <h1 style={{ color: "#111" }}>Seleção para Ana Paula</h1><p>Curadoria feita por Renato Gosling • top 6 matches</p>
-            <div className="client-grid">{topMatches.slice(0, 6).map((x) => <ImovelCard x={x} key={x.id} client />)}</div>
+            <h1 style={{ color: "#111" }}>Seleção para Ana Paula</h1><p>Curadoria feita por Renato Gosling • top matches com explicação de score.</p>
+            <div className="client-controls">
+              <label>Ordenar por
+                <select value={clientOrder} onChange={(e) => setClientOrder(e.target.value)}>
+                  <option value="score">Melhor Match</option>
+                  <option value="precoMenor">Menor preço</option>
+                  <option value="precoMaior">Maior preço</option>
+                  <option value="areaMenor">Menor área</option>
+                  <option value="areaMaior">Maior área</option>
+                  <option value="oportunidade">Melhor oportunidade</option>
+                </select>
+              </label>
+              <p>Selecione até 4 imóveis para comparar lado a lado.</p>
+            </div>
+            <div className="client-grid">{orderedClientMatches.slice(0, 9).map((x) => <ImovelCard x={x} key={x.id} client />)}</div>
+
+            {compareItems.length > 0 && (
+              <div className="compare-box">
+                <h2>Comparar imóveis</h2>
+                <div className="compare-table">
+                  <table>
+                    <tbody>
+                      <tr><th>Critério</th>{compareItems.map((x) => <th key={x.id}>{x.bairro}</th>)}</tr>
+                      <tr><td>Match</td>{compareItems.map((x) => <td key={x.id}>{x.score}%</td>)}</tr>
+                      <tr><td>Preço</td>{compareItems.map((x) => <td key={x.id}>{money(x.preco)}</td>)}</tr>
+                      <tr><td>Área</td>{compareItems.map((x) => <td key={x.id}>{x.area} m²</td>)}</tr>
+                      <tr><td>Preço/m²</td>{compareItems.map((x) => <td key={x.id}>R$ {pricePerM2(x)}</td>)}</tr>
+                      <tr><td>Suítes</td>{compareItems.map((x) => <td key={x.id}>{x.suites}</td>)}</tr>
+                      <tr><td>Vagas</td>{compareItems.map((x) => <td key={x.id}>{x.vagas}</td>)}</tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
           </div>
         </section>}
 
@@ -230,6 +334,53 @@ export default function Page() {
           </div>
           <div className="card" style={{ marginTop: 18 }}><h2>Mensagem para investidor</h2><p>O Matchr cria uma camada inteligente entre inventário imobiliário, corretor e comprador. O primeiro valor está no aumento de eficiência comercial. O segundo está nos dados: o que os clientes gostam, recusam, visitam e compram.</p></div>
         </section>}
+
+      {visitProperty && (
+        <div className="modal-bg" onClick={() => setVisitProperty(null)}>
+          <div className="modal-card visit-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="top modal-top">
+              <div>
+                <h2>Marcar visita</h2>
+                <p>{visitProperty.tipo} • {visitProperty.bairro} — {visitProperty.endereco}</p>
+              </div>
+              <button className="btn" onClick={() => setVisitProperty(null)}>Fechar</button>
+            </div>
+
+            <div className="visit-summary">
+              <div><b>{visitProperty.area} m²</b><span>área</span></div>
+              <div><b>{visitProperty.suites}</b><span>suítes</span></div>
+              <div><b>{visitProperty.vagas}</b><span>vagas</span></div>
+              <div><b>Match {visitProperty.score}%</b><span>compatibilidade</span></div>
+            </div>
+
+            <div className="form-grid">
+              <label>Data da visita
+                <input type="date" value={visitDate} onChange={(e) => setVisitDate(e.target.value)} />
+              </label>
+              <label>Horário
+                <select value={visitTime} onChange={(e) => setVisitTime(e.target.value)}>
+                  <option value="">Selecionar horário</option>
+                  <option value="09:00">09:00</option>
+                  <option value="10:00">10:00</option>
+                  <option value="11:00">11:00</option>
+                  <option value="14:00">14:00</option>
+                  <option value="15:00">15:00</option>
+                  <option value="16:00">16:00</option>
+                  <option value="17:00">17:00</option>
+                </select>
+              </label>
+              <label className="wide">Observações para o corretor
+                <textarea placeholder="Ex.: quero visitar com minha esposa, prefiro pela manhã, quero entender a reforma..." />
+              </label>
+            </div>
+
+            <div className="actions" style={{ marginTop: 16 }}>
+              <button className="btn primary" onClick={scheduleVisit}>Solicitar visita</button>
+              <button className="btn whatsapp" onClick={sendWhatsApp}>Enviar curadoria por WhatsApp</button>
+            </div>
+          </div>
+        </div>
+      )}
       </main>
       <div className={toast ? "toast show" : "toast"}>{toast}</div>
     </div>
