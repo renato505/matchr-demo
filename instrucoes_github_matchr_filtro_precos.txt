@@ -1,0 +1,17 @@
+Atualização MatchR — filtro de valores
+
+Arquivo alterado: index.html
+
+O que mudou:
+- Na tela de busca, o filtro de Valor agora mostra:
+  • Imóveis até R$ 3 milhões
+  • Imóveis até R$ 5 milhões
+- A busca por texto/voz também entende frases como:
+  • apartamento em Moema até 3 milhões
+  • casa até 5 milhões
+
+Como subir no GitHub:
+1. Abra o repositório do site MatchR no GitHub.
+2. Substitua o index.html atual pelo index.html deste pacote.
+3. Commit message sugerida: adiciona filtros ate 3 e 5 milhoes
+4. Clique em Commit changes.
