@@ -8,3 +8,14 @@ main{padding:28px;max-width:1500px;width:100%;margin:0 auto}h1{margin:0;font-siz
 .table{width:100%;border-collapse:collapse}.table th,.table td{padding:14px 10px;border-bottom:1px solid var(--line);text-align:left;font-size:14px}.table th{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.08em}.status{padding:5px 9px;border-radius:999px;font-size:12px;font-weight:850}.hot{background:rgba(255,122,26,.18);color:var(--orange2)}.ok{background:rgba(81,216,138,.15);color:var(--green)}.cold{background:rgba(169,173,186,.14);color:var(--muted)}
 .clientpage{background:#f6f3ec;color:#171717;border-radius:30px;padding:26px}.clientpage p{color:#5f615f}.client-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.client-card{background:#fff;border:1px solid #e6e1d6;border-radius:20px;overflow:hidden;color:#171717}.client-img{height:140px;background:linear-gradient(135deg,#ddd,#aaa)}.client-body{padding:15px}.mini-actions{display:flex;gap:8px;margin-top:12px}.mini-actions button{flex:1;border:1px solid #ddd;border-radius:12px;padding:10px;background:#fff;cursor:pointer;font-weight:850}.toast{position:fixed;right:24px;bottom:24px;background:#fff;color:#111;padding:14px 18px;border-radius:15px;box-shadow:var(--shadow);display:none;font-weight:850}.toast.show{display:block}
 @media(max-width:1050px){.app{grid-template-columns:1fr}aside{position:relative;height:auto}.cols4,.cols3,.inventory,.client-grid,.filters{grid-template-columns:1fr}.top{display:block}.actions{margin-top:14px}}
+
+.muted-small{color:var(--muted);font-size:12px}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.62);backdrop-filter:blur(8px);display:grid;place-items:center;z-index:20;padding:20px}
+.modal-card{width:min(860px,100%);background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:22px;box-shadow:var(--shadow)}
+.modal-top{margin-bottom:12px}
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.form-grid label{display:block;color:var(--muted);font-size:12px;font-weight:800}
+.form-grid input,.form-grid select,.form-grid textarea{margin-top:7px}
+.form-grid textarea{min-height:110px;resize:vertical}
+.form-grid .wide{grid-column:1/-1}
+@media(max-width:800px){.form-grid{grid-template-columns:1fr}.table{display:block;overflow-x:auto}}

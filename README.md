@@ -1,7 +1,7 @@
-# Matchr — Base Fake Realista 3.000 Imóveis
+# Matchr — Clientes editáveis + 3.000 imóveis
 
-Versão com aproximadamente 3.000 imóveis fictícios, 200 por bairro nobre de São Paulo.
-
-Bairros incluídos: Jardim América, Jardim Europa, Jardim Paulistano, Itaim Bibi, Vila Nova Conceição, Alto de Pinheiros, Boaçava, Cidade Jardim, Higienópolis, Moema, Brooklin, Real Parque, Jardins, Pinheiros e Vila Madalena.
-
-Inclui botão de WhatsApp para compartilhar curadoria.
+Atualizações:
+- Dashboard ajustado para 3.000 imóveis e 15 bairros.
+- Seção Clientes com botão Editar.
+- Edição de telefone, e-mail, status (quente, ativo, nutrir) e próximo passo.
+- Botão de WhatsApp mantido.

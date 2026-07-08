@@ -13,6 +13,12 @@ export default function Page() {
   const [suites, setSuites] = useState("");
   const [ordem, setOrdem] = useState("score");
   const [toast, setToast] = useState("");
+  const [selectedClient, setSelectedClient] = useState(null);
+  const [clients, setClients] = useState([
+    { id: 1, nome: "Ana Paula", telefone: "+55 11 99999-9999", email: "ana.paula@email.com", busca: "Casa • Jardim América/Jardim Europa", budget: "R$ 35–45 mi", status: "quente", proximoPasso: "Enviar curadoria com top 6 casas e confirmar disponibilidade para visita." },
+    { id: 2, nome: "Marcelo e Julia", telefone: "+55 11 98888-8888", email: "marcelo@email.com", busca: "Casa • Alto de Pinheiros", budget: "R$ 12–18 mi", status: "ativo", proximoPasso: "Agendar visita no sábado às 11h e validar preferência por rua fechada." },
+    { id: 3, nome: "Bianca", telefone: "+55 11 97777-7777", email: "bianca@email.com", busca: "Apto • Itaim", budget: "R$ 7–10 mi", status: "nutrir", proximoPasso: "Refinar busca: varanda, andar alto e distância a pé do Faria Lima." }
+  ]);
 
   const clientShareUrl = "https://www.matchr.com.br/curadoria/ana-paula";
 
@@ -39,6 +45,16 @@ export default function Page() {
     const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, "_blank", "noopener,noreferrer");
     showToast("WhatsApp aberto com a curadoria.");
+  };
+
+  const updateClient = (field, value) => {
+    setSelectedClient((current) => ({ ...current, [field]: value }));
+  };
+
+  const saveClient = () => {
+    setClients((list) => list.map((client) => client.id === selectedClient.id ? selectedClient : client));
+    showToast("Cliente atualizado.");
+    setSelectedClient(null);
   };
 
   const filtered = useMemo(() => {
@@ -94,7 +110,7 @@ export default function Page() {
   return (
     <div className="app">
       <aside>
-        <div className="logo"><div><img src="/matchr-logo.jpeg" alt="Matchr" /><span>Demo • 200 imóveis fake</span></div></div>
+        <div className="logo"><div><img src="/matchr-logo.jpeg" alt="Matchr" /><span>Alpha • 3.000 imóveis fake</span></div></div>
         <nav>
           <NavButton id="dashboard">Dashboard</NavButton>
           <NavButton id="inventario">Inventário <span className="pill">200</span></NavButton>
@@ -108,10 +124,10 @@ export default function Page() {
 
       <main>
         {view === "dashboard" && <section>
-          <div className="top"><div><h1>Matchr para corretores</h1><p>Demo navegável com 200 imóveis simulados, busca, filtros, score de match e página compartilhável para cliente.</p></div><div className="actions"><button className="btn primary" onClick={() => go("inventario")}>Ver inventário</button><button className="btn whatsapp" onClick={sendWhatsApp}>Enviar curadoria por WhatsApp</button></div></div>
+          <div className="top"><div><h1>Matchr para corretores</h1><p>Demo navegável com 3.000 imóveis simulados, busca, filtros, score de match e página compartilhável para cliente.</p></div><div className="actions"><button className="btn primary" onClick={() => go("inventario")}>Ver inventário</button><button className="btn whatsapp" onClick={sendWhatsApp}>Enviar curadoria por WhatsApp</button></div></div>
           <div className="grid cols4">
-            <div className="card metric"><div className="n">200</div><div className="label">imóveis fake cadastrados</div></div>
-            <div className="card metric"><div className="n">12</div><div className="label">bairros prime</div></div>
+            <div className="card metric"><div className="n">3.000</div><div className="label">imóveis fake cadastrados</div></div>
+            <div className="card metric"><div className="n">15</div><div className="label">bairros prime</div></div>
             <div className="card metric"><div className="n">83%</div><div className="label">score médio top 20</div></div>
             <div className="card metric"><div className="n">90 dias</div><div className="label">piloto sugerido</div></div>
           </div>
@@ -142,8 +158,58 @@ export default function Page() {
         </section>}
 
         {view === "clientes" && <section>
-          <div className="top"><div><h1>Clientes</h1><p>CRM simples para testar com corretores.</p></div></div>
-          <div className="card"><table className="table"><tbody><tr><th>Cliente</th><th>Busca</th><th>Budget</th><th>Status</th></tr><tr><td>Ana Paula</td><td>Casa • Jardim América/Jardim Europa</td><td>R$ 35–45 mi</td><td><span className="status hot">quente</span></td></tr><tr><td>Marcelo e Julia</td><td>Casa • Alto de Pinheiros</td><td>R$ 12–18 mi</td><td><span className="status ok">ativo</span></td></tr><tr><td>Bianca</td><td>Apto • Itaim</td><td>R$ 7–10 mi</td><td><span className="status cold">nutrir</span></td></tr></tbody></table></div>
+          <div className="top"><div><h1>Clientes</h1><p>CRM simples com edição de contato, status e próximo passo.</p></div></div>
+          <div className="card">
+            <table className="table">
+              <tbody>
+                <tr><th>Cliente</th><th>Contato</th><th>Busca</th><th>Budget</th><th>Status</th><th>Próximo passo</th><th></th></tr>
+                {clients.map((client) => (
+                  <tr key={client.id}>
+                    <td><b>{client.nome}</b></td>
+                    <td>{client.telefone}<br/><span className="muted-small">{client.email}</span></td>
+                    <td>{client.busca}</td>
+                    <td>{client.budget}</td>
+                    <td><span className={`status ${client.status === "quente" ? "hot" : client.status === "ativo" ? "ok" : "cold"}`}>{client.status}</span></td>
+                    <td>{client.proximoPasso}</td>
+                    <td><button className="btn" onClick={() => setSelectedClient(client)}>Editar</button></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {selectedClient && (
+            <div className="modal-bg" onClick={() => setSelectedClient(null)}>
+              <div className="modal-card" onClick={(e) => e.stopPropagation()}>
+                <div className="top modal-top">
+                  <div>
+                    <h2>Editar cliente</h2>
+                    <p>Atualize contato, temperatura comercial e próximo passo.</p>
+                  </div>
+                  <button className="btn" onClick={() => setSelectedClient(null)}>Fechar</button>
+                </div>
+                <div className="form-grid">
+                  <label>Nome<input value={selectedClient.nome} onChange={(e) => updateClient("nome", e.target.value)} /></label>
+                  <label>Telefone<input value={selectedClient.telefone} onChange={(e) => updateClient("telefone", e.target.value)} /></label>
+                  <label>E-mail<input value={selectedClient.email} onChange={(e) => updateClient("email", e.target.value)} /></label>
+                  <label>Status
+                    <select value={selectedClient.status} onChange={(e) => updateClient("status", e.target.value)}>
+                      <option value="quente">quente</option>
+                      <option value="ativo">ativo</option>
+                      <option value="nutrir">nutrir</option>
+                    </select>
+                  </label>
+                  <label>Busca<input value={selectedClient.busca} onChange={(e) => updateClient("busca", e.target.value)} /></label>
+                  <label>Budget<input value={selectedClient.budget} onChange={(e) => updateClient("budget", e.target.value)} /></label>
+                  <label className="wide">Próximo passo<textarea value={selectedClient.proximoPasso} onChange={(e) => updateClient("proximoPasso", e.target.value)} /></label>
+                </div>
+                <div className="actions" style={{ marginTop: 16 }}>
+                  <button className="btn primary" onClick={saveClient}>Salvar alterações</button>
+                  <button className="btn" onClick={() => setSelectedClient(null)}>Cancelar</button>
+                </div>
+              </div>
+            </div>
+          )}
         </section>}
 
         {view === "share" && <section>
