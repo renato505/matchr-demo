@@ -1,10 +1,17 @@
-# Matchr — Sprint 2
+# Matchr Demo
 
-Incluído:
-- Filtro de preço no inventário: até R$ 2 mi, R$ 2–5 mi, R$ 5–8 mi, R$ 8–20 mi, acima de R$ 20 mi.
-- Ordenação no inventário: Melhor Match, Menor preço, Maior preço, Menor área, Maior área, Melhor oportunidade.
-- Mesma ordenação na Página do Cliente.
-- Explicação visual do score.
-- Comparador de imóveis.
-- Agenda de visita mantida.
-- Clientes editáveis mantidos.
+MVP estático em HTML, CSS e JavaScript, pronto para publicar no GitHub Pages.
+
+## Arquivos
+
+- `index.html`: aplicativo completo do MVP.
+- `.nojekyll`: evita processamento Jekyll no GitHub Pages.
+- `.gitignore`: ignora arquivos automáticos do macOS, como `.DS_Store`.
+
+## Publicação
+
+1. Copie estes arquivos para a raiz do repositório `matchr-demo`.
+2. Faça commit no GitHub Desktop.
+3. Clique em Push origin.
+4. No GitHub, confira se o repositório tem `index.html` na raiz.
+5. Em Settings > Pages, publique pela branch `main` e pasta `/root`.
