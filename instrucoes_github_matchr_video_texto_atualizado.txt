@@ -1,0 +1,14 @@
+INSTRUÇÕES RÁPIDAS — ATUALIZAÇÃO MATCHR
+
+1. Baixe o arquivo index.html atualizado.
+2. Entre no repositório do MatchR no GitHub.
+3. Clique em Add file > Upload files.
+4. Arraste o arquivo index.html.
+5. Confirme que ele vai substituir o index.html antigo.
+6. Em commit message, escreva: atualiza texto do vídeo para corretor.
+7. Clique em Commit changes.
+8. Aguarde 1 ou 2 minutos e recarregue o site.
+
+Alteração feita:
+A frase abaixo do vídeo foi substituída por:
+“Aula de Renato Gosling fundador do MatchR falando sobre como os corretores podem ter mais sucesso em follow-up, networking e técnicas de vendas.”
