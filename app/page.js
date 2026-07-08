@@ -14,6 +14,8 @@ export default function Page() {
   const [ordem, setOrdem] = useState("score");
   const [toast, setToast] = useState("");
 
+  const clientShareUrl = "https://www.matchr.com.br/curadoria/ana-paula";
+
   const bairros = [...new Set(IMOVEIS.map((x) => x.bairro))].sort();
   const tipos = [...new Set(IMOVEIS.map((x) => x.tipo))].sort();
 
@@ -25,6 +27,18 @@ export default function Page() {
   const go = (id) => {
     setView(id);
     window.scrollTo(0, 0);
+  };
+
+  const copyLink = async () => {
+    try { await navigator.clipboard.writeText(clientShareUrl); } catch {}
+    showToast("Link privado copiado.");
+  };
+
+  const sendWhatsApp = () => {
+    const message = `Olá, Ana Paula! Separei uma curadoria de imóveis que acredito que combina bastante com o que você está buscando. Você pode ver a seleção por aqui: ${clientShareUrl}`;
+    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    showToast("WhatsApp aberto com a curadoria.");
   };
 
   const filtered = useMemo(() => {
@@ -47,11 +61,6 @@ export default function Page() {
       .sort((a, b) => b.score - a.score)
       .slice(0, 9);
   }, []);
-
-  const copyLink = async () => {
-    try { await navigator.clipboard.writeText("https://www.matchr.com.br/curadoria/ana-paula"); } catch {}
-    showToast("Link privado copiado.");
-  };
 
   const money = (v) => "R$ " + v.toFixed(1).replace(".", ",") + " mi";
 
@@ -85,9 +94,7 @@ export default function Page() {
   return (
     <div className="app">
       <aside>
-        <div className="logo">
-          <div><img src="/matchr-logo.jpeg" alt="Matchr" /><span>Demo • 200 imóveis fake</span></div>
-        </div>
+        <div className="logo"><div><img src="/matchr-logo.jpeg" alt="Matchr" /><span>Demo • 200 imóveis fake</span></div></div>
         <nav>
           <NavButton id="dashboard">Dashboard</NavButton>
           <NavButton id="inventario">Inventário <span className="pill">200</span></NavButton>
@@ -96,15 +103,12 @@ export default function Page() {
           <NavButton id="share">Página do cliente</NavButton>
           <NavButton id="analytics">Analytics</NavButton>
         </nav>
-        <div className="card" style={{ marginTop: 24 }}>
-          <b>Piloto 90 dias</b>
-          <p style={{ fontSize: 13, marginBottom: 0 }}>Base fake para demonstração com investidores, imobiliárias e corretores.</p>
-        </div>
+        <div className="card" style={{ marginTop: 24 }}><b>Piloto 90 dias</b><p style={{ fontSize: 13, marginBottom: 0 }}>Base fake para demonstração com investidores, imobiliárias e corretores.</p></div>
       </aside>
 
       <main>
-        {view === "dashboard" && <section className="view active">
-          <div className="top"><div><h1>Matchr para corretores</h1><p>Demo navegável com 200 imóveis simulados, busca, filtros, score de match e página compartilhável para cliente.</p></div><button className="btn primary" onClick={() => go("inventario")}>Ver inventário</button></div>
+        {view === "dashboard" && <section>
+          <div className="top"><div><h1>Matchr para corretores</h1><p>Demo navegável com 200 imóveis simulados, busca, filtros, score de match e página compartilhável para cliente.</p></div><div className="actions"><button className="btn primary" onClick={() => go("inventario")}>Ver inventário</button><button className="btn whatsapp" onClick={sendWhatsApp}>Enviar curadoria por WhatsApp</button></div></div>
           <div className="grid cols4">
             <div className="card metric"><div className="n">200</div><div className="label">imóveis fake cadastrados</div></div>
             <div className="card metric"><div className="n">12</div><div className="label">bairros prime</div></div>
@@ -118,7 +122,7 @@ export default function Page() {
           </div>
         </section>}
 
-        {view === "inventario" && <section className="view active">
+        {view === "inventario" && <section>
           <div className="top"><div><h1>Inventário fake</h1><p>Use os filtros para simular uma base real de imóveis de alto padrão.</p></div><button className="btn primary" onClick={() => { go("matches"); showToast("Top matches selecionados para cliente."); }}>Selecionar top matches</button></div>
           <div className="filters">
             <input placeholder="Buscar por bairro, rua, diferencial..." value={q} onChange={(e) => setQ(e.target.value)} />
@@ -132,25 +136,25 @@ export default function Page() {
           <div className="inventory">{filtered.slice(0, 60).map((x) => <ImovelCard x={x} key={x.id} />)}</div>
         </section>}
 
-        {view === "matches" && <section className="view active">
-          <div className="top"><div><h1>Matches IA para cliente exemplo</h1><p>Perfil: casa nos Jardins, R$ 35–45 mi, muita luz natural, privacidade, jardim, 4+ suítes.</p></div><button className="btn primary" onClick={() => go("share")}>Criar página compartilhável</button></div>
+        {view === "matches" && <section>
+          <div className="top"><div><h1>Matches IA para cliente exemplo</h1><p>Perfil: casa nos Jardins, R$ 35–45 mi, muita luz natural, privacidade, jardim, 4+ suítes.</p></div><div className="actions"><button className="btn primary" onClick={() => go("share")}>Criar página compartilhável</button><button className="btn whatsapp" onClick={sendWhatsApp}>Enviar por WhatsApp</button></div></div>
           <div className="inventory">{topMatches.map((x) => <ImovelCard x={x} key={x.id} />)}</div>
         </section>}
 
-        {view === "clientes" && <section className="view active">
+        {view === "clientes" && <section>
           <div className="top"><div><h1>Clientes</h1><p>CRM simples para testar com corretores.</p></div></div>
           <div className="card"><table className="table"><tbody><tr><th>Cliente</th><th>Busca</th><th>Budget</th><th>Status</th></tr><tr><td>Ana Paula</td><td>Casa • Jardim América/Jardim Europa</td><td>R$ 35–45 mi</td><td><span className="status hot">quente</span></td></tr><tr><td>Marcelo e Julia</td><td>Casa • Alto de Pinheiros</td><td>R$ 12–18 mi</td><td><span className="status ok">ativo</span></td></tr><tr><td>Bianca</td><td>Apto • Itaim</td><td>R$ 7–10 mi</td><td><span className="status cold">nutrir</span></td></tr></tbody></table></div>
         </section>}
 
-        {view === "share" && <section className="view active">
-          <div className="top"><div><h1>Página do cliente</h1><p>Link privado com imóveis selecionados e feedback.</p></div><button className="btn primary" onClick={copyLink}>Copiar link</button></div>
+        {view === "share" && <section>
+          <div className="top"><div><h1>Página do cliente</h1><p>Link privado com imóveis selecionados e feedback.</p></div><div className="actions"><button className="btn whatsapp" onClick={sendWhatsApp}>Enviar por WhatsApp</button><button className="btn primary" onClick={copyLink}>Copiar link</button></div></div>
           <div className="clientpage">
             <h1 style={{ color: "#111" }}>Seleção para Ana Paula</h1><p>Curadoria feita por Renato Gosling • top 6 matches</p>
             <div className="client-grid">{topMatches.slice(0, 6).map((x) => <ImovelCard x={x} key={x.id} client />)}</div>
           </div>
         </section>}
 
-        {view === "analytics" && <section className="view active">
+        {view === "analytics" && <section>
           <div className="top"><div><h1>Analytics do piloto</h1><p>O que medir em 90 dias.</p></div></div>
           <div className="grid cols4">
             <div className="card metric"><div className="n">200</div><div className="label">imóveis simulados</div></div>
