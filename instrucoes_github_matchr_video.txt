@@ -1,0 +1,15 @@
+INSTRUÇÕES RÁPIDAS — MATCHR NO GITHUB
+
+Opção mais simples:
+1. Baixe o arquivo index.html atualizado.
+2. No GitHub, entre no repositório matchr-demo.
+3. Clique em Add file > Upload files.
+4. Arraste o arquivo index.html.
+5. Confirme que ele vai substituir o index.html atual.
+6. Em Commit message, escreva: adiciona video para voce corretor.
+7. Clique em Commit changes.
+
+Observação:
+- O logo já está embutido no próprio index.html. Não precisa subir imagem separada.
+- O vídeo foi colocado no final da aba/seção "Para você corretor".
+- Se você já tiver alterações importantes no GitHub, faça download/backup do index.html atual antes de substituir.
