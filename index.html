@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MatchR - MVP v12</title>
+  <title>MatchR - MVP v13</title>
   <meta name="description" content="MVP MatchR - busca inteligente de imóveis compatíveis com o cliente." />
   <style>
     :root {
@@ -569,8 +569,98 @@
       border-radius: 18px;
       padding: 16px;
       display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-columns: minmax(150px, 190px) minmax(0, 1fr) auto;
       gap: 14px;
+      align-items: start;
+    }
+
+    .property-media {
+      position: relative;
+      min-height: 148px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(143, 93, 59, .22);
+      background:
+        linear-gradient(145deg, rgba(36, 31, 26, .18), rgba(143, 93, 59, .18)),
+        radial-gradient(circle at 24% 22%, rgba(255,255,255,.95) 0 8%, transparent 9%),
+        linear-gradient(135deg, #ead9c2 0%, #c9a47f 48%, #8f6b4c 100%);
+      box-shadow: inset 0 -48px 60px rgba(36, 31, 26, .22);
+    }
+
+    .property-media.apartment {
+      background:
+        linear-gradient(145deg, rgba(36, 31, 26, .18), rgba(143, 93, 59, .18)),
+        repeating-linear-gradient(90deg, rgba(255,255,255,.28) 0 12px, transparent 12px 34px),
+        linear-gradient(135deg, #e9d9c5 0%, #c59b73 46%, #75563e 100%);
+    }
+
+    .property-media.house {
+      background:
+        linear-gradient(145deg, rgba(36, 31, 26, .16), rgba(143, 93, 59, .16)),
+        radial-gradient(circle at 76% 24%, rgba(255,255,255,.92) 0 10%, transparent 11%),
+        linear-gradient(135deg, #ead8bd 0%, #a98a63 44%, #46614b 100%);
+    }
+
+    .property-media.beach {
+      background:
+        linear-gradient(145deg, rgba(36, 31, 26, .12), rgba(143, 93, 59, .16)),
+        radial-gradient(circle at 80% 18%, rgba(255,255,255,.92) 0 9%, transparent 10%),
+        linear-gradient(135deg, #f3dfbd 0%, #b7d5cf 48%, #4c8c92 100%);
+    }
+
+    .property-media.country {
+      background:
+        linear-gradient(145deg, rgba(36, 31, 26, .15), rgba(143, 93, 59, .15)),
+        radial-gradient(circle at 22% 18%, rgba(255,255,255,.86) 0 9%, transparent 10%),
+        linear-gradient(135deg, #edd7b7 0%, #9bb574 48%, #536d3f 100%);
+    }
+
+    .photo-kicker {
+      position: absolute;
+      left: 12px;
+      top: 12px;
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: rgba(255, 250, 243, .88);
+      color: var(--brand);
+      font-size: .72rem;
+      font-weight: 850;
+      box-shadow: 0 10px 18px rgba(57, 43, 32, .12);
+    }
+
+    .agency-badge {
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px;
+      border-radius: 13px;
+      background: rgba(255, 250, 243, .94);
+      border: 1px solid rgba(255, 255, 255, .6);
+      box-shadow: 0 14px 30px rgba(57, 43, 32, .18);
+    }
+
+    .agency-badge b {
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      width: 34px;
+      height: 34px;
+      border-radius: 11px;
+      background: var(--brand);
+      color: #fffaf3;
+      font-size: .78rem;
+      letter-spacing: -.04em;
+    }
+
+    .agency-badge small {
+      color: var(--ink);
+      font-weight: 850;
+      line-height: 1.05;
+      font-size: .78rem;
     }
 
     .property-card h4 {
@@ -993,6 +1083,7 @@
       .principles { grid-template-columns: 1fr; }
       .form-grid, .check-grid, .content-grid.three, .content-grid.four { grid-template-columns: 1fr; }
       .property-card { grid-template-columns: 1fr; }
+      .property-media { min-height: 176px; }
       .property-score { width: 100%; height: 46px; border-radius: 14px; }
       .content-section { padding: 22px; }
       .content-heading h2, .content-section > h2, .split-content h2 { max-width: none; }
@@ -1004,7 +1095,7 @@
     <header class="topbar" aria-label="Cabeçalho do produto">
       <a class="brand brand-link" href="#" aria-label="MatchR - início">
         <img class="brand-logo-image" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NjAgMTY4IiByb2xlPSJpbWciIGFyaWEtbGFiZWw9Ik1hdGNoUiDigJQgSW50ZWxpZ8OqbmNpYSBwYXJhIG8gY29ycmV0b3IgaW1vYmlsacOhcmlvIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMzZDJjMjQiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjOGY1ZDNiIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGZpbHRlciBpZD0icyIgeD0iLTIwJSIgeT0iLTIwJSIgd2lkdGg9IjE0MCUiIGhlaWdodD0iMTQwJSI+CiAgICAgIDxmZURyb3BTaGFkb3cgZHg9IjAiIGR5PSIxMiIgc3RkRGV2aWF0aW9uPSIxMiIgZmxvb2QtY29sb3I9IiMzOTJiMjAiIGZsb29kLW9wYWNpdHk9IjAuMTUiLz4KICAgIDwvZmlsdGVyPgogIDwvZGVmcz4KICA8cmVjdCB3aWR0aD0iNjYwIiBoZWlnaHQ9IjE2OCIgcng9IjM0IiBmaWxsPSIjZmZmYWYzIi8+CiAgPGcgZmlsdGVyPSJ1cmwoI3MpIj4KICAgIDxyZWN0IHg9IjE4IiB5PSIxOCIgd2lkdGg9IjEzMiIgaGVpZ2h0PSIxMzIiIHJ4PSIzMiIgZmlsbD0idXJsKCNnKSIvPgogICAgPHBhdGggZD0iTTQ4IDkyIDg0IDU4bDM2IDM0djM3SDk2di0zMEg3MnYzMEg0OFY5MloiIGZpbGw9IiNmZmZhZjMiLz4KICAgIDxwYXRoIGQ9Ik02NiA4MSA4NCA2NGwxOCAxNyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmYWYzIiBzdHJva2Utd2lkdGg9IjEwIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KICA8L2c+CiAgPHRleHQgeD0iMTc0IiB5PSI5MCIgZm9udC1mYW1pbHk9IkludGVyLCBBcmlhbCwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjU0IiBmb250LXdlaWdodD0iODAwIiBsZXR0ZXItc3BhY2luZz0iLTIuNSIgZmlsbD0iIzI0MWYxYSI+TWF0Y2hSPC90ZXh0PgogIDx0ZXh0IHg9IjE3NiIgeT0iMTI2IiBmb250LWZhbWlseT0iSW50ZXIsIEFyaWFsLCBIZWx2ZXRpY2EsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjIiIGZvbnQtd2VpZ2h0PSI1MDAiIGZpbGw9IiM2ZDYyNTgiPkludGVsaWfDqm5jaWEgcGFyYSBvIGNvcnJldG9yIGltb2JpbGnDoXJpbzwvdGV4dD4KPC9zdmc+" alt="MatchR — Inteligência para o corretor imobiliário" />
-        <span class="logo-subtitle">MVP v12 • busca inteligente para corretores</span>
+        <span class="logo-subtitle">MVP v13 • busca inteligente para corretores</span>
       </a>
       <div class="top-actions">
         <span class="pill">Menu restaurado</span>
@@ -1075,7 +1166,7 @@
         <form id="matchForm" class="form-grid" autocomplete="off">
           <div class="field full">
             <label for="briefing">Briefing inteligente por texto</label>
-            <textarea id="briefing" name="briefing" placeholder="Ex.: Cliente procura apartamento ou casa de condomínio no Itaim, até R$ 3,5 mi, 3 quartos, 2 vagas, piscina, academia e carregador para carro elétrico."></textarea>
+            <textarea id="briefing" name="briefing" placeholder="Ex.: Cliente procura casa de condomínio no Alto de Pinheiros, até R$ 6 mi, 4 quartos, 3 vagas, segurança e carregador para carro elétrico."></textarea>
             <div class="hint">O texto reconhece tipo, bairro, preço, quartos, vagas e preferências como piscina, academia e carro elétrico.</div>
           </div>
 
@@ -1086,19 +1177,16 @@
               <option value="apartamento">Apartamento</option>
               <option value="casa">Casa</option>
               <option value="casa-condominio">Casa de condomínio</option>
+              <option value="casa-campo">Casa de campo</option>
+              <option value="casa-praia">Casa na praia</option>
               <option value="cobertura">Cobertura</option>
-              <option value="studio-kitnet">Studio / Kitnet</option>
-              <option value="terreno">Terreno</option>
-              <option value="sala-comercial">Sala comercial</option>
-              <option value="loja">Loja</option>
-              <option value="galpao">Galpão</option>
             </select>
-            <div id="typeHint" class="hint">“Casa de condomínio” foi incluída no combo box.</div>
+            <div id="typeHint" class="hint">Tipos comerciais e terrenos foram removidos; Casa de campo e Casa na praia foram incluídas.</div>
           </div>
 
           <div class="field">
             <label for="neighborhood">Bairro ou região</label>
-            <input id="neighborhood" name="neighborhood" type="text" placeholder="Ex.: Itaim, Jardins, Moema" />
+            <input id="neighborhood" name="neighborhood" type="text" placeholder="Ex.: Alto de Pinheiros, Itaim, Jardins" />
           </div>
 
           <div class="field">
@@ -1234,7 +1322,7 @@
         <article class="content-card">
           <span>3</span>
           <h3>Prioriza compatibilidade</h3>
-          <p>A lista sugerida organiza imóveis por aderência ao perfil, evitando perda de tempo com opções desalinhadas.</p>
+          <p>A lista sugerida organiza imóveis por aderência, com trava obrigatória de tipo e região quando esses campos são preenchidos.</p>
         </article>
       </div>
     </section>
@@ -1364,12 +1452,9 @@
       "apartamento": "Apartamento",
       "casa": "Casa",
       "casa-condominio": "Casa de condomínio",
-      "cobertura": "Cobertura",
-      "studio-kitnet": "Studio / Kitnet",
-      "terreno": "Terreno",
-      "sala-comercial": "Sala comercial",
-      "loja": "Loja",
-      "galpao": "Galpão"
+      "casa-campo": "Casa de campo",
+      "casa-praia": "Casa na praia",
+      "cobertura": "Cobertura"
     };
 
     const commonAreaLabel = {
@@ -1400,6 +1485,8 @@
         title: "Apartamento no Itaim com lazer completo",
         type: "apartamento",
         neighborhood: "Itaim Bibi",
+        city: "São Paulo",
+        locationAliases: ["Itaim"],
         price: 3400000,
         bedrooms: 3,
         suites: 2,
@@ -1407,12 +1494,32 @@
         area: 156,
         commonAreas: ["piscina", "academia", "salao-festas", "carregador-eletrico", "portaria-24h", "lazer-completo"],
         preferences: ["varanda", "vista", "pet-friendly"],
+        agency: { name: "Prime SP Imóveis", initials: "PS" },
+        visual: "apartment",
         description: "Boa aderência para cliente que valoriza prédio completo, recarga para carro elétrico e localização premium."
       },
       {
-        title: "Casa de condomínio com área de lazer em Alphaville",
+        title: "Casa de condomínio no Alto de Pinheiros",
+        type: "casa-condominio",
+        neighborhood: "Alto de Pinheiros",
+        city: "São Paulo",
+        locationAliases: ["Alto de Pinheiros", "City Boaçava"],
+        price: 5900000,
+        bedrooms: 4,
+        suites: 3,
+        parking: 4,
+        area: 360,
+        commonAreas: ["seguranca", "vagas-visitantes", "jardim", "carregador-eletrico", "playground"],
+        preferences: ["pet-friendly", "reformado", "jardim"],
+        agency: { name: "Alto Prime Imóveis", initials: "AP" },
+        visual: "house",
+        description: "Resultado demonstrativo correto para casa de condomínio em Alto de Pinheiros, com tipo e região respeitados."
+      },
+      {
+        title: "Casa de condomínio familiar em Alphaville",
         type: "casa-condominio",
         neighborhood: "Alphaville",
+        city: "Barueri",
         price: 5200000,
         bedrooms: 4,
         suites: 4,
@@ -1420,12 +1527,15 @@
         area: 420,
         commonAreas: ["seguranca", "quadra", "playground", "carregador-eletrico", "vagas-visitantes", "jardim"],
         preferences: ["pet-friendly", "reformado"],
+        agency: { name: "Vila Real Estate", initials: "VR" },
+        visual: "house",
         description: "Casa em condomínio com segurança, estrutura familiar e infraestrutura para carregar carro elétrico."
       },
       {
         title: "Cobertura duplex em Moema",
         type: "cobertura",
         neighborhood: "Moema",
+        city: "São Paulo",
         price: 4100000,
         bedrooms: 3,
         suites: 3,
@@ -1433,12 +1543,16 @@
         area: 240,
         commonAreas: [],
         preferences: ["varanda", "vista", "reformado"],
+        agency: { name: "Bairro Nobre Realty", initials: "BN" },
+        visual: "apartment",
         description: "Opção com terraço e vista aberta. Áreas comuns ficam ocultas no formulário para este tipo."
       },
       {
         title: "Apartamento nos Jardins com academia e piscina",
         type: "apartamento",
         neighborhood: "Jardins",
+        city: "São Paulo",
+        locationAliases: ["Jardim Paulista", "Jardim América"],
         price: 2950000,
         bedrooms: 3,
         suites: 1,
@@ -1446,12 +1560,15 @@
         area: 142,
         commonAreas: ["piscina", "academia", "bicicletario", "gerador"],
         preferences: ["andar-alto", "vista"],
+        agency: { name: "Jardins Collection", initials: "JC" },
+        visual: "apartment",
         description: "Perfil bom para cliente urbano que prioriza serviços do edifício e mobilidade."
       },
       {
         title: "Casa térrea no Alto de Pinheiros",
         type: "casa",
         neighborhood: "Alto de Pinheiros",
+        city: "São Paulo",
         price: 3900000,
         bedrooms: 4,
         suites: 2,
@@ -1459,12 +1576,15 @@
         area: 310,
         commonAreas: [],
         preferences: ["pet-friendly", "reformado", "jardim"],
+        agency: { name: "Pinheiros Casas", initials: "PC" },
+        visual: "house",
         description: "Casa fora de condomínio; por isso, o formulário não exibe áreas comuns."
       },
       {
         title: "Casa de condomínio compacta na Granja Viana",
         type: "casa-condominio",
         neighborhood: "Granja Viana",
+        city: "Cotia",
         price: 2450000,
         bedrooms: 3,
         suites: 2,
@@ -1472,7 +1592,42 @@
         area: 220,
         commonAreas: ["seguranca", "piscina", "playground", "carregador-eletrico", "espaco-gourmet"],
         preferences: ["pet-friendly", "varanda"],
+        agency: { name: "Reserva Oeste", initials: "RO" },
+        visual: "house",
         description: "Alternativa com condomínio completo, boa área externa e recarga para carro elétrico."
+      },
+      {
+        title: "Casa de campo em São Roque com vista verde",
+        type: "casa-campo",
+        neighborhood: "São Roque",
+        city: "São Roque",
+        price: 3200000,
+        bedrooms: 4,
+        suites: 2,
+        parking: 5,
+        area: 680,
+        commonAreas: [],
+        preferences: ["vista", "pet-friendly", "jardim"],
+        agency: { name: "Serra & Campo", initials: "SC" },
+        visual: "country",
+        description: "Perfil para cliente que quer natureza, privacidade e área externa ampla."
+      },
+      {
+        title: "Casa na praia em Juquehy perto do mar",
+        type: "casa-praia",
+        neighborhood: "Juquehy",
+        city: "São Sebastião",
+        locationAliases: ["Juqueí", "Litoral Norte"],
+        price: 4800000,
+        bedrooms: 5,
+        suites: 4,
+        parking: 4,
+        area: 410,
+        commonAreas: [],
+        preferences: ["varanda", "vista", "mobiliado"],
+        agency: { name: "Litoral Prime", initials: "LP" },
+        visual: "beach",
+        description: "Casa para cliente buscando litoral, conforto e uso familiar nos fins de semana."
       }
     ];
 
@@ -1531,11 +1686,77 @@
       return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 }).format(value);
     }
 
+    function escapeHTML(value) {
+      return String(value ?? "").replace(/[&<>"']/g, char => {
+        switch (char) {
+          case "&": return "&amp;";
+          case "<": return "&lt;";
+          case ">": return "&gt;";
+          case '"': return "&quot;";
+          case "'": return "&#039;";
+          default: return char;
+        }
+      });
+    }
+
+    function normalizeText(value) {
+      return String(value || "")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9\s]/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function compactLocation(value) {
+      return normalizeText(value)
+        .split(" ")
+        .filter(word => word && !["de", "da", "do", "das", "dos", "em", "no", "na"].includes(word))
+        .join(" ");
+    }
+
+    function locationCandidates(property) {
+      return [property.neighborhood, property.city, ...(property.locationAliases || [])].filter(Boolean);
+    }
+
+    function matchesNeighborhood(property, wantedRaw) {
+      const wanted = normalizeText(wantedRaw);
+      const wantedCompact = compactLocation(wantedRaw);
+      if (!wanted) return true;
+
+      return locationCandidates(property).some(candidateRaw => {
+        const candidate = normalizeText(candidateRaw);
+        const candidateCompact = compactLocation(candidateRaw);
+        return candidate === wanted || candidateCompact === wantedCompact;
+      });
+    }
+
+    function hardFilterFailure(property, criteria) {
+      if (criteria.type && property.type !== criteria.type) return "tipo diferente";
+      if (criteria.neighborhood && !matchesNeighborhood(property, criteria.neighborhood)) return "região diferente";
+      return "";
+    }
+
+    function renderPropertyMedia(property) {
+      const agency = property.agency || { name: "Imobiliária parceira", initials: "IM" };
+      return `
+        <div class="property-media ${escapeHTML(property.visual || "")}" role="img" aria-label="Imagem do imóvel ${escapeHTML(property.title)} com logo da imobiliária ${escapeHTML(agency.name)}">
+          <span class="photo-kicker">Imagem do imóvel</span>
+          <div class="agency-badge" aria-label="Logo da imobiliária ${escapeHTML(agency.name)}">
+            <b>${escapeHTML(agency.initials || "IM")}</b>
+            <small>${escapeHTML(agency.name)}</small>
+          </div>
+        </div>
+      `;
+    }
+
     function buildWhatsAppUrl(property, score) {
       const message = [
         "Olá! Quero falar sobre este imóvel encontrado no MatchR:",
         property.title,
         `${typeLabel[property.type]} em ${property.neighborhood}`,
+        `Imobiliária: ${(property.agency && property.agency.name) || "parceira"}`,
         `${formatCurrency(property.price)} • ${property.bedrooms} dorms • ${property.suites} suítes • ${property.parking} vagas • ${property.area} m²`,
         `Aderência no match: ${score}%`
       ].join("\n");
@@ -1553,13 +1774,10 @@
       const typeRules = [
         { value: "casa-condominio", regex: /(casa\s+de\s+condom[ií]nio|condom[ií]nio\s+de\s+casas|casa\s+em\s+condom[ií]nio)/i },
         { value: "apartamento", regex: /(apartamento|apto|edif[ií]cio|pr[eé]dio)/i },
-        { value: "casa", regex: /\bcasa\b/i },
         { value: "cobertura", regex: /(cobertura|duplex)/i },
-        { value: "studio-kitnet", regex: /(studio|kitnet|loft)/i },
-        { value: "terreno", regex: /(terreno|lote)/i },
-        { value: "sala-comercial", regex: /(sala\s+comercial|conjunto)/i },
-        { value: "loja", regex: /\bloja\b/i },
-        { value: "galpao", regex: /(galp[aã]o|dep[oó]sito)/i }
+        { value: "casa-praia", regex: /(casa\s+(na|de)\s+praia|litoral|juquehy|juque[ií]|guaruj[aá]|maresias|s[aã]o\s+sebasti[aã]o)/i },
+        { value: "casa-campo", regex: /(casa\s+(de|no)\s+campo|s[ií]tio|fazenda|ch[aá]cara|s[aã]o\s+roque|atibaia|serra)/i },
+        { value: "casa", regex: /\bcasa\b/i }
       ];
 
       for (const rule of typeRules) {
@@ -1570,10 +1788,31 @@
         }
       }
 
-      const neighborhoods = ["itaim", "itaim bibi", "jardins", "moema", "alphaville", "granja viana", "alto de pinheiros", "pinheiros", "vila nova conceição", "campo belo"];
-      const matchedNeighborhood = neighborhoods.find(item => text.includes(item));
+      const neighborhoods = ["alto de pinheiros", "vila nova conceição", "campo belo", "itaim bibi", "granja viana", "são roque", "sao roque", "são sebastião", "sao sebastiao", "alphaville", "pinheiros", "jardins", "juquehy", "juqueí", "guarujá", "guaruja", "moema", "itaim"];
+      const matchedNeighborhood = neighborhoods.find(item => normalizeText(text).includes(normalizeText(item)));
       if (matchedNeighborhood) {
-        document.getElementById("neighborhood").value = matchedNeighborhood.replace(/\b\w/g, letter => letter.toUpperCase());
+        const locationLabels = {
+          "alto de pinheiros": "Alto de Pinheiros",
+          "vila nova conceicao": "Vila Nova Conceição",
+          "campo belo": "Campo Belo",
+          "itaim bibi": "Itaim Bibi",
+          "granja viana": "Granja Viana",
+          "sao roque": "São Roque",
+          "são roque": "São Roque",
+          "sao sebastiao": "São Sebastião",
+          "são sebastião": "São Sebastião",
+          "alphaville": "Alphaville",
+          "pinheiros": "Pinheiros",
+          "jardins": "Jardins",
+          "juquehy": "Juquehy",
+          "juquei": "Juquehy",
+          "juqueí": "Juquehy",
+          "guaruja": "Guarujá",
+          "guarujá": "Guarujá",
+          "moema": "Moema",
+          "itaim": "Itaim Bibi"
+        };
+        document.getElementById("neighborhood").value = locationLabels[normalizeText(matchedNeighborhood)] || matchedNeighborhood.replace(/\b\w/g, letter => letter.toUpperCase());
       }
 
       const bedroomsMatch = text.match(/(\d+)\s*(quartos|dormit[oó]rios|dorms)/i);
@@ -1643,22 +1882,13 @@
       const reasons = [];
 
       if (criteria.type) {
-        if (property.type === criteria.type) {
-          score += 24;
-          reasons.push("tipo compatível");
-        } else {
-          score -= 25;
-        }
+        score += 24;
+        reasons.push("tipo compatível");
       }
 
       if (criteria.neighborhood) {
-        const wanted = criteria.neighborhood.toLowerCase();
-        if (property.neighborhood.toLowerCase().includes(wanted) || wanted.includes(property.neighborhood.toLowerCase())) {
-          score += 14;
-          reasons.push("região aderente");
-        } else {
-          score -= 4;
-        }
+        score += 18;
+        reasons.push("região compatível");
       }
 
       if (criteria.budget) {
@@ -1721,7 +1951,7 @@
       criteria.preferences.forEach(item => chips.push(item.replace("-", " ")));
 
       selectedChips.innerHTML = chips.length
-        ? chips.map(chip => `<span class="chip">${chip}</span>`).join("")
+        ? chips.map(chip => `<span class="chip">${escapeHTML(chip)}</span>`).join("")
         : `<span class="chip">Nenhum filtro aplicado</span>`;
     }
 
@@ -1730,7 +1960,11 @@
       buildChips(criteria);
 
       const ranked = sampleProperties
-        .map(property => ({ property, ...calculateScore(property, criteria) }))
+        .map(property => {
+          const blocked = hardFilterFailure(property, criteria);
+          return blocked ? null : { property, ...calculateScore(property, criteria) };
+        })
+        .filter(Boolean)
         .filter(item => item.score >= 40)
         .sort((a, b) => b.score - a.score);
 
@@ -1738,7 +1972,7 @@
       averageScore.textContent = ranked.length ? `${Math.round(ranked.reduce((sum, item) => sum + item.score, 0) / ranked.length)}%` : "--";
 
       if (!ranked.length) {
-        propertyList.innerHTML = `<div class="empty-state">Nenhum imóvel compatível com estes filtros. Tente aliviar orçamento, região ou quantidade de requisitos obrigatórios.</div>`;
+        propertyList.innerHTML = `<div class="empty-state"><strong>Nenhum imóvel compatível dentro da região/tipo selecionados.</strong><br>Não trouxemos imóveis de outras regiões para preencher a lista. Se a busca pedir um bairro específico, regiões incompatíveis ficam bloqueadas automaticamente.</div>`;
       } else {
         propertyList.innerHTML = ranked.map(({ property, score, reasons }) => {
           const meta = [
@@ -1749,7 +1983,7 @@
             `${property.suites} suítes`,
             `${property.parking} vagas`,
             `${property.area} m²`
-          ].map(item => `<span>${item}</span>`).join("");
+          ].map(item => `<span>${escapeHTML(item)}</span>`).join("");
 
           const relevantAreas = property.commonAreas
             .slice(0, 5)
@@ -1760,14 +1994,15 @@
 
           return `
             <article class="property-card">
+              ${renderPropertyMedia(property)}
               <div>
-                <h4>${property.title}</h4>
+                <h4>${escapeHTML(property.title)}</h4>
                 <div class="property-meta">${meta}</div>
-                <p>${property.description}</p>
-                <div class="hint">${reasons.length ? `Por que apareceu: ${reasons.join(", ")}.` : "Sugestão inicial da base demonstrativa."}</div>
-                ${relevantAreas ? `<div class="hint">Áreas: ${relevantAreas}</div>` : ""}
+                <p>${escapeHTML(property.description)}</p>
+                <div class="hint">${reasons.length ? `Por que apareceu: ${escapeHTML(reasons.join(", "))}.` : "Sugestão inicial da base demonstrativa."}</div>
+                ${relevantAreas ? `<div class="hint">Áreas: ${escapeHTML(relevantAreas)}</div>` : ""}
                 <div class="property-actions">
-                  <a class="btn whatsapp" href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" aria-label="Enviar ${property.title} pelo WhatsApp">💬 WhatsApp</a>
+                  <a class="btn whatsapp" href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" aria-label="Enviar ${escapeHTML(property.title)} pelo WhatsApp">💬 WhatsApp</a>
                 </div>
               </div>
               <div class="property-score" aria-label="Aderência ${score}%">${score}%</div>
@@ -1792,6 +2027,10 @@
         bullets.push("Infraestrutura para carregar carro elétrico marcada como requisito do cliente.");
       } else {
         bullets.push("A opção de infraestrutura para carregar carro elétrico fica disponível para Apartamento e Casa de condomínio.");
+      }
+
+      if (criteria.neighborhood) {
+        bullets.push("Região preenchida: a busca usa trava obrigatória e não mistura imóveis de outros bairros ou cidades.");
       }
 
       bullets.push("Filtros avançados permanecem recolhidos por padrão para deixar o MVP mais limpo.");

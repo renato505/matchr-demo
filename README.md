@@ -1,25 +1,17 @@
-# MatchR MVP v12
+# MatchR MVP v13
 
-Versão estática para publicação em GitHub Pages.
+Versão corrigida para publicação em GitHub Pages.
 
-## O que esta versão mantém
+## Ajustes desta versão
 
-- Logotipo no canto superior esquerdo.
-- Menu hambúrguer para navegar pelas seções da página.
-- Interface limpa do motor de compatibilidade.
-- Opção `Casa de condomínio` no combo box de tipo de imóvel.
-- Exibição condicional de áreas comuns:
-  - `Apartamento` exibe `Áreas comuns do edifício`.
-  - `Casa de condomínio` exibe `Áreas comuns do condomínio`.
-  - Demais tipos ocultam a seção para reduzir poluição visual.
-- Opção `Infraestrutura para carregar carro elétrico` disponível em apartamento e casa de condomínio.
-- Vídeo embedado na seção `Para você, corretor`.
-
-## Ajustes da v12
-
-- O vídeo foi movido para o final da página.
-- O botão de WhatsApp voltou a aparecer nos imóveis sugeridos da busca.
-
-## Publicação
-
-Substitua o arquivo `index.html` atual do GitHub Pages pelo `index.html` deste pacote.
+- Mantém logotipo no canto superior esquerdo.
+- Mantém menu hambúrguer com navegação pelas seções da página.
+- Mantém vídeo embedado no final da página.
+- Remove tipos comerciais e terrenos do combo box.
+- Inclui Casa de campo e Casa na praia.
+- Mantém Casa de condomínio.
+- Mantém áreas comuns condicionais para Apartamento e Casa de condomínio.
+- Mantém Infraestrutura para carregar carro elétrico nas áreas comuns de Apartamento e Casa de condomínio.
+- Corrige o motor de busca: tipo e bairro/região agora são filtros obrigatórios quando preenchidos.
+- Volta a exibir imagem visual do imóvel com logo/nome da imobiliária responsável em cada card.
+- Mantém botão de WhatsApp nos resultados.
