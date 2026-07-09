@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>MatchR — MVP v6 • WhatsApp nos cards</title>
+<title>MatchR — MVP v7 • áreas comuns</title>
 <style>
 :root{
   --bg:#fffaf5;
@@ -56,6 +56,19 @@ nav button.active .pill,nav button:hover .pill{background:#fff;color:#111;border
 .side-card p{margin:8px 0 0;font-size:13px;color:var(--muted);line-height:1.45}.side-card strong{font-size:13px}main{padding:28px;max-width:1520px;width:100%;margin:0 auto}.view{display:none}.view.active{display:block}
 .top{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:22px}h1{margin:0;font-size:36px;letter-spacing:-.05em;line-height:1.04}h2{margin:0 0 12px;font-size:21px;letter-spacing:-.025em}h3{margin:0 0 8px;font-size:16px}p{color:var(--muted);line-height:1.45}.lead{margin:8px 0 0;max-width:780px}.grid{display:grid;gap:16px}.cols2{grid-template-columns:repeat(2,minmax(0,1fr))}.cols3{grid-template-columns:repeat(3,minmax(0,1fr))}.cols4{grid-template-columns:repeat(4,minmax(0,1fr))}.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow-soft)}.card.soft{background:linear-gradient(180deg,#fff,#fff7ef)}.metric .n{font-size:38px;font-weight:950;letter-spacing:-.06em}.metric .label{font-size:13px;color:var(--muted);font-weight:800}.btn{border:0;border-radius:14px;padding:12px 16px;font-weight:950;font-size:14px;white-space:nowrap}.btn.primary{background:#111;color:#fff}.btn.orange{background:var(--orange);color:#fff}.btn.ghost{background:#fff;color:#111;border:1px solid var(--line)}.btn.soft{background:#fff4ec;color:var(--orange-dark);border:1px solid #ffd9bf}.btn:hover{transform:translateY(-1px)}.filters{display:grid;grid-template-columns:repeat(6,minmax(120px,1fr));gap:10px;margin-bottom:16px}input,select,textarea{width:100%;border:1px solid var(--line);background:#fff;color:#111;padding:12px 13px;border-radius:14px;outline:none;font-size:14px}textarea{resize:vertical;min-height:112px;line-height:1.45}input:focus,select:focus,textarea:focus{border-color:var(--orange);box-shadow:0 0 0 4px rgba(255,106,0,.10)}.briefing-card{margin-bottom:16px;padding:18px;border:1px solid var(--line);border-radius:22px;background:#fff;box-shadow:var(--shadow)}.briefing-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.briefing-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}.badge,.tag,.score,.status,.chip{display:inline-flex;align-items:center;gap:4px;border-radius:999px;padding:6px 9px;font-size:12px;font-weight:850}.badge{background:#111;color:#fff}.tag{background:#f6f6f6;color:#333;margin:4px 4px 0 0}.tag.good{background:rgba(14,122,70,.10);color:var(--green);border:1px solid rgba(14,122,70,.18)}.tag.warn{background:#fff4ec;color:var(--orange-dark);border:1px solid #ffd9bf}.tag.bad{background:rgba(170,31,31,.08);color:var(--red);border:1px solid rgba(170,31,31,.18)}.score{background:rgba(255,106,0,.13);color:var(--orange-dark);border:1px solid rgba(255,106,0,.22)}.status{background:#f1f5f9;color:#334155}.status.hot{background:rgba(255,106,0,.13);color:var(--orange-dark)}.status.ok{background:rgba(14,122,70,.12);color:var(--green)}.criteria{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.criteria .chip{background:#fff4ec;color:var(--orange-dark);border:1px solid #ffd9bf}.criteria .chip.strict{background:rgba(14,122,70,.10);color:var(--green);border-color:rgba(14,122,70,.20)}.criteria .chip.empty{background:#f6f6f6;color:#666;border-color:#e5e5e5}.rules{display:grid;grid-template-columns:1.15fr .85fr;gap:16px;margin-bottom:16px}.rules-list{display:grid;gap:9px}.toggle{display:flex;align-items:flex-start;gap:10px;padding:10px;border:1px solid var(--line);border-radius:14px;background:#fff}.toggle input{width:auto;margin-top:3px}.toggle span{font-size:13px;color:#333}.toggle b{display:block;color:#111;margin-bottom:2px}.inventory{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.imovel{border:1px solid var(--line);border-radius:22px;overflow:hidden;background:#fff;box-shadow:var(--shadow-soft);display:flex;flex-direction:column}.photo{height:148px;background:linear-gradient(135deg,#f4ede4,#d7cec4 56%,#f7f7f7);position:relative;overflow:hidden}.photo.with-image{background-size:cover;background-position:center}.photo.logo-photo{background:linear-gradient(135deg,#fff7ef,#ffffff 46%,#f0ebe5)}.photo:after{content:"";position:absolute;inset:18px;border:1px solid rgba(255,255,255,.72);border-radius:16px;pointer-events:none}.photo.logo-photo:after{border-color:rgba(17,17,17,.08)}.photo .kind{position:absolute;left:14px;top:14px;background:#111;color:#fff;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:950;z-index:3}.photo .match{position:absolute;right:14px;top:14px;background:#fff;color:var(--orange-dark);border-radius:999px;padding:7px 10px;font-size:12px;font-weight:950;box-shadow:var(--shadow-soft);z-index:3}.logo-photo-content{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:5px;padding:36px 18px 16px;z-index:1}.broker-logo-card{width:min(78%,230px);min-height:72px;border-radius:18px;background:#fff;border:1px solid rgba(17,17,17,.10);display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:var(--shadow-soft);padding:12px 14px}.broker-logo-mark{width:38px;height:38px;border-radius:13px;background:#111;color:#fff;display:grid;place-items:center;font-weight:950;font-size:13px;letter-spacing:-.04em;flex:0 0 auto}.broker-logo-word{font-size:16px;font-weight:950;letter-spacing:-.05em;color:#111;line-height:1.02;text-align:left;max-width:150px}.broker-name{font-size:13px;font-weight:950;letter-spacing:-.02em;color:#111;max-width:90%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.broker-label{font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:var(--muted-2)}.imovel-body{padding:16px;display:flex;flex-direction:column;gap:8px;flex:1}.imovel h3{font-size:17px;letter-spacing:-.02em;margin:0}.meta{font-size:13px;color:var(--muted);font-weight:780}.price{font-size:20px;font-weight:950;letter-spacing:-.04em}.why{border-top:1px solid var(--line);padding-top:12px;margin-top:auto}.why p{font-size:12px;margin:6px 0;color:#555}.split{display:grid;grid-template-columns:1.25fr .75fr;gap:16px}.mini-table{width:100%;border-collapse:collapse}.mini-table th,.mini-table td{border-bottom:1px solid var(--line);padding:11px;text-align:left;font-size:13px}.mini-table th{color:#555;font-size:12px;text-transform:uppercase;letter-spacing:.04em}.empty-state{padding:22px;border:1px dashed #e0b995;background:#fff8f0;border-radius:20px;color:#633900}.toast{position:fixed;right:24px;bottom:24px;background:#111;color:#fff;padding:14px 18px;border-radius:15px;box-shadow:var(--shadow);display:none;font-weight:850;z-index:50}.small{font-size:12px;color:var(--muted-2)}.divider{height:1px;background:var(--line);margin:14px 0}.callout{border:1px solid #ffd9bf;background:#fff4ec;border-radius:18px;padding:14px;color:#643700}.callout p{margin:6px 0 0}.kbd{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#f6f6f6;border:1px solid #e7e7e7;border-radius:7px;padding:2px 5px;font-size:12px}.client-grid{display:grid;grid-template-columns:1.1fr .9fr .7fr .7fr auto;gap:10px}.results-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin:8px 0 14px}.results-head p{margin:5px 0 0}.test-pass{font-size:12px;color:var(--green);font-weight:900}.test-fail{font-size:12px;color:var(--red);font-weight:900}
 .example-row{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 0}.mini-example{border:1px solid #ffd9bf;background:#fffaf5;color:var(--orange-dark);font-weight:900;border-radius:999px;padding:8px 10px;font-size:12px}.mini-example:hover{background:#fff4ec}.selection-panel{margin-bottom:16px}.whatsapp-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.whatsapp-grid{display:grid;grid-template-columns:minmax(180px,.8fr) auto auto auto auto;gap:10px;margin:12px 0}.whatsapp-message{min-height:152px;background:#fffdfb}.select-line{margin-top:12px;display:flex;align-items:center;justify-content:center;gap:9px;border:1px solid rgba(37,211,102,.35);background:#25d366;border-radius:14px;padding:11px 12px;font-size:13px;font-weight:950;color:#073b1a;box-shadow:0 10px 22px rgba(37,211,102,.18);transition:transform .16s ease,filter .16s ease,box-shadow .16s ease}.select-line:hover{transform:translateY(-1px);filter:saturate(1.04);box-shadow:0 14px 28px rgba(37,211,102,.22)}.select-line input{position:absolute;opacity:0;pointer-events:none}.wa-card-icon{width:19px;height:19px;display:inline-flex;align-items:center;justify-content:center;color:#fff;flex:0 0 auto}.wa-card-icon svg{width:19px;height:19px;display:block}.wa-copy{line-height:1}.imovel.selected{border-color:rgba(37,211,102,.58);box-shadow:0 18px 42px rgba(37,211,102,.14)}.imovel.selected .select-line{background:#128c3d;border-color:#128c3d;color:#fff}.imovel.selected .wa-card-icon{color:#fff}.selection-mini{font-size:12px;color:var(--muted);margin-top:6px}.wa-preview-count{font-size:13px;color:var(--muted);font-weight:800}.btn.whatsapp{background:#25d366;color:#063b19}.btn.whatsapp:hover{transform:translateY(-1px)}
+
+.amenities-card{margin:0 0 16px;background:linear-gradient(180deg,#fff,#fffaf5)}
+.amenities-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:8px}
+.amenity-grid{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.amenity-chip{position:relative;display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 11px;font-size:12px;font-weight:900;color:#333;user-select:none;transition:transform .16s ease, background .16s ease, border-color .16s ease}
+.amenity-chip:hover{transform:translateY(-1px);background:#fff7ef;border-color:#ffd9bf}
+.amenity-chip input{position:absolute;opacity:0;pointer-events:none;width:auto}
+.amenity-chip:has(input:checked){background:rgba(14,122,70,.10);border-color:rgba(14,122,70,.25);color:var(--green)}
+.amenity-mode{margin-top:10px;background:#fffdfb}
+.condo-line{font-size:12px;color:#444;background:#fffaf5;border:1px solid #f0e3d5;border-radius:14px;padding:9px 10px;line-height:1.35}
+.condo-line b{color:#111}
+.why .amenity-note{font-size:12px;color:#555;margin:6px 0}
+
 @media(max-width:1100px){.app{grid-template-columns:1fr}aside{position:relative;height:auto}.filters,.cols4,.cols3,.cols2,.inventory,.rules,.split,.client-grid,.whatsapp-grid{grid-template-columns:1fr}main{padding:18px}h1{font-size:31px}.top,.briefing-head,.results-head{display:block}.briefing-actions{margin-top:12px}}
 </style>
 </head>
@@ -64,7 +77,7 @@ nav button.active .pill,nav button:hover .pill{background:#fff;color:#111;border
   <aside>
     <a class="logo" onclick="goId('dashboard')" aria-label="Voltar ao início">
       <span class="logo-mark">MR</span>
-      <span class="logo-text"><b>MatchR</b><span>MVP v6 • WhatsApp nos cards</span></span>
+      <span class="logo-text"><b>MatchR</b><span>MVP v7 • áreas comuns</span></span>
     </a>
     <nav>
       <button class="active" data-view="dashboard" onclick="goId('dashboard')">O MatchR <span class="pill">novo</span></button>
@@ -82,8 +95,8 @@ nav button.active .pill,nav button:hover .pill{background:#fff;color:#111;border
       <p>Preferência do buscador × características disponíveis. O sistema cruza intenção, restrições e atributos do imóvel.</p>
     </div>
     <div class="side-card">
-      <strong>Imóveis sem foto</strong>
-      <p>Quando o card não tem imagem do imóvel, o MatchR exibe um logo textual de imobiliária distribuído de forma balanceada na base, embutido no próprio HTML.</p>
+      <strong>Áreas comuns</strong>
+      <p>Agora o corretor filtra piscina, academia, brinquedoteca, coworking, pet place, portaria, rooftop e outros itens do edifício.</p>
     </div>
   </aside>
 
@@ -92,7 +105,7 @@ nav button.active .pill,nav button:hover .pill{background:#fff;color:#111;border
       <div class="top">
         <div>
           <h1>Encontre imóveis compatíveis com o cliente.</h1>
-          <p class="lead">Digite ou cole o briefing, veja imóveis coerentes com o perfil e selecione os melhores para enviar pelo WhatsApp.</p>
+          <p class="lead">Digite ou cole o briefing, filtre áreas comuns do edifício e selecione os melhores imóveis para enviar pelo WhatsApp.</p>
         </div>
         <button class="btn orange" onclick="goId('search')">Testar busca</button>
       </div>
@@ -100,14 +113,14 @@ nav button.active .pill,nav button:hover .pill{background:#fff;color:#111;border
       <div class="grid cols4">
         <div class="card metric"><div class="n" id="totalImoveis">3.000</div><div class="label">imóveis simulados</div></div>
         <div class="card metric"><div class="n">0</div><div class="label">casas quando busca apartamento</div></div>
-        <div class="card metric"><div class="n">2</div><div class="label">camadas: obrigatório + preferência</div></div>
+        <div class="card metric"><div class="n">20+</div><div class="label">áreas comuns do edifício</div></div>
         <div class="card metric"><div class="n">WhatsApp</div><div class="label">seleção pronta para enviar</div></div>
       </div>
 
       <div class="grid cols3" style="margin-top:16px">
         <div class="card soft">
           <h2>1. Entende o briefing</h2>
-          <p>Extrai tipo, bairro, valor, suítes, vagas, área, preferências e perfil do comprador a partir da frase do corretor.</p>
+          <p>Extrai tipo, bairro, valor, suítes, vagas, área, áreas comuns, preferências e perfil do comprador a partir da frase do corretor.</p>
         </div>
         <div class="card soft">
           <h2>2. Respeita os obrigatórios</h2>
@@ -115,7 +128,7 @@ nav button.active .pill,nav button:hover .pill{background:#fff;color:#111;border
         </div>
         <div class="card soft">
           <h2>3. Ranqueia por aderência</h2>
-          <p>Varanda gourmet, vista aberta, andar alto, lazer, pet, silêncio e perfil familiar/investidor entram como pontuação e explicação.</p>
+          <p>Varanda gourmet, vista aberta, andar alto, lazer, áreas comuns, pet, silêncio e perfil familiar/investidor entram como pontuação e explicação.</p>
         </div>
       </div>
 
@@ -130,7 +143,7 @@ nav button.active .pill,nav button:hover .pill{background:#fff;color:#111;border
       <div class="top">
         <div>
           <h1>Encontre imóveis compatíveis com o cliente</h1>
-          <p class="lead">Digite ou cole o briefing do cliente. O MatchR entende o perfil, respeita os critérios obrigatórios, ranqueia as preferências e permite selecionar imóveis para enviar pelo WhatsApp.</p>
+          <p class="lead">Digite ou cole o briefing do cliente. O MatchR entende o perfil, respeita os critérios obrigatórios, considera áreas comuns do edifício e permite selecionar imóveis para enviar pelo WhatsApp.</p>
         </div>
         <button class="btn ghost" onclick="fillExample()">Usar exemplo bom</button>
       </div>
@@ -157,6 +170,18 @@ nav button.active .pill,nav button:hover .pill{background:#fff;color:#111;border
         </select>
       </div>
 
+      <div class="card amenities-card">
+        <div class="amenities-head">
+          <div>
+            <h2>Áreas comuns do edifício</h2>
+            <p class="small">Selecione itens do condomínio. Por padrão eles melhoram o ranking; se forem inegociáveis, marque como essenciais para eliminar imóveis sem essas áreas.</p>
+          </div>
+          <span class="badge">novo</span>
+        </div>
+        <div id="amenityChips" class="amenity-grid" aria-label="Filtros de áreas comuns"></div>
+        <label class="toggle amenity-mode"><input id="amenityRequiredMode" type="checkbox"><span><b>Tratar áreas selecionadas como essenciais nesta busca</b>Use quando o cliente disser “precisa ter piscina”, “não abre mão de academia” ou “somente prédio com brinquedoteca”.</span></label>
+      </div>
+
       <div class="briefing-card">
         <div class="briefing-head">
           <div>
@@ -165,7 +190,7 @@ nav button.active .pill,nav button:hover .pill{background:#fff;color:#111;border
           </div>
           <span class="badge">texto natural</span>
         </div>
-        <textarea id="briefingText" placeholder="Digite ou cole o perfil do cliente. Ex.: Cliente Mariana quer apartamento em Moema até 5 milhões, 3 suítes, 2 vagas, varanda gourmet e vista aberta."></textarea>
+        <textarea id="briefingText" placeholder="Digite ou cole o perfil do cliente. Ex.: Cliente Mariana quer apartamento em Moema até 5 milhões, 3 suítes, 2 vagas, varanda gourmet, vista aberta e prédio com piscina e brinquedoteca."></textarea>
         <div class="example-row" aria-label="Exemplos de briefing">
           <button class="mini-example" type="button" onclick="useBriefingExample(0)">Família em Moema</button>
           <button class="mini-example" type="button" onclick="useBriefingExample(1)">Investidor em Pinheiros</button>
@@ -208,6 +233,7 @@ nav button.active .pill,nav button:hover .pill{background:#fff;color:#111;border
             <label class="toggle"><input id="rulePreco" type="checkbox" checked><span><b>Orçamento obrigatório</b>Não ultrapassa o teto de valor informado.</span></label>
             <label class="toggle"><input id="ruleSuites" type="checkbox" checked><span><b>Suítes obrigatórias</b>Respeita mínimo de suítes quando informado.</span></label>
             <label class="toggle"><input id="ruleVagas" type="checkbox" checked><span><b>Vagas obrigatórias</b>Respeita mínimo de vagas quando informado.</span></label>
+            <label class="toggle"><input id="ruleAmenities" type="checkbox" checked><span><b>Áreas comuns essenciais</b>Quando o cliente disser que precisa ter, elimina imóveis sem essas áreas do edifício.</span></label>
             <label class="toggle"><input id="ruleSubtipos" type="checkbox"><span><b>Permitir subtipos de apartamento</b>Quando ligado, Cobertura/Garden/Loft podem entrar para busca por apartamento. Casas continuam fora.</span></label>
           </div>
         </div>
@@ -215,7 +241,7 @@ nav button.active .pill,nav button:hover .pill{background:#fff;color:#111;border
           <h2>Como o match é calculado</h2>
           <p><b>Obrigatórios</b> eliminam. <b>Preferências</b> ranqueiam.</p>
           <div class="divider"></div>
-          <p class="small">Exemplo: “apartamento em Moema até 5 mi” é filtro. “varanda gourmet, vista aberta, andar alto” é pontuação e explicação do card.</p>
+          <p class="small">Exemplo: “apartamento em Moema até 5 mi” é filtro. “varanda gourmet, vista aberta, andar alto e áreas comuns desejadas” entram na pontuação; “precisa ter piscina” pode virar eliminatório.</p>
           <div class="callout" style="margin-top:12px">
             <strong>Insight da corretora</strong>
             <p>O caminho certo é cruzar preferências do buscador com características disponíveis no inventário.</p>
@@ -284,7 +310,7 @@ nav button.active .pill,nav button:hover .pill{background:#fff;color:#111;border
         </div>
         <div class="card">
           <h2>Próximos recursos naturais</h2>
-          <p>Configuração por imobiliária, pesos por regra comercial, integração de CRM, ingestão de estoque real e envio com links reais dos imóveis.</p>
+          <p>Configuração por imobiliária, pesos por regra comercial, integração de CRM, ingestão de estoque real, agenda de visitas e envio com links reais dos imóveis.</p>
         </div>
       </div>
       <div class="grid cols4" style="margin-top:16px">
@@ -333,6 +359,28 @@ const featureAliases = {
   'liquidez':['liquidez','investimento','rentabilidade','locacao','locação']
 };
 const preferenceKeys = Object.keys(featureAliases);
+const buildingAmenities = [
+  {key:'piscina', label:'Piscina', aliases:['piscina','raia','piscina coberta','piscina aquecida']},
+  {key:'academia', label:'Academia', aliases:['academia','fitness','sala fitness']},
+  {key:'salão de festas', label:'Salão de festas', aliases:['salao de festas','salão de festas','salão para festas']},
+  {key:'espaço gourmet', label:'Espaço gourmet', aliases:['espaco gourmet','espaço gourmet','area gourmet','área gourmet']},
+  {key:'churrasqueira', label:'Churrasqueira', aliases:['churrasqueira','churrasco']},
+  {key:'playground', label:'Playground', aliases:['playground','parquinho']},
+  {key:'brinquedoteca', label:'Brinquedoteca', aliases:['brinquedoteca','brinquedos','crianças','criancas']},
+  {key:'quadra', label:'Quadra', aliases:['quadra','quadra poliesportiva','quadra de tenis','quadra de tênis']},
+  {key:'sauna', label:'Sauna', aliases:['sauna','spa']},
+  {key:'coworking', label:'Coworking', aliases:['coworking','workstation','sala de reunião','sala de reuniao','home office no predio','home office no prédio']},
+  {key:'pet place', label:'Pet place', aliases:['pet place','pet care','pet wash','espaço pet','espaco pet']},
+  {key:'jardim', label:'Jardim', aliases:['jardim','area verde','área verde','paisagismo']},
+  {key:'rooftop', label:'Rooftop', aliases:['rooftop','sky lounge','terraço comum','terraco comum']},
+  {key:'bicicletário', label:'Bicicletário', aliases:['bicicletario','bicicletário','bike','bicicleta']},
+  {key:'portaria 24h', label:'Portaria 24h', aliases:['portaria 24h','porteiro 24','24 horas','portaria vinte e quatro']},
+  {key:'segurança', label:'Segurança', aliases:['seguranca','segurança','monitoramento','cftv','controle de acesso']},
+  {key:'vagas para visitantes', label:'Vagas para visitantes', aliases:['vaga de visitante','vagas de visitantes','visitantes']},
+  {key:'gerador', label:'Gerador', aliases:['gerador','gerador full','gerador total']},
+  {key:'lazer completo', label:'Lazer completo', aliases:['lazer completo','condominio clube','condomínio clube','clube']}
+];
+const amenityKeys = buildingAmenities.map(item => item.key);
 let inventory = [];
 let currentBriefingProfile = {};
 let currentMatches = [];
@@ -341,9 +389,9 @@ let selectedIds = new Set();
 let history = [];
 let clients = [{nome:'Mariana', tipo:'Cliente', status:'Quente', busca:'Apartamento em Moema até R$ 5 mi, 3 suítes, varanda gourmet'}];
 const briefingExamples = [
-  'Cliente Mariana quer apartamento em Moema até 5 milhões, 3 suítes, 2 vagas, varanda gourmet e vista aberta. Família com pet, quer andar alto e lazer completo.',
-  'Investidor procura studio ou apartamento compacto em Pinheiros até 2 milhões, perto do metrô, boa liquidez e pronto para locação.',
-  'Casal com dois filhos quer casa em Alto de Pinheiros até 8 milhões, 4 quartos, 3 suítes, jardim, segurança e rua silenciosa.'
+  'Cliente Mariana quer apartamento em Moema até 5 milhões, 3 suítes, 2 vagas, varanda gourmet e vista aberta. Família com pet, quer prédio com piscina, brinquedoteca, playground e lazer completo.',
+  'Investidor procura studio ou apartamento compacto em Pinheiros até 2 milhões, perto do metrô, boa liquidez, coworking, academia e bicicletário.',
+  'Casal com dois filhos quer casa em Alto de Pinheiros até 8 milhões, 4 quartos, 3 suítes, jardim, segurança, vagas para visitantes e rua silenciosa.'
 ];
 
 function norm(value){return String(value||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[ºª]/g,'').trim();}
@@ -422,26 +470,54 @@ function logoDistribution(){
 }
 function priceBucket(maxPrice){if(!maxPrice)return ''; if(maxPrice<=3)return '3'; if(maxPrice<=5)return '5'; if(maxPrice<=8)return '8'; if(maxPrice<=10)return '10'; return 'acima10';}
 function numberFromToken(token){const clean=norm(token).replace(/[^\d,.a-z]/g,''); if(numberWords[clean]!=null)return numberWords[clean]; const n=Number(clean.replace(/\./g,'').replace(',','.')); return Number.isFinite(n)?n:null;}
+function unique(list){return [...new Set((list||[]).filter(Boolean))];}
+function amenityLabel(key){return (buildingAmenities.find(item=>item.key===key)||{}).label || key;}
+function amenityAliasList(key){const item = buildingAmenities.find(a=>a.key===key); return item ? unique([item.key,item.label,...(item.aliases||[])]).map(norm) : [norm(key)];}
+function hasAmenity(imovel,key){const txt=featureText(imovel); return amenityAliasList(key).some(alias=>txt.includes(alias));}
+function commonAreasForImovel(imovel){return amenityKeys.filter(key=>hasAmenity(imovel,key));}
+function selectedAmenityValues(){return [...document.querySelectorAll('[data-amenity]:checked')].map(input=>input.value);}
+function getAmenitySelectionFromUI(){
+  const selected = unique(selectedAmenityValues());
+  const mode = document.getElementById('amenityRequiredMode');
+  return {desired:selected, required:(mode && mode.checked) ? selected : []};
+}
+function renderAmenityControls(){
+  const el = document.getElementById('amenityChips');
+  if(!el)return;
+  el.innerHTML = buildingAmenities.map(item=>`<label class="amenity-chip"><input type="checkbox" data-amenity value="${escapeHtml(item.key)}"><span>${escapeHtml(item.label)}</span></label>`).join('');
+  document.querySelectorAll('[data-amenity]').forEach(input=>input.addEventListener('change',()=>searchWithProfile(false)));
+  const mode = document.getElementById('amenityRequiredMode');
+  if(mode) mode.addEventListener('change',()=>searchWithProfile(false));
+}
+function mergeAmenitiesIntoControls(profile){
+  const selected = new Set([...(profile.amenitiesDesired||[]), ...(profile.amenitiesRequired||[])]);
+  document.querySelectorAll('[data-amenity]').forEach(input=>{ if(selected.has(input.value)) input.checked = true; });
+}
+function clearAmenityControls(){
+  document.querySelectorAll('[data-amenity]').forEach(input=>{ input.checked = false; });
+  const mode = document.getElementById('amenityRequiredMode');
+  if(mode) mode.checked = false;
+}
 
 function generateInventory(){
   const curated = [
-    {id:1,titulo:'Apartamento vista aberta no coração de Moema',tipo:'Apartamento',bairro:'Moema',preco:4.85,area:224,quartos:4,suites:3,vagas:3,features:['varanda gourmet','vista aberta','andar alto','lazer completo','piscina','academia','pet friendly','reformado','segurança'],descricao:'Planta familiar, varanda gourmet integrada e vista aberta em rua tranquila.'},
-    {id:2,titulo:'Apartamento reformado em Moema Pássaros',tipo:'Apartamento',bairro:'Moema',preco:3.95,area:178,quartos:3,suites:3,vagas:2,features:['varanda gourmet','vista livre','silencioso','reformado','pet friendly','segurança','escolas'],descricao:'Opção certeira para família que quer praticidade, silêncio e boa apresentação.'},
-    {id:3,titulo:'Apartamento amplo com lazer clube em Moema',tipo:'Apartamento',bairro:'Moema',preco:4.45,area:206,quartos:4,suites:3,vagas:2,features:['varanda','vista aberta','lazer completo','piscina','academia','brinquedoteca','escolas'],descricao:'Condomínio com estrutura completa e excelente aderência a famílias.'},
-    {id:4,titulo:'Casa charmosa em Moema Índios',tipo:'Casa',bairro:'Moema',preco:4.35,area:260,quartos:4,suites:3,vagas:3,features:['jardim','quintal','silencioso','segurança','reformado'],descricao:'Casa com jardim. Deve ficar fora quando o briefing pedir apartamento.'},
-    {id:5,titulo:'Cobertura duplex em Moema',tipo:'Cobertura',bairro:'Moema',preco:4.95,area:250,quartos:4,suites:3,vagas:3,features:['terraço','vista aberta','piscina','andar alto','varanda gourmet'],descricao:'Subtipo premium; só entra quando a regra permitir subtipos ou quando o cliente pedir cobertura.'},
-    {id:6,titulo:'Apartamento sofisticado no Itaim Bibi',tipo:'Apartamento',bairro:'Itaim Bibi',preco:4.7,area:190,quartos:3,suites:3,vagas:2,features:['varanda gourmet','andar alto','academia','perto do metrô','reformado'],descricao:'Boa liquidez e localização forte para comprador executivo.'},
-    {id:7,titulo:'Garden familiar em Alto de Pinheiros',tipo:'Garden',bairro:'Alto de Pinheiros',preco:5.8,area:246,quartos:4,suites:3,vagas:3,features:['jardim','varanda gourmet','pet friendly','escolas','silencioso','segurança'],descricao:'Perfil família com pets e desejo de área externa.'},
-    {id:8,titulo:'Studio para investimento em Pinheiros',tipo:'Studio',bairro:'Pinheiros',preco:1.35,area:42,quartos:1,suites:1,vagas:1,features:['perto do metrô','liquidez','academia','novo'],descricao:'Produto de liquidez para investidor.'},
-    {id:9,titulo:'Apartamento clássico em Higienópolis',tipo:'Apartamento',bairro:'Higienópolis',preco:3.6,area:210,quartos:3,suites:2,vagas:2,features:['planta ampla','silencioso','reformado','escolas','vista livre'],descricao:'Metragem generosa e localização tradicional.'},
-    {id:10,titulo:'Casa de condomínio na Chácara Flora',tipo:'Casa',bairro:'Chácara Flora',preco:9.8,area:520,quartos:5,suites:4,vagas:5,features:['condominio fechado','jardim','piscina','segurança','pet friendly'],descricao:'Casa de alto padrão para família que busca verde e segurança.'},
-    {id:11,titulo:'Apartamento compacto na Vila Olímpia',tipo:'Apartamento',bairro:'Vila Olímpia',preco:2.4,area:86,quartos:2,suites:1,vagas:2,features:['perto do metrô','academia','liquidez','varanda','novo'],descricao:'Boa opção para executivo ou investidor.'},
-    {id:12,titulo:'Apartamento premium na Vila Nova Conceição',tipo:'Apartamento',bairro:'Vila Nova Conceição',preco:7.8,area:238,quartos:4,suites:4,vagas:4,features:['varanda gourmet','vista aberta','andar alto','lazer completo','piscina','academia'],descricao:'Produto premium com aderência ao alto padrão.'},
-    {id:13,titulo:'Loft com pé-direito alto nos Jardins',tipo:'Loft',bairro:'Jardins',preco:3.2,area:118,quartos:1,suites:1,vagas:2,features:['pé direito alto','reformado','perto do metrô','liquidez','home office'],descricao:'Perfil solteiro ou casal, design e localização.'},
-    {id:14,titulo:'Apartamento família em Perdizes',tipo:'Apartamento',bairro:'Perdizes',preco:3.1,area:165,quartos:3,suites:2,vagas:2,features:['varanda','lazer completo','escolas','piscina','segurança'],descricao:'Bom equilíbrio entre metragem, bairro e estrutura familiar.'}
+    {id:1,titulo:'Apartamento vista aberta no coração de Moema',tipo:'Apartamento',bairro:'Moema',preco:4.85,area:224,quartos:4,suites:3,vagas:3,features:['varanda gourmet','vista aberta','andar alto','lazer completo','piscina','academia','brinquedoteca','playground','salão de festas','pet friendly','portaria 24h','segurança','reformado'],descricao:'Planta familiar, varanda gourmet integrada e vista aberta em rua tranquila.'},
+    {id:2,titulo:'Apartamento reformado em Moema Pássaros',tipo:'Apartamento',bairro:'Moema',preco:3.95,area:178,quartos:3,suites:3,vagas:2,features:['varanda gourmet','vista livre','silencioso','reformado','pet friendly','pet place','portaria 24h','segurança','escolas'],descricao:'Opção certeira para família que quer praticidade, silêncio e boa apresentação.'},
+    {id:3,titulo:'Apartamento amplo com lazer clube em Moema',tipo:'Apartamento',bairro:'Moema',preco:4.45,area:206,quartos:4,suites:3,vagas:2,features:['varanda','vista aberta','lazer completo','piscina','academia','brinquedoteca','playground','quadra','salão de festas','segurança','escolas'],descricao:'Condomínio com estrutura completa e excelente aderência a famílias.'},
+    {id:4,titulo:'Casa charmosa em Moema Índios',tipo:'Casa',bairro:'Moema',preco:4.35,area:260,quartos:4,suites:3,vagas:3,features:['jardim','quintal','silencioso','segurança','portaria 24h','reformado'],descricao:'Casa com jardim. Deve ficar fora quando o briefing pedir apartamento.'},
+    {id:5,titulo:'Cobertura duplex em Moema',tipo:'Cobertura',bairro:'Moema',preco:4.95,area:250,quartos:4,suites:3,vagas:3,features:['terraço','vista aberta','piscina','rooftop','andar alto','varanda gourmet','espaço gourmet'],descricao:'Subtipo premium; só entra quando a regra permitir subtipos ou quando o cliente pedir cobertura.'},
+    {id:6,titulo:'Apartamento sofisticado no Itaim Bibi',tipo:'Apartamento',bairro:'Itaim Bibi',preco:4.7,area:190,quartos:3,suites:3,vagas:2,features:['varanda gourmet','andar alto','academia','coworking','portaria 24h','perto do metrô','reformado'],descricao:'Boa liquidez e localização forte para comprador executivo.'},
+    {id:7,titulo:'Garden familiar em Alto de Pinheiros',tipo:'Garden',bairro:'Alto de Pinheiros',preco:5.8,area:246,quartos:4,suites:3,vagas:3,features:['jardim','varanda gourmet','pet friendly','pet place','escolas','silencioso','segurança','playground'],descricao:'Perfil família com pets e desejo de área externa.'},
+    {id:8,titulo:'Studio para investimento em Pinheiros',tipo:'Studio',bairro:'Pinheiros',preco:1.35,area:42,quartos:1,suites:1,vagas:1,features:['perto do metrô','liquidez','academia','coworking','bicicletário','novo'],descricao:'Produto de liquidez para investidor.'},
+    {id:9,titulo:'Apartamento clássico em Higienópolis',tipo:'Apartamento',bairro:'Higienópolis',preco:3.6,area:210,quartos:3,suites:2,vagas:2,features:['planta ampla','silencioso','reformado','escolas','vista livre','salão de festas','jardim'],descricao:'Metragem generosa e localização tradicional.'},
+    {id:10,titulo:'Casa de condomínio na Chácara Flora',tipo:'Casa',bairro:'Chácara Flora',preco:9.8,area:520,quartos:5,suites:4,vagas:5,features:['condominio fechado','jardim','piscina','segurança','portaria 24h','pet friendly','vagas para visitantes'],descricao:'Casa de alto padrão para família que busca verde e segurança.'},
+    {id:11,titulo:'Apartamento compacto na Vila Olímpia',tipo:'Apartamento',bairro:'Vila Olímpia',preco:2.4,area:86,quartos:2,suites:1,vagas:2,features:['perto do metrô','academia','coworking','liquidez','varanda','novo','bicicletário'],descricao:'Boa opção para executivo ou investidor.'},
+    {id:12,titulo:'Apartamento premium na Vila Nova Conceição',tipo:'Apartamento',bairro:'Vila Nova Conceição',preco:7.8,area:238,quartos:4,suites:4,vagas:4,features:['varanda gourmet','vista aberta','andar alto','lazer completo','piscina','academia','sauna','rooftop','gerador','portaria 24h'],descricao:'Produto premium com aderência ao alto padrão.'},
+    {id:13,titulo:'Loft com pé-direito alto nos Jardins',tipo:'Loft',bairro:'Jardins',preco:3.2,area:118,quartos:1,suites:1,vagas:2,features:['pé direito alto','reformado','perto do metrô','liquidez','home office','coworking','bicicletário'],descricao:'Perfil solteiro ou casal, design e localização.'},
+    {id:14,titulo:'Apartamento família em Perdizes',tipo:'Apartamento',bairro:'Perdizes',preco:3.1,area:165,quartos:3,suites:2,vagas:2,features:['varanda','lazer completo','escolas','piscina','playground','brinquedoteca','salão de festas','segurança'],descricao:'Bom equilíbrio entre metragem, bairro e estrutura familiar.'}
   ];
   const rnd = seeded(505);
-  const featurePool = ['varanda','varanda gourmet','vista aberta','vista livre','andar alto','piscina','academia','lazer completo','pet friendly','silencioso','reformado','perto do metrô','segurança','jardim','home office','escolas','liquidez','novo','brinquedoteca','terraço'];
+  const featurePool = ['varanda','varanda gourmet','vista aberta','vista livre','andar alto','piscina','academia','lazer completo','pet friendly','silencioso','reformado','perto do metrô','segurança','portaria 24h','jardim','home office','escolas','liquidez','novo','brinquedoteca','playground','salão de festas','espaço gourmet','churrasqueira','quadra','sauna','coworking','pet place','rooftop','bicicletário','vagas para visitantes','gerador','terraço'];
   const titles = ['Essencial','Prime','Reserva','Signature','Vista','Parque','Jardim','Alameda','Maison','Horizonte'];
   inventory = curated.slice();
   for(let i=curated.length+1;i<=3000;i++){
@@ -553,6 +629,26 @@ function parsePreferences(text){
   return matches;
 }
 
+function parseAmenities(text){
+  const n=norm(text);
+  const desired=[];
+  const required=[];
+  const hardContext = /(precisa ter|tem que ter|obrigatorio|obrigatoria|indispensavel|nao abre mao|exige|exigencia|somente predio com|somente edificio com|so predio com|só predio com|sem isso nao)/.test(n);
+  for(const item of buildingAmenities){
+    const matched = amenityAliasList(item.key).some(alias=>n.includes(alias));
+    if(matched){
+      desired.push(item.key);
+      if(hardContext) required.push(item.key);
+    }
+  }
+  if(/familia|filhos|crianca|criança|escola|colegio|colégio/.test(n)) desired.push('playground','brinquedoteca','piscina','quadra','segurança');
+  if(/lazer completo|condominio clube|condomínio clube|clube/.test(n)) desired.push('lazer completo','piscina','academia','salão de festas','playground','brinquedoteca','quadra');
+  if(/pet|cachorro|gato/.test(n)) desired.push('pet place','jardim');
+  if(/home office|executivo|trabalho remoto|sala de reuniao|sala de reunião/.test(n)) desired.push('coworking','academia','portaria 24h');
+  if(/receber amigos|recebe amigos|vida social|churrasco|churrasqueira/.test(n)) desired.push('espaço gourmet','churrasqueira','salão de festas');
+  return {desired:unique(desired), required:unique(required)};
+}
+
 function parseBuyerProfile(text){
   const n=norm(text);
   const profiles=[];
@@ -581,6 +677,7 @@ function parseOrder(text){
 
 function parseBriefing(text){
   const budget = parseBudget(text);
+  const amenities = parseAmenities(text);
   return {
     raw:String(text||''),
     cliente:parseClient(text),
@@ -594,6 +691,8 @@ function parseBriefing(text){
     minQuartos:parseMinCount(text,['quarto','dormitorio','dorm']),
     minArea:parseArea(text),
     preferences:parsePreferences(text),
+    amenitiesDesired:amenities.desired,
+    amenitiesRequired:amenities.required,
     buyerProfiles:parseBuyerProfile(text),
     order:parseOrder(text)
   };
@@ -612,6 +711,7 @@ function applyNaturalSearch(){
   setSelect('suites', currentBriefingProfile.minSuites || '');
   setSelect('vagas', currentBriefingProfile.minVagas || '');
   setSelect('ordem', currentBriefingProfile.order || '');
+  mergeAmenitiesIntoControls(currentBriefingProfile);
   renderProfileChips(currentBriefingProfile);
   return currentBriefingProfile;
 }
@@ -619,6 +719,7 @@ function applyNaturalSearch(){
 function getProfileFromUI(){
   const textProfile = currentBriefingProfile.raw ? {...currentBriefingProfile} : {};
   const preco = document.getElementById('preco').value;
+  const uiAmenities = getAmenitySelectionFromUI();
   const profile = {
     raw:textProfile.raw || '',
     cliente:textProfile.cliente || '',
@@ -631,6 +732,8 @@ function getProfileFromUI(){
     minQuartos:textProfile.minQuartos || null,
     minArea:textProfile.minArea || null,
     preferences:textProfile.preferences || [],
+    amenitiesDesired:unique([...(textProfile.amenitiesDesired||[]), ...uiAmenities.desired, ...uiAmenities.required]),
+    amenitiesRequired:unique([...(textProfile.amenitiesRequired||[]), ...uiAmenities.required]),
     buyerProfiles:textProfile.buyerProfiles || [],
     order:document.getElementById('ordem').value || textProfile.order || 'match',
     budgetRaw:textProfile.budgetRaw || ''
@@ -648,6 +751,7 @@ function getRules(){return {
   preco:document.getElementById('rulePreco').checked,
   suites:document.getElementById('ruleSuites').checked,
   vagas:document.getElementById('ruleVagas').checked,
+  amenities:document.getElementById('ruleAmenities').checked,
   subtipos:document.getElementById('ruleSubtipos').checked
 };}
 
@@ -660,12 +764,13 @@ function typeMatches(imovelTipo, requested, rules){
 
 function mandatoryCheck(imovel, profile, rules){
   const failed=[];
-  const total = ['tipo','bairro','preco','suites','vagas'].filter(key => {
+  const total = ['tipo','bairro','preco','suites','vagas','amenities'].filter(key => {
     if(key==='tipo') return rules.tipo && !!profile.tipo;
     if(key==='bairro') return rules.bairro && !!profile.bairro;
     if(key==='preco') return rules.preco && (!!profile.maxPrice || !!profile.minPrice);
     if(key==='suites') return rules.suites && !!profile.minSuites;
     if(key==='vagas') return rules.vagas && !!profile.minVagas;
+    if(key==='amenities') return rules.amenities && (profile.amenitiesRequired||[]).length>0;
   }).length;
   if(rules.tipo && profile.tipo && !typeMatches(imovel.tipo, profile.tipo, rules)) failed.push(`tipo diferente (${imovel.tipo})`);
   if(rules.bairro && profile.bairro && imovel.bairro!==profile.bairro) failed.push(`bairro diferente (${imovel.bairro})`);
@@ -673,6 +778,10 @@ function mandatoryCheck(imovel, profile, rules){
   if(rules.preco && profile.minPrice && imovel.preco<profile.minPrice) failed.push(`abaixo do piso (${miText(imovel.preco)})`);
   if(rules.suites && profile.minSuites && imovel.suites<profile.minSuites) failed.push(`menos suítes (${imovel.suites})`);
   if(rules.vagas && profile.minVagas && imovel.vagas<profile.minVagas) failed.push(`menos vagas (${imovel.vagas})`);
+  if(rules.amenities && (profile.amenitiesRequired||[]).length){
+    const missingRequiredAmenities = profile.amenitiesRequired.filter(key=>!hasAmenity(imovel,key));
+    if(missingRequiredAmenities.length) failed.push(`faltam áreas comuns essenciais (${missingRequiredAmenities.map(amenityLabel).join(', ')})`);
+  }
   if(profile.minQuartos && imovel.quartos<profile.minQuartos) failed.push(`menos quartos (${imovel.quartos})`);
   if(profile.minArea && imovel.area<profile.minArea) failed.push(`menos metragem (${imovel.area} m²)`);
   return {pass:failed.length===0, failed, total, passed:Math.max(0,total-failed.length)};
@@ -696,7 +805,7 @@ function buyerBoost(imovel, profiles){
 
 function scoreMatch(imovel, profile, rules){
   const mandatory = mandatoryCheck(imovel, profile, rules);
-  if(!mandatory.pass) return {pass:false,score:0,mandatory,matchedPrefs:[],missingPrefs:[],boosts:[]};
+  if(!mandatory.pass) return {pass:false,score:0,mandatory,matchedPrefs:[],missingPrefs:[],matchedAmenities:[],missingAmenities:[],boosts:[]};
   let score = 48;
   if(profile.tipo && typeMatches(imovel.tipo,profile.tipo,rules)) score += 12;
   if(profile.bairro && imovel.bairro===profile.bairro) score += 10;
@@ -712,10 +821,15 @@ function scoreMatch(imovel, profile, rules){
     if(hasFeature(imovel,pref)){matchedPrefs.push(pref); score += pref==='varanda gourmet'||pref==='vista aberta'?8:6;}
     else missingPrefs.push(pref);
   }
+  const requestedAmenities = unique([...(profile.amenitiesDesired||[]), ...(profile.amenitiesRequired||[])]);
+  const matchedAmenities = requestedAmenities.filter(key=>hasAmenity(imovel,key));
+  const missingAmenities = requestedAmenities.filter(key=>!hasAmenity(imovel,key));
+  score += matchedAmenities.length * 3;
+  if((profile.amenitiesRequired||[]).length && profile.amenitiesRequired.every(key=>hasAmenity(imovel,key))) score += 5;
   const boosts = buyerBoost(imovel, profile.buyerProfiles);
   score += boosts.length*4;
-  if((profile.preferences||[]).length===0 && (profile.buyerProfiles||[]).length===0) score += Math.min(8, imovel.features.length);
-  return {pass:true,score:Math.min(99,Math.round(score)),mandatory,matchedPrefs,missingPrefs,boosts};
+  if((profile.preferences||[]).length===0 && (profile.buyerProfiles||[]).length===0 && requestedAmenities.length===0) score += Math.min(8, imovel.features.length);
+  return {pass:true,score:Math.min(99,Math.round(score)),mandatory,matchedPrefs,missingPrefs,matchedAmenities,missingAmenities,boosts};
 }
 
 function rankedResults(profile){
@@ -754,6 +868,8 @@ function profileLabel(profile){
   if(profile.minQuartos) parts.push(`${profile.minQuartos}+ quartos`);
   if(profile.minArea) parts.push(`${profile.minArea}+ m²`);
   if((profile.preferences||[]).length) parts.push(`preferências: ${profile.preferences.join(', ')}`);
+  if((profile.amenitiesDesired||[]).length) parts.push(`áreas comuns: ${profile.amenitiesDesired.map(amenityLabel).join(', ')}`);
+  if((profile.amenitiesRequired||[]).length) parts.push(`áreas essenciais: ${profile.amenitiesRequired.map(amenityLabel).join(', ')}`);
   if((profile.buyerProfiles||[]).length) parts.push(`perfil: ${profile.buyerProfiles.join(', ')}`);
   return parts.join(' • ') || 'Sem perfil definido';
 }
@@ -772,6 +888,8 @@ function renderProfileChips(profile){
   if(profile.minQuartos) strict.push(`Quartos: ${profile.minQuartos}+`);
   if(profile.minArea) strict.push(`Área: ${profile.minArea}+ m²`);
   (profile.preferences||[]).forEach(p=>prefs.push(p));
+  (profile.amenitiesDesired||[]).forEach(p=>prefs.push(`área comum: ${amenityLabel(p)}`));
+  (profile.amenitiesRequired||[]).forEach(p=>strict.push(`Área essencial: ${amenityLabel(p)}`));
   (profile.buyerProfiles||[]).forEach(p=>prefs.push(`perfil ${p}`));
   const strictHtml = strict.map(x=>`<span class="chip strict">${escapeHtml(x)}</span>`).join('');
   const prefHtml = prefs.map(x=>`<span class="chip">${escapeHtml(x)}</span>`).join('');
@@ -807,6 +925,10 @@ function renderCards(rows, profile){
     const matched = match.matchedPrefs.length ? match.matchedPrefs.map(x=>`<span class="tag good">✓ ${escapeHtml(x)}</span>`).join('') : '<span class="tag warn">sem preferência explícita</span>';
     const missing = match.missingPrefs.length ? `<p>Faltou: ${match.missingPrefs.map(escapeHtml).join(', ')}</p>` : '<p>Preferências principais atendidas ou não solicitadas.</p>';
     const boosts = match.boosts.length ? `<p>Perfil: ${match.boosts.map(escapeHtml).join(', ')}</p>` : '';
+    const amenitiesMatched = match.matchedAmenities.length ? `<p class="amenity-note"><b>Áreas comuns compatíveis:</b> ${match.matchedAmenities.map(amenityLabel).map(escapeHtml).join(', ')}</p>` : '';
+    const amenitiesMissing = match.missingAmenities.length ? `<p class="amenity-note"><b>Não encontrado no edifício:</b> ${match.missingAmenities.map(amenityLabel).map(escapeHtml).join(', ')}</p>` : '';
+    const condoList = commonAreasForImovel(imovel).slice(0,8);
+    const condoHtml = condoList.length ? `<div class="condo-line"><b>Condomínio:</b> ${condoList.map(amenityLabel).map(escapeHtml).join(', ')}</div>` : '';
     const mandatory = match.mandatory.total ? `${match.mandatory.passed}/${match.mandatory.total} obrigatórios` : 'sem filtros duros';
     const photo = renderPhoto(imovel, match);
     const brokerTag = imovel.imobiliaria ? `<span class="tag warn">${escapeHtml(imovel.imobiliaria)}</span>` : '';
@@ -819,9 +941,11 @@ function renderCards(rows, profile){
         <div class="meta">${escapeHtml(imovel.bairro)} • ${imovel.area} m² • ${imovel.quartos} quarto(s) • ${imovel.suites} suíte(s) • ${imovel.vagas} vaga(s)</div>
         <div class="price">${money(imovel.preco)}</div>
         <div>${brokerTag}${imovel.features.slice(0,6).map(f=>`<span class="tag">${escapeHtml(f)}</span>`).join('')}</div>
+        ${condoHtml}
         <div class="why">
           <span class="status ok">${mandatory}</span>
           <div style="margin-top:8px">${matched}</div>
+          ${amenitiesMatched}${amenitiesMissing}
           ${missing}${boosts}
         </div>
         <label class="select-line"><input type="checkbox" ${checked} onchange="toggleSelection(${imovel.id})"><span class="wa-card-icon" aria-hidden="true"><svg viewBox="0 0 32 32" role="img" focusable="false"><path fill="currentColor" d="M16.04 3.4c-6.94 0-12.58 5.5-12.58 12.28 0 2.17.59 4.29 1.7 6.15L3.35 28.6l6.96-1.78a12.85 12.85 0 0 0 5.73 1.35c6.94 0 12.59-5.5 12.59-12.28S22.98 3.4 16.04 3.4Zm0 22.68c-1.82 0-3.61-.46-5.18-1.32l-.37-.2-4.12 1.06 1.1-4.02-.24-.39a10.07 10.07 0 0 1-1.6-5.53c0-5.63 4.67-10.2 10.41-10.2 5.75 0 10.42 4.57 10.42 10.2 0 5.62-4.67 10.2-10.42 10.2Zm5.72-7.64c-.31-.15-1.84-.89-2.13-.99-.28-.1-.49-.15-.7.15-.2.3-.8.98-.98 1.18-.18.2-.36.23-.67.08-.31-.15-1.31-.47-2.5-1.51-.92-.8-1.54-1.8-1.72-2.1-.18-.3-.02-.47.13-.62.14-.13.31-.35.47-.52.15-.18.2-.3.31-.5.1-.2.05-.37-.03-.52-.08-.15-.7-1.65-.95-2.26-.25-.59-.5-.51-.7-.52h-.59c-.2 0-.52.07-.8.37-.28.3-1.05 1-1.05 2.44 0 1.44 1.07 2.84 1.22 3.04.15.2 2.1 3.14 5.08 4.4.71.3 1.27.48 1.7.62.72.22 1.37.19 1.88.11.57-.08 1.84-.73 2.1-1.44.26-.7.26-1.31.18-1.44-.08-.13-.28-.2-.6-.35Z"/></svg></span><span class="wa-copy">${selectedIds.has(imovel.id) ? 'Selecionado para WhatsApp' : 'Selecionar para WhatsApp'}</span></label>
@@ -862,11 +986,13 @@ function buildWhatsAppMessage(){
   rows.forEach((row,idx)=>{
     const imovel = row.imovel;
     const match = row.match;
-    const destaques = [...match.matchedPrefs, ...match.boosts, ...imovel.features.slice(0,3)].filter(Boolean);
-    const uniqueHighlights = [...new Set(destaques)].slice(0,5).join(', ');
+    const commonAreas = commonAreasForImovel(imovel).slice(0,5).map(amenityLabel);
+    const destaques = [...match.matchedPrefs, ...match.matchedAmenities.map(amenityLabel), ...match.boosts, ...imovel.features.slice(0,3)].filter(Boolean);
+    const uniqueHighlights = [...new Set(destaques)].slice(0,6).join(', ');
     lines.push(`${idx+1}. ${imovel.titulo}`);
     lines.push(`${imovel.bairro} • ${imovel.tipo} • ${imovel.area} m² • ${imovel.suites} suíte(s) • ${imovel.vagas} vaga(s) • ${money(imovel.preco)}`);
     lines.push(`Compatibilidade: ${match.score}%${uniqueHighlights ? ` • Destaques: ${uniqueHighlights}` : ''}`);
+    if(commonAreas.length) lines.push(`Condomínio: ${commonAreas.join(', ')}`);
     if(imovel.imobiliaria) lines.push(`Imobiliária: ${imovel.imobiliaria}`);
     lines.push('');
   });
@@ -992,6 +1118,7 @@ function clearSearch(){
   selectedIds.clear();
   document.getElementById('whatsappMessage').value='';
   ['bairro','tipo','preco','suites','vagas'].forEach(id=>document.getElementById(id).value='');
+  clearAmenityControls();
   document.getElementById('ordem').value='match';
   renderProfileChips({});
   searchWithProfile(false);
@@ -1016,7 +1143,8 @@ function showToast(msg){const t=document.getElementById('toast'); t.textContent=
 function initFilters(){
   document.getElementById('bairro').innerHTML='<option value="">Todos bairros</option>'+bairros.map(b=>`<option value="${escapeHtml(b)}">${escapeHtml(b)}</option>`).join('');
   document.getElementById('tipo').innerHTML='<option value="">Tipo</option>'+tipos.map(t=>`<option value="${escapeHtml(t)}">${escapeHtml(t)}</option>`).join('');
-  ['bairro','tipo','preco','suites','vagas','ordem','ruleTipo','ruleBairro','rulePreco','ruleSuites','ruleVagas','ruleSubtipos'].forEach(id=>document.getElementById(id).addEventListener('change',()=>searchWithProfile(false)));
+  renderAmenityControls();
+  ['bairro','tipo','preco','suites','vagas','ordem','ruleTipo','ruleBairro','rulePreco','ruleSuites','ruleVagas','ruleAmenities','ruleSubtipos'].forEach(id=>document.getElementById(id).addEventListener('change',()=>searchWithProfile(false)));
 }
 
 function runRegressionTest(){
@@ -1024,9 +1152,14 @@ function runRegressionTest(){
   currentBriefingProfile = parseBriefing(phrase);
   const rows = rankedResults(currentBriefingProfile);
   const ok = rows.length>0 && rows.every(r=>r.imovel.tipo==='Apartamento') && rows.every(r=>r.imovel.bairro==='Moema') && rows.every(r=>r.imovel.preco<=5) && rows.every(r=>r.imovel.suites>=3) && rows.every(r=>r.imovel.vagas>=2);
+  const amenityPhrase = 'Cliente Mariana quer apartamento em Moema até 5 milhões, 3 suítes, 2 vagas e precisa ter piscina e brinquedoteca no prédio.';
+  currentBriefingProfile = parseBriefing(amenityPhrase);
+  const amenityRows = rankedResults(currentBriefingProfile);
+  const amenityOk = amenityRows.length>0 && amenityRows.every(r=>hasAmenity(r.imovel,'piscina') && hasAmenity(r.imovel,'brinquedoteca'));
   const el=document.getElementById('regressionResult');
-  el.className = ok ? 'test-pass' : 'test-fail';
-  el.textContent = ok ? `PASSOU — ${rows.length} resultados, zero casas, todos dentro do perfil obrigatório.` : 'FALHOU — revisar motor de matching.';
+  const pass = ok && amenityOk;
+  el.className = pass ? 'test-pass' : 'test-fail';
+  el.textContent = pass ? `PASSOU — ${rows.length} resultados sem casas; áreas comuns essenciais também respeitadas.` : 'FALHOU — revisar motor de matching ou filtros de áreas comuns.';
   currentBriefingProfile = {};
 }
 
@@ -1039,7 +1172,7 @@ renderProfileChips({});
 searchWithProfile(false);
 runRegressionTest();
 document.getElementById('totalImoveis').textContent = inventory.length.toLocaleString('pt-BR');
-window.MatchRDebug = {version:'v6-whatsapp-card-bottom', parseBriefing, rankedResults, inventory, runRegressionTest, logoDistribution, imobiliarias, buildWhatsAppMessage, selectedRows, toggleSelection, generateWhatsAppMessage, formatWhatsAppPhone, getCurrentMatches:()=>currentMatches};
+window.MatchRDebug = {version:'v7-areas-comuns', parseBriefing, parseAmenities, rankedResults, inventory, runRegressionTest, logoDistribution, imobiliarias, buildingAmenities, commonAreasForImovel, hasAmenity, buildWhatsAppMessage, selectedRows, toggleSelection, generateWhatsAppMessage, formatWhatsAppPhone, getCurrentMatches:()=>currentMatches};
 </script>
 </body>
 </html>

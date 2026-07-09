@@ -1,29 +1,26 @@
 # Changelog
 
-## v6 — WhatsApp nos cards
+## v7 — Áreas comuns do edifício
 
-- Botão `Selecionar para WhatsApp` movido para o final dos cards.
-- Botão ganhou visual verde, com ícone estilo WhatsApp.
-- Estado selecionado dos cards agora usa verde em vez de laranja.
-- Mantidas as correções de briefing, matching e logos dos imóveis sem foto.
+- Adicionado filtro visual de áreas comuns dos edifícios.
+- Adicionado modo para tratar áreas selecionadas como essenciais na busca.
+- O briefing inteligente agora entende termos como `lazer completo`, `piscina`, `academia`, `brinquedoteca`, `coworking`, `pet place`, `portaria 24h`, `segurança`, `rooftop`, entre outros.
+- Cards agora mostram `Condomínio: ...` com as áreas do prédio.
+- Motivo do match agora mostra áreas comuns compatíveis e ausentes.
+- WhatsApp continua no final dos cards, verde e com ícone.
+- Busca por voz continua removida.
+- Mantida a regra: busca por apartamento não traz casa.
 
-## v5 — briefing + WhatsApp
+## v6 — WhatsApp no final dos cards
 
-- Removido o botão e a lógica de captura por áudio.
-- Renomeada a experiência para `Encontre imóveis compatíveis com o cliente`.
-- Adicionada área de `Briefing inteligente do cliente`.
-- Adicionados exemplos clicáveis de briefing.
-- Adicionado painel de seleção de imóveis para WhatsApp.
-- Adicionadas ações: gerar mensagem, copiar texto e abrir WhatsApp.
-- Mantida correção: busca por apartamento não retorna casa.
-- Mantidos logos das imobiliárias nos imóveis sem foto, com distribuição proporcional.
+- Botão verde de seleção para WhatsApp movido para o final de cada card.
 
-## v4 — logos embutidos
+## v5 — Briefing sem voz + WhatsApp
 
-- Logos textuais das imobiliárias foram embutidos no próprio HTML.
-- Não depende de pasta externa de assets para os logos provisórios.
+- Removida busca por áudio.
+- Criado fluxo de briefing inteligente por texto.
+- Adicionada seleção de imóveis para envio por WhatsApp.
 
-## v3/v2 — motor de perfil
+## v4/v3/v2
 
-- Separação entre critérios obrigatórios e preferências.
-- Correção do fluxo para interpretar briefing antes de buscar.
+- Correções de matching, regras configuráveis e logos nos cards sem foto.

@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "test": "node test-matchr-v6.js"
+    "test": "node test-matchr-v7.js"
   },
   "devDependencies": {}
 }
