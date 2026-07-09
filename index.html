@@ -2,24 +2,24 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>MatchR — Inteligência para o corretor imobiliário</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MatchR — MVP v2</title>
 <style>
 :root{
-  --bg:#ffffff;
+  --bg:#fffaf5;
   --panel:#ffffff;
-  --panel2:#f7f7f8;
-  --panel3:#fbfbfc;
-  --text:#000000;
-  --muted:#444444;
-  --muted2:#6b7280;
+  --panel-soft:#fff7ef;
+  --text:#111111;
+  --muted:#555555;
+  --muted-2:#767676;
+  --line:#e8e2da;
   --orange:#ff6a00;
-  --orange2:#b84a00;
-  --line:#e5e7eb;
-  --green:#0f7a4a;
+  --orange-dark:#b84a00;
+  --green:#0e7a46;
   --blue:#2454ff;
-  --shadow:0 14px 42px rgba(0,0,0,.08);
-  --shadow2:0 22px 55px rgba(0,0,0,.12);
+  --red:#aa1f1f;
+  --shadow:0 18px 50px rgba(20,20,20,.08);
+  --shadow-soft:0 10px 28px rgba(20,20,20,.06);
   --radius:22px;
 }
 *{box-sizing:border-box}
@@ -28,344 +28,779 @@ body{
   margin:0;
   background:var(--bg);
   color:var(--text);
-  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
 }
-.app{display:grid;grid-template-columns:292px 1fr;min-height:100vh}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.app{display:grid;grid-template-columns:290px 1fr;min-height:100vh}
 aside{
-  border-right:1px solid var(--line);
   background:#fff;
+  border-right:1px solid var(--line);
   padding:24px;
   position:sticky;
   top:0;
   height:100vh;
 }
-.logo{display:block;margin-bottom:28px;text-decoration:none;cursor:pointer}
-.logo-img{width:190px;max-width:100%;height:auto;display:block}
-.logo-subtitle{display:block;color:#444;font-size:12px;margin-top:8px;font-weight:800}
+.logo{display:flex;align-items:center;gap:10px;margin-bottom:28px;text-decoration:none;color:inherit;cursor:pointer}
+.logo-mark{
+  width:46px;height:46px;border-radius:16px;background:#111;color:#fff;display:grid;place-items:center;
+  font-weight:950;letter-spacing:-.04em;font-size:19px;box-shadow:var(--shadow-soft)
+}
+.logo-text b{display:block;font-size:20px;letter-spacing:-.04em}.logo-text span{font-size:12px;color:var(--muted);font-weight:800}
 nav button{
-  width:100%;
-  border:0;
-  background:transparent;
-  color:#111;
-  padding:13px 14px;
-  text-align:left;
-  border-radius:14px;
-  margin:3px 0;
-  cursor:pointer;
-  font-weight:800;
-  font-size:14px;
+  width:100%;border:0;background:transparent;color:#111;text-align:left;padding:13px 14px;border-radius:14px;
+  margin:3px 0;font-weight:900;font-size:14px;display:flex;align-items:center;justify-content:space-between;gap:8px
 }
-nav button.active,nav button:hover{background:#111;color:#fff}
-.pill{font-size:11px;background:#fff1e8;color:var(--orange2);padding:3px 7px;border-radius:999px;float:right;border:1px solid #ffd9bf;font-weight:900}
-nav button.active .pill,nav button:hover .pill{background:#fff;color:#111;border-color:#fff}
-.side-card{margin-top:24px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
-.side-card p{font-size:13px;margin-bottom:0;color:#444}
-main{padding:28px;max-width:1500px;width:100%;margin:0 auto;background:#fff}
-h1{margin:0;font-size:34px;letter-spacing:-.04em;color:#000;line-height:1.05}
-h2{margin:0 0 14px;font-size:21px;letter-spacing:-.02em;color:#000}
-h3{color:#000;margin:0 0 8px}
-p{color:#444;line-height:1.45}
-.top{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;margin-bottom:22px}
-.btn{border:0;border-radius:14px;padding:12px 16px;cursor:pointer;font-weight:900;font-size:14px;white-space:nowrap}
-.btn.primary{background:#111;color:#fff}
-.btn.orange{background:var(--orange);color:#fff}
-.btn.ghost{background:#fff;color:#111;border:1px solid var(--line)}
-.btn:hover{transform:translateY(-1px)}
-.view{display:none}
-.view.active{display:block}
-.grid{display:grid;gap:16px}
-.cols2{grid-template-columns:repeat(2,minmax(0,1fr))}
-.cols3{grid-template-columns:repeat(3,minmax(0,1fr))}
-.cols4{grid-template-columns:repeat(4,minmax(0,1fr))}
-.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
-.card.soft{background:linear-gradient(180deg,#fff,#fafafa)}
-.metric .n{font-size:38px;font-weight:950;letter-spacing:-.05em;color:#000}
-.metric .label{font-size:13px;color:#555;font-weight:750}
-.filters{display:grid;grid-template-columns:repeat(7,minmax(120px,1fr));gap:10px;margin-bottom:16px}
-input,select,textarea{
-  border:1px solid var(--line);
-  background:#fff;
-  color:#111;
-  padding:12px 13px;
-  border-radius:14px;
-  font:inherit;
-  font-size:14px;
-  outline:none;
-  width:100%;
-}
-textarea{resize:vertical;min-height:96px;line-height:1.4}
-input:focus,select:focus,textarea:focus{border-color:var(--orange);box-shadow:0 0 0 4px rgba(255,106,0,.10)}
-.voice-card{margin:0 0 16px;padding:18px;border:1px solid var(--line);border-radius:22px;background:#fff;box-shadow:var(--shadow)}
-.voice-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
-.voice-card h2{margin-bottom:4px}
-.voice-card p{margin:0 0 12px;font-size:13px}
-.voice-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
-.criteria{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
-.criteria span,.tag,.score,.status{display:inline-flex;align-items:center;gap:4px;border-radius:999px;padding:6px 9px;font-size:12px;font-weight:850}
-.criteria span{background:#fff4ec;color:var(--orange2);border:1px solid #ffd9bf}
-.tag{background:#f4f4f5;color:#333;margin:4px 4px 0 0}
-.score{background:rgba(255,106,0,.13);color:var(--orange2);border:1px solid rgba(255,106,0,.24)}
-.status{background:#f1f5f9;color:#334155}
-.status.hot{background:rgba(255,106,0,.13);color:var(--orange2)}
-.status.ok{background:rgba(15,122,74,.12);color:var(--green)}
-.status.cold{background:rgba(107,114,128,.12);color:#4b5563}
-.inventory{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-.imovel{border:1px solid var(--line);border-radius:22px;overflow:hidden;background:#fff;box-shadow:var(--shadow)}
-.photo{height:150px;background:linear-gradient(135deg,#ece7df,#c8c0b7 55%,#f4f4f4);position:relative}
-.photo:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 25% 20%,rgba(255,255,255,.65),transparent 28%),linear-gradient(135deg,transparent 35%,rgba(255,106,0,.18) 36%,transparent 58%)}
-.body{padding:16px}
-.meta{font-size:13px;color:#555;line-height:1.4}
-.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-.actions button{flex:1;min-width:115px}
-.table{width:100%;border-collapse:collapse}
-.table th,.table td{padding:14px 10px;border-bottom:1px solid var(--line);text-align:left;font-size:14px;vertical-align:top}
-.table th{color:var(--muted2);font-size:12px;text-transform:uppercase;letter-spacing:.08em}
-.clientpage{background:#f6f3ec;color:#171717;border-radius:30px;padding:26px}
-.clientpage p{color:#5f615f}
-.client-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.client-card{background:#fff;border:1px solid #e6e1d6;border-radius:20px;overflow:hidden;color:#171717}
-.client-img{height:140px;background:linear-gradient(135deg,#ddd,#aaa)}
-.client-body{padding:15px}
-.mini-actions{display:flex;gap:8px;margin-top:12px}
-.mini-actions button{flex:1;border:1px solid #ddd;border-radius:12px;padding:10px;background:#fff;cursor:pointer;font-weight:850}
-.video-card{margin-top:22px;background:#fff;border:1px solid var(--line);border-radius:28px;padding:22px;box-shadow:var(--shadow2)}
-.video-wrap{position:relative;width:100%;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:20px;background:#000;box-shadow:0 20px 45px rgba(0,0,0,.18)}
-.video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
-.toast{position:fixed;right:24px;bottom:24px;background:#111;color:#fff;padding:14px 18px;border-radius:15px;box-shadow:var(--shadow2);display:none;font-weight:850;z-index:50}
-@media(max-width:1050px){
-  .app{grid-template-columns:1fr}
-  aside{position:relative;height:auto}
-  main{padding:18px}
-  .top{display:block}
-  .cols4,.cols3,.cols2,.inventory,.client-grid,.filters{grid-template-columns:1fr}
-  h1{font-size:30px}
-  .logo-img{width:170px}
-}
+nav button.active,nav button:hover{background:#111;color:#fff}.pill{font-size:11px;background:#fff1e8;color:var(--orange-dark);padding:3px 7px;border-radius:999px;border:1px solid #ffd9bf;font-weight:950}
+nav button.active .pill,nav button:hover .pill{background:#fff;color:#111;border-color:#fff}.side-card{margin-top:24px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow-soft)}
+.side-card p{margin:8px 0 0;font-size:13px;color:var(--muted);line-height:1.45}.side-card strong{font-size:13px}main{padding:28px;max-width:1520px;width:100%;margin:0 auto}.view{display:none}.view.active{display:block}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:22px}h1{margin:0;font-size:36px;letter-spacing:-.05em;line-height:1.04}h2{margin:0 0 12px;font-size:21px;letter-spacing:-.025em}h3{margin:0 0 8px;font-size:16px}p{color:var(--muted);line-height:1.45}.lead{margin:8px 0 0;max-width:780px}.grid{display:grid;gap:16px}.cols2{grid-template-columns:repeat(2,minmax(0,1fr))}.cols3{grid-template-columns:repeat(3,minmax(0,1fr))}.cols4{grid-template-columns:repeat(4,minmax(0,1fr))}.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow-soft)}.card.soft{background:linear-gradient(180deg,#fff,#fff7ef)}.metric .n{font-size:38px;font-weight:950;letter-spacing:-.06em}.metric .label{font-size:13px;color:var(--muted);font-weight:800}.btn{border:0;border-radius:14px;padding:12px 16px;font-weight:950;font-size:14px;white-space:nowrap}.btn.primary{background:#111;color:#fff}.btn.orange{background:var(--orange);color:#fff}.btn.ghost{background:#fff;color:#111;border:1px solid var(--line)}.btn.soft{background:#fff4ec;color:var(--orange-dark);border:1px solid #ffd9bf}.btn:hover{transform:translateY(-1px)}.filters{display:grid;grid-template-columns:repeat(6,minmax(120px,1fr));gap:10px;margin-bottom:16px}input,select,textarea{width:100%;border:1px solid var(--line);background:#fff;color:#111;padding:12px 13px;border-radius:14px;outline:none;font-size:14px}textarea{resize:vertical;min-height:112px;line-height:1.45}input:focus,select:focus,textarea:focus{border-color:var(--orange);box-shadow:0 0 0 4px rgba(255,106,0,.10)}.voice-card{margin-bottom:16px;padding:18px;border:1px solid var(--line);border-radius:22px;background:#fff;box-shadow:var(--shadow)}.voice-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.voice-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}.badge,.tag,.score,.status,.chip{display:inline-flex;align-items:center;gap:4px;border-radius:999px;padding:6px 9px;font-size:12px;font-weight:850}.badge{background:#111;color:#fff}.tag{background:#f6f6f6;color:#333;margin:4px 4px 0 0}.tag.good{background:rgba(14,122,70,.10);color:var(--green);border:1px solid rgba(14,122,70,.18)}.tag.warn{background:#fff4ec;color:var(--orange-dark);border:1px solid #ffd9bf}.tag.bad{background:rgba(170,31,31,.08);color:var(--red);border:1px solid rgba(170,31,31,.18)}.score{background:rgba(255,106,0,.13);color:var(--orange-dark);border:1px solid rgba(255,106,0,.22)}.status{background:#f1f5f9;color:#334155}.status.hot{background:rgba(255,106,0,.13);color:var(--orange-dark)}.status.ok{background:rgba(14,122,70,.12);color:var(--green)}.criteria{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.criteria .chip{background:#fff4ec;color:var(--orange-dark);border:1px solid #ffd9bf}.criteria .chip.strict{background:rgba(14,122,70,.10);color:var(--green);border-color:rgba(14,122,70,.20)}.criteria .chip.empty{background:#f6f6f6;color:#666;border-color:#e5e5e5}.rules{display:grid;grid-template-columns:1.15fr .85fr;gap:16px;margin-bottom:16px}.rules-list{display:grid;gap:9px}.toggle{display:flex;align-items:flex-start;gap:10px;padding:10px;border:1px solid var(--line);border-radius:14px;background:#fff}.toggle input{width:auto;margin-top:3px}.toggle span{font-size:13px;color:#333}.toggle b{display:block;color:#111;margin-bottom:2px}.inventory{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.imovel{border:1px solid var(--line);border-radius:22px;overflow:hidden;background:#fff;box-shadow:var(--shadow-soft);display:flex;flex-direction:column}.photo{height:148px;background:linear-gradient(135deg,#f4ede4,#d7cec4 56%,#f7f7f7);position:relative}.photo:after{content:"";position:absolute;inset:18px;border:1px solid rgba(255,255,255,.65);border-radius:16px}.photo .kind{position:absolute;left:14px;top:14px;background:#111;color:#fff;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:950;z-index:2}.photo .match{position:absolute;right:14px;top:14px;background:#fff;color:var(--orange-dark);border-radius:999px;padding:7px 10px;font-size:12px;font-weight:950;box-shadow:var(--shadow-soft);z-index:2}.imovel-body{padding:16px;display:flex;flex-direction:column;gap:8px;flex:1}.imovel h3{font-size:17px;letter-spacing:-.02em;margin:0}.meta{font-size:13px;color:var(--muted);font-weight:780}.price{font-size:20px;font-weight:950;letter-spacing:-.04em}.why{border-top:1px solid var(--line);padding-top:12px;margin-top:auto}.why p{font-size:12px;margin:6px 0;color:#555}.split{display:grid;grid-template-columns:1.25fr .75fr;gap:16px}.mini-table{width:100%;border-collapse:collapse}.mini-table th,.mini-table td{border-bottom:1px solid var(--line);padding:11px;text-align:left;font-size:13px}.mini-table th{color:#555;font-size:12px;text-transform:uppercase;letter-spacing:.04em}.empty-state{padding:22px;border:1px dashed #e0b995;background:#fff8f0;border-radius:20px;color:#633900}.toast{position:fixed;right:24px;bottom:24px;background:#111;color:#fff;padding:14px 18px;border-radius:15px;box-shadow:var(--shadow);display:none;font-weight:850;z-index:50}.small{font-size:12px;color:var(--muted-2)}.divider{height:1px;background:var(--line);margin:14px 0}.callout{border:1px solid #ffd9bf;background:#fff4ec;border-radius:18px;padding:14px;color:#643700}.callout p{margin:6px 0 0}.kbd{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#f6f6f6;border:1px solid #e7e7e7;border-radius:7px;padding:2px 5px;font-size:12px}.client-grid{display:grid;grid-template-columns:1.1fr .9fr .7fr .7fr auto;gap:10px}.results-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin:8px 0 14px}.results-head p{margin:5px 0 0}.test-pass{font-size:12px;color:var(--green);font-weight:900}.test-fail{font-size:12px;color:var(--red);font-weight:900}
+@media(max-width:1100px){.app{grid-template-columns:1fr}aside{position:relative;height:auto}.filters,.cols4,.cols3,.cols2,.inventory,.rules,.split,.client-grid{grid-template-columns:1fr}main{padding:18px}h1{font-size:31px}.top,.voice-head,.results-head{display:block}.voice-actions{margin-top:12px}}
 </style>
 </head>
 <body>
 <div class="app">
-<aside>
-  <a class="logo" onclick="goId('dashboard')" aria-label="Voltar para o início">
-    <img class="logo-img" src="data:image/webp;base64,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" alt="MatchR — Inteligência para o corretor imobiliário">
-    <span class="logo-subtitle">Demo • 3.000 imóveis simulados</span>
-  </a>
-  <nav>
-    <button class="active" onclick="go('dashboard',this)">O MatchR</button>
-    <button onclick="go('inventario',this)">Encontrar imóvel ideal <span class="pill">3000</span></button>
-    <button onclick="go('matches',this)">Resultados de buscas</button>
-    <button onclick="go('clientes',this)">Leads / Clientes</button>
-    <button onclick="go('analytics',this)">Para você corretor</button>
-  </nav>
-  <div class="side-card"><b>Para você corretor</b><p>Base simulada para validar eficiência com corretores e imobiliárias.</p></div>
-</aside>
-<main>
-  <section id="dashboard" class="view active">
-    <div class="top"><div><h1>O que é o MatchR e números.</h1><p>O MatchR ajuda corretores imobiliários de alto padrão a encontrar o imóvel certo para cada cliente, com rapidez, contexto e menos perda de tempo.</p></div><button class="btn primary" onclick="goId('inventario')">Encontrar imóvel ideal</button></div>
-    <div class="grid cols4">
-      <div class="card metric"><div class="n">3.000</div><div class="label">imóveis simulados</div></div>
-      <div class="card metric"><div class="n">18</div><div class="label">bairros prime</div></div>
-      <div class="card metric"><div class="n" id="dashboardScore">83%</div><div class="label">compatibilidade média top 20</div></div>
-      <div class="card metric"><div class="n">90 dias</div><div class="label">piloto sugerido</div></div>
+  <aside>
+    <a class="logo" onclick="goId('dashboard')" aria-label="Voltar ao início">
+      <span class="logo-mark">MR</span>
+      <span class="logo-text"><b>MatchR</b><span>MVP v2 • motor criterioso</span></span>
+    </a>
+    <nav>
+      <button class="active" data-view="dashboard" onclick="goId('dashboard')">O MatchR <span class="pill">novo</span></button>
+      <button data-view="search" onclick="goId('search')">Encontrar imóvel ideal <span class="pill">perfil</span></button>
+      <button data-view="history" onclick="goId('history')">Resultados de buscas</button>
+      <button data-view="clients" onclick="goId('clients')">Leads / Clientes</button>
+      <button data-view="corretor" onclick="goId('corretor')">Para você corretor</button>
+    </nav>
+    <div class="side-card">
+      <strong>Correção aplicada</strong>
+      <p>Busca por voz/texto agora interpreta o briefing antes de ranquear. Tipo, bairro, preço, suítes e vagas podem virar filtros obrigatórios.</p>
     </div>
-    <div class="grid cols2" style="margin-top:18px">
-      <div class="card soft"><h2>Para o corretor</h2><p>Menos planilha, menos WhatsApp perdido e mais curadoria com contexto. A busca vira uma rotina simples: briefing, filtros, match e seleção para o cliente.</p></div>
-      <div class="card soft"><h2>Para a imobiliária</h2><p>Inventário mais bem aproveitado, com apresentação qualificada e rastreável. A base aparece para corretores com demanda compatível, não para curiosos.</p></div>
+    <div class="side-card">
+      <strong>Regra de ouro</strong>
+      <p>Preferência do buscador × características disponíveis. O sistema cruza intenção, restrições e atributos do imóvel.</p>
     </div>
-    <div class="card" style="margin-top:18px"><h2>A tese do MVP</h2><p>A pergunta que o piloto precisa responder é simples: o corretor consegue encontrar opções melhores e mais rápido do que entrando em vários sites, grupos e planilhas?</p></div>
-  </section>
+  </aside>
 
-  <section id="inventario" class="view">
-    <div class="top"><div><h1>Buscar imóvel ideal para o cliente</h1><p>Use filtros ou escreva a busca como se estivesse falando no WhatsApp com outro corretor.</p></div></div>
-    <div class="filters">
-      <input id="clienteNome" placeholder="Cliente — nome da busca">
-      <select id="bairro"><option value="">Todos bairros</option></select>
-      <select id="tipo"><option value="">Tipo</option></select>
-      <select id="preco">
-        <option value="">Valor</option><option value="3">Imóveis até R$ 3 milhões</option><option value="5">Imóveis até R$ 5 milhões</option><option value="8">Até R$ 8 milhões</option><option value="10">Até R$ 10 milhões</option><option value="acima10">Acima de R$ 10 milhões</option>
-      </select>
-      <select id="suites"><option value="">Suítes</option><option value="1">1+ suíte</option><option value="2">2+ suítes</option><option value="3">3+ suítes</option><option value="4">4+ suítes</option><option value="5">5+ suítes</option></select>
-      <select id="vagas"><option value="">Vagas</option><option value="1">1+ vaga</option><option value="2">2+ vagas</option><option value="3">3+ vagas</option><option value="4">4+ vagas</option><option value="mais4">5+ vagas</option></select>
-      <select id="ordem"><option value="score">Critérios</option><option value="preco_asc">Menor preço</option><option value="preco_desc">Maior preço</option><option value="area_desc">Maior metragem</option><option value="area_asc">Menor metragem</option></select>
-    </div>
-
-    <div class="voice-card" id="voiceSearchCard">
-      <div class="voice-head"><div><h2>Busca por voz ou texto</h2><p>Exemplo: Cliente Mariana quer apartamento em Moema até 3 milhões ou até 5 milhões, 3 suítes, 2 vagas, varanda gourmet e vista aberta.</p></div><span class="score">Novo motor</span></div>
-      <textarea id="voiceSearchText" placeholder="Digite ou fale a busca do cliente..."></textarea>
-      <div class="voice-actions">
-        <button class="btn primary" type="button" onclick="startVoiceSearch()">🎙️ Falar busca</button>
-        <button class="btn ghost" type="button" onclick="applyNaturalSearch()">Aplicar aos filtros</button>
-        <button class="btn ghost" type="button" onclick="clearSearch()">Limpar</button>
-        <button class="btn orange" type="button" onclick="selectTop()">Buscar imóveis compatíveis</button>
+  <main>
+    <section id="dashboard" class="view active">
+      <div class="top">
+        <div>
+          <h1>Matching imobiliário com foco no perfil solicitado.</h1>
+          <p class="lead">Esta versão transforma o feedback da corretora em produto: primeiro respeita o briefing, depois ranqueia pelos desejos do comprador.</p>
+        </div>
+        <button class="btn orange" onclick="goId('search')">Testar busca</button>
       </div>
-      <p id="voiceSearchStatus" style="margin-top:12px">Digite uma frase ou clique em “Falar busca”.</p>
-      <div id="voiceSearchChips" class="criteria"></div>
-    </div>
 
-    <div class="top" style="margin-top:10px"><div><h2 id="resultTitle">Imóveis compatíveis</h2><p id="resultSub">Mostrando os melhores resultados da base simulada.</p></div></div>
-    <div id="inventory" class="inventory"></div>
-  </section>
-
-  <section id="matches" class="view">
-    <div class="top"><div><h1>Resultados de buscas</h1><p>Histórico das seleções criadas para clientes e leads.</p></div><button class="btn primary" onclick="goId('inventario')">Nova busca</button></div>
-    <div class="grid cols2">
-      <div class="card"><h2>Histórico</h2><div id="searchHistory"></div></div>
-      <div class="card"><h2>Resultado selecionado</h2><div id="selectedSearch"></div></div>
-    </div>
-  </section>
-
-  <section id="clientes" class="view">
-    <div class="top"><div><h1>Leads / Clientes</h1><p>Cadastro simples para organizar quem está procurando, quem já comprou e o que cada pessoa busca.</p></div></div>
-    <div class="card">
-      <div class="filters" style="grid-template-columns:repeat(5,minmax(120px,1fr));margin-bottom:0">
-        <input id="pessoaNome" placeholder="Nome">
-        <select id="pessoaTipo"><option>Lead</option><option>Cliente</option><option>Parceiro</option></select>
-        <input id="pessoaBusca" placeholder="Busca resumida">
-        <input id="pessoaBudget" placeholder="Budget">
-        <select id="pessoaStatus"><option value="quente">Quente</option><option value="morno">Morno</option><option value="frio">Frio</option><option value="comprou">Comprou</option></select>
+      <div class="grid cols4">
+        <div class="card metric"><div class="n" id="totalImoveis">3.000</div><div class="label">imóveis simulados</div></div>
+        <div class="card metric"><div class="n">0</div><div class="label">casas quando busca apartamento</div></div>
+        <div class="card metric"><div class="n">2</div><div class="label">camadas: obrigatório + preferência</div></div>
+        <div class="card metric"><div class="n">90 dias</div><div class="label">piloto sugerido</div></div>
       </div>
-      <div style="margin-top:12px"><button class="btn primary" onclick="addPessoa()">Adicionar cadastro</button></div>
-    </div>
-    <div class="card" style="margin-top:18px"><h2>Base de relacionamento</h2><div id="pessoasTable"></div></div>
-  </section>
 
-  <section id="analytics" class="view">
-    <div class="top"><div><h1>Para você corretor</h1><p>Validação prática das funcionalidades para aumentar a eficiência do corretor de imóveis.</p></div></div>
-    <div class="card">
-      <h2>Mensagem para você corretor</h2>
-      <p>Este projeto piloto serve para validar, no uso real, se o sistema ajuda o corretor a ganhar velocidade, organizar melhor leads e clientes, encontrar imóveis compatíveis com mais precisão e apresentar uma curadoria mais profissional.</p>
-      <p>A ideia é medir eficiência: menos tempo perdido em planilhas, menos informação espalhada no WhatsApp, mais clareza sobre o perfil do comprador e mais rapidez para transformar uma busca em uma seleção de imóveis relevante.</p>
-    </div>
-    <div class="grid cols4" style="margin-top:18px">
-      <div class="card metric"><div class="n">3.000</div><div class="label">imóveis simulados</div></div>
-      <div class="card metric"><div class="n" id="above90">38</div><div class="label">resultados acima de 90%</div></div>
-      <div class="card metric"><div class="n">64%</div><div class="label">abertura estimada de links</div></div>
-      <div class="card metric"><div class="n">3.1x</div><div class="label">mais imóveis avaliados</div></div>
-    </div>
-    <div class="video-card" id="video-corretor">
-      <h2>Assista: Para você, corretor</h2>
-      <p>Aula de Renato Gosling fundador do MatchR falando sobre como os corretores podem ter mais sucesso em follow-up, networking e técnicas de vendas.</p>
-      <div class="video-wrap">
-        <iframe src="https://www.youtube.com/embed/7o9W3ATGCl4" title="Para você, corretor — MatchR" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      <div class="grid cols3" style="margin-top:16px">
+        <div class="card soft">
+          <h2>1. Entende o briefing</h2>
+          <p>Extrai tipo, bairro, valor, suítes, vagas, área, preferências e perfil do comprador a partir da frase do corretor.</p>
+        </div>
+        <div class="card soft">
+          <h2>2. Respeita os obrigatórios</h2>
+          <p>Se o cliente pediu apartamento, casa não entra. Se pediu Moema até R$ 5 mi, o resultado não tenta “forçar” outra coisa.</p>
+        </div>
+        <div class="card soft">
+          <h2>3. Ranqueia por aderência</h2>
+          <p>Varanda gourmet, vista aberta, andar alto, lazer, pet, silêncio e perfil familiar/investidor entram como pontuação e explicação.</p>
+        </div>
       </div>
-    </div>
-  </section>
-</main>
+
+      <div class="card" style="margin-top:16px">
+        <h2>Teste de regressão do feedback</h2>
+        <p>Frase testada: <span class="kbd">Cliente Mariana quer apartamento em Moema até 5 milhões, 3 suítes, 2 vagas, varanda gourmet e vista aberta.</span></p>
+        <div id="regressionResult" class="test-pass">Teste interno carregando…</div>
+      </div>
+    </section>
+
+    <section id="search" class="view">
+      <div class="top">
+        <div>
+          <h1>Buscar imóvel ideal para o cliente</h1>
+          <p class="lead">Use filtros ou escreva como falaria no WhatsApp. O botão principal já aplica o briefing antes de buscar.</p>
+        </div>
+        <button class="btn ghost" onclick="fillExample()">Usar exemplo bom</button>
+      </div>
+
+      <div class="filters">
+        <select id="bairro" aria-label="Bairro"></select>
+        <select id="tipo" aria-label="Tipo do imóvel"></select>
+        <select id="preco" aria-label="Valor">
+          <option value="">Valor</option>
+          <option value="3">Até R$ 3 mi</option>
+          <option value="5">Até R$ 5 mi</option>
+          <option value="8">Até R$ 8 mi</option>
+          <option value="10">Até R$ 10 mi</option>
+          <option value="acima10">Acima de R$ 10 mi</option>
+        </select>
+        <select id="suites" aria-label="Suítes">
+          <option value="">Suítes</option><option value="1">1+ suíte</option><option value="2">2+ suítes</option><option value="3">3+ suítes</option><option value="4">4+ suítes</option><option value="5">5+ suítes</option>
+        </select>
+        <select id="vagas" aria-label="Vagas">
+          <option value="">Vagas</option><option value="1">1+ vaga</option><option value="2">2+ vagas</option><option value="3">3+ vagas</option><option value="4">4+ vagas</option><option value="5">5+ vagas</option>
+        </select>
+        <select id="ordem" aria-label="Ordenação">
+          <option value="match">Maior compatibilidade</option><option value="precoAsc">Menor preço</option><option value="precoDesc">Maior preço</option><option value="areaDesc">Maior metragem</option><option value="areaAsc">Menor metragem</option>
+        </select>
+      </div>
+
+      <div class="voice-card">
+        <div class="voice-head">
+          <div>
+            <h2>Busca por voz ou texto</h2>
+            <p>Exemplo: Cliente Mariana quer apartamento em Moema até 5 milhões, 3 suítes, 2 vagas, varanda gourmet e vista aberta.</p>
+          </div>
+          <span class="badge">motor v2</span>
+        </div>
+        <textarea id="voiceSearchText" placeholder="Digite o briefing do cliente aqui..."></textarea>
+        <div class="voice-actions">
+          <button class="btn ghost" type="button" onclick="startVoice()">🎙️ Falar busca</button>
+          <button class="btn soft" type="button" onclick="applyNaturalSearch()">Interpretar perfil</button>
+          <button class="btn ghost" type="button" onclick="clearSearch()">Limpar</button>
+          <button class="btn orange" type="button" onclick="searchWithProfile()">Buscar imóveis compatíveis</button>
+        </div>
+        <div id="profileChips" class="criteria"><span class="chip empty">Digite uma frase ou clique em “Falar busca”.</span></div>
+      </div>
+
+      <div class="rules">
+        <div class="card">
+          <h2>Regras configuráveis da imobiliária</h2>
+          <p class="small">Por padrão, o MatchR não mostra imóveis fora do perfil duro. A imobiliária pode definir quais regras são inegociáveis.</p>
+          <div class="rules-list">
+            <label class="toggle"><input id="ruleTipo" type="checkbox" checked><span><b>Tipo obrigatório</b>Casa não aparece em busca por apartamento.</span></label>
+            <label class="toggle"><input id="ruleBairro" type="checkbox" checked><span><b>Bairro obrigatório</b>Respeita o bairro solicitado quando informado.</span></label>
+            <label class="toggle"><input id="rulePreco" type="checkbox" checked><span><b>Orçamento obrigatório</b>Não ultrapassa o teto de valor informado.</span></label>
+            <label class="toggle"><input id="ruleSuites" type="checkbox" checked><span><b>Suítes obrigatórias</b>Respeita mínimo de suítes quando informado.</span></label>
+            <label class="toggle"><input id="ruleVagas" type="checkbox" checked><span><b>Vagas obrigatórias</b>Respeita mínimo de vagas quando informado.</span></label>
+            <label class="toggle"><input id="ruleSubtipos" type="checkbox"><span><b>Permitir subtipos de apartamento</b>Quando ligado, Cobertura/Garden/Loft podem entrar para busca por apartamento. Casas continuam fora.</span></label>
+          </div>
+        </div>
+        <div class="card soft">
+          <h2>Como o match é calculado</h2>
+          <p><b>Obrigatórios</b> eliminam. <b>Preferências</b> ranqueiam.</p>
+          <div class="divider"></div>
+          <p class="small">Exemplo: “apartamento em Moema até 5 mi” é filtro. “varanda gourmet, vista aberta, andar alto” é pontuação e explicação do card.</p>
+          <div class="callout" style="margin-top:12px">
+            <strong>Insight da corretora</strong>
+            <p>O caminho certo é cruzar preferências do buscador com características disponíveis no inventário.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="results-head">
+        <div>
+          <h2>Imóveis compatíveis</h2>
+          <p id="resultSummary">Mostrando os melhores resultados da base simulada.</p>
+        </div>
+        <button class="btn ghost" onclick="goId('history')">Ver histórico</button>
+      </div>
+      <div id="inventory" class="inventory"></div>
+    </section>
+
+    <section id="history" class="view">
+      <div class="top">
+        <div>
+          <h1>Resultados de buscas</h1>
+          <p class="lead">Histórico das seleções criadas para clientes e leads. Agora cada busca guarda o perfil entendido e a regra aplicada.</p>
+        </div>
+        <button class="btn orange" onclick="goId('search')">Nova busca</button>
+      </div>
+      <div class="card">
+        <h2>Histórico</h2>
+        <div id="historyList"></div>
+      </div>
+    </section>
+
+    <section id="clients" class="view">
+      <div class="top">
+        <div>
+          <h1>Leads / Clientes</h1>
+          <p class="lead">Cadastro simples para organizar quem está procurando, quem já comprou e o que cada pessoa busca.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="client-grid">
+          <input id="clienteNome" placeholder="Nome" />
+          <input id="clienteBusca" placeholder="Perfil de busca" />
+          <select id="clienteTipo"><option>Lead</option><option>Cliente</option><option>Parceiro</option></select>
+          <select id="clienteStatus"><option>Quente</option><option>Morno</option><option>Frio</option><option>Comprou</option></select>
+          <button class="btn orange" onclick="addClient()">Adicionar</button>
+        </div>
+      </div>
+      <div class="card" style="margin-top:16px">
+        <h2>Base de relacionamento</h2>
+        <div id="clientList"></div>
+      </div>
+    </section>
+
+    <section id="corretor" class="view">
+      <div class="top">
+        <div>
+          <h1>Para você corretor</h1>
+          <p class="lead">Validação prática das funcionalidades para aumentar eficiência, precisão e apresentação profissional.</p>
+        </div>
+      </div>
+      <div class="grid cols2">
+        <div class="card soft">
+          <h2>Mensagem para validação</h2>
+          <p>O MatchR não quer substituir o faro do corretor. A ideia é tirar ruído, acelerar busca e ajudar a justificar por que um imóvel combina com o cliente.</p>
+          <p>Esta versão já evita o erro mais grave do MVP: sugerir imóvel fora do perfil solicitado.</p>
+        </div>
+        <div class="card">
+          <h2>Próximos recursos naturais</h2>
+          <p>Configuração por imobiliária, pesos por regra comercial, integração de CRM, ingestão de estoque real e explicação do match para enviar ao cliente.</p>
+        </div>
+      </div>
+      <div class="grid cols4" style="margin-top:16px">
+        <div class="card metric"><div class="n">3.000</div><div class="label">imóveis simulados</div></div>
+        <div class="card metric"><div class="n" id="above90">0</div><div class="label">resultados acima de 90%</div></div>
+        <div class="card metric"><div class="n">64%</div><div class="label">abertura estimada de links</div></div>
+        <div class="card metric"><div class="n">3.1x</div><div class="label">mais imóveis avaliados</div></div>
+      </div>
+    </section>
+  </main>
 </div>
-<div class="toast" id="toast"></div>
+<div id="toast" class="toast"></div>
+
 <script>
-const bairros=['Alto de Pinheiros','Boaçava','Brooklin','Cidade Jardim','Higienópolis','Itaim Bibi','Jardim América','Jardim Europa','Jardim Paulistano','Jardim Paulista','Moema','Moema Pássaros','Pacaembu','Paraíso','Pinheiros','Real Parque','Vila Madalena','Vila Nova Conceição'];
-const tipos=['Apartamento','Casa','Casa de condomínio','Cobertura','Garden','Studio','Terreno'];
-const ruas=['Rua Alemanha','Rua Canadá','Rua Hungria','Rua Alvorada','Rua Pedroso Alvarenga','Rua Groenlândia','Rua Tucumã','Rua Manduri','Rua Adolfo Tabacow','Praça General San Martin','Rua Ministro Rocha Azevedo','Rua Atlântica','Rua Estados Unidos','Rua Sampaio Vidal','Rua Jesuíno Arruda','Rua Doutor Renato Paes de Barros'];
-const statusList=['Pronto','Oportunidade','Lançamento','Em reforma','Off-market'];
-const diffs=['muita luz natural','privacidade','jardim','piscina','rooftop','sauna','vista aberta','rua tranquila','academia','elevador privativo','varanda integrada','área gourmet','pé-direito alto','arquitetura autoral','reforma contemporânea','segurança','janelas piso-teto'];
-const numberWords={um:1,uma:1,dois:2,duas:2,tres:3,'três':3,quatro:4,cinco:5,seis:6,sete:7,oito:8,nove:9,dez:10,quinze:15,vinte:20,trinta:30,quarenta:40,cinquenta:50};
-let voiceState={text:'',cliente:'',bairro:'',tipo:'',priceMaxMi:null,priceMinMi:null,priceBucket:'',suitesMin:null,vagasMin:null,areaMin:null,features:[],order:''};
-let activeSearchId=null;
-let searchHistory=[];
-let pessoas=[
-  {nome:'Ana Paula',tipo:'Cliente',busca:'Apartamento em Jardim Paulista, 3 suítes, pronto para morar',budget:'Até R$ 8 mi',status:'quente'},
-  {nome:'Família Silva',tipo:'Lead',busca:'Casa em Alto de Pinheiros com jardim e privacidade',budget:'Acima de R$ 10 mi',status:'morno'},
-  {nome:'Mariana',tipo:'Cliente',busca:'Moema, varanda gourmet, 2 vagas',budget:'Até R$ 5 mi',status:'quente'}
-];
-function pick(arr,i,step=1){return arr[Math.abs(i*step)%arr.length]}
-function unique(arr){return [...new Set(arr)]}
-function makeImovel(i){
- const tipo=pick(tipos,i,7), bairro=pick(bairros,i,11), rua=pick(ruas,i,13);
- const area=70+((i*37)%870), terreno=tipo.includes('Casa')?260+((i*71)%1500):null;
- const suites=1+((i*5)%6), vagas=((i*3)%8)+1;
- const preco=Number((1.8+(((i*19)%430)/10)).toFixed(1));
- const score=62+((i*29)%36);
- const selected=unique([pick(diffs,i,5),pick(diffs,i+2,7),pick(diffs,i+4,9),pick(diffs,i+7,11),pick(diffs,i+9,13)]);
- return {id:'MTR-'+String(i).padStart(4,'0'),tipo,bairro,endereco:`${rua}, ${80+((i*17)%920)}`,area,terreno,suites,vagas,preco,status:pick(statusList,i,3),score,diferenciais:selected,descricao:`${tipo} em ${bairro}, com ${area} m², ${suites} suítes e ${vagas} vagas. Destaques: ${selected.slice(0,3).join(', ')}.`};
+const bairros = ['Alto de Pinheiros','Bela Vista','Brooklin','Campo Belo','Chácara Flora','Higienópolis','Itaim Bibi','Jardim Europa','Jardins','Moema','Morumbi','Paraíso','Perdizes','Pinheiros','Real Parque','Vila Madalena','Vila Nova Conceição','Vila Olímpia'];
+const tipos = ['Apartamento','Casa','Cobertura','Garden','Loft','Studio'];
+const numberWords = {um:1,uma:1,dois:2,duas:2,tres:3,treis:3,três:3,quatro:4,cinco:5,seis:6,sete:7,oito:8,nove:9,dez:10};
+const featureAliases = {
+  'varanda gourmet':['varanda gourmet','espaco gourmet','espaço gourmet','gourmet'],
+  'varanda':['varanda','terraco','terraço','sacada'],
+  'vista aberta':['vista aberta','vista livre','vista permanente','vista skyline','vista para parque'],
+  'andar alto':['andar alto','alto andar'],
+  'piscina':['piscina','raia'],
+  'academia':['academia','fitness'],
+  'lazer completo':['lazer completo','clube','quadra','brinquedoteca','salao de festas','salão de festas'],
+  'pet friendly':['pet','cachorro','gato','pet friendly'],
+  'silencioso':['silencioso','rua calma','quieto','privacidade'],
+  'reformado':['reformado','pronto para morar','novo','modernizado'],
+  'perto do metrô':['metro','metrô','perto do metro','estacao','estação'],
+  'segurança':['seguranca','segurança','portaria 24h','condominio fechado','monitoramento'],
+  'jardim':['jardim','quintal','area externa','área externa'],
+  'home office':['home office','escritorio','escritório'],
+  'escolas':['escola','colegio','colégio'],
+  'liquidez':['liquidez','investimento','rentabilidade','locacao','locação']
+};
+const preferenceKeys = Object.keys(featureAliases);
+let inventory = [];
+let currentVoiceProfile = {};
+let currentMatches = [];
+let history = [];
+let clients = [{nome:'Mariana', tipo:'Cliente', status:'Quente', busca:'Apartamento em Moema até R$ 5 mi, 3 suítes, varanda gourmet'}];
+
+function norm(value){return String(value||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[ºª]/g,'').trim();}
+function escapeHtml(value){return String(value ?? '').replace(/[&<>'"]/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));}
+function money(mi){return new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL',maximumFractionDigits:0}).format(mi*1000000);}
+function miText(mi){if(mi == null)return ''; return `R$ ${String(Number(mi.toFixed(2))).replace('.', ',')} mi`;}
+function pick(arr,rnd){return arr[Math.floor(rnd()*arr.length)];}
+function seeded(seed){let s=seed; return function(){s=(s*9301+49297)%233280; return s/233280;};}
+function priceBucket(maxPrice){if(!maxPrice)return ''; if(maxPrice<=3)return '3'; if(maxPrice<=5)return '5'; if(maxPrice<=8)return '8'; if(maxPrice<=10)return '10'; return 'acima10';}
+function numberFromToken(token){const clean=norm(token).replace(/[^\d,.a-z]/g,''); if(numberWords[clean]!=null)return numberWords[clean]; const n=Number(clean.replace(/\./g,'').replace(',','.')); return Number.isFinite(n)?n:null;}
+
+function generateInventory(){
+  const curated = [
+    {id:1,titulo:'Apartamento vista aberta no coração de Moema',tipo:'Apartamento',bairro:'Moema',preco:4.85,area:224,quartos:4,suites:3,vagas:3,features:['varanda gourmet','vista aberta','andar alto','lazer completo','piscina','academia','pet friendly','reformado','segurança'],descricao:'Planta familiar, varanda gourmet integrada e vista aberta em rua tranquila.'},
+    {id:2,titulo:'Apartamento reformado em Moema Pássaros',tipo:'Apartamento',bairro:'Moema',preco:3.95,area:178,quartos:3,suites:3,vagas:2,features:['varanda gourmet','vista livre','silencioso','reformado','pet friendly','segurança','escolas'],descricao:'Opção certeira para família que quer praticidade, silêncio e boa apresentação.'},
+    {id:3,titulo:'Apartamento amplo com lazer clube em Moema',tipo:'Apartamento',bairro:'Moema',preco:4.45,area:206,quartos:4,suites:3,vagas:2,features:['varanda','vista aberta','lazer completo','piscina','academia','brinquedoteca','escolas'],descricao:'Condomínio com estrutura completa e excelente aderência a famílias.'},
+    {id:4,titulo:'Casa charmosa em Moema Índios',tipo:'Casa',bairro:'Moema',preco:4.35,area:260,quartos:4,suites:3,vagas:3,features:['jardim','quintal','silencioso','segurança','reformado'],descricao:'Casa com jardim. Deve ficar fora quando o briefing pedir apartamento.'},
+    {id:5,titulo:'Cobertura duplex em Moema',tipo:'Cobertura',bairro:'Moema',preco:4.95,area:250,quartos:4,suites:3,vagas:3,features:['terraço','vista aberta','piscina','andar alto','varanda gourmet'],descricao:'Subtipo premium; só entra quando a regra permitir subtipos ou quando o cliente pedir cobertura.'},
+    {id:6,titulo:'Apartamento sofisticado no Itaim Bibi',tipo:'Apartamento',bairro:'Itaim Bibi',preco:4.7,area:190,quartos:3,suites:3,vagas:2,features:['varanda gourmet','andar alto','academia','perto do metrô','reformado'],descricao:'Boa liquidez e localização forte para comprador executivo.'},
+    {id:7,titulo:'Garden familiar em Alto de Pinheiros',tipo:'Garden',bairro:'Alto de Pinheiros',preco:5.8,area:246,quartos:4,suites:3,vagas:3,features:['jardim','varanda gourmet','pet friendly','escolas','silencioso','segurança'],descricao:'Perfil família com pets e desejo de área externa.'},
+    {id:8,titulo:'Studio para investimento em Pinheiros',tipo:'Studio',bairro:'Pinheiros',preco:1.35,area:42,quartos:1,suites:1,vagas:1,features:['perto do metrô','liquidez','academia','novo'],descricao:'Produto de liquidez para investidor.'},
+    {id:9,titulo:'Apartamento clássico em Higienópolis',tipo:'Apartamento',bairro:'Higienópolis',preco:3.6,area:210,quartos:3,suites:2,vagas:2,features:['planta ampla','silencioso','reformado','escolas','vista livre'],descricao:'Metragem generosa e localização tradicional.'},
+    {id:10,titulo:'Casa de condomínio na Chácara Flora',tipo:'Casa',bairro:'Chácara Flora',preco:9.8,area:520,quartos:5,suites:4,vagas:5,features:['condominio fechado','jardim','piscina','segurança','pet friendly'],descricao:'Casa de alto padrão para família que busca verde e segurança.'},
+    {id:11,titulo:'Apartamento compacto na Vila Olímpia',tipo:'Apartamento',bairro:'Vila Olímpia',preco:2.4,area:86,quartos:2,suites:1,vagas:2,features:['perto do metrô','academia','liquidez','varanda','novo'],descricao:'Boa opção para executivo ou investidor.'},
+    {id:12,titulo:'Apartamento premium na Vila Nova Conceição',tipo:'Apartamento',bairro:'Vila Nova Conceição',preco:7.8,area:238,quartos:4,suites:4,vagas:4,features:['varanda gourmet','vista aberta','andar alto','lazer completo','piscina','academia'],descricao:'Produto premium com aderência ao alto padrão.'},
+    {id:13,titulo:'Loft com pé-direito alto nos Jardins',tipo:'Loft',bairro:'Jardins',preco:3.2,area:118,quartos:1,suites:1,vagas:2,features:['pé direito alto','reformado','perto do metrô','liquidez','home office'],descricao:'Perfil solteiro ou casal, design e localização.'},
+    {id:14,titulo:'Apartamento família em Perdizes',tipo:'Apartamento',bairro:'Perdizes',preco:3.1,area:165,quartos:3,suites:2,vagas:2,features:['varanda','lazer completo','escolas','piscina','segurança'],descricao:'Bom equilíbrio entre metragem, bairro e estrutura familiar.'}
+  ];
+  const rnd = seeded(505);
+  const featurePool = ['varanda','varanda gourmet','vista aberta','vista livre','andar alto','piscina','academia','lazer completo','pet friendly','silencioso','reformado','perto do metrô','segurança','jardim','home office','escolas','liquidez','novo','brinquedoteca','terraço'];
+  const titles = ['Essencial','Prime','Reserva','Signature','Vista','Parque','Jardim','Alameda','Maison','Horizonte'];
+  inventory = curated.slice();
+  for(let i=curated.length+1;i<=3000;i++){
+    const tipo = pick(['Apartamento','Apartamento','Apartamento','Apartamento','Casa','Casa','Cobertura','Garden','Studio','Loft'], rnd);
+    const bairro = pick(bairros, rnd);
+    const areaBase = tipo==='Studio'? 32+rnd()*45 : tipo==='Casa'? 190+rnd()*430 : tipo==='Cobertura'? 180+rnd()*260 : 70+rnd()*230;
+    const area = Math.round(areaBase);
+    const bairroPremium = ['Vila Nova Conceição','Jardim Europa','Itaim Bibi','Jardins','Moema'].includes(bairro) ? 1.25 : ['Pinheiros','Vila Olímpia','Alto de Pinheiros','Higienópolis'].includes(bairro) ? .75 : .35;
+    let preco = .45 + bairroPremium + (area * (tipo==='Studio' ? .023 : tipo==='Casa' ? .0175 : tipo==='Cobertura' ? .020 : .0165)) + (rnd()*1.1);
+    if(tipo==='Casa') preco += 1.2;
+    if(tipo==='Cobertura') preco += 1.4;
+    if(tipo==='Garden') preco += .55;
+    if(tipo==='Loft') preco -= .25;
+    if(tipo==='Studio') preco = .65 + bairroPremium*.45 + area*.018 + rnd()*.65;
+    preco = Math.max(.68, Math.round(preco*100)/100);
+    let quartos, suites, vagas;
+    if(tipo==='Studio'){
+      quartos=1; suites=1; vagas=rnd()>.45?1:0;
+    } else if(area<95){
+      quartos=2; suites=1; vagas=1;
+    } else if(area<150){
+      quartos=2 + (rnd()>.45?1:0); suites=1 + (rnd()>.55?1:0); vagas=1 + (rnd()>.55?1:0);
+    } else if(area<220){
+      quartos=3 + (rnd()>.65?1:0); suites=2 + (rnd()>.55?1:0); vagas=2 + (rnd()>.65?1:0);
+    } else {
+      quartos=4 + (rnd()>.70?1:0); suites=3 + (rnd()>.62?1:0); vagas=3 + (rnd()>.55?1:0);
+    }
+    if(tipo==='Casa' && area>320){quartos=Math.max(quartos,4); suites=Math.max(suites,3); vagas=Math.max(vagas,4);}
+    if(tipo==='Cobertura'){suites=Math.max(suites,3); vagas=Math.max(vagas,3);}
+    const features = [];
+    while(features.length<7){const f=pick(featurePool,rnd); if(!features.includes(f))features.push(f);}
+    inventory.push({
+      id:i,
+      titulo:`${tipo} ${pick(titles,rnd)} em ${bairro}`,
+      tipo,bairro,preco,area,quartos,suites,vagas,features,
+      descricao:`${tipo} em ${bairro} com ${area} m², ${suites} suíte(s), ${vagas} vaga(s) e atributos compatíveis com curadoria.`
+    });
+  }
 }
-const IMOVEIS=Array.from({length:3000},(_,i)=>makeImovel(i+1));
-function norm(value){return String(value||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,' ').trim()}
-function escapeHtml(value){return String(value||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;')}
-function money(v){return 'R$ '+Number(v).toFixed(1).replace('.',',')+' mi'}
-function br(n){return Number(n).toLocaleString('pt-BR')}
-function labelOf(el){return el&&el.options&&el.selectedIndex>=0?el.options[el.selectedIndex].text:''}
-function populateFilters(){
- document.getElementById('bairro').innerHTML='<option value="">Todos bairros</option>'+bairros.map(b=>`<option value="${escapeHtml(b)}">${escapeHtml(b)}</option>`).join('');
- document.getElementById('tipo').innerHTML='<option value="">Tipo</option>'+tipos.map(t=>`<option value="${escapeHtml(t)}">${escapeHtml(t)}</option>`).join('');
- ['bairro','tipo','preco','suites','vagas','ordem'].forEach(id=>document.getElementById(id).addEventListener('change',render));
-}
-function numberFromToken(token){
- const clean=norm(token).replace(/[^\d,.a-z]/g,'');
- if(numberWords[clean]!=null)return numberWords[clean];
- const n=Number(clean.replace(/\./g,'').replace(',','.'));
- return Number.isFinite(n)?n:null;
-}
-function priceBucket(price){if(!price)return ''; if(price<=3)return '3'; if(price<=5)return '5'; if(price<=8)return '8'; if(price<=10)return '10'; return 'acima10'}
+
 function parseBudget(text){
- const s=norm(text); const token='(\\d+(?:[\\.,]\\d+)?|um|uma|dois|duas|tres|três|quatro|cinco|seis|sete|oito|nove|dez|quinze|vinte|trinta|quarenta|cinquenta)';
- let m=s.match(new RegExp('(?:acima de|acima|mais de|maior que|a partir de|apartir de)\\s*(?:r\\$)?\\s*'+token+'\\s*(milhoes|milhao|mi|m)?'));
- if(m){const min=numberFromToken(m[1]); if(min!=null)return {min,max:null,bucket:'acima10'};}
- const patterns=[new RegExp('(?:ate|até|no maximo|maximo|budget|orcamento|orçamento|valor|preco|preço|teto de)\\s*(?:r\\$)?\\s*'+token+'\\s*(milhoes|milhao|mi|m|mil)?'),new RegExp('r\\$\\s*'+token+'\\s*(milhoes|milhao|mi|m|mil)?'),new RegExp(token+'\\s*(milhoes|milhao|mi)\\b')];
- for(const p of patterns){m=s.match(p); if(!m)continue; let value=numberFromToken(m[1]); if(value==null)continue; const unit=m[2]||''; const nearby=s.slice(m.index,m.index+80); if(unit==='mil')value=value/1000; if(!unit&&value>100)value=value/1000; if(/meio/.test(nearby)&&value<100)value+=0.5; value=Math.round(value*10)/10; return {min:null,max:value,bucket:priceBucket(value)};}
- return {min:null,max:null,bucket:''};
+  const n = norm(text);
+  const out = {min:null,max:null,raw:''};
+  const values = [];
+  const range = n.match(/entre\s+(\d+(?:[,.]\d+)?)\s*(?:e|a)\s*(\d+(?:[,.]\d+)?)\s*(milhoes|milhao|mi|m)\b/);
+  if(range){out.min=Number(range[1].replace(',','.')); out.max=Number(range[2].replace(',','.')); out.raw=`entre ${miText(out.min)} e ${miText(out.max)}`; return out;}
+  const millionRegex = /(\d+(?:[,.]\d+)?)\s*(milhoes|milhao|mi|m)\b/g;
+  let m;
+  while((m=millionRegex.exec(n))!==null){values.push(Number(m[1].replace(',','.')));}
+  const currencyRegex = /r\$\s*([\d.]+(?:,\d+)?)/g;
+  while((m=currencyRegex.exec(n))!==null){
+    const rawNum = Number(m[1].replace(/\./g,'').replace(',','.'));
+    if(Number.isFinite(rawNum)) values.push(rawNum>1000?rawNum/1000000:rawNum);
+  }
+  if(!values.length)return out;
+  if(/(acima|a partir|apartir|mais de|maior que)/.test(n)){out.min=Math.min(...values); out.raw=`a partir de ${miText(out.min)}`; return out;}
+  out.max = Math.max(...values);
+  out.raw = `até ${miText(out.max)}`;
+  return out;
 }
-function parseMin(text,words){const m=norm(text).match(new RegExp('(\\d+|um|uma|dois|duas|tres|três|quatro|cinco|seis|sete|oito|nove|dez)\\s*(?:'+words.join('|')+')')); return m?numberFromToken(m[1]):null}
-function parseArea(text){const m=norm(text).match(/(\d{2,4})\s*(m2|m²|metros|metro|metros quadrados|metragem)/); return m?Number(m[1]):null}
-function parseCliente(text){const m=String(text||'').match(/cliente\s+([A-Za-zÀ-ÿ]+(?:\s+[A-Za-zÀ-ÿ]+){0,2})/i); if(!m)return ''; const stops=['quer','procura','busca','precisa','gostaria','deseja']; return m[1].split(/\s+/).filter(p=>!stops.includes(norm(p))).join(' ').trim()}
+
+function parseType(text){
+  const n=norm(text);
+  if(/\bcobertura\b/.test(n))return 'Cobertura';
+  if(/\b(apartamento|apto|ape)\s+garden\b|\bgarden\b/.test(n))return 'Garden';
+  if(/\bstudio\b|\bkitnet\b|\bquitinete\b/.test(n))return 'Studio';
+  if(/\bloft\b/.test(n))return 'Loft';
+  if(/\bcasa\b|\bsobrado\b|casa de condominio/.test(n))return 'Casa';
+  if(/\bapartamento\b|\bapto\b|\bape\b/.test(n))return 'Apartamento';
+  return '';
+}
+
 function parseBairro(text){
- const s=norm(text); const aliases=[['Jardim América',['jardins','jardim america']],['Vila Nova Conceição',['vila nova','vila nova conceicao']],['Itaim Bibi',['itaim']],['Moema Pássaros',['moema passaros','passaros']],['Alto de Pinheiros',['alto pinheiros']],['Vila Madalena',['madalena']]];
- for(const b of bairros.slice().sort((a,b)=>b.length-a.length)){if(s.includes(norm(b)))return b;}
- for(const [bairro,terms] of aliases){if(terms.some(t=>s.includes(norm(t))))return bairro;}
- return '';
+  const n=norm(text);
+  const aliases = {
+    'vila nova conceicao':'Vila Nova Conceição','vila olimpia':'Vila Olímpia','alto de pinheiros':'Alto de Pinheiros','jardim europa':'Jardim Europa','chacara flora':'Chácara Flora',
+    'itaim bibi':'Itaim Bibi','vila madalena':'Vila Madalena','campo belo':'Campo Belo','real parque':'Real Parque','bela vista':'Bela Vista','higienopolis':'Higienópolis',
+    'pinheiros':'Pinheiros','jardins':'Jardins','moema':'Moema','brooklin':'Brooklin','morumbi':'Morumbi','paraiso':'Paraíso','perdizes':'Perdizes'
+  };
+  return Object.entries(aliases).sort((a,b)=>b[0].length-a[0].length).find(([key])=>n.includes(key))?.[1] || '';
 }
-function parseTipo(text){
- const s=norm(text); const checks=[['Casa de condomínio',['casa de condominio','condominio fechado','condominio']],['Cobertura',['cobertura','penthouse']],['Apartamento',['apartamento','apto','ape']],['Garden',['garden']],['Studio',['studio','estudio']],['Terreno',['terreno','lote']],['Casa',['casa','sobrado']]];
- for(const [tipo,terms] of checks){if(terms.some(t=>s.includes(norm(t))))return tipo;}
- return '';
+
+function parseMinCount(text,nouns){
+  const n = norm(text);
+  const num = '(\\d+|um|uma|dois|duas|tres|treis|quatro|cinco|seis|sete|oito|nove|dez)';
+  for(const noun of nouns){
+    const re1 = new RegExp(`${num}\\s*(?:\\+|ou mais|mais)?\\s*${noun}s?\\b`);
+    const re2 = new RegExp(`${noun}s?\\s*(?:minimo|minima|a partir de|de pelo menos)?\\s*${num}\\b`);
+    let m = n.match(re1) || n.match(re2);
+    if(m){const token = m[1] || m[2]; return numberFromToken(token);}
+  }
+  return null;
 }
-function parseFeatures(text){const s=norm(text); const found=[]; const map={'muita luz natural':['muita luz natural','luz natural','iluminado','bem iluminado'],privacidade:['privacidade','privativo'],jardim:['jardim'],piscina:['piscina'],rooftop:['rooftop'],sauna:['sauna'],'vista aberta':['vista aberta','vista livre'],'rua tranquila':['rua tranquila','rua silenciosa','silencioso'],academia:['academia'],'elevador privativo':['elevador privativo'],'varanda integrada':['varanda integrada','varanda'],'área gourmet':['area gourmet','área gourmet','varanda gourmet','gourmet'],'pé-direito alto':['pe direito alto','pé direito alto','pé-direito alto'],'arquitetura autoral':['arquitetura autoral'],'reforma contemporânea':['reforma contemporanea','reforma contemporânea','reformado','reformada'],segurança:['seguranca','segurança'],'janelas piso-teto':['janelas piso teto','janelas piso-teto']}; Object.entries(map).forEach(([label,terms])=>{if(terms.some(t=>s.includes(norm(t))))found.push(label)}); return found}
-function parseOrder(text){const s=norm(text); if(/menor\s+preco|mais\s+barato/.test(s))return 'preco_asc'; if(/maior\s+preco|mais\s+caro/.test(s))return 'preco_desc'; if(/menor\s+(metragem|area)/.test(s))return 'area_asc'; if(/maior\s+(metragem|area)/.test(s))return 'area_desc'; return ''}
-function parseSearch(text){const budget=parseBudget(text); return {text:String(text||'').trim(),cliente:parseCliente(text),bairro:parseBairro(text),tipo:parseTipo(text),priceMaxMi:budget.max,priceMinMi:budget.min,priceBucket:budget.bucket,suitesMin:parseMin(text,['suite','suites']),vagasMin:parseMin(text,['vaga','vagas','garagem','garagens']),areaMin:parseArea(text),features:parseFeatures(text),order:parseOrder(text)}}
-function setSelect(id,value){const el=document.getElementById(id); if(!el)return; const exists=[...el.options].some(o=>o.value===value); if(exists)el.value=value||''}
-function chipsHtml(parsed){const chips=[]; if(parsed.cliente)chips.push('Cliente: '+parsed.cliente); if(parsed.bairro)chips.push('Bairro: '+parsed.bairro); if(parsed.tipo)chips.push('Tipo: '+parsed.tipo); if(parsed.priceMinMi)chips.push('Preço: acima de R$ '+String(parsed.priceMinMi).replace('.',',')+' mi'); if(parsed.priceMaxMi)chips.push('Preço: até R$ '+String(parsed.priceMaxMi).replace('.',',')+' mi'); if(parsed.suitesMin)chips.push('Suítes: '+parsed.suitesMin+'+'); if(parsed.vagasMin)chips.push('Vagas: '+parsed.vagasMin+'+'); if(parsed.areaMin)chips.push('Área: '+parsed.areaMin+'+ m²'); if(parsed.features.length)chips.push('Desejos: '+parsed.features.join(', ')); if(parsed.order)chips.push('Critério: '+orderLabel(parsed.order)); return chips.map(x=>`<span>${escapeHtml(x)}</span>`).join('')}
-function orderLabel(value){return {score:'Critérios',preco_desc:'Maior preço',preco_asc:'Menor preço',area_desc:'Maior metragem',area_asc:'Menor metragem'}[value]||''}
+
+function parseArea(text){
+  const n=norm(text);
+  const m=n.match(/(?:a partir de|acima de|minimo de|minima de|com pelo menos|mais de)?\s*(\d{2,4})\s*(?:m2|m²|metros|metro)/);
+  return m?Number(m[1]):null;
+}
+
+function parsePreferences(text){
+  const n=norm(text);
+  const matches=[];
+  for(const key of preferenceKeys){
+    const aliases = featureAliases[key].map(norm);
+    if(aliases.some(alias => n.includes(alias)) && !matches.includes(key)) matches.push(key);
+  }
+  if(matches.includes('varanda gourmet') && !matches.includes('varanda')) matches.push('varanda');
+  return matches;
+}
+
+function parseBuyerProfile(text){
+  const n=norm(text);
+  const profiles=[];
+  if(/familia|filhos|crianca|criança|escola|colegio|colegio/.test(n))profiles.push('família');
+  if(/investidor|investimento|renda|locacao|locação|liquidez/.test(n))profiles.push('investidor');
+  if(/casal|recem casado|recém casado/.test(n))profiles.push('casal');
+  if(/executivo|expatriado|trabalho|home office/.test(n))profiles.push('executivo');
+  if(/pet|cachorro|gato/.test(n))profiles.push('pet');
+  return profiles;
+}
+
+function parseClient(text){
+  const original = String(text||'');
+  const m = original.match(/(?:cliente|lead|comprador|compradora)\s+([A-ZÁÉÍÓÚÂÊÔÃÕÇ][\wÀ-ÿ'-]{1,24})/i);
+  return m?m[1]:'';
+}
+
+function parseOrder(text){
+  const n=norm(text);
+  if(/menor preco|mais barato|barato/.test(n))return 'precoAsc';
+  if(/maior preco|mais caro/.test(n))return 'precoDesc';
+  if(/maior metragem|mais area|mais metros|amplo/.test(n))return 'areaDesc';
+  if(/menor metragem|compacto/.test(n))return 'areaAsc';
+  return '';
+}
+
+function parseBriefing(text){
+  const budget = parseBudget(text);
+  return {
+    raw:String(text||''),
+    cliente:parseClient(text),
+    tipo:parseType(text),
+    bairro:parseBairro(text),
+    minPrice:budget.min,
+    maxPrice:budget.max,
+    budgetRaw:budget.raw,
+    minSuites:parseMinCount(text,['suite']),
+    minVagas:parseMinCount(text,['vaga','garagem']),
+    minQuartos:parseMinCount(text,['quarto','dormitorio','dorm']),
+    minArea:parseArea(text),
+    preferences:parsePreferences(text),
+    buyerProfiles:parseBuyerProfile(text),
+    order:parseOrder(text)
+  };
+}
+
+function setSelect(id,value){if(value!=='' && value!=null){const el=document.getElementById(id); if([...el.options].some(o=>o.value==value))el.value=value;}}
 function applyNaturalSearch(){
- const raw=document.getElementById('voiceSearchText').value.trim(); if(!raw){toast('Digite ou fale uma busca primeiro.'); return;}
- voiceState=parseSearch(raw);
- if(voiceState.cliente)document.getElementById('clienteNome').value=voiceState.cliente;
- if(voiceState.bairro)setSelect('bairro',voiceState.bairro);
- if(voiceState.tipo)setSelect('tipo',voiceState.tipo);
- setSelect('preco',voiceState.priceBucket||''); if(voiceState.order)setSelect('ordem',voiceState.order);
- document.getElementById('voiceSearchChips').innerHTML=chipsHtml(voiceState);
- document.getElementById('voiceSearchStatus').textContent='Busca aplicada aos filtros. Clique em “Buscar imóveis compatíveis” para salvar no histórico.';
- render();
+  const raw = document.getElementById('voiceSearchText').value.trim();
+  currentVoiceProfile = raw ? parseBriefing(raw) : {};
+  if(currentVoiceProfile.cliente) document.getElementById('clienteNome').value = currentVoiceProfile.cliente;
+  if(currentVoiceProfile.raw) document.getElementById('clienteBusca').value = currentVoiceProfile.raw;
+  setSelect('bairro', currentVoiceProfile.bairro || '');
+  setSelect('tipo', currentVoiceProfile.tipo || '');
+  if(currentVoiceProfile.maxPrice) setSelect('preco', priceBucket(currentVoiceProfile.maxPrice));
+  if(currentVoiceProfile.minPrice && !currentVoiceProfile.maxPrice) setSelect('preco','acima10');
+  setSelect('suites', currentVoiceProfile.minSuites || '');
+  setSelect('vagas', currentVoiceProfile.minVagas || '');
+  setSelect('ordem', currentVoiceProfile.order || '');
+  renderProfileChips(currentVoiceProfile);
+  return currentVoiceProfile;
 }
-function clearSearch(){voiceState={text:'',cliente:'',bairro:'',tipo:'',priceMaxMi:null,priceMinMi:null,priceBucket:'',suitesMin:null,vagasMin:null,areaMin:null,features:[],order:''}; document.getElementById('voiceSearchText').value=''; document.getElementById('voiceSearchChips').innerHTML=''; document.getElementById('clienteNome').value=''; ['bairro','tipo','preco','suites','vagas'].forEach(id=>setSelect(id,'')); setSelect('ordem','score'); document.getElementById('voiceSearchStatus').textContent='Busca limpa.'; render();}
-function propertyHasFeature(x,feature){const all=(x.diferenciais.join(' ')+' '+x.descricao).toLowerCase(); return all.includes(String(feature||'').toLowerCase())}
-function filtered(){
- let data=IMOVEIS.slice(); const bairro=document.getElementById('bairro').value||voiceState.bairro; const tipo=document.getElementById('tipo').value||voiceState.tipo; const preco=document.getElementById('preco').value; const vagas=document.getElementById('vagas').value; const suites=document.getElementById('suites').value; const ordem=voiceState.order||document.getElementById('ordem').value||'score';
- if(bairro)data=data.filter(x=>x.bairro===bairro); if(tipo)data=data.filter(x=>x.tipo===tipo);
- if(voiceState.priceMaxMi)data=data.filter(x=>x.preco<=voiceState.priceMaxMi); else if(voiceState.priceMinMi)data=data.filter(x=>x.preco>voiceState.priceMinMi); else if(preco){ if(preco==='acima10')data=data.filter(x=>x.preco>10); else data=data.filter(x=>x.preco<=Number(preco)); }
- const suitesMin=voiceState.suitesMin||Number(suites||0); if(suitesMin)data=data.filter(x=>x.suites>=suitesMin);
- if(vagas){ if(vagas==='mais4')data=data.filter(x=>x.vagas>=5); else data=data.filter(x=>x.vagas>=Number(vagas)); } if(voiceState.vagasMin)data=data.filter(x=>x.vagas>=voiceState.vagasMin);
- if(voiceState.areaMin)data=data.filter(x=>x.area>=voiceState.areaMin); if(voiceState.features.length)data=data.filter(x=>voiceState.features.every(f=>propertyHasFeature(x,f)));
- if(ordem==='preco_desc')data.sort((a,b)=>b.preco-a.preco); else if(ordem==='preco_asc')data.sort((a,b)=>a.preco-b.preco); else if(ordem==='area_desc')data.sort((a,b)=>b.area-a.area); else if(ordem==='area_asc')data.sort((a,b)=>a.area-b.area); else data.sort((a,b)=>b.score-a.score);
- return data;
+
+function getProfileFromUI(){
+  const textProfile = currentVoiceProfile.raw ? {...currentVoiceProfile} : {};
+  const preco = document.getElementById('preco').value;
+  const profile = {
+    raw:textProfile.raw || '',
+    cliente:textProfile.cliente || '',
+    tipo:document.getElementById('tipo').value || textProfile.tipo || '',
+    bairro:document.getElementById('bairro').value || textProfile.bairro || '',
+    minPrice:textProfile.minPrice || null,
+    maxPrice:textProfile.maxPrice || null,
+    minSuites:Number(document.getElementById('suites').value || textProfile.minSuites || 0) || null,
+    minVagas:Number(document.getElementById('vagas').value || textProfile.minVagas || 0) || null,
+    minQuartos:textProfile.minQuartos || null,
+    minArea:textProfile.minArea || null,
+    preferences:textProfile.preferences || [],
+    buyerProfiles:textProfile.buyerProfiles || [],
+    order:document.getElementById('ordem').value || textProfile.order || 'match',
+    budgetRaw:textProfile.budgetRaw || ''
+  };
+  if(preco && !textProfile.maxPrice && !textProfile.minPrice){
+    if(preco==='acima10'){profile.minPrice=10; profile.maxPrice=null; profile.budgetRaw='acima de R$ 10 mi';}
+    else {profile.maxPrice=Number(preco); profile.budgetRaw=`até ${miText(profile.maxPrice)}`;}
+  }
+  return profile;
 }
-function card(x,client=false){return `<div class="${client?'client-card':'imovel'}"><div class="${client?'client-img':'photo'}"></div><div class="${client?'client-body':'body'}"><h3>${escapeHtml(x.tipo)} • ${escapeHtml(x.bairro)}</h3><div class="meta">${escapeHtml(x.endereco)}<br>${br(x.area)} m²${x.terreno?' • terreno '+br(x.terreno)+' m²':''} • ${x.suites} suítes • ${x.vagas} vagas</div><p style="font-size:13px;margin:10px 0">${escapeHtml(x.descricao)}</p><div><span class="score">Match ${x.score}%</span> <b>${money(x.preco)}</b></div><div>${x.diferenciais.slice(0,4).map(t=>`<span class="tag">${escapeHtml(t)}</span>`).join('')}</div>${client?'<div class="mini-actions"><button onclick="toast(&quot;Gostei registrado.&quot;)">❤️ Gostei</button><button onclick="toast(&quot;Pedido de visita enviado.&quot;)">Agendar</button></div>':'<div class="actions"><button class="btn ghost" onclick="toast(&quot;Imóvel favoritado.&quot;)">Favoritar</button><button class="btn primary" onclick="toast(&quot;Contato com parceiro iniciado.&quot;)">Tenho cliente</button></div>'}</div></div>`}
-function render(){const data=filtered(); document.getElementById('inventory').innerHTML=data.slice(0,18).map(x=>card(x)).join('')||'<div class="card"><h2>Nenhum imóvel encontrado</h2><p>Altere os filtros ou limpe a busca.</p></div>'; document.getElementById('resultTitle').textContent=`${br(data.length)} imóveis compatíveis`; document.getElementById('resultSub').textContent=data.length?'Mostrando os melhores resultados da base simulada.':'Nenhum resultado com esses critérios.'; const top=data.slice(0,20); const avg=top.length?Math.round(top.reduce((s,x)=>s+x.score,0)/top.length):0; document.getElementById('dashboardScore').textContent=avg+'%'; document.getElementById('above90').textContent=String(IMOVEIS.filter(x=>x.score>=90).length);}
-function currentCriteria(){const c={cliente:document.getElementById('clienteNome').value.trim()||'Cliente sem nome',bairro:document.getElementById('bairro').value,tipo:document.getElementById('tipo').value,preco:labelOf(document.getElementById('preco')),vagas:labelOf(document.getElementById('vagas')),suites:labelOf(document.getElementById('suites')),ordem:labelOf(document.getElementById('ordem')),area:voiceState.areaMin?voiceState.areaMin+'+ m²':'',desejos:voiceState.features.join(', '),fala:voiceState.text}; if(!document.getElementById('preco').value&&!voiceState.priceMaxMi&&!voiceState.priceMinMi)c.preco=''; if(!document.getElementById('vagas').value&&!voiceState.vagasMin)c.vagas=''; if(!document.getElementById('suites').value&&!voiceState.suitesMin)c.suites=''; if(c.ordem==='Critérios')c.ordem=''; return c}
-function criteriaList(c){const arr=[]; if(c.bairro)arr.push('Bairro: '+c.bairro); if(c.tipo)arr.push('Tipo: '+c.tipo); if(c.preco)arr.push('Preço: '+c.preco); if(c.vagas)arr.push('Vagas: '+c.vagas); if(c.suites)arr.push('Suítes: '+c.suites); if(c.area)arr.push('Área: '+c.area); if(c.desejos)arr.push('Desejos: '+c.desejos); if(c.ordem)arr.push('Critério: '+c.ordem); return arr.length?arr:['Busca geral em toda a base']}
-function criteriaBadges(c){return criteriaList(c).map(i=>`<span>${escapeHtml(i)}</span>`).join('')}
-function makeSearchRecord(data,criteria){const id='BUSCA-'+Date.now(); return {id,created:new Date().toLocaleDateString('pt-BR'),criteria,total:data.length,top:data.slice(0,6)}}
-function selectTop(){const data=filtered(); const rec=makeSearchRecord(data,currentCriteria()); searchHistory.unshift(rec); activeSearchId=rec.id; renderSearchHistory(); goId('matches'); viewSearchResult(rec.id,false); toast('Resultado de busca criado para '+rec.criteria.cliente+'.')}
-function renderSearchHistory(){const el=document.getElementById('searchHistory'); if(!searchHistory.length){el.innerHTML='<p>Nenhuma busca salva ainda.</p>';return;} el.innerHTML='<table class="table"><thead><tr><th>Cliente</th><th>Critérios</th><th>Resultados</th><th></th></tr></thead><tbody>'+searchHistory.map(r=>`<tr><td><b>${escapeHtml(r.criteria.cliente)}</b><br><small>${r.created}</small></td><td><div class="criteria">${criteriaBadges(r.criteria)}</div></td><td>${br(r.total)}</td><td><button class="btn ghost" onclick="viewSearchResult('${r.id}')">Ver</button></td></tr>`).join('')+'</tbody></table>'}
-function viewSearchResult(id,toastIt=true){const rec=searchHistory.find(r=>r.id===id)||searchHistory[0]; if(!rec)return; activeSearchId=rec.id; document.getElementById('selectedSearch').innerHTML=`<h3>${escapeHtml(rec.criteria.cliente)}</h3><div class="criteria">${criteriaBadges(rec.criteria)}</div><p>${br(rec.total)} imóveis encontrados. Top 6 para curadoria:</p><div class="client-grid">${rec.top.map(x=>card(x,true)).join('')}</div><div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap"><button class="btn primary" onclick="copyLink()">Copiar link privado</button><button class="btn ghost" onclick="goId('inventario')">Ajustar busca</button></div>`; if(toastIt)toast('Resultado aberto.')}
-function seedSearchHistory(){const samples=[{cliente:'Ana Paula',bairro:'Jardim Paulista',tipo:'Apartamento',preco:'Até R$ 8 mi',vagas:'2+ vagas',suites:'3+ suítes',ordem:'Maior metragem'},{cliente:'Família Silva',bairro:'Alto de Pinheiros',tipo:'Casa',preco:'Acima de R$ 10 mi',vagas:'4+ vagas',suites:'4+ suítes',ordem:''}]; samples.forEach((c,i)=>{let data=IMOVEIS.filter(x=>(!c.bairro||x.bairro===c.bairro)&&(!c.tipo||x.tipo===c.tipo)).sort((a,b)=>b.score-a.score); searchHistory.push({id:'DEMO-'+i,created:new Date().toLocaleDateString('pt-BR'),criteria:c,total:data.length,top:data.slice(0,6)})}); activeSearchId=searchHistory[0].id;}
-function renderPessoas(){const el=document.getElementById('pessoasTable'); el.innerHTML='<table class="table"><thead><tr><th>Nome</th><th>Tipo</th><th>Busca</th><th>Budget</th><th>Status</th></tr></thead><tbody>'+pessoas.map(p=>`<tr><td><b>${escapeHtml(p.nome)}</b></td><td>${escapeHtml(p.tipo)}</td><td>${escapeHtml(p.busca)}</td><td>${escapeHtml(p.budget)}</td><td><span class="status ${p.status==='quente'?'hot':p.status==='comprou'?'ok':'cold'}">${escapeHtml(p.status)}</span></td></tr>`).join('')+'</tbody></table>'}
-function addPessoa(){const nome=document.getElementById('pessoaNome').value.trim(); if(!nome){toast('Digite o nome para cadastrar.');return;} pessoas.unshift({nome,tipo:document.getElementById('pessoaTipo').value,busca:document.getElementById('pessoaBusca').value.trim()||'Busca ainda não informada',budget:document.getElementById('pessoaBudget').value.trim()||'Budget a definir',status:document.getElementById('pessoaStatus').value}); document.getElementById('pessoaNome').value=''; document.getElementById('pessoaBusca').value=''; document.getElementById('pessoaBudget').value=''; renderPessoas(); toast('Cadastro adicionado em Leads / Clientes.')}
-function startVoiceSearch(){const Recognition=window.SpeechRecognition||window.webkitSpeechRecognition; if(!Recognition){toast('Este navegador não liberou voz. Digite a frase e clique em aplicar.');return;} const rec=new Recognition(); rec.lang='pt-BR'; rec.interimResults=false; rec.maxAlternatives=1; document.getElementById('voiceSearchStatus').textContent='Pode falar...'; rec.onresult=e=>{document.getElementById('voiceSearchText').value=e.results[0][0].transcript; applyNaturalSearch();}; rec.onerror=()=>toast('Não consegui captar o áudio. Tente de novo ou digite.'); rec.start();}
-function go(id,btn){document.querySelectorAll('.view').forEach(v=>v.classList.remove('active')); document.getElementById(id).classList.add('active'); document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active')); if(btn)btn.classList.add('active'); window.scrollTo(0,0)}
-function goId(id){const btn=[...document.querySelectorAll('nav button')].find(b=>b.getAttribute('onclick')&&b.getAttribute('onclick').includes(`'${id}'`)); go(id,btn)}
-function toast(t){const el=document.getElementById('toast'); el.textContent=t; el.style.display='block'; clearTimeout(window.toastTimer); window.toastTimer=setTimeout(()=>el.style.display='none',2400)}
-function copyLink(){if(navigator.clipboard)navigator.clipboard.writeText('https://matchr.demo/curadoria/cliente'); toast('Link privado copiado.')}
-populateFilters(); seedSearchHistory(); render(); renderSearchHistory(); viewSearchResult(activeSearchId,false); renderPessoas();
+
+function getRules(){return {
+  tipo:document.getElementById('ruleTipo').checked,
+  bairro:document.getElementById('ruleBairro').checked,
+  preco:document.getElementById('rulePreco').checked,
+  suites:document.getElementById('ruleSuites').checked,
+  vagas:document.getElementById('ruleVagas').checked,
+  subtipos:document.getElementById('ruleSubtipos').checked
+};}
+
+function typeMatches(imovelTipo, requested, rules){
+  if(!requested)return true;
+  if(imovelTipo===requested)return true;
+  if(rules.subtipos && requested==='Apartamento' && ['Cobertura','Garden','Loft'].includes(imovelTipo))return true;
+  return false;
+}
+
+function mandatoryCheck(imovel, profile, rules){
+  const failed=[];
+  const total = ['tipo','bairro','preco','suites','vagas'].filter(key => {
+    if(key==='tipo') return rules.tipo && !!profile.tipo;
+    if(key==='bairro') return rules.bairro && !!profile.bairro;
+    if(key==='preco') return rules.preco && (!!profile.maxPrice || !!profile.minPrice);
+    if(key==='suites') return rules.suites && !!profile.minSuites;
+    if(key==='vagas') return rules.vagas && !!profile.minVagas;
+  }).length;
+  if(rules.tipo && profile.tipo && !typeMatches(imovel.tipo, profile.tipo, rules)) failed.push(`tipo diferente (${imovel.tipo})`);
+  if(rules.bairro && profile.bairro && imovel.bairro!==profile.bairro) failed.push(`bairro diferente (${imovel.bairro})`);
+  if(rules.preco && profile.maxPrice && imovel.preco>profile.maxPrice) failed.push(`acima do orçamento (${miText(imovel.preco)})`);
+  if(rules.preco && profile.minPrice && imovel.preco<profile.minPrice) failed.push(`abaixo do piso (${miText(imovel.preco)})`);
+  if(rules.suites && profile.minSuites && imovel.suites<profile.minSuites) failed.push(`menos suítes (${imovel.suites})`);
+  if(rules.vagas && profile.minVagas && imovel.vagas<profile.minVagas) failed.push(`menos vagas (${imovel.vagas})`);
+  if(profile.minQuartos && imovel.quartos<profile.minQuartos) failed.push(`menos quartos (${imovel.quartos})`);
+  if(profile.minArea && imovel.area<profile.minArea) failed.push(`menos metragem (${imovel.area} m²)`);
+  return {pass:failed.length===0, failed, total, passed:Math.max(0,total-failed.length)};
+}
+
+function featureText(imovel){return norm([...(imovel.features||[]), imovel.descricao, imovel.titulo, imovel.bairro, imovel.tipo].join(' '));}
+function hasFeature(imovel,key){const txt=featureText(imovel); return (featureAliases[key]||[key]).map(norm).some(alias=>txt.includes(alias));}
+
+function buyerBoost(imovel, profiles){
+  const boosts=[];
+  const txt = featureText(imovel);
+  for(const p of profiles||[]){
+    if(p==='família' && (txt.includes('escola')||txt.includes('brinquedoteca')||txt.includes('lazer')||imovel.suites>=3)) boosts.push('perfil família');
+    if(p==='investidor' && (txt.includes('liquidez')||txt.includes('metro')||imovel.tipo==='Studio'||imovel.preco<=3)) boosts.push('perfil investidor');
+    if(p==='casal' && (imovel.quartos<=2||txt.includes('reformado')||txt.includes('novo'))) boosts.push('perfil casal');
+    if(p==='executivo' && (txt.includes('home office')||txt.includes('metro')||['Itaim Bibi','Vila Olímpia','Pinheiros'].includes(imovel.bairro))) boosts.push('perfil executivo');
+    if(p==='pet' && (txt.includes('pet')||txt.includes('jardim')||txt.includes('varanda'))) boosts.push('perfil pet');
+  }
+  return [...new Set(boosts)];
+}
+
+function scoreMatch(imovel, profile, rules){
+  const mandatory = mandatoryCheck(imovel, profile, rules);
+  if(!mandatory.pass) return {pass:false,score:0,mandatory,matchedPrefs:[],missingPrefs:[],boosts:[]};
+  let score = 48;
+  if(profile.tipo && typeMatches(imovel.tipo,profile.tipo,rules)) score += 12;
+  if(profile.bairro && imovel.bairro===profile.bairro) score += 10;
+  if(profile.maxPrice){
+    const ratio = imovel.preco/profile.maxPrice;
+    score += ratio<=1 ? Math.max(3, 10 - Math.abs(.86-ratio)*12) : 0;
+  } else if(profile.minPrice && imovel.preco>=profile.minPrice){score += 8;}
+  if(profile.minSuites && imovel.suites>=profile.minSuites) score += 5 + Math.min(3, imovel.suites-profile.minSuites);
+  if(profile.minVagas && imovel.vagas>=profile.minVagas) score += 4 + Math.min(2, imovel.vagas-profile.minVagas);
+  if(profile.minArea && imovel.area>=profile.minArea) score += 4;
+  const matchedPrefs=[], missingPrefs=[];
+  for(const pref of profile.preferences||[]){
+    if(hasFeature(imovel,pref)){matchedPrefs.push(pref); score += pref==='varanda gourmet'||pref==='vista aberta'?8:6;}
+    else missingPrefs.push(pref);
+  }
+  const boosts = buyerBoost(imovel, profile.buyerProfiles);
+  score += boosts.length*4;
+  if((profile.preferences||[]).length===0 && (profile.buyerProfiles||[]).length===0) score += Math.min(8, imovel.features.length);
+  return {pass:true,score:Math.min(99,Math.round(score)),mandatory,matchedPrefs,missingPrefs,boosts};
+}
+
+function rankedResults(profile){
+  const rules = getRules();
+  const results = inventory.map(imovel => ({imovel, match:scoreMatch(imovel,profile,rules)})).filter(row=>row.match.pass);
+  const order = profile.order || 'match';
+  results.sort((a,b)=>{
+    if(order==='precoAsc')return a.imovel.preco-b.imovel.preco || b.match.score-a.match.score;
+    if(order==='precoDesc')return b.imovel.preco-a.imovel.preco || b.match.score-a.match.score;
+    if(order==='areaDesc')return b.imovel.area-a.imovel.area || b.match.score-a.match.score;
+    if(order==='areaAsc')return a.imovel.area-b.imovel.area || b.match.score-a.match.score;
+    const scoreDelta = b.match.score-a.match.score;
+    if(scoreDelta) return scoreDelta;
+    const prefDelta = (b.match.matchedPrefs.length-a.match.matchedPrefs.length);
+    if(prefDelta) return prefDelta;
+    if(profile.maxPrice){
+      const target = profile.maxPrice*.9;
+      const closeA = Math.abs(a.imovel.preco-target);
+      const closeB = Math.abs(b.imovel.preco-target);
+      if(closeA!==closeB) return closeA-closeB;
+    }
+    return b.imovel.area-a.imovel.area;
+  });
+  return results;
+}
+
+function profileLabel(profile){
+  const parts=[];
+  if(profile.cliente) parts.push(`Cliente: ${profile.cliente}`);
+  if(profile.tipo) parts.push(profile.tipo);
+  if(profile.bairro) parts.push(profile.bairro);
+  if(profile.budgetRaw) parts.push(profile.budgetRaw);
+  else { if(profile.maxPrice) parts.push(`até ${miText(profile.maxPrice)}`); if(profile.minPrice) parts.push(`a partir de ${miText(profile.minPrice)}`); }
+  if(profile.minSuites) parts.push(`${profile.minSuites}+ suítes`);
+  if(profile.minVagas) parts.push(`${profile.minVagas}+ vagas`);
+  if(profile.minQuartos) parts.push(`${profile.minQuartos}+ quartos`);
+  if(profile.minArea) parts.push(`${profile.minArea}+ m²`);
+  if((profile.preferences||[]).length) parts.push(`preferências: ${profile.preferences.join(', ')}`);
+  if((profile.buyerProfiles||[]).length) parts.push(`perfil: ${profile.buyerProfiles.join(', ')}`);
+  return parts.join(' • ') || 'Sem perfil definido';
+}
+
+function renderProfileChips(profile){
+  const el=document.getElementById('profileChips');
+  const strict=[];
+  const prefs=[];
+  if(profile.cliente) strict.push(`Cliente: ${profile.cliente}`);
+  if(profile.tipo) strict.push(`Tipo: ${profile.tipo}`);
+  if(profile.bairro) strict.push(`Bairro: ${profile.bairro}`);
+  if(profile.budgetRaw) strict.push(`Valor: ${profile.budgetRaw}`);
+  else {if(profile.maxPrice) strict.push(`Valor: até ${miText(profile.maxPrice)}`); if(profile.minPrice) strict.push(`Valor: a partir de ${miText(profile.minPrice)}`);}
+  if(profile.minSuites) strict.push(`Suítes: ${profile.minSuites}+`);
+  if(profile.minVagas) strict.push(`Vagas: ${profile.minVagas}+`);
+  if(profile.minQuartos) strict.push(`Quartos: ${profile.minQuartos}+`);
+  if(profile.minArea) strict.push(`Área: ${profile.minArea}+ m²`);
+  (profile.preferences||[]).forEach(p=>prefs.push(p));
+  (profile.buyerProfiles||[]).forEach(p=>prefs.push(`perfil ${p}`));
+  const strictHtml = strict.map(x=>`<span class="chip strict">${escapeHtml(x)}</span>`).join('');
+  const prefHtml = prefs.map(x=>`<span class="chip">${escapeHtml(x)}</span>`).join('');
+  el.innerHTML = strictHtml + prefHtml || '<span class="chip empty">Nenhum critério entendido ainda.</span>';
+}
+
+function renderCards(rows, profile){
+  const container=document.getElementById('inventory');
+  if(!rows.length){
+    container.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><strong>Nenhum imóvel atende aos critérios obrigatórios.</strong><p>O sistema não vai preencher a lista com imóveis fora do perfil só para mostrar resultado. Ajuste o briefing ou relaxe alguma regra configurável da imobiliária.</p><p class="small">Perfil atual: ${escapeHtml(profileLabel(profile))}</p></div>`;
+    return;
+  }
+  container.innerHTML = rows.slice(0,12).map(({imovel,match})=>{
+    const matched = match.matchedPrefs.length ? match.matchedPrefs.map(x=>`<span class="tag good">✓ ${escapeHtml(x)}</span>`).join('') : '<span class="tag warn">sem preferência explícita</span>';
+    const missing = match.missingPrefs.length ? `<p>Faltou: ${match.missingPrefs.map(escapeHtml).join(', ')}</p>` : '<p>Preferências principais atendidas ou não solicitadas.</p>';
+    const boosts = match.boosts.length ? `<p>Perfil: ${match.boosts.map(escapeHtml).join(', ')}</p>` : '';
+    const mandatory = match.mandatory.total ? `${match.mandatory.passed}/${match.mandatory.total} obrigatórios` : 'sem filtros duros';
+    return `<article class="imovel">
+      <div class="photo"><span class="kind">${escapeHtml(imovel.tipo)}</span><span class="match">${match.score}% match</span></div>
+      <div class="imovel-body">
+        <h3>${escapeHtml(imovel.titulo)}</h3>
+        <div class="meta">${escapeHtml(imovel.bairro)} • ${imovel.area} m² • ${imovel.quartos} quarto(s) • ${imovel.suites} suíte(s) • ${imovel.vagas} vaga(s)</div>
+        <div class="price">${money(imovel.preco)}</div>
+        <div>${imovel.features.slice(0,6).map(f=>`<span class="tag">${escapeHtml(f)}</span>`).join('')}</div>
+        <div class="why">
+          <span class="status ok">${mandatory}</span>
+          <div style="margin-top:8px">${matched}</div>
+          ${missing}${boosts}
+        </div>
+      </div>
+    </article>`;
+  }).join('');
+}
+
+function renderSummary(rows, profile){
+  const el=document.getElementById('resultSummary');
+  const requested = profileLabel(profile);
+  if(!rows.length){el.textContent = `Nenhum resultado dentro dos obrigatórios. ${requested}`; return;}
+  const tiposEncontrados=[...new Set(rows.map(r=>r.imovel.tipo))].join(', ');
+  el.textContent = `Mostrando ${Math.min(12,rows.length)} de ${rows.length} imóveis que respeitam os obrigatórios. Tipos no resultado: ${tiposEncontrados}. Perfil: ${requested}.`;
+}
+
+function searchWithProfile(save=true){
+  applyNaturalSearch();
+  const profile = getProfileFromUI();
+  renderProfileChips(profile);
+  const rows = rankedResults(profile);
+  currentMatches = rows;
+  renderCards(rows, profile);
+  renderSummary(rows, profile);
+  document.getElementById('above90').textContent = rows.filter(r=>r.match.score>=90).length;
+  if(save){
+    history.unshift({when:new Date(), profile:profileLabel(profile), count:rows.length, top:rows.slice(0,5).map(r=>({titulo:r.imovel.titulo,score:r.match.score,tipo:r.imovel.tipo,bairro:r.imovel.bairro,preco:r.imovel.preco}))});
+    history = history.slice(0,20);
+    renderHistory();
+  }
+  if(profile.tipo==='Apartamento'){
+    const houses = rows.filter(r=>r.imovel.tipo==='Casa').length;
+    if(houses===0) showToast('Corrigido: busca por apartamento não trouxe casas.');
+  }
+}
+
+function renderHistory(){
+  const el=document.getElementById('historyList');
+  if(!history.length){el.innerHTML='<p class="small">Nenhuma busca salva ainda.</p>';return;}
+  el.innerHTML = history.map((h,idx)=>`<div class="card" style="box-shadow:none;margin-bottom:10px">
+    <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start"><div><strong>Busca ${history.length-idx}</strong><p class="small">${escapeHtml(h.profile)}</p></div><span class="score">${h.count} imóveis</span></div>
+    <table class="mini-table"><thead><tr><th>Top imóvel</th><th>Tipo</th><th>Bairro</th><th>Valor</th><th>Match</th></tr></thead><tbody>${h.top.map(item=>`<tr><td>${escapeHtml(item.titulo)}</td><td>${escapeHtml(item.tipo)}</td><td>${escapeHtml(item.bairro)}</td><td>${money(item.preco)}</td><td>${item.score}%</td></tr>`).join('')}</tbody></table>
+  </div>`).join('');
+}
+
+function renderClients(){
+  const el=document.getElementById('clientList');
+  if(!clients.length){el.innerHTML='<p class="small">Nenhum cadastro ainda.</p>';return;}
+  el.innerHTML = `<table class="mini-table"><thead><tr><th>Nome</th><th>Tipo</th><th>Status</th><th>Busca</th></tr></thead><tbody>${clients.map(c=>`<tr><td>${escapeHtml(c.nome)}</td><td>${escapeHtml(c.tipo)}</td><td><span class="status ${c.status==='Quente'?'hot':c.status==='Comprou'?'ok':''}">${escapeHtml(c.status)}</span></td><td>${escapeHtml(c.busca)}</td></tr>`).join('')}</tbody></table>`;
+}
+
+function addClient(){
+  const nome=document.getElementById('clienteNome').value.trim();
+  const busca=document.getElementById('clienteBusca').value.trim();
+  if(!nome){showToast('Digite o nome do cliente.');return;}
+  clients.unshift({nome,busca,tipo:document.getElementById('clienteTipo').value,status:document.getElementById('clienteStatus').value});
+  renderClients();
+  showToast('Cliente adicionado.');
+}
+
+function clearSearch(){
+  document.getElementById('voiceSearchText').value='';
+  currentVoiceProfile={};
+  ['bairro','tipo','preco','suites','vagas'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('ordem').value='match';
+  renderProfileChips({});
+  searchWithProfile(false);
+}
+
+function fillExample(){
+  document.getElementById('voiceSearchText').value = 'Cliente Mariana quer apartamento em Moema até 5 milhões, 3 suítes, 2 vagas, varanda gourmet e vista aberta. Família com pet, quer andar alto e lazer completo.';
+  searchWithProfile(true);
+}
+
+function startVoice(){
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if(!SpeechRecognition){showToast('Reconhecimento de voz não está disponível neste navegador.');return;}
+  const recognition = new SpeechRecognition();
+  recognition.lang='pt-BR'; recognition.interimResults=false; recognition.maxAlternatives=1;
+  showToast('Pode falar o briefing do cliente.');
+  recognition.onresult = event => {document.getElementById('voiceSearchText').value = event.results[0][0].transcript; searchWithProfile(true);};
+  recognition.onerror = () => showToast('Não consegui captar a voz. Tente digitar o briefing.');
+  recognition.start();
+}
+
+function goId(id){
+  document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===id));
+  document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===id));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function showToast(msg){const t=document.getElementById('toast'); t.textContent=msg; t.style.display='block'; clearTimeout(showToast.timer); showToast.timer=setTimeout(()=>t.style.display='none',2600);}
+
+function initFilters(){
+  document.getElementById('bairro').innerHTML='<option value="">Todos bairros</option>'+bairros.map(b=>`<option value="${escapeHtml(b)}">${escapeHtml(b)}</option>`).join('');
+  document.getElementById('tipo').innerHTML='<option value="">Tipo</option>'+tipos.map(t=>`<option value="${escapeHtml(t)}">${escapeHtml(t)}</option>`).join('');
+  ['bairro','tipo','preco','suites','vagas','ordem','ruleTipo','ruleBairro','rulePreco','ruleSuites','ruleVagas','ruleSubtipos'].forEach(id=>document.getElementById(id).addEventListener('change',()=>searchWithProfile(false)));
+}
+
+function runRegressionTest(){
+  const phrase = 'Cliente Mariana quer apartamento em Moema até 5 milhões, 3 suítes, 2 vagas, varanda gourmet e vista aberta.';
+  currentVoiceProfile = parseBriefing(phrase);
+  const rows = rankedResults(currentVoiceProfile);
+  const ok = rows.length>0 && rows.every(r=>r.imovel.tipo==='Apartamento') && rows.every(r=>r.imovel.bairro==='Moema') && rows.every(r=>r.imovel.preco<=5) && rows.every(r=>r.imovel.suites>=3) && rows.every(r=>r.imovel.vagas>=2);
+  const el=document.getElementById('regressionResult');
+  el.className = ok ? 'test-pass' : 'test-fail';
+  el.textContent = ok ? `PASSOU — ${rows.length} resultados, zero casas, todos dentro do perfil obrigatório.` : 'FALHOU — revisar motor de matching.';
+  currentVoiceProfile = {};
+}
+
+generateInventory();
+initFilters();
+renderClients();
+renderHistory();
+renderProfileChips({});
+searchWithProfile(false);
+runRegressionTest();
+document.getElementById('totalImoveis').textContent = inventory.length.toLocaleString('pt-BR');
+window.MatchRDebug = {parseBriefing, rankedResults, inventory, runRegressionTest};
 </script>
 </body>
 </html>

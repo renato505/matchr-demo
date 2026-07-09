@@ -1,115 +1,63 @@
-# Busca imobiliária por voz para corretores
+# MatchR — MVP v2
 
-Funcionalidade plugável para o corretor falar livremente o que procura — em vez de preencher bairro, valor, suítes, vagas etc. — e receber filtros estruturados para o motor de busca.
+MVP estático do **MatchR**, pronto para publicar no GitHub Pages.
 
-## O que vem pronto
+## O que esta versão corrige
 
-- Componente React `VoiceSearchBox` com botão de microfone, fallback por texto e preview de filtros.
-- Hook `useSpeechToText` usando Web Speech API no navegador.
-- Endpoint Next.js `POST /api/parse-property-search`.
-- Schema Zod para extrair intenção imobiliária com Structured Outputs.
-- Parser local simples como fallback quando `OPENAI_API_KEY` não estiver configurada.
-- Conversão para um objeto `searchParams` fácil de conectar ao seu motor de busca.
+- A busca por voz/texto agora interpreta o briefing antes de buscar imóveis.
+- Tipo de imóvel, bairro, orçamento, suítes e vagas podem funcionar como critérios obrigatórios.
+- Se o cliente pede **apartamento**, o motor não sugere **casa**.
+- As preferências do cliente são cruzadas com as características disponíveis dos imóveis.
+- Cada resultado explica o motivo do match: obrigatórios atendidos, preferências encontradas e pontos que faltaram.
+- Inclui uma área de regras configuráveis da imobiliária, simulando como cada operação pode definir o que é inegociável.
 
-## Fluxo
+## Como publicar no GitHub Pages
 
-```txt
-Fala do corretor
-  -> SpeechRecognition no navegador
-  -> texto livre
-  -> /api/parse-property-search
-  -> filtros estruturados
-  -> searchParams
-  -> seu motor de busca
-```
+1. Crie ou abra o repositório do demo no GitHub.
+2. Envie estes arquivos para a raiz do repositório:
+   - `index.html`
+   - `.nojekyll`
+   - `README.md`
+   - `package.json` e `test-matchr-v2.js` são opcionais, mas úteis para registro e teste.
+3. No GitHub, vá em **Settings → Pages**.
+4. Em **Build and deployment**, selecione:
+   - Source: `Deploy from a branch`
+   - Branch: `main`
+   - Folder: `/root`
+5. Salve e abra o link do GitHub Pages depois da publicação.
 
-## Instalação em um projeto Next.js
+## Teste principal de regressão
 
-1. Copie as pastas `src/components`, `src/hooks`, `src/lib` e `src/app/api/parse-property-search` para seu projeto.
-2. Instale as dependências:
+Frase usada para validar o bug corrigido:
 
-```bash
-npm install openai zod
-```
+> Cliente Mariana quer apartamento em Moema até 5 milhões, 3 suítes, 2 vagas, varanda gourmet e vista aberta.
 
-3. Configure a chave no `.env.local`:
+Resultado esperado:
 
-```bash
-OPENAI_API_KEY=sk-...
-OPENAI_MODEL=gpt-5.5
-```
+- somente imóveis do tipo **Apartamento**;
+- somente imóveis em **Moema**;
+- preço até **R$ 5 milhões**;
+- mínimo de **3 suítes**;
+- mínimo de **2 vagas**;
+- varanda gourmet e vista aberta entram como preferências de ranking.
 
-4. Use o componente onde hoje ficam os filtros manuais:
+## Teste local opcional
 
-```tsx
-import { VoiceSearchBox } from "./components/VoiceSearchBox";
-
-export function PropertySearch() {
-  return (
-    <VoiceSearchBox
-      knownNeighborhoods={["Vila Madalena", "Pinheiros", "Jardins", "Moema"]}
-      knownCities={["São Paulo", "Rio de Janeiro"]}
-      knownStates={["SP", "RJ"]}
-      onSearch={(params, filters) => {
-        console.log("Enviar para seu motor de busca", params, filters);
-        // fetchProperties(params)
-        // router.push(`/imoveis?${new URLSearchParams(flatten(params))}`)
-      }}
-    />
-  );
-}
-```
-
-## Exemplo de entrada
-
-> “Apartamento para compra na Vila Madalena até 1 milhão e meio, 3 quartos, 2 suítes, 2 vagas e varanda gourmet.”
-
-## Exemplo de saída para o motor de busca
-
-```json
-{
-  "transaction": "compra",
-  "property_type": "apartamento",
-  "neighborhoods": ["Vila Madalena"],
-  "price_max": 1500000,
-  "bedrooms_min": 3,
-  "suites_min": 2,
-  "parking_spaces_min": 2,
-  "must_have": ["varanda gourmet"],
-  "sort_by": "relevance",
-  "free_text": "Apartamento para compra na Vila Madalena até 1 milhão e meio, 3 quartos, 2 suítes, 2 vagas e varanda gourmet."
-}
-```
-
-## Como conectar ao seu motor de busca
-
-O arquivo `src/lib/toSearchQuery.ts` é a camada de tradução. Adapte os nomes dos campos para baterem com sua API, banco ou índice de busca.
-
-Exemplo:
-
-```ts
-onSearch={(params) => {
-  fetch("/api/properties/search", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(params),
-  });
-}}
-```
-
-## Observações de produto
-
-- O preço é capturado no mesmo momento que os demais filtros. Nada de tratar preço como detalhe final.
-- Use `knownNeighborhoods`, `knownCities` e `knownStates` com os nomes que existem na sua base. Isso reduz ambiguidade e melhora matching.
-- A experiência ideal é manter os filtros visuais editáveis depois da fala. O corretor fala rápido, confere os chips e ajusta só se precisar.
-- Para produção mobile, teste bem em Chrome/Edge/Safari. Alguns navegadores não suportam a Web Speech API de forma consistente.
-- Em alguns navegadores, o reconhecimento de voz pode depender de serviço externo do próprio navegador. Avise isso na política de privacidade se for aplicável ao seu produto.
-
-## Rodando a demo
+Com Node.js instalado:
 
 ```bash
-npm install
-npm run dev
+npm test
 ```
 
-Abra `/demo`.
+O teste roda a checagem principal para garantir que casas não entram quando o briefing pede apartamento.
+
+## Estrutura
+
+```text
+.
+├── index.html          # demo estático completo
+├── README.md           # instruções do projeto
+├── .nojekyll           # evita processamento Jekyll no GitHub Pages
+├── package.json        # script opcional de teste
+└── test-matchr-v2.js   # teste opcional de regressão
+```
