@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MatchR - MVP v13</title>
+  <title>MatchR - MVP v14</title>
   <meta name="description" content="MVP MatchR - busca inteligente de imóveis compatíveis com o cliente." />
   <style>
     :root {
@@ -563,6 +563,44 @@
       gap: 14px;
     }
 
+    .bulk-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin: -2px 0 16px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, .52);
+    }
+
+    .selection-status {
+      font-weight: 850;
+      color: var(--brand);
+      font-size: .88rem;
+      margin-right: auto;
+    }
+
+    .bulk-actions .btn {
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-size: .84rem;
+    }
+
+    .btn:disabled,
+    .btn[aria-disabled="true"] {
+      opacity: .48;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .btn:disabled:hover,
+    .btn[aria-disabled="true"]:hover {
+      transform: none;
+    }
+
     .property-card {
       border: 1px solid var(--line);
       background: #fffdf9;
@@ -572,6 +610,13 @@
       grid-template-columns: minmax(150px, 190px) minmax(0, 1fr) auto;
       gap: 14px;
       align-items: start;
+      transition: border-color .16s ease, box-shadow .16s ease, background .16s ease;
+    }
+
+    .property-card.is-selected {
+      border-color: rgba(39, 103, 73, .55);
+      background: rgba(39, 103, 73, .045);
+      box-shadow: 0 14px 32px rgba(39, 103, 73, .10);
     }
 
     .property-media {
@@ -694,8 +739,32 @@
     .property-actions {
       display: flex;
       flex-wrap: wrap;
+      align-items: center;
       gap: 10px;
       margin-top: 12px;
+    }
+
+    .select-property {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0;
+      padding: 10px 12px;
+      border: 1px solid rgba(39, 103, 73, .28);
+      border-radius: 13px;
+      background: rgba(39, 103, 73, .055);
+      color: var(--brand);
+      font-size: .84rem;
+      font-weight: 850;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .select-property input {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--success);
+      flex: 0 0 auto;
     }
 
     .btn.whatsapp {
@@ -1095,7 +1164,7 @@
     <header class="topbar" aria-label="Cabeçalho do produto">
       <a class="brand brand-link" href="#" aria-label="MatchR - início">
         <img class="brand-logo-image" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NjAgMTY4IiByb2xlPSJpbWciIGFyaWEtbGFiZWw9Ik1hdGNoUiDigJQgSW50ZWxpZ8OqbmNpYSBwYXJhIG8gY29ycmV0b3IgaW1vYmlsacOhcmlvIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMzZDJjMjQiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjOGY1ZDNiIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGZpbHRlciBpZD0icyIgeD0iLTIwJSIgeT0iLTIwJSIgd2lkdGg9IjE0MCUiIGhlaWdodD0iMTQwJSI+CiAgICAgIDxmZURyb3BTaGFkb3cgZHg9IjAiIGR5PSIxMiIgc3RkRGV2aWF0aW9uPSIxMiIgZmxvb2QtY29sb3I9IiMzOTJiMjAiIGZsb29kLW9wYWNpdHk9IjAuMTUiLz4KICAgIDwvZmlsdGVyPgogIDwvZGVmcz4KICA8cmVjdCB3aWR0aD0iNjYwIiBoZWlnaHQ9IjE2OCIgcng9IjM0IiBmaWxsPSIjZmZmYWYzIi8+CiAgPGcgZmlsdGVyPSJ1cmwoI3MpIj4KICAgIDxyZWN0IHg9IjE4IiB5PSIxOCIgd2lkdGg9IjEzMiIgaGVpZ2h0PSIxMzIiIHJ4PSIzMiIgZmlsbD0idXJsKCNnKSIvPgogICAgPHBhdGggZD0iTTQ4IDkyIDg0IDU4bDM2IDM0djM3SDk2di0zMEg3MnYzMEg0OFY5MloiIGZpbGw9IiNmZmZhZjMiLz4KICAgIDxwYXRoIGQ9Ik02NiA4MSA4NCA2NGwxOCAxNyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmYWYzIiBzdHJva2Utd2lkdGg9IjEwIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KICA8L2c+CiAgPHRleHQgeD0iMTc0IiB5PSI5MCIgZm9udC1mYW1pbHk9IkludGVyLCBBcmlhbCwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjU0IiBmb250LXdlaWdodD0iODAwIiBsZXR0ZXItc3BhY2luZz0iLTIuNSIgZmlsbD0iIzI0MWYxYSI+TWF0Y2hSPC90ZXh0PgogIDx0ZXh0IHg9IjE3NiIgeT0iMTI2IiBmb250LWZhbWlseT0iSW50ZXIsIEFyaWFsLCBIZWx2ZXRpY2EsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjIiIGZvbnQtd2VpZ2h0PSI1MDAiIGZpbGw9IiM2ZDYyNTgiPkludGVsaWfDqm5jaWEgcGFyYSBvIGNvcnJldG9yIGltb2JpbGnDoXJpbzwvdGV4dD4KPC9zdmc+" alt="MatchR — Inteligência para o corretor imobiliário" />
-        <span class="logo-subtitle">MVP v13 • busca inteligente para corretores</span>
+        <span class="logo-subtitle">MVP v14 • busca inteligente para corretores</span>
       </a>
       <div class="top-actions">
         <span class="pill">Menu restaurado</span>
@@ -1124,7 +1193,6 @@
         <a href="#como-funciona" data-menu-link role="listitem">Como funciona</a>
         <a href="#beneficios" data-menu-link role="listitem">Benefícios</a>
         <a href="#para-imobiliarias" data-menu-link role="listitem">Para imobiliárias e incorporadoras</a>
-        <a href="#contato" data-menu-link role="listitem">Contato / próximos passos</a>
         <a href="#para-voce-corretor" data-menu-link role="listitem">Para você, corretor / vídeo</a>
       </div>
       <p class="drawer-note">A interface do motor continua limpa; as seções institucionais e o vídeo ficam acessíveis pelo menu.</p>
@@ -1297,6 +1365,12 @@
           <h3>Imóveis sugeridos</h3>
           <span class="pill" id="resultCount">0 encontrados</span>
         </div>
+        <div class="bulk-actions" aria-label="Ações para imóveis selecionados">
+          <span class="selection-status" id="selectionCount">Nenhum imóvel selecionado</span>
+          <button type="button" class="btn secondary" id="selectAllResults">Selecionar todos</button>
+          <button type="button" class="btn ghost" id="clearSelectedResults">Limpar seleção</button>
+          <button type="button" class="btn whatsapp" id="sendSelectedWhatsApp" disabled>Enviar selecionados por WhatsApp</button>
+        </div>
         <div class="properties" id="propertyList"></div>
       </article>
     </section>
@@ -1364,18 +1438,6 @@
         <div class="stack-item"><b>Inteligência de produto</b><span>Sinais sobre bairros, faixas de preço e atributos mais procurados.</span></div>
       </div>
     </section>
-
-    <section class="panel content-section cta-section" id="contato" aria-labelledby="contato-title">
-      <p class="eyebrow">Contato / próximos passos</p>
-      <h2 id="contato-title">Próximo passo do MVP</h2>
-      <p>Validar a navegação completa, testar o fluxo com corretores e evoluir a base de imóveis compatíveis sem perder a simplicidade da interface.</p>
-      <div class="cta-actions" aria-label="Ações sugeridas">
-        <a class="btn primary" href="#motor-compatibilidade">Testar o motor</a>
-        <a class="btn secondary" href="#para-voce-corretor">Ver vídeo no final da página</a>
-      </div>
-    </section>
-
-
 
     <section class="panel broker-video final-video" id="para-voce-corretor" aria-labelledby="broker-video-title">
       <div class="broker-video-copy">
@@ -1641,7 +1703,14 @@
     const averageScore = document.getElementById("averageScore");
     const matchSummary = document.getElementById("matchSummary");
     const selectedChips = document.getElementById("selectedChips");
+    const selectionCount = document.getElementById("selectionCount");
+    const selectAllResults = document.getElementById("selectAllResults");
+    const clearSelectedResults = document.getElementById("clearSelectedResults");
+    const sendSelectedWhatsApp = document.getElementById("sendSelectedWhatsApp");
     const toast = document.getElementById("toast");
+
+    let currentRankedResults = [];
+    let selectedPropertyKeys = new Set();
 
     function showToast(message) {
       toast.textContent = message;
@@ -1749,6 +1818,49 @@
           </div>
         </div>
       `;
+    }
+
+    function getPropertyKey(property) {
+      return normalizeText(property.title).replace(/\s+/g, "-") || String(property.title || "imovel");
+    }
+
+    function getSelectedItems() {
+      return currentRankedResults.filter(item => selectedPropertyKeys.has(getPropertyKey(item.property)));
+    }
+
+    function buildSelectedWhatsAppUrl(items) {
+      const lines = [
+        "Olá! Separei estes imóveis compatíveis no MatchR:",
+      ];
+
+      items.forEach(({ property, score }, index) => {
+        lines.push(
+          "",
+          `${index + 1}. ${property.title}`,
+          `${typeLabel[property.type]} em ${property.neighborhood}`,
+          `Imobiliária: ${(property.agency && property.agency.name) || "parceira"}`,
+          `${formatCurrency(property.price)} • ${property.bedrooms} dorms • ${property.suites} suítes • ${property.parking} vagas • ${property.area} m²`,
+          `Aderência no match: ${score}%`
+        );
+      });
+
+      lines.push("", "Quer que eu te envie mais detalhes ou agende uma visita?");
+      return `https://wa.me/?text=${encodeURIComponent(lines.join("\n"))}`;
+    }
+
+    function updateSelectionUI() {
+      const selectedItems = getSelectedItems();
+      const count = selectedItems.length;
+      const visibleCount = currentRankedResults.length;
+
+      selectionCount.textContent = count
+        ? `${count} ${count === 1 ? "imóvel selecionado" : "imóveis selecionados"} para enviar no Zap`
+        : "Nenhum imóvel selecionado";
+
+      selectAllResults.disabled = visibleCount === 0;
+      clearSelectedResults.disabled = count === 0;
+      sendSelectedWhatsApp.disabled = count === 0;
+      sendSelectedWhatsApp.setAttribute("aria-disabled", count === 0 ? "true" : "false");
     }
 
     function buildWhatsAppUrl(property, score) {
@@ -1968,6 +2080,10 @@
         .filter(item => item.score >= 40)
         .sort((a, b) => b.score - a.score);
 
+      currentRankedResults = ranked;
+      const visibleKeys = new Set(ranked.map(({ property }) => getPropertyKey(property)));
+      selectedPropertyKeys = new Set(Array.from(selectedPropertyKeys).filter(key => visibleKeys.has(key)));
+
       resultCount.textContent = `${ranked.length} ${ranked.length === 1 ? "encontrado" : "encontrados"}`;
       averageScore.textContent = ranked.length ? `${Math.round(ranked.reduce((sum, item) => sum + item.score, 0) / ranked.length)}%` : "--";
 
@@ -1975,6 +2091,10 @@
         propertyList.innerHTML = `<div class="empty-state"><strong>Nenhum imóvel compatível dentro da região/tipo selecionados.</strong><br>Não trouxemos imóveis de outras regiões para preencher a lista. Se a busca pedir um bairro específico, regiões incompatíveis ficam bloqueadas automaticamente.</div>`;
       } else {
         propertyList.innerHTML = ranked.map(({ property, score, reasons }) => {
+          const key = getPropertyKey(property);
+          const isSelected = selectedPropertyKeys.has(key);
+          const checkedAttr = isSelected ? "checked" : "";
+
           const meta = [
             typeLabel[property.type],
             property.neighborhood,
@@ -1993,7 +2113,7 @@
           const whatsappUrl = buildWhatsAppUrl(property, score);
 
           return `
-            <article class="property-card">
+            <article class="property-card${isSelected ? " is-selected" : ""}" data-property-key="${escapeHTML(key)}">
               ${renderPropertyMedia(property)}
               <div>
                 <h4>${escapeHTML(property.title)}</h4>
@@ -2002,6 +2122,10 @@
                 <div class="hint">${reasons.length ? `Por que apareceu: ${escapeHTML(reasons.join(", "))}.` : "Sugestão inicial da base demonstrativa."}</div>
                 ${relevantAreas ? `<div class="hint">Áreas: ${escapeHTML(relevantAreas)}</div>` : ""}
                 <div class="property-actions">
+                  <label class="select-property">
+                    <input class="property-select-input" type="checkbox" value="${escapeHTML(key)}" ${checkedAttr} />
+                    <span>Selecionar para Zap</span>
+                  </label>
                   <a class="btn whatsapp" href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" aria-label="Enviar ${escapeHTML(property.title)} pelo WhatsApp">💬 WhatsApp</a>
                 </div>
               </div>
@@ -2010,6 +2134,8 @@
           `;
         }).join("");
       }
+
+      updateSelectionUI();
 
       const visibleType = propertyType.value;
       const bullets = [];
@@ -2037,6 +2163,52 @@
       matchSummary.innerHTML = bullets.map(item => `<li>${item}</li>`).join("");
     }
 
+    propertyList.addEventListener("change", event => {
+      const target = event.target;
+      if (!target.classList || !target.classList.contains("property-select-input")) return;
+
+      if (target.checked) {
+        selectedPropertyKeys.add(target.value);
+      } else {
+        selectedPropertyKeys.delete(target.value);
+      }
+
+      const card = target.closest(".property-card");
+      if (card) card.classList.toggle("is-selected", target.checked);
+      updateSelectionUI();
+    });
+
+    selectAllResults.addEventListener("click", () => {
+      currentRankedResults.forEach(({ property }) => selectedPropertyKeys.add(getPropertyKey(property)));
+      propertyList.querySelectorAll(".property-select-input").forEach(input => {
+        input.checked = true;
+        const card = input.closest(".property-card");
+        if (card) card.classList.add("is-selected");
+      });
+      updateSelectionUI();
+      showToast("Todos os imóveis visíveis foram selecionados para envio no Zap.");
+    });
+
+    clearSelectedResults.addEventListener("click", () => {
+      selectedPropertyKeys.clear();
+      propertyList.querySelectorAll(".property-select-input").forEach(input => {
+        input.checked = false;
+        const card = input.closest(".property-card");
+        if (card) card.classList.remove("is-selected");
+      });
+      updateSelectionUI();
+      showToast("Seleção de imóveis limpa.");
+    });
+
+    sendSelectedWhatsApp.addEventListener("click", () => {
+      const selectedItems = getSelectedItems();
+      if (!selectedItems.length) {
+        showToast("Selecione pelo menos um imóvel para enviar por WhatsApp.");
+        return;
+      }
+      window.open(buildSelectedWhatsAppUrl(selectedItems), "_blank", "noopener,noreferrer");
+    });
+
     let previousType = propertyType.value;
     propertyType.addEventListener("change", () => {
       updateCommonAreasVisibility(previousType);
@@ -2055,6 +2227,7 @@
     document.getElementById("clearForm").addEventListener("click", () => {
       form.reset();
       previousType = "";
+      selectedPropertyKeys.clear();
       updateCommonAreasVisibility();
       renderResults();
       showToast("Filtros limpos.");
