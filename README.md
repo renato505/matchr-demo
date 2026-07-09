@@ -1,28 +1,33 @@
-# MatchR MVP v7 — Áreas comuns + WhatsApp
+# Mova Match - MVP v8
 
-Demo estático para GitHub Pages.
+Protótipo estático em HTML/CSS/JS para a tela **Encontre imóveis compatíveis com o cliente**.
 
-## O que entrou na v7
+## Ajustes incluídos nesta versão
 
-- Remoção definitiva da busca por voz da interface principal.
-- Posicionamento: **Encontre imóveis compatíveis com o cliente**.
-- Filtro de **áreas comuns do edifício**: piscina, academia, salão de festas, espaço gourmet, churrasqueira, playground, brinquedoteca, quadra, sauna, coworking, pet place, jardim, rooftop, bicicletário, portaria 24h, segurança, vagas para visitantes, gerador e lazer completo.
-- Interpretação dessas áreas no briefing inteligente.
-- Separação entre áreas desejáveis e áreas essenciais.
-- Cards exibem linha de condomínio e motivo do match com áreas compatíveis/faltantes.
-- Seleção de imóveis para enviar pelo WhatsApp no final dos cards.
-- Logos de imobiliárias distribuídos de forma proporcional nos imóveis sem foto.
-- Testes de regressão: apartamento não traz casa; áreas comuns essenciais são respeitadas.
+1. Tela menos poluída:
+   - Filtros avançados ficam recolhidos por padrão.
+   - A seção de áreas comuns não aparece para todos os tipos de imóvel.
 
-## Como publicar no GitHub Pages
+2. Combo box de tipo de imóvel:
+   - Incluída a opção **Casa de condomínio**.
 
-1. Suba todos os arquivos desta pasta para a raiz do repositório.
-2. Vá em `Settings → Pages`.
-3. Selecione a branch `main` e pasta `/root`.
-4. Após publicar, acesse o link com `?v=7` no final para evitar cache.
+3. Regra condicional das áreas comuns:
+   - Se o usuário selecionar **Apartamento**, aparece o bloco **Áreas comuns do edifício**.
+   - Se o usuário selecionar **Casa de condomínio**, aparece o bloco **Áreas comuns do condomínio**.
+   - Para os demais tipos de imóvel, o bloco fica oculto.
+   - Ao trocar para um tipo que não usa essa seção, os filtros marcados em áreas comuns são limpos.
 
-## Teste local opcional
+4. Carro elétrico:
+   - A opção **Infraestrutura para carregar carro elétrico** foi adicionada dentro das áreas comuns.
+   - Ela aparece tanto para **Apartamento** quanto para **Casa de condomínio**.
+   - O briefing inteligente reconhece termos como `carro elétrico`, `carregador`, `recarga`, `tomada para carro` e `EV charger`.
 
-```bash
-node test-matchr-v7.js
-```
+## Como usar
+
+Abra o arquivo `index.html` no navegador.
+
+## Arquivos
+
+- `index.html`: protótipo completo em arquivo único.
+- `README.md`: este resumo.
+- `CHANGELOG.md`: histórico da versão.
