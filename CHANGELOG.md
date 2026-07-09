@@ -1,27 +1,29 @@
 # Changelog
 
-## v5 — Briefing inteligente + WhatsApp
+## v6 — WhatsApp nos cards
 
-- Remove da interface principal a funcionalidade de fala por áudio.
-- Reposiciona a busca como **Encontre imóveis compatíveis com o cliente**.
-- Mantém o motor de briefing escrito em linguagem natural.
-- Adiciona exemplos clicáveis de briefing.
-- Mantém a correção: busca por apartamento não retorna casa.
-- Adiciona seleção de imóveis nos cards.
-- Adiciona geração de mensagem para WhatsApp com número opcional do cliente.
-- Mantém logos textuais embutidos para cards sem foto.
+- Botão `Selecionar para WhatsApp` movido para o final dos cards.
+- Botão ganhou visual verde, com ícone estilo WhatsApp.
+- Estado selecionado dos cards agora usa verde em vez de laranja.
+- Mantidas as correções de briefing, matching e logos dos imóveis sem foto.
 
-## v4 — Logos embutidos
+## v5 — briefing + WhatsApp
 
-- Remove dependência externa de assets para os logos textuais.
-- Mantém distribuição proporcional dos logos na base de 3.000 imóveis.
+- Removido o botão e a lógica de captura por áudio.
+- Renomeada a experiência para `Encontre imóveis compatíveis com o cliente`.
+- Adicionada área de `Briefing inteligente do cliente`.
+- Adicionados exemplos clicáveis de briefing.
+- Adicionado painel de seleção de imóveis para WhatsApp.
+- Adicionadas ações: gerar mensagem, copiar texto e abrir WhatsApp.
+- Mantida correção: busca por apartamento não retorna casa.
+- Mantidos logos das imobiliárias nos imóveis sem foto, com distribuição proporcional.
 
-## v3 — Logos de imobiliárias
+## v4 — logos embutidos
 
-- Distribui proporcionalmente as marcas Pilar, Bossa Nova Sotheby's, Coelho da Fonseca, Local, Axpe, Cobogó, Refúgios, Anglo, Tamaras e Jardins & CO nos imóveis sem foto.
+- Logos textuais das imobiliárias foram embutidos no próprio HTML.
+- Não depende de pasta externa de assets para os logos provisórios.
 
-## v2 — Matching por perfil
+## v3/v2 — motor de perfil
 
-- Corrige busca que retornava casa quando o briefing pedia apartamento.
-- Adiciona regras configuráveis da imobiliária.
-- Separa critérios obrigatórios de preferências de ranking.
+- Separação entre critérios obrigatórios e preferências.
+- Correção do fluxo para interpretar briefing antes de buscar.

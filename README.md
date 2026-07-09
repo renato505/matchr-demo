@@ -1,44 +1,23 @@
-# MatchR — MVP v5
+# MatchR MVP v6 — WhatsApp nos cards
 
-MVP estático do **MatchR**, pronto para publicar no GitHub Pages.
+Versão estática pronta para GitHub Pages.
 
-## O que esta versão inclui
+## O que mudou nesta versão
 
-- A interface principal agora é **Encontre imóveis compatíveis com o cliente**.
-- O corretor digita ou cola o briefing do cliente em linguagem natural.
-- Exemplos clicáveis ajudam a demonstrar rapidamente o fluxo.
-- Tipo, bairro, orçamento, suítes e vagas podem funcionar como critérios obrigatórios.
-- Se o cliente pede **apartamento**, o motor não sugere **casa**.
-- Preferências como varanda gourmet, vista aberta, lazer, pet, silêncio e liquidez entram como ranking.
-- Cada card explica o motivo do match.
-- Cards sem foto exibem logos textuais das imobiliárias parceiras, distribuídos proporcionalmente na base simulada.
-- O corretor pode selecionar imóveis e gerar uma mensagem pronta para enviar pelo WhatsApp.
+- Mantém o posicionamento **Encontre imóveis compatíveis com o cliente**.
+- Mantém o briefing inteligente por texto, sem captura de fala por áudio.
+- Mantém o motor de critérios obrigatórios x preferências.
+- Mantém a correção: busca por apartamento não retorna casa.
+- Mantém os logos das imobiliárias nos imóveis sem foto.
+- Move a ação **Selecionar para WhatsApp** para o final de cada card.
+- Transforma a ação em botão verde, com ícone estilo WhatsApp em todos os cards.
+- Mantém o painel para gerar mensagem, copiar texto ou abrir o WhatsApp.
 
-## Imobiliárias distribuídas nos cards sem foto
+## Como publicar
 
-- Pilar
-- Bossa Nova Sotheby's
-- Coelho da Fonseca
-- Local
-- Axpe
-- Cobogó
-- Refúgios
-- Anglo
-- Tamaras
-- Jardins & CO
-
-Nesta versão, os logos textuais estão embutidos no próprio HTML para evitar problemas de caminho no GitHub Pages. Quando os logos oficiais estiverem prontos, dá para substituir a renderização textual por imagens reais.
-
-## Como publicar no GitHub Pages
-
-1. Baixe e descompacte o pacote.
-2. Envie todos os arquivos desta pasta para a raiz do repositório.
-3. No GitHub, vá em **Settings → Pages**.
-4. Em **Build and deployment**, selecione:
-   - Source: `Deploy from a branch`
-   - Branch: `main`
-   - Folder: `/root`
-5. Salve e abra o link do GitHub Pages depois da publicação.
+1. Faça upload do conteúdo desta pasta na raiz do repositório do GitHub Pages.
+2. O arquivo principal precisa se chamar `index.html`.
+3. Se o navegador mostrar versão antiga, abra o link com `?v=6` no final ou limpe o cache.
 
 ## Teste local opcional
 
@@ -48,15 +27,4 @@ Com Node.js instalado:
 npm test
 ```
 
-## Estrutura
-
-```text
-.
-├── index.html
-├── README.md
-├── CHANGELOG.md
-├── package.json
-├── test-matchr-v5.js
-├── .nojekyll
-└── .gitignore
-```
+O teste valida que a interface não contém captura de áudio, que o matching de apartamento não retorna casa, que os logos seguem distribuição balanceada, que a mensagem de WhatsApp é gerada e que o seletor do WhatsApp está no final do card.

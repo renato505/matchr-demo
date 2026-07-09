@@ -1,10 +1,6 @@
 {
-  "name": "matchr-demo",
-  "version": "5.0.0",
-  "private": true,
   "scripts": {
-    "test": "node test-matchr-v5.js"
+    "test": "node test-matchr-v6.js"
   },
-  "description": "MatchR MVP v5 - briefing inteligente e WhatsApp",
-  "license": "UNLICENSED"
+  "devDependencies": {}
 }
