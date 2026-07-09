@@ -1,16 +1,18 @@
-# MatchR — MVP v3
+# MatchR — MVP v5
 
 MVP estático do **MatchR**, pronto para publicar no GitHub Pages.
 
 ## O que esta versão inclui
 
-- Busca por voz/texto interpreta o briefing antes de buscar imóveis.
-- Tipo de imóvel, bairro, orçamento, suítes e vagas podem funcionar como critérios obrigatórios.
+- A interface principal agora é **Encontre imóveis compatíveis com o cliente**.
+- O corretor digita ou cola o briefing do cliente em linguagem natural.
+- Exemplos clicáveis ajudam a demonstrar rapidamente o fluxo.
+- Tipo, bairro, orçamento, suítes e vagas podem funcionar como critérios obrigatórios.
 - Se o cliente pede **apartamento**, o motor não sugere **casa**.
-- Preferências do cliente são cruzadas com características disponíveis dos imóveis.
-- Cada resultado explica o motivo do match: obrigatórios atendidos, preferências encontradas e pontos que faltaram.
-- Imóveis sem foto exibem logos de imobiliárias parceiras.
-- Os 3.000 imóveis simulados sem imagem recebem logos de forma aleatória e proporcional: 300 para cada uma das 10 imobiliárias.
+- Preferências como varanda gourmet, vista aberta, lazer, pet, silêncio e liquidez entram como ranking.
+- Cada card explica o motivo do match.
+- Cards sem foto exibem logos textuais das imobiliárias parceiras, distribuídos proporcionalmente na base simulada.
+- O corretor pode selecionar imóveis e gerar uma mensagem pronta para enviar pelo WhatsApp.
 
 ## Imobiliárias distribuídas nos cards sem foto
 
@@ -25,11 +27,11 @@ MVP estático do **MatchR**, pronto para publicar no GitHub Pages.
 - Tamaras
 - Jardins & CO
 
-Os logos ficam em `assets/logos/`. Os arquivos incluídos são placeholders neutros para o MVP. Para usar os logos oficiais, substitua os arquivos mantendo os mesmos nomes.
+Nesta versão, os logos textuais estão embutidos no próprio HTML para evitar problemas de caminho no GitHub Pages. Quando os logos oficiais estiverem prontos, dá para substituir a renderização textual por imagens reais.
 
 ## Como publicar no GitHub Pages
 
-1. Crie ou abra o repositório do demo no GitHub.
+1. Baixe e descompacte o pacote.
 2. Envie todos os arquivos desta pasta para a raiz do repositório.
 3. No GitHub, vá em **Settings → Pages**.
 4. Em **Build and deployment**, selecione:
@@ -37,21 +39,6 @@ Os logos ficam em `assets/logos/`. Os arquivos incluídos são placeholders neut
    - Branch: `main`
    - Folder: `/root`
 5. Salve e abra o link do GitHub Pages depois da publicação.
-
-## Testes de regressão
-
-Frase usada para validar o bug corrigido:
-
-> Cliente Mariana quer apartamento em Moema até 5 milhões, 3 suítes, 2 vagas, varanda gourmet e vista aberta.
-
-Resultado esperado:
-
-- somente imóveis do tipo **Apartamento**;
-- somente imóveis em **Moema**;
-- preço até **R$ 5 milhões**;
-- mínimo de **3 suítes**;
-- mínimo de **2 vagas**;
-- nenhum card sem imagem fica vazio; todos recebem um logo de imobiliária.
 
 ## Teste local opcional
 
@@ -61,29 +48,15 @@ Com Node.js instalado:
 npm test
 ```
 
-O teste checa o motor de matching e a distribuição proporcional dos logos.
-
 ## Estrutura
 
 ```text
 .
 ├── index.html
-├── assets/
-│   └── logos/
-│       ├── pilar.svg
-│       ├── bossa-nova-sothebys.svg
-│       ├── coelho-da-fonseca.svg
-│       ├── local.svg
-│       ├── axpe.svg
-│       ├── cobogo.svg
-│       ├── refugios.svg
-│       ├── anglo.svg
-│       ├── tamaras.svg
-│       └── jardins-co.svg
 ├── README.md
 ├── CHANGELOG.md
 ├── package.json
-├── test-matchr-v3.js
+├── test-matchr-v5.js
 ├── .nojekyll
 └── .gitignore
 ```

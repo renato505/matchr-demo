@@ -1,18 +1,10 @@
 {
-  "name": "matchr-mvp-v3",
-  "version": "3.0.0",
+  "name": "matchr-demo",
+  "version": "5.0.0",
   "private": true,
-  "description": "MVP estático do MatchR pronto para GitHub Pages.",
   "scripts": {
-    "test": "node test-matchr-v3.js"
+    "test": "node test-matchr-v5.js"
   },
-  "keywords": [
-    "matchr",
-    "imobiliario",
-    "crm",
-    "mvp",
-    "github-pages"
-  ],
-  "author": "Renato",
+  "description": "MatchR MVP v5 - briefing inteligente e WhatsApp",
   "license": "UNLICENSED"
 }

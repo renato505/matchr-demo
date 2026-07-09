@@ -1,19 +1,27 @@
 # Changelog
 
-## v3.0.0
+## v5 — Briefing inteligente + WhatsApp
 
-- Adiciona exibição de logo de imobiliária nos imóveis sem imagem.
-- Distribui proporcionalmente os 10 logos informados na base simulada de 3.000 imóveis.
-- Mantém distribuição determinística: aleatória na aparência, mas estável a cada reload.
-- Inclui placeholders SVG neutros em `assets/logos/` para publicação imediata no GitHub Pages.
-- Adiciona instruções para substituir os placeholders pelos logos oficiais.
-- Atualiza teste local para validar matching e distribuição dos logos.
+- Remove da interface principal a funcionalidade de fala por áudio.
+- Reposiciona a busca como **Encontre imóveis compatíveis com o cliente**.
+- Mantém o motor de briefing escrito em linguagem natural.
+- Adiciona exemplos clicáveis de briefing.
+- Mantém a correção: busca por apartamento não retorna casa.
+- Adiciona seleção de imóveis nos cards.
+- Adiciona geração de mensagem para WhatsApp com número opcional do cliente.
+- Mantém logos textuais embutidos para cards sem foto.
 
-## v2.0.0
+## v4 — Logos embutidos
 
-- Corrige o fluxo em que a busca natural podia ser ignorada ao clicar diretamente em buscar.
-- Transforma tipo, bairro, preço, suítes e vagas em critérios obrigatórios configuráveis.
-- Adiciona lógica de preferência do buscador versus características disponíveis.
-- Adiciona explicação do match em cada resultado.
-- Adiciona protótipo de regras configuráveis por imobiliária.
-- Inclui teste de regressão para busca de apartamento em Moema.
+- Remove dependência externa de assets para os logos textuais.
+- Mantém distribuição proporcional dos logos na base de 3.000 imóveis.
+
+## v3 — Logos de imobiliárias
+
+- Distribui proporcionalmente as marcas Pilar, Bossa Nova Sotheby's, Coelho da Fonseca, Local, Axpe, Cobogó, Refúgios, Anglo, Tamaras e Jardins & CO nos imóveis sem foto.
+
+## v2 — Matching por perfil
+
+- Corrige busca que retornava casa quando o briefing pedia apartamento.
+- Adiciona regras configuráveis da imobiliária.
+- Separa critérios obrigatórios de preferências de ranking.

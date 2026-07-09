@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>MatchR — MVP v3</title>
+<title>MatchR — MVP v5 • briefing + WhatsApp</title>
 <style>
 :root{
   --bg:#fffaf5;
@@ -54,8 +54,9 @@ nav button{
 nav button.active,nav button:hover{background:#111;color:#fff}.pill{font-size:11px;background:#fff1e8;color:var(--orange-dark);padding:3px 7px;border-radius:999px;border:1px solid #ffd9bf;font-weight:950}
 nav button.active .pill,nav button:hover .pill{background:#fff;color:#111;border-color:#fff}.side-card{margin-top:24px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow-soft)}
 .side-card p{margin:8px 0 0;font-size:13px;color:var(--muted);line-height:1.45}.side-card strong{font-size:13px}main{padding:28px;max-width:1520px;width:100%;margin:0 auto}.view{display:none}.view.active{display:block}
-.top{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:22px}h1{margin:0;font-size:36px;letter-spacing:-.05em;line-height:1.04}h2{margin:0 0 12px;font-size:21px;letter-spacing:-.025em}h3{margin:0 0 8px;font-size:16px}p{color:var(--muted);line-height:1.45}.lead{margin:8px 0 0;max-width:780px}.grid{display:grid;gap:16px}.cols2{grid-template-columns:repeat(2,minmax(0,1fr))}.cols3{grid-template-columns:repeat(3,minmax(0,1fr))}.cols4{grid-template-columns:repeat(4,minmax(0,1fr))}.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow-soft)}.card.soft{background:linear-gradient(180deg,#fff,#fff7ef)}.metric .n{font-size:38px;font-weight:950;letter-spacing:-.06em}.metric .label{font-size:13px;color:var(--muted);font-weight:800}.btn{border:0;border-radius:14px;padding:12px 16px;font-weight:950;font-size:14px;white-space:nowrap}.btn.primary{background:#111;color:#fff}.btn.orange{background:var(--orange);color:#fff}.btn.ghost{background:#fff;color:#111;border:1px solid var(--line)}.btn.soft{background:#fff4ec;color:var(--orange-dark);border:1px solid #ffd9bf}.btn:hover{transform:translateY(-1px)}.filters{display:grid;grid-template-columns:repeat(6,minmax(120px,1fr));gap:10px;margin-bottom:16px}input,select,textarea{width:100%;border:1px solid var(--line);background:#fff;color:#111;padding:12px 13px;border-radius:14px;outline:none;font-size:14px}textarea{resize:vertical;min-height:112px;line-height:1.45}input:focus,select:focus,textarea:focus{border-color:var(--orange);box-shadow:0 0 0 4px rgba(255,106,0,.10)}.voice-card{margin-bottom:16px;padding:18px;border:1px solid var(--line);border-radius:22px;background:#fff;box-shadow:var(--shadow)}.voice-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.voice-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}.badge,.tag,.score,.status,.chip{display:inline-flex;align-items:center;gap:4px;border-radius:999px;padding:6px 9px;font-size:12px;font-weight:850}.badge{background:#111;color:#fff}.tag{background:#f6f6f6;color:#333;margin:4px 4px 0 0}.tag.good{background:rgba(14,122,70,.10);color:var(--green);border:1px solid rgba(14,122,70,.18)}.tag.warn{background:#fff4ec;color:var(--orange-dark);border:1px solid #ffd9bf}.tag.bad{background:rgba(170,31,31,.08);color:var(--red);border:1px solid rgba(170,31,31,.18)}.score{background:rgba(255,106,0,.13);color:var(--orange-dark);border:1px solid rgba(255,106,0,.22)}.status{background:#f1f5f9;color:#334155}.status.hot{background:rgba(255,106,0,.13);color:var(--orange-dark)}.status.ok{background:rgba(14,122,70,.12);color:var(--green)}.criteria{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.criteria .chip{background:#fff4ec;color:var(--orange-dark);border:1px solid #ffd9bf}.criteria .chip.strict{background:rgba(14,122,70,.10);color:var(--green);border-color:rgba(14,122,70,.20)}.criteria .chip.empty{background:#f6f6f6;color:#666;border-color:#e5e5e5}.rules{display:grid;grid-template-columns:1.15fr .85fr;gap:16px;margin-bottom:16px}.rules-list{display:grid;gap:9px}.toggle{display:flex;align-items:flex-start;gap:10px;padding:10px;border:1px solid var(--line);border-radius:14px;background:#fff}.toggle input{width:auto;margin-top:3px}.toggle span{font-size:13px;color:#333}.toggle b{display:block;color:#111;margin-bottom:2px}.inventory{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.imovel{border:1px solid var(--line);border-radius:22px;overflow:hidden;background:#fff;box-shadow:var(--shadow-soft);display:flex;flex-direction:column}.photo{height:148px;background:linear-gradient(135deg,#f4ede4,#d7cec4 56%,#f7f7f7);position:relative;overflow:hidden}.photo.with-image{background-size:cover;background-position:center}.photo.logo-photo{background:linear-gradient(135deg,#fff7ef,#ffffff 46%,#f0ebe5)}.photo:after{content:"";position:absolute;inset:18px;border:1px solid rgba(255,255,255,.72);border-radius:16px;pointer-events:none}.photo.logo-photo:after{border-color:rgba(17,17,17,.08)}.photo .kind{position:absolute;left:14px;top:14px;background:#111;color:#fff;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:950;z-index:3}.photo .match{position:absolute;right:14px;top:14px;background:#fff;color:var(--orange-dark);border-radius:999px;padding:7px 10px;font-size:12px;font-weight:950;box-shadow:var(--shadow-soft);z-index:3}.logo-photo-content{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:5px;padding:36px 18px 16px;z-index:1}.broker-logo-img{max-width:72%;max-height:54px;object-fit:contain;display:block;filter:drop-shadow(0 8px 18px rgba(17,17,17,.08))}.logo-fallback{min-width:76px;min-height:52px;border-radius:16px;background:#fff;border:1px solid rgba(17,17,17,.10);display:grid;place-items:center;font-weight:950;font-size:18px;letter-spacing:-.04em;color:#111;box-shadow:var(--shadow-soft);padding:0 14px}.broker-name{font-size:13px;font-weight:950;letter-spacing:-.02em;color:#111;max-width:90%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.broker-label{font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:var(--muted-2)}.imovel-body{padding:16px;display:flex;flex-direction:column;gap:8px;flex:1}.imovel h3{font-size:17px;letter-spacing:-.02em;margin:0}.meta{font-size:13px;color:var(--muted);font-weight:780}.price{font-size:20px;font-weight:950;letter-spacing:-.04em}.why{border-top:1px solid var(--line);padding-top:12px;margin-top:auto}.why p{font-size:12px;margin:6px 0;color:#555}.split{display:grid;grid-template-columns:1.25fr .75fr;gap:16px}.mini-table{width:100%;border-collapse:collapse}.mini-table th,.mini-table td{border-bottom:1px solid var(--line);padding:11px;text-align:left;font-size:13px}.mini-table th{color:#555;font-size:12px;text-transform:uppercase;letter-spacing:.04em}.empty-state{padding:22px;border:1px dashed #e0b995;background:#fff8f0;border-radius:20px;color:#633900}.toast{position:fixed;right:24px;bottom:24px;background:#111;color:#fff;padding:14px 18px;border-radius:15px;box-shadow:var(--shadow);display:none;font-weight:850;z-index:50}.small{font-size:12px;color:var(--muted-2)}.divider{height:1px;background:var(--line);margin:14px 0}.callout{border:1px solid #ffd9bf;background:#fff4ec;border-radius:18px;padding:14px;color:#643700}.callout p{margin:6px 0 0}.kbd{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#f6f6f6;border:1px solid #e7e7e7;border-radius:7px;padding:2px 5px;font-size:12px}.client-grid{display:grid;grid-template-columns:1.1fr .9fr .7fr .7fr auto;gap:10px}.results-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin:8px 0 14px}.results-head p{margin:5px 0 0}.test-pass{font-size:12px;color:var(--green);font-weight:900}.test-fail{font-size:12px;color:var(--red);font-weight:900}
-@media(max-width:1100px){.app{grid-template-columns:1fr}aside{position:relative;height:auto}.filters,.cols4,.cols3,.cols2,.inventory,.rules,.split,.client-grid{grid-template-columns:1fr}main{padding:18px}h1{font-size:31px}.top,.voice-head,.results-head{display:block}.voice-actions{margin-top:12px}}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:22px}h1{margin:0;font-size:36px;letter-spacing:-.05em;line-height:1.04}h2{margin:0 0 12px;font-size:21px;letter-spacing:-.025em}h3{margin:0 0 8px;font-size:16px}p{color:var(--muted);line-height:1.45}.lead{margin:8px 0 0;max-width:780px}.grid{display:grid;gap:16px}.cols2{grid-template-columns:repeat(2,minmax(0,1fr))}.cols3{grid-template-columns:repeat(3,minmax(0,1fr))}.cols4{grid-template-columns:repeat(4,minmax(0,1fr))}.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow-soft)}.card.soft{background:linear-gradient(180deg,#fff,#fff7ef)}.metric .n{font-size:38px;font-weight:950;letter-spacing:-.06em}.metric .label{font-size:13px;color:var(--muted);font-weight:800}.btn{border:0;border-radius:14px;padding:12px 16px;font-weight:950;font-size:14px;white-space:nowrap}.btn.primary{background:#111;color:#fff}.btn.orange{background:var(--orange);color:#fff}.btn.ghost{background:#fff;color:#111;border:1px solid var(--line)}.btn.soft{background:#fff4ec;color:var(--orange-dark);border:1px solid #ffd9bf}.btn:hover{transform:translateY(-1px)}.filters{display:grid;grid-template-columns:repeat(6,minmax(120px,1fr));gap:10px;margin-bottom:16px}input,select,textarea{width:100%;border:1px solid var(--line);background:#fff;color:#111;padding:12px 13px;border-radius:14px;outline:none;font-size:14px}textarea{resize:vertical;min-height:112px;line-height:1.45}input:focus,select:focus,textarea:focus{border-color:var(--orange);box-shadow:0 0 0 4px rgba(255,106,0,.10)}.briefing-card{margin-bottom:16px;padding:18px;border:1px solid var(--line);border-radius:22px;background:#fff;box-shadow:var(--shadow)}.briefing-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.briefing-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}.badge,.tag,.score,.status,.chip{display:inline-flex;align-items:center;gap:4px;border-radius:999px;padding:6px 9px;font-size:12px;font-weight:850}.badge{background:#111;color:#fff}.tag{background:#f6f6f6;color:#333;margin:4px 4px 0 0}.tag.good{background:rgba(14,122,70,.10);color:var(--green);border:1px solid rgba(14,122,70,.18)}.tag.warn{background:#fff4ec;color:var(--orange-dark);border:1px solid #ffd9bf}.tag.bad{background:rgba(170,31,31,.08);color:var(--red);border:1px solid rgba(170,31,31,.18)}.score{background:rgba(255,106,0,.13);color:var(--orange-dark);border:1px solid rgba(255,106,0,.22)}.status{background:#f1f5f9;color:#334155}.status.hot{background:rgba(255,106,0,.13);color:var(--orange-dark)}.status.ok{background:rgba(14,122,70,.12);color:var(--green)}.criteria{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.criteria .chip{background:#fff4ec;color:var(--orange-dark);border:1px solid #ffd9bf}.criteria .chip.strict{background:rgba(14,122,70,.10);color:var(--green);border-color:rgba(14,122,70,.20)}.criteria .chip.empty{background:#f6f6f6;color:#666;border-color:#e5e5e5}.rules{display:grid;grid-template-columns:1.15fr .85fr;gap:16px;margin-bottom:16px}.rules-list{display:grid;gap:9px}.toggle{display:flex;align-items:flex-start;gap:10px;padding:10px;border:1px solid var(--line);border-radius:14px;background:#fff}.toggle input{width:auto;margin-top:3px}.toggle span{font-size:13px;color:#333}.toggle b{display:block;color:#111;margin-bottom:2px}.inventory{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.imovel{border:1px solid var(--line);border-radius:22px;overflow:hidden;background:#fff;box-shadow:var(--shadow-soft);display:flex;flex-direction:column}.photo{height:148px;background:linear-gradient(135deg,#f4ede4,#d7cec4 56%,#f7f7f7);position:relative;overflow:hidden}.photo.with-image{background-size:cover;background-position:center}.photo.logo-photo{background:linear-gradient(135deg,#fff7ef,#ffffff 46%,#f0ebe5)}.photo:after{content:"";position:absolute;inset:18px;border:1px solid rgba(255,255,255,.72);border-radius:16px;pointer-events:none}.photo.logo-photo:after{border-color:rgba(17,17,17,.08)}.photo .kind{position:absolute;left:14px;top:14px;background:#111;color:#fff;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:950;z-index:3}.photo .match{position:absolute;right:14px;top:14px;background:#fff;color:var(--orange-dark);border-radius:999px;padding:7px 10px;font-size:12px;font-weight:950;box-shadow:var(--shadow-soft);z-index:3}.logo-photo-content{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:5px;padding:36px 18px 16px;z-index:1}.broker-logo-card{width:min(78%,230px);min-height:72px;border-radius:18px;background:#fff;border:1px solid rgba(17,17,17,.10);display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:var(--shadow-soft);padding:12px 14px}.broker-logo-mark{width:38px;height:38px;border-radius:13px;background:#111;color:#fff;display:grid;place-items:center;font-weight:950;font-size:13px;letter-spacing:-.04em;flex:0 0 auto}.broker-logo-word{font-size:16px;font-weight:950;letter-spacing:-.05em;color:#111;line-height:1.02;text-align:left;max-width:150px}.broker-name{font-size:13px;font-weight:950;letter-spacing:-.02em;color:#111;max-width:90%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.broker-label{font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:var(--muted-2)}.imovel-body{padding:16px;display:flex;flex-direction:column;gap:8px;flex:1}.imovel h3{font-size:17px;letter-spacing:-.02em;margin:0}.meta{font-size:13px;color:var(--muted);font-weight:780}.price{font-size:20px;font-weight:950;letter-spacing:-.04em}.why{border-top:1px solid var(--line);padding-top:12px;margin-top:auto}.why p{font-size:12px;margin:6px 0;color:#555}.split{display:grid;grid-template-columns:1.25fr .75fr;gap:16px}.mini-table{width:100%;border-collapse:collapse}.mini-table th,.mini-table td{border-bottom:1px solid var(--line);padding:11px;text-align:left;font-size:13px}.mini-table th{color:#555;font-size:12px;text-transform:uppercase;letter-spacing:.04em}.empty-state{padding:22px;border:1px dashed #e0b995;background:#fff8f0;border-radius:20px;color:#633900}.toast{position:fixed;right:24px;bottom:24px;background:#111;color:#fff;padding:14px 18px;border-radius:15px;box-shadow:var(--shadow);display:none;font-weight:850;z-index:50}.small{font-size:12px;color:var(--muted-2)}.divider{height:1px;background:var(--line);margin:14px 0}.callout{border:1px solid #ffd9bf;background:#fff4ec;border-radius:18px;padding:14px;color:#643700}.callout p{margin:6px 0 0}.kbd{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#f6f6f6;border:1px solid #e7e7e7;border-radius:7px;padding:2px 5px;font-size:12px}.client-grid{display:grid;grid-template-columns:1.1fr .9fr .7fr .7fr auto;gap:10px}.results-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin:8px 0 14px}.results-head p{margin:5px 0 0}.test-pass{font-size:12px;color:var(--green);font-weight:900}.test-fail{font-size:12px;color:var(--red);font-weight:900}
+.example-row{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 0}.mini-example{border:1px solid #ffd9bf;background:#fffaf5;color:var(--orange-dark);font-weight:900;border-radius:999px;padding:8px 10px;font-size:12px}.mini-example:hover{background:#fff4ec}.selection-panel{margin-bottom:16px}.whatsapp-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.whatsapp-grid{display:grid;grid-template-columns:minmax(180px,.8fr) auto auto auto auto;gap:10px;margin:12px 0}.whatsapp-message{min-height:152px;background:#fffdfb}.select-line{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:#fffaf5;border-radius:13px;padding:9px 10px;font-size:13px;font-weight:950;color:#111}.select-line input{width:auto}.imovel.selected{border-color:rgba(255,106,0,.55);box-shadow:0 18px 42px rgba(255,106,0,.14)}.imovel.selected .select-line{background:#fff4ec;border-color:#ffd9bf;color:var(--orange-dark)}.selection-mini{font-size:12px;color:var(--muted);margin-top:6px}.wa-preview-count{font-size:13px;color:var(--muted);font-weight:800}.btn.whatsapp{background:#25d366;color:#063b19}.btn.whatsapp:hover{transform:translateY(-1px)}
+@media(max-width:1100px){.app{grid-template-columns:1fr}aside{position:relative;height:auto}.filters,.cols4,.cols3,.cols2,.inventory,.rules,.split,.client-grid,.whatsapp-grid{grid-template-columns:1fr}main{padding:18px}h1{font-size:31px}.top,.briefing-head,.results-head{display:block}.briefing-actions{margin-top:12px}}
 </style>
 </head>
 <body>
@@ -63,18 +64,18 @@ nav button.active .pill,nav button:hover .pill{background:#fff;color:#111;border
   <aside>
     <a class="logo" onclick="goId('dashboard')" aria-label="Voltar ao início">
       <span class="logo-mark">MR</span>
-      <span class="logo-text"><b>MatchR</b><span>MVP v3 • motor + logos</span></span>
+      <span class="logo-text"><b>MatchR</b><span>MVP v5 • briefing + WhatsApp</span></span>
     </a>
     <nav>
       <button class="active" data-view="dashboard" onclick="goId('dashboard')">O MatchR <span class="pill">novo</span></button>
-      <button data-view="search" onclick="goId('search')">Encontrar imóvel ideal <span class="pill">perfil</span></button>
+      <button data-view="search" onclick="goId('search')">Encontre imóveis compatíveis <span class="pill">perfil</span></button>
       <button data-view="history" onclick="goId('history')">Resultados de buscas</button>
       <button data-view="clients" onclick="goId('clients')">Leads / Clientes</button>
       <button data-view="corretor" onclick="goId('corretor')">Para você corretor</button>
     </nav>
     <div class="side-card">
-      <strong>Correção aplicada</strong>
-      <p>Busca por voz/texto agora interpreta o briefing antes de ranquear. Tipo, bairro, preço, suítes e vagas podem virar filtros obrigatórios.</p>
+      <strong>Briefing inteligente</strong>
+      <p>O corretor digita ou cola o perfil do cliente, o MatchR interpreta os critérios e sugere imóveis compatíveis.</p>
     </div>
     <div class="side-card">
       <strong>Regra de ouro</strong>
@@ -82,7 +83,7 @@ nav button.active .pill,nav button:hover .pill{background:#fff;color:#111;border
     </div>
     <div class="side-card">
       <strong>Imóveis sem foto</strong>
-      <p>Quando o card não tem imagem do imóvel, o MatchR exibe um logo de imobiliária distribuído de forma balanceada na base.</p>
+      <p>Quando o card não tem imagem do imóvel, o MatchR exibe um logo textual de imobiliária distribuído de forma balanceada na base, embutido no próprio HTML.</p>
     </div>
   </aside>
 
@@ -90,8 +91,8 @@ nav button.active .pill,nav button:hover .pill{background:#fff;color:#111;border
     <section id="dashboard" class="view active">
       <div class="top">
         <div>
-          <h1>Matching imobiliário com foco no perfil solicitado.</h1>
-          <p class="lead">Esta versão transforma o feedback da corretora em produto: primeiro respeita o briefing, depois ranqueia pelos desejos do comprador.</p>
+          <h1>Encontre imóveis compatíveis com o cliente.</h1>
+          <p class="lead">Digite ou cole o briefing, veja imóveis coerentes com o perfil e selecione os melhores para enviar pelo WhatsApp.</p>
         </div>
         <button class="btn orange" onclick="goId('search')">Testar busca</button>
       </div>
@@ -100,7 +101,7 @@ nav button.active .pill,nav button:hover .pill{background:#fff;color:#111;border
         <div class="card metric"><div class="n" id="totalImoveis">3.000</div><div class="label">imóveis simulados</div></div>
         <div class="card metric"><div class="n">0</div><div class="label">casas quando busca apartamento</div></div>
         <div class="card metric"><div class="n">2</div><div class="label">camadas: obrigatório + preferência</div></div>
-        <div class="card metric"><div class="n">10</div><div class="label">logos distribuídos nos cards sem foto</div></div>
+        <div class="card metric"><div class="n">WhatsApp</div><div class="label">seleção pronta para enviar</div></div>
       </div>
 
       <div class="grid cols3" style="margin-top:16px">
@@ -128,8 +129,8 @@ nav button.active .pill,nav button:hover .pill{background:#fff;color:#111;border
     <section id="search" class="view">
       <div class="top">
         <div>
-          <h1>Buscar imóvel ideal para o cliente</h1>
-          <p class="lead">Use filtros ou escreva como falaria no WhatsApp. O botão principal já aplica o briefing antes de buscar. Imóveis sem foto exibem logos de imobiliárias distribuídos proporcionalmente.</p>
+          <h1>Encontre imóveis compatíveis com o cliente</h1>
+          <p class="lead">Digite ou cole o briefing do cliente. O MatchR entende o perfil, respeita os critérios obrigatórios, ranqueia as preferências e permite selecionar imóveis para enviar pelo WhatsApp.</p>
         </div>
         <button class="btn ghost" onclick="fillExample()">Usar exemplo bom</button>
       </div>
@@ -156,22 +157,45 @@ nav button.active .pill,nav button:hover .pill{background:#fff;color:#111;border
         </select>
       </div>
 
-      <div class="voice-card">
-        <div class="voice-head">
+      <div class="briefing-card">
+        <div class="briefing-head">
           <div>
-            <h2>Busca por voz ou texto</h2>
-            <p>Exemplo: Cliente Mariana quer apartamento em Moema até 5 milhões, 3 suítes, 2 vagas, varanda gourmet e vista aberta.</p>
+            <h2>Briefing inteligente do cliente</h2>
+            <p>Digite como o corretor falaria: bairro, tipo de imóvel, orçamento, suítes, vagas, estilo de vida e preferências. O foco agora é cruzar perfil do cliente com imóveis disponíveis.</p>
           </div>
-          <span class="badge">motor v2</span>
+          <span class="badge">texto natural</span>
         </div>
-        <textarea id="voiceSearchText" placeholder="Digite o briefing do cliente aqui..."></textarea>
-        <div class="voice-actions">
-          <button class="btn ghost" type="button" onclick="startVoice()">🎙️ Falar busca</button>
+        <textarea id="briefingText" placeholder="Digite ou cole o perfil do cliente. Ex.: Cliente Mariana quer apartamento em Moema até 5 milhões, 3 suítes, 2 vagas, varanda gourmet e vista aberta."></textarea>
+        <div class="example-row" aria-label="Exemplos de briefing">
+          <button class="mini-example" type="button" onclick="useBriefingExample(0)">Família em Moema</button>
+          <button class="mini-example" type="button" onclick="useBriefingExample(1)">Investidor em Pinheiros</button>
+          <button class="mini-example" type="button" onclick="useBriefingExample(2)">Casa com jardim</button>
+        </div>
+        <div class="briefing-actions">
           <button class="btn soft" type="button" onclick="applyNaturalSearch()">Interpretar perfil</button>
           <button class="btn ghost" type="button" onclick="clearSearch()">Limpar</button>
           <button class="btn orange" type="button" onclick="searchWithProfile()">Buscar imóveis compatíveis</button>
         </div>
-        <div id="profileChips" class="criteria"><span class="chip empty">Digite uma frase ou clique em “Falar busca”.</span></div>
+        <div id="profileChips" class="criteria"><span class="chip empty">Digite ou cole o briefing do cliente.</span></div>
+      </div>
+
+      <div class="card selection-panel">
+        <div class="whatsapp-head">
+          <div>
+            <h2>Selecionar imóveis para WhatsApp</h2>
+            <p id="selectionSummary" class="wa-preview-count">Nenhum imóvel selecionado ainda.</p>
+          </div>
+          <span class="badge">novo</span>
+        </div>
+        <div class="whatsapp-grid">
+          <input id="whatsappPhone" inputmode="numeric" placeholder="Telefone do cliente com DDD (opcional)" />
+          <button class="btn soft" type="button" onclick="generateWhatsAppMessage()">Gerar mensagem</button>
+          <button class="btn ghost" type="button" onclick="copyWhatsAppMessage()">Copiar texto</button>
+          <button class="btn whatsapp" type="button" onclick="openWhatsApp()">Abrir WhatsApp</button>
+          <button class="btn ghost" type="button" onclick="clearSelection()">Limpar seleção</button>
+        </div>
+        <textarea id="whatsappMessage" class="whatsapp-message" readonly placeholder="Selecione imóveis nos cards abaixo. A mensagem para o cliente aparece aqui."></textarea>
+        <p class="small">Dica: use o telefone só com DDD e número. Sem telefone, o WhatsApp abre com a mensagem pronta para você escolher o contato.</p>
       </div>
 
       <div class="rules">
@@ -260,7 +284,7 @@ nav button.active .pill,nav button:hover .pill{background:#fff;color:#111;border
         </div>
         <div class="card">
           <h2>Próximos recursos naturais</h2>
-          <p>Configuração por imobiliária, pesos por regra comercial, integração de CRM, ingestão de estoque real e explicação do match para enviar ao cliente.</p>
+          <p>Configuração por imobiliária, pesos por regra comercial, integração de CRM, ingestão de estoque real e envio com links reais dos imóveis.</p>
         </div>
       </div>
       <div class="grid cols4" style="margin-top:16px">
@@ -278,16 +302,16 @@ nav button.active .pill,nav button:hover .pill{background:#fff;color:#111;border
 const bairros = ['Alto de Pinheiros','Bela Vista','Brooklin','Campo Belo','Chácara Flora','Higienópolis','Itaim Bibi','Jardim Europa','Jardins','Moema','Morumbi','Paraíso','Perdizes','Pinheiros','Real Parque','Vila Madalena','Vila Nova Conceição','Vila Olímpia'];
 const tipos = ['Apartamento','Casa','Cobertura','Garden','Loft','Studio'];
 const imobiliarias = [
-  {nome:'Pilar', slug:'pilar', logo:'assets/logos/pilar.svg'},
-  {nome:"Bossa Nova Sotheby's", slug:'bossa-nova-sothebys', logo:'assets/logos/bossa-nova-sothebys.svg'},
-  {nome:'Coelho da Fonseca', slug:'coelho-da-fonseca', logo:'assets/logos/coelho-da-fonseca.svg'},
-  {nome:'Local', slug:'local', logo:'assets/logos/local.svg'},
-  {nome:'Axpe', slug:'axpe', logo:'assets/logos/axpe.svg'},
-  {nome:'Cobogó', slug:'cobogo', logo:'assets/logos/cobogo.svg'},
-  {nome:'Refúgios', slug:'refugios', logo:'assets/logos/refugios.svg'},
-  {nome:'Anglo', slug:'anglo', logo:'assets/logos/anglo.svg'},
-  {nome:'Tamaras', slug:'tamaras', logo:'assets/logos/tamaras.svg'},
-  {nome:'Jardins & CO', slug:'jardins-co', logo:'assets/logos/jardins-co.svg'}
+  {nome:'Pilar', slug:'pilar', logoTexto:'Pilar'},
+  {nome:"Bossa Nova Sotheby's", slug:'bossa-nova-sothebys', logoTexto:"Bossa Nova Sotheby's"},
+  {nome:'Coelho da Fonseca', slug:'coelho-da-fonseca', logoTexto:'Coelho da Fonseca'},
+  {nome:'Local', slug:'local', logoTexto:'Local'},
+  {nome:'Axpe', slug:'axpe', logoTexto:'Axpe'},
+  {nome:'Cobogó', slug:'cobogo', logoTexto:'Cobogó'},
+  {nome:'Refúgios', slug:'refugios', logoTexto:'Refúgios'},
+  {nome:'Anglo', slug:'anglo', logoTexto:'Anglo'},
+  {nome:'Tamaras', slug:'tamaras', logoTexto:'Tamaras'},
+  {nome:'Jardins & CO', slug:'jardins-co', logoTexto:'Jardins & CO'}
 ];
 const numberWords = {um:1,uma:1,dois:2,duas:2,tres:3,treis:3,três:3,quatro:4,cinco:5,seis:6,sete:7,oito:8,nove:9,dez:10};
 const featureAliases = {
@@ -310,10 +334,17 @@ const featureAliases = {
 };
 const preferenceKeys = Object.keys(featureAliases);
 let inventory = [];
-let currentVoiceProfile = {};
+let currentBriefingProfile = {};
 let currentMatches = [];
+let currentSearchProfile = {};
+let selectedIds = new Set();
 let history = [];
 let clients = [{nome:'Mariana', tipo:'Cliente', status:'Quente', busca:'Apartamento em Moema até R$ 5 mi, 3 suítes, varanda gourmet'}];
+const briefingExamples = [
+  'Cliente Mariana quer apartamento em Moema até 5 milhões, 3 suítes, 2 vagas, varanda gourmet e vista aberta. Família com pet, quer andar alto e lazer completo.',
+  'Investidor procura studio ou apartamento compacto em Pinheiros até 2 milhões, perto do metrô, boa liquidez e pronto para locação.',
+  'Casal com dois filhos quer casa em Alto de Pinheiros até 8 milhões, 4 quartos, 3 suítes, jardim, segurança e rua silenciosa.'
+];
 
 function norm(value){return String(value||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[ºª]/g,'').trim();}
 function escapeHtml(value){return String(value ?? '').replace(/[&<>'"]/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));}
@@ -323,6 +354,38 @@ function pick(arr,rnd){return arr[Math.floor(rnd()*arr.length)];}
 function seeded(seed){let s=seed; return function(){s=(s*9301+49297)%233280; return s/233280;};}
 function brokerInitials(name){
   return String(name||'MR').replace(/&/g,' ').split(/\s+/).filter(Boolean).map(w=>w[0]).join('').slice(0,3).toUpperCase();
+}
+function svgText(value){
+  return String(value||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+function brokerLogoDataUri(name, slug){
+  const palettes = [
+    ['#111111','#ffffff','#ff6a00'],
+    ['#1f2937','#ffffff','#e5b567'],
+    ['#0f172a','#ffffff','#94a3b8'],
+    ['#3f2f24','#fff7ef','#ff6a00'],
+    ['#2f3a2f','#ffffff','#a7c957'],
+    ['#1f3552','#ffffff','#8ecae6'],
+    ['#3b1f2b','#ffffff','#f4a261'],
+    ['#2b2b2b','#ffffff','#d6d3d1'],
+    ['#432818','#fff7ef','#bb9457'],
+    ['#0b3d2e','#ffffff','#d8f3dc']
+  ];
+  const key = String(slug || name || 'matchr');
+  let hash = 0;
+  for(let i=0;i<key.length;i++) hash = (hash * 31 + key.charCodeAt(i)) >>> 0;
+  const [bg,fg,accent] = palettes[hash % palettes.length];
+  const initials = svgText(brokerInitials(name));
+  const displayName = svgText(name);
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="420" height="132" viewBox="0 0 420 132" role="img" aria-label="${displayName}">
+    <rect x="0" y="0" width="420" height="132" rx="28" fill="${bg}"/>
+    <rect x="14" y="14" width="392" height="104" rx="22" fill="none" stroke="${accent}" stroke-width="3" opacity="0.85"/>
+    <circle cx="72" cy="66" r="34" fill="${accent}" opacity="0.98"/>
+    <text x="72" y="76" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="900" fill="${bg}">${initials}</text>
+    <text x="124" y="61" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="900" fill="${fg}">${displayName}</text>
+    <text x="124" y="88" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="800" letter-spacing="2" fill="${fg}" opacity="0.72">IMOBILIÁRIA PARCEIRA</text>
+  </svg>`;
+  return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
 }
 function balancedBrokerPool(total, seed=1207){
   const pool=[];
@@ -346,7 +409,7 @@ function assignBrokerLogosToMissingImages(){
     const broker = pool[idx % pool.length];
     imovel.imobiliaria = broker.nome;
     imovel.imobiliariaSlug = broker.slug;
-    imovel.imobiliariaLogo = broker.logo;
+    imovel.imobiliariaLogoTexto = broker.logoTexto || broker.nome;
     imovel.placeholderLogo = true;
   });
 }
@@ -538,23 +601,23 @@ function parseBriefing(text){
 
 function setSelect(id,value){if(value!=='' && value!=null){const el=document.getElementById(id); if([...el.options].some(o=>o.value==value))el.value=value;}}
 function applyNaturalSearch(){
-  const raw = document.getElementById('voiceSearchText').value.trim();
-  currentVoiceProfile = raw ? parseBriefing(raw) : {};
-  if(currentVoiceProfile.cliente) document.getElementById('clienteNome').value = currentVoiceProfile.cliente;
-  if(currentVoiceProfile.raw) document.getElementById('clienteBusca').value = currentVoiceProfile.raw;
-  setSelect('bairro', currentVoiceProfile.bairro || '');
-  setSelect('tipo', currentVoiceProfile.tipo || '');
-  if(currentVoiceProfile.maxPrice) setSelect('preco', priceBucket(currentVoiceProfile.maxPrice));
-  if(currentVoiceProfile.minPrice && !currentVoiceProfile.maxPrice) setSelect('preco','acima10');
-  setSelect('suites', currentVoiceProfile.minSuites || '');
-  setSelect('vagas', currentVoiceProfile.minVagas || '');
-  setSelect('ordem', currentVoiceProfile.order || '');
-  renderProfileChips(currentVoiceProfile);
-  return currentVoiceProfile;
+  const raw = document.getElementById('briefingText').value.trim();
+  currentBriefingProfile = raw ? parseBriefing(raw) : {};
+  if(currentBriefingProfile.cliente) document.getElementById('clienteNome').value = currentBriefingProfile.cliente;
+  if(currentBriefingProfile.raw) document.getElementById('clienteBusca').value = currentBriefingProfile.raw;
+  setSelect('bairro', currentBriefingProfile.bairro || '');
+  setSelect('tipo', currentBriefingProfile.tipo || '');
+  if(currentBriefingProfile.maxPrice) setSelect('preco', priceBucket(currentBriefingProfile.maxPrice));
+  if(currentBriefingProfile.minPrice && !currentBriefingProfile.maxPrice) setSelect('preco','acima10');
+  setSelect('suites', currentBriefingProfile.minSuites || '');
+  setSelect('vagas', currentBriefingProfile.minVagas || '');
+  setSelect('ordem', currentBriefingProfile.order || '');
+  renderProfileChips(currentBriefingProfile);
+  return currentBriefingProfile;
 }
 
 function getProfileFromUI(){
-  const textProfile = currentVoiceProfile.raw ? {...currentVoiceProfile} : {};
+  const textProfile = currentBriefingProfile.raw ? {...currentBriefingProfile} : {};
   const preco = document.getElementById('preco').value;
   const profile = {
     raw:textProfile.raw || '',
@@ -722,10 +785,12 @@ function renderPhoto(imovel, match){
     return `<div class="photo with-image" style="background-image:url('${escapeHtml(imovel.imagem)}')">${kind}${score}</div>`;
   }
   const brokerName = imovel.imobiliaria || 'Imobiliária parceira';
-  const logo = imovel.imobiliariaLogo || '';
+  const logoText = imovel.imobiliariaLogoTexto || brokerName;
   return `<div class="photo logo-photo">${kind}${score}<div class="logo-photo-content">
-    <img class="broker-logo-img" src="${escapeHtml(logo)}" alt="Logo ${escapeHtml(brokerName)}" onerror="this.style.display='none';this.nextElementSibling.style.display='grid';">
-    <span class="logo-fallback" style="display:none">${escapeHtml(brokerInitials(brokerName))}</span>
+    <div class="broker-logo-card" aria-label="Logo ${escapeHtml(brokerName)}">
+      <span class="broker-logo-mark">${escapeHtml(brokerInitials(brokerName))}</span>
+      <span class="broker-logo-word">${escapeHtml(logoText)}</span>
+    </div>
     <div class="broker-name">${escapeHtml(brokerName)}</div>
     <div class="broker-label">sem foto do imóvel</div>
   </div></div>`;
@@ -735,6 +800,7 @@ function renderCards(rows, profile){
   const container=document.getElementById('inventory');
   if(!rows.length){
     container.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><strong>Nenhum imóvel atende aos critérios obrigatórios.</strong><p>O sistema não vai preencher a lista com imóveis fora do perfil só para mostrar resultado. Ajuste o briefing ou relaxe alguma regra configurável da imobiliária.</p><p class="small">Perfil atual: ${escapeHtml(profileLabel(profile))}</p></div>`;
+    renderWhatsAppPanel();
     return;
   }
   container.innerHTML = rows.slice(0,12).map(({imovel,match})=>{
@@ -744,9 +810,12 @@ function renderCards(rows, profile){
     const mandatory = match.mandatory.total ? `${match.mandatory.passed}/${match.mandatory.total} obrigatórios` : 'sem filtros duros';
     const photo = renderPhoto(imovel, match);
     const brokerTag = imovel.imobiliaria ? `<span class="tag warn">${escapeHtml(imovel.imobiliaria)}</span>` : '';
-    return `<article class="imovel">
+    const checked = selectedIds.has(imovel.id) ? 'checked' : '';
+    const selectedClass = selectedIds.has(imovel.id) ? ' selected' : '';
+    return `<article class="imovel${selectedClass}">
       ${photo}
       <div class="imovel-body">
+        <label class="select-line"><input type="checkbox" ${checked} onchange="toggleSelection(${imovel.id})"><span>${selectedIds.has(imovel.id) ? 'Selecionado para WhatsApp' : 'Selecionar para WhatsApp'}</span></label>
         <h3>${escapeHtml(imovel.titulo)}</h3>
         <div class="meta">${escapeHtml(imovel.bairro)} • ${imovel.area} m² • ${imovel.quartos} quarto(s) • ${imovel.suites} suíte(s) • ${imovel.vagas} vaga(s)</div>
         <div class="price">${money(imovel.preco)}</div>
@@ -759,6 +828,7 @@ function renderCards(rows, profile){
       </div>
     </article>`;
   }).join('');
+  renderWhatsAppPanel();
 }
 
 function renderSummary(rows, profile){
@@ -769,12 +839,115 @@ function renderSummary(rows, profile){
   el.textContent = `Mostrando ${Math.min(12,rows.length)} de ${rows.length} imóveis que respeitam os obrigatórios. Tipos no resultado: ${tiposEncontrados}. Perfil: ${requested}.`;
 }
 
+
+function selectedRows(){
+  return currentMatches.filter(row => selectedIds.has(row.imovel.id));
+}
+
+function syncSelectionWithResults(rows){
+  const valid = new Set(rows.map(row=>row.imovel.id));
+  selectedIds = new Set([...selectedIds].filter(id=>valid.has(id)));
+}
+
+function buildWhatsAppMessage(){
+  const rows = selectedRows();
+  if(!rows.length) return '';
+  const profile = currentSearchProfile && Object.keys(currentSearchProfile).length ? currentSearchProfile : getProfileFromUI();
+  const cliente = profile.cliente ? ` ${profile.cliente}` : '';
+  const lines = [];
+  lines.push(`Oi${cliente}! Separei ${rows.length} imóvel${rows.length>1?'is':''} que combina${rows.length>1?'m':''} com o seu perfil.`);
+  lines.push('');
+  lines.push(`Perfil considerado: ${profileLabel(profile)}.`);
+  lines.push('');
+  rows.forEach((row,idx)=>{
+    const imovel = row.imovel;
+    const match = row.match;
+    const destaques = [...match.matchedPrefs, ...match.boosts, ...imovel.features.slice(0,3)].filter(Boolean);
+    const uniqueHighlights = [...new Set(destaques)].slice(0,5).join(', ');
+    lines.push(`${idx+1}. ${imovel.titulo}`);
+    lines.push(`${imovel.bairro} • ${imovel.tipo} • ${imovel.area} m² • ${imovel.suites} suíte(s) • ${imovel.vagas} vaga(s) • ${money(imovel.preco)}`);
+    lines.push(`Compatibilidade: ${match.score}%${uniqueHighlights ? ` • Destaques: ${uniqueHighlights}` : ''}`);
+    if(imovel.imobiliaria) lines.push(`Imobiliária: ${imovel.imobiliaria}`);
+    lines.push('');
+  });
+  lines.push('Quer que eu envie mais detalhes de algum deles ou já organizo uma visita?');
+  return lines.join('\n');
+}
+
+function renderWhatsAppPanel(){
+  const summary = document.getElementById('selectionSummary');
+  const message = document.getElementById('whatsappMessage');
+  if(!summary || !message) return;
+  const count = selectedIds.size;
+  summary.textContent = count ? `${count} imóvel${count>1?'is':''} selecionado${count>1?'s':''} para enviar ao cliente.` : 'Nenhum imóvel selecionado ainda.';
+  if(!count){
+    message.value = '';
+    message.placeholder = 'Selecione imóveis nos cards abaixo. A mensagem para o cliente aparece aqui.';
+  } else if(!message.value.trim()) {
+    message.value = buildWhatsAppMessage();
+  }
+}
+
+function generateWhatsAppMessage(){
+  if(!selectedIds.size){showToast('Selecione pelo menos um imóvel.');return '';}
+  const msg = buildWhatsAppMessage();
+  document.getElementById('whatsappMessage').value = msg;
+  renderWhatsAppPanel();
+  showToast('Mensagem do WhatsApp gerada.');
+  return msg;
+}
+
+function toggleSelection(id){
+  if(selectedIds.has(id)) selectedIds.delete(id); else selectedIds.add(id);
+  document.getElementById('whatsappMessage').value = selectedIds.size ? buildWhatsAppMessage() : '';
+  renderCards(currentMatches, currentSearchProfile || getProfileFromUI());
+}
+
+function clearSelection(){
+  selectedIds.clear();
+  const msg = document.getElementById('whatsappMessage');
+  if(msg) msg.value = '';
+  renderCards(currentMatches, currentSearchProfile || getProfileFromUI());
+  showToast('Seleção limpa.');
+}
+
+function copyWhatsAppMessage(){
+  const msg = document.getElementById('whatsappMessage').value.trim() || generateWhatsAppMessage();
+  if(!msg) return;
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(msg).then(()=>showToast('Texto copiado para enviar ao cliente.')).catch(()=>showToast('Não consegui copiar automaticamente. Selecione o texto e copie.'));
+  } else {
+    const field = document.getElementById('whatsappMessage');
+    field.focus(); field.select();
+    showToast('Texto selecionado. Copie manualmente.');
+  }
+}
+
+function formatWhatsAppPhone(value){
+  let phone = String(value || '').replace(/\D/g,'');
+  if(!phone) return '';
+  if(phone.startsWith('00')) phone = phone.slice(2);
+  if(!phone.startsWith('55') && (phone.length===10 || phone.length===11)) phone = '55' + phone;
+  return phone;
+}
+
+function openWhatsApp(){
+  const msg = document.getElementById('whatsappMessage').value.trim() || generateWhatsAppMessage();
+  if(!msg) return;
+  const phone = formatWhatsAppPhone(document.getElementById('whatsappPhone').value);
+  const base = phone ? `https://wa.me/${phone}` : 'https://wa.me/';
+  window.open(`${base}?text=${encodeURIComponent(msg)}`,'_blank','noopener');
+}
+
 function searchWithProfile(save=true){
   applyNaturalSearch();
   const profile = getProfileFromUI();
   renderProfileChips(profile);
   const rows = rankedResults(profile);
   currentMatches = rows;
+  currentSearchProfile = profile;
+  syncSelectionWithResults(rows);
+  document.getElementById('whatsappMessage').value = selectedIds.size ? buildWhatsAppMessage() : '';
   renderCards(rows, profile);
   renderSummary(rows, profile);
   document.getElementById('above90').textContent = rows.filter(r=>r.match.score>=90).length;
@@ -785,7 +958,7 @@ function searchWithProfile(save=true){
   }
   if(profile.tipo==='Apartamento'){
     const houses = rows.filter(r=>r.imovel.tipo==='Casa').length;
-    if(houses===0) showToast('Corrigido: busca por apartamento não trouxe casas.');
+    if(houses===0) showToast('Busca validada: apartamento não trouxe casas.');
   }
 }
 
@@ -814,28 +987,23 @@ function addClient(){
 }
 
 function clearSearch(){
-  document.getElementById('voiceSearchText').value='';
-  currentVoiceProfile={};
+  document.getElementById('briefingText').value='';
+  currentBriefingProfile={};
+  selectedIds.clear();
+  document.getElementById('whatsappMessage').value='';
   ['bairro','tipo','preco','suites','vagas'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('ordem').value='match';
   renderProfileChips({});
   searchWithProfile(false);
 }
 
-function fillExample(){
-  document.getElementById('voiceSearchText').value = 'Cliente Mariana quer apartamento em Moema até 5 milhões, 3 suítes, 2 vagas, varanda gourmet e vista aberta. Família com pet, quer andar alto e lazer completo.';
+function useBriefingExample(index){
+  document.getElementById('briefingText').value = briefingExamples[index] || briefingExamples[0];
   searchWithProfile(true);
 }
 
-function startVoice(){
-  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if(!SpeechRecognition){showToast('Reconhecimento de voz não está disponível neste navegador.');return;}
-  const recognition = new SpeechRecognition();
-  recognition.lang='pt-BR'; recognition.interimResults=false; recognition.maxAlternatives=1;
-  showToast('Pode falar o briefing do cliente.');
-  recognition.onresult = event => {document.getElementById('voiceSearchText').value = event.results[0][0].transcript; searchWithProfile(true);};
-  recognition.onerror = () => showToast('Não consegui captar a voz. Tente digitar o briefing.');
-  recognition.start();
+function fillExample(){
+  useBriefingExample(0);
 }
 
 function goId(id){
@@ -853,13 +1021,13 @@ function initFilters(){
 
 function runRegressionTest(){
   const phrase = 'Cliente Mariana quer apartamento em Moema até 5 milhões, 3 suítes, 2 vagas, varanda gourmet e vista aberta.';
-  currentVoiceProfile = parseBriefing(phrase);
-  const rows = rankedResults(currentVoiceProfile);
+  currentBriefingProfile = parseBriefing(phrase);
+  const rows = rankedResults(currentBriefingProfile);
   const ok = rows.length>0 && rows.every(r=>r.imovel.tipo==='Apartamento') && rows.every(r=>r.imovel.bairro==='Moema') && rows.every(r=>r.imovel.preco<=5) && rows.every(r=>r.imovel.suites>=3) && rows.every(r=>r.imovel.vagas>=2);
   const el=document.getElementById('regressionResult');
   el.className = ok ? 'test-pass' : 'test-fail';
   el.textContent = ok ? `PASSOU — ${rows.length} resultados, zero casas, todos dentro do perfil obrigatório.` : 'FALHOU — revisar motor de matching.';
-  currentVoiceProfile = {};
+  currentBriefingProfile = {};
 }
 
 generateInventory();
@@ -871,7 +1039,7 @@ renderProfileChips({});
 searchWithProfile(false);
 runRegressionTest();
 document.getElementById('totalImoveis').textContent = inventory.length.toLocaleString('pt-BR');
-window.MatchRDebug = {parseBriefing, rankedResults, inventory, runRegressionTest, logoDistribution, imobiliarias};
+window.MatchRDebug = {version:'v5-briefing-whatsapp', parseBriefing, rankedResults, inventory, runRegressionTest, logoDistribution, imobiliarias, buildWhatsAppMessage, selectedRows, toggleSelection, generateWhatsAppMessage, formatWhatsAppPhone, getCurrentMatches:()=>currentMatches};
 </script>
 </body>
 </html>
