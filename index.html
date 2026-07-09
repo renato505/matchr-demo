@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MatchR - MVP v11</title>
+  <title>MatchR - MVP v12</title>
   <meta name="description" content="MVP MatchR - busca inteligente de imóveis compatíveis com o cliente." />
   <style>
     :root {
@@ -177,6 +177,11 @@
       width: 100%;
       height: 100%;
       border: 0;
+    }
+
+    .final-video {
+      margin-top: 24px;
+      margin-bottom: 0;
     }
 
     .panel {
@@ -596,6 +601,24 @@
       font-size: .92rem;
     }
 
+    .property-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .btn.whatsapp {
+      background: var(--success);
+      color: #fff;
+      text-decoration: none;
+      box-shadow: 0 12px 24px rgba(39, 103, 73, .18);
+    }
+
+    .btn.whatsapp:hover {
+      box-shadow: 0 15px 28px rgba(39, 103, 73, .23);
+    }
+
     .property-score {
       width: 62px;
       height: 62px;
@@ -981,7 +1004,7 @@
     <header class="topbar" aria-label="Cabeçalho do produto">
       <a class="brand brand-link" href="#" aria-label="MatchR - início">
         <img class="brand-logo-image" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NjAgMTY4IiByb2xlPSJpbWciIGFyaWEtbGFiZWw9Ik1hdGNoUiDigJQgSW50ZWxpZ8OqbmNpYSBwYXJhIG8gY29ycmV0b3IgaW1vYmlsacOhcmlvIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMzZDJjMjQiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjOGY1ZDNiIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGZpbHRlciBpZD0icyIgeD0iLTIwJSIgeT0iLTIwJSIgd2lkdGg9IjE0MCUiIGhlaWdodD0iMTQwJSI+CiAgICAgIDxmZURyb3BTaGFkb3cgZHg9IjAiIGR5PSIxMiIgc3RkRGV2aWF0aW9uPSIxMiIgZmxvb2QtY29sb3I9IiMzOTJiMjAiIGZsb29kLW9wYWNpdHk9IjAuMTUiLz4KICAgIDwvZmlsdGVyPgogIDwvZGVmcz4KICA8cmVjdCB3aWR0aD0iNjYwIiBoZWlnaHQ9IjE2OCIgcng9IjM0IiBmaWxsPSIjZmZmYWYzIi8+CiAgPGcgZmlsdGVyPSJ1cmwoI3MpIj4KICAgIDxyZWN0IHg9IjE4IiB5PSIxOCIgd2lkdGg9IjEzMiIgaGVpZ2h0PSIxMzIiIHJ4PSIzMiIgZmlsbD0idXJsKCNnKSIvPgogICAgPHBhdGggZD0iTTQ4IDkyIDg0IDU4bDM2IDM0djM3SDk2di0zMEg3MnYzMEg0OFY5MloiIGZpbGw9IiNmZmZhZjMiLz4KICAgIDxwYXRoIGQ9Ik02NiA4MSA4NCA2NGwxOCAxNyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmYWYzIiBzdHJva2Utd2lkdGg9IjEwIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KICA8L2c+CiAgPHRleHQgeD0iMTc0IiB5PSI5MCIgZm9udC1mYW1pbHk9IkludGVyLCBBcmlhbCwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjU0IiBmb250LXdlaWdodD0iODAwIiBsZXR0ZXItc3BhY2luZz0iLTIuNSIgZmlsbD0iIzI0MWYxYSI+TWF0Y2hSPC90ZXh0PgogIDx0ZXh0IHg9IjE3NiIgeT0iMTI2IiBmb250LWZhbWlseT0iSW50ZXIsIEFyaWFsLCBIZWx2ZXRpY2EsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjIiIGZvbnQtd2VpZ2h0PSI1MDAiIGZpbGw9IiM2ZDYyNTgiPkludGVsaWfDqm5jaWEgcGFyYSBvIGNvcnJldG9yIGltb2JpbGnDoXJpbzwvdGV4dD4KPC9zdmc+" alt="MatchR — Inteligência para o corretor imobiliário" />
-        <span class="logo-subtitle">MVP v11 • busca inteligente para corretores</span>
+        <span class="logo-subtitle">MVP v12 • busca inteligente para corretores</span>
       </a>
       <div class="top-actions">
         <span class="pill">Menu restaurado</span>
@@ -1005,36 +1028,16 @@
         <button class="drawer-close" id="menuClose" type="button" aria-label="Fechar menu">×</button>
       </div>
       <div class="drawer-nav" role="list">
-        <a href="#para-voce-corretor" data-menu-link role="listitem">Para você, corretor</a>
         <a href="#motor-compatibilidade" data-menu-link role="listitem">Motor de compatibilidade</a>
         <a href="#imoveis-sugeridos" data-menu-link role="listitem">Imóveis sugeridos</a>
         <a href="#como-funciona" data-menu-link role="listitem">Como funciona</a>
         <a href="#beneficios" data-menu-link role="listitem">Benefícios</a>
         <a href="#para-imobiliarias" data-menu-link role="listitem">Para imobiliárias e incorporadoras</a>
         <a href="#contato" data-menu-link role="listitem">Contato / próximos passos</a>
+        <a href="#para-voce-corretor" data-menu-link role="listitem">Para você, corretor / vídeo</a>
       </div>
-      <p class="drawer-note">A interface do motor continua limpa; o conteúdo institucional fica acessível pelo menu.</p>
+      <p class="drawer-note">A interface do motor continua limpa; as seções institucionais e o vídeo ficam acessíveis pelo menu.</p>
     </nav>
-
-    <section class="panel broker-video" id="para-voce-corretor" aria-labelledby="broker-video-title">
-      <div class="broker-video-copy">
-        <p class="eyebrow">Para você, corretor</p>
-        <h2 id="broker-video-title">Assista ao vídeo de apresentação.</h2>
-        <p>
-          Aula de Renato Gosling, fundador do MatchR, sobre como corretores podem ganhar eficiência em follow-up, networking e técnicas de vendas.
-        </p>
-      </div>
-      <div class="video-frame" aria-label="Vídeo de apresentação para corretores">
-        <iframe
-          src="https://www.youtube.com/embed/7o9W3ATGCl4"
-          title="Vídeo para você, corretor - MatchR"
-          loading="lazy"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen>
-        </iframe>
-      </div>
-    </section>
 
     <section class="hero" id="motor-compatibilidade" aria-labelledby="hero-title">
       <article class="panel intro">
@@ -1280,7 +1283,29 @@
       <p>Validar a navegação completa, testar o fluxo com corretores e evoluir a base de imóveis compatíveis sem perder a simplicidade da interface.</p>
       <div class="cta-actions" aria-label="Ações sugeridas">
         <a class="btn primary" href="#motor-compatibilidade">Testar o motor</a>
-        <a class="btn secondary" href="#para-voce-corretor">Ver vídeo para corretores</a>
+        <a class="btn secondary" href="#para-voce-corretor">Ver vídeo no final da página</a>
+      </div>
+    </section>
+
+
+
+    <section class="panel broker-video final-video" id="para-voce-corretor" aria-labelledby="broker-video-title">
+      <div class="broker-video-copy">
+        <p class="eyebrow">Para você, corretor</p>
+        <h2 id="broker-video-title">Assista ao vídeo de apresentação.</h2>
+        <p>
+          Aula de Renato Gosling, fundador do MatchR, sobre como corretores podem ganhar eficiência em follow-up, networking e técnicas de vendas.
+        </p>
+      </div>
+      <div class="video-frame" aria-label="Vídeo de apresentação para corretores">
+        <iframe
+          src="https://www.youtube.com/embed/7o9W3ATGCl4"
+          title="Vídeo para você, corretor - MatchR"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
       </div>
     </section>
   </main>
@@ -1506,6 +1531,18 @@
       return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 }).format(value);
     }
 
+    function buildWhatsAppUrl(property, score) {
+      const message = [
+        "Olá! Quero falar sobre este imóvel encontrado no MatchR:",
+        property.title,
+        `${typeLabel[property.type]} em ${property.neighborhood}`,
+        `${formatCurrency(property.price)} • ${property.bedrooms} dorms • ${property.suites} suítes • ${property.parking} vagas • ${property.area} m²`,
+        `Aderência no match: ${score}%`
+      ].join("\n");
+
+      return `https://wa.me/?text=${encodeURIComponent(message)}`;
+    }
+
     function parseBriefing() {
       const text = document.getElementById("briefing").value.toLowerCase();
       if (!text.trim()) {
@@ -1719,6 +1756,8 @@
             .map(item => commonAreaLabel[item])
             .join(", ");
 
+          const whatsappUrl = buildWhatsAppUrl(property, score);
+
           return `
             <article class="property-card">
               <div>
@@ -1727,6 +1766,9 @@
                 <p>${property.description}</p>
                 <div class="hint">${reasons.length ? `Por que apareceu: ${reasons.join(", ")}.` : "Sugestão inicial da base demonstrativa."}</div>
                 ${relevantAreas ? `<div class="hint">Áreas: ${relevantAreas}</div>` : ""}
+                <div class="property-actions">
+                  <a class="btn whatsapp" href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" aria-label="Enviar ${property.title} pelo WhatsApp">💬 WhatsApp</a>
+                </div>
               </div>
               <div class="property-score" aria-label="Aderência ${score}%">${score}%</div>
             </article>
