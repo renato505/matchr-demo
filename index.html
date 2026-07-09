@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mova Match - MVP v8</title>
-  <meta name="description" content="MVP Mova Match - busca inteligente de imóveis compatíveis com o cliente." />
+  <title>MatchR - MVP v11</title>
+  <meta name="description" content="MVP MatchR - busca inteligente de imóveis compatíveis com o cliente." />
   <style>
     :root {
       --bg: #f7f4ef;
@@ -61,6 +61,35 @@
       min-width: 0;
     }
 
+    .brand-link {
+      text-decoration: none;
+      flex-wrap: wrap;
+    }
+
+    .brand-logo-image {
+      display: block;
+      width: min(280px, 58vw);
+      height: auto;
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      background: var(--surface);
+      flex: 0 0 auto;
+    }
+
+    .logo-subtitle {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 7px 11px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .62);
+      color: var(--muted);
+      font-size: .86rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
     .brand-mark {
       width: 42px;
       height: 42px;
@@ -104,6 +133,50 @@
       grid-template-columns: minmax(0, 1.05fr) minmax(320px, .95fr);
       gap: 24px;
       align-items: stretch;
+    }
+
+    .broker-video {
+      display: grid;
+      grid-template-columns: minmax(260px, .72fr) minmax(320px, 1fr);
+      gap: 24px;
+      align-items: center;
+      padding: clamp(22px, 4vw, 34px);
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+
+    .broker-video-copy h2 {
+      margin: 0;
+      font-size: clamp(1.65rem, 3.4vw, 2.75rem);
+      line-height: 1;
+      letter-spacing: -.065em;
+      max-width: 13ch;
+    }
+
+    .broker-video-copy p:not(.eyebrow) {
+      margin: 16px 0 0;
+      color: var(--muted);
+      line-height: 1.52;
+      max-width: 52ch;
+    }
+
+    .video-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(231, 222, 211, .95);
+      background: #1d1712;
+      box-shadow: 0 18px 38px rgba(57, 43, 32, .14);
+    }
+
+    .video-frame iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
     }
 
     .panel {
@@ -568,36 +641,402 @@
       transform: translateX(-50%) translateY(0);
     }
 
+
+
+    .top-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: auto;
+    }
+
+    .menu-button {
+      appearance: none;
+      width: 50px;
+      height: 50px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, .72);
+      box-shadow: 0 10px 24px rgba(57, 43, 32, .08);
+      cursor: pointer;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+    }
+
+    .menu-button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 28px rgba(57, 43, 32, .12);
+      background: #fffdf9;
+    }
+
+    .menu-button:focus-visible,
+    .drawer-close:focus-visible,
+    .drawer-nav a:focus-visible {
+      outline: none;
+      box-shadow: var(--focus);
+    }
+
+    .menu-button .bar {
+      display: block;
+      width: 22px;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--brand);
+    }
+
+    .menu-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(36, 31, 26, .36);
+      backdrop-filter: blur(5px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .18s ease;
+      z-index: 30;
+    }
+
+    .menu-overlay[hidden] { display: none; }
+
+    .menu-drawer {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: min(390px, 90vw);
+      padding: 24px;
+      background:
+        radial-gradient(circle at top left, rgba(143, 93, 59, .16), transparent 18rem),
+        rgba(255, 250, 243, .98);
+      border-right: 1px solid rgba(231, 222, 211, .95);
+      box-shadow: 20px 0 50px rgba(57, 43, 32, .18);
+      transform: translateX(-104%);
+      transition: transform .22s ease;
+      z-index: 31;
+      overflow-y: auto;
+      pointer-events: none;
+    }
+
+    body.menu-open { overflow: hidden; }
+
+    body.menu-open .menu-overlay {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    body.menu-open .menu-drawer {
+      transform: translateX(0);
+      pointer-events: auto;
+    }
+
+    .drawer-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 18px;
+    }
+
+    .drawer-header .eyebrow { margin-bottom: 10px; }
+
+    .drawer-header h2 {
+      margin: 0;
+      font-size: 2rem;
+      letter-spacing: -.07em;
+      line-height: 1;
+    }
+
+    .drawer-header span,
+    .drawer-note {
+      display: block;
+      color: var(--muted);
+      line-height: 1.42;
+      font-size: .93rem;
+      margin-top: 8px;
+    }
+
+    .drawer-close {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: #fffdf9;
+      color: var(--brand);
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      cursor: pointer;
+      font-size: 1.65rem;
+      line-height: 1;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+    }
+
+    .drawer-nav {
+      display: grid;
+      gap: 10px;
+    }
+
+    .drawer-nav a {
+      text-decoration: none;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, .66);
+      border-radius: 16px;
+      padding: 13px 14px;
+      font-weight: 850;
+      color: var(--brand);
+      transition: transform .16s ease, border-color .16s ease, background .16s ease;
+    }
+
+    .drawer-nav a:hover {
+      transform: translateX(2px);
+      border-color: rgba(143, 93, 59, .42);
+      background: #fffdf9;
+    }
+
+    .drawer-note {
+      margin: 18px 0 0;
+      padding: 14px;
+      border-radius: 16px;
+      background: rgba(239, 229, 216, .5);
+      border: 1px solid var(--line);
+    }
+
+    #para-voce-corretor,
+    #motor-compatibilidade,
+    #imoveis-sugeridos,
+    .content-section {
+      scroll-margin-top: 24px;
+    }
+
+    .content-section {
+      margin-top: 24px;
+      padding: clamp(24px, 4vw, 38px);
+    }
+
+    .content-heading {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 22px;
+    }
+
+    .content-heading.compact { align-items: flex-start; }
+
+    .content-heading h2,
+    .content-section > h2,
+    .split-content h2 {
+      margin: 0;
+      font-size: clamp(1.7rem, 3.4vw, 3rem);
+      line-height: 1;
+      letter-spacing: -.07em;
+      max-width: 15ch;
+    }
+
+    .content-heading p,
+    .content-section > p:not(.eyebrow),
+    .split-content p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.55;
+      max-width: 56ch;
+    }
+
+    .content-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .content-grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .content-grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    .content-card {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, .58);
+      border-radius: 18px;
+      padding: 18px;
+      min-height: 174px;
+    }
+
+    .content-card.small { min-height: 150px; }
+
+    .content-card > span {
+      width: 38px;
+      height: 38px;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      background: var(--brand-soft);
+      color: var(--brand);
+      font-weight: 950;
+      margin-bottom: 18px;
+    }
+
+    .content-card h3 {
+      margin: 0 0 8px;
+      letter-spacing: -.04em;
+      font-size: 1.08rem;
+    }
+
+    .content-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.45;
+      font-size: .94rem;
+    }
+
+    .split-content {
+      display: grid;
+      grid-template-columns: minmax(260px, .85fr) minmax(300px, 1fr);
+      gap: 24px;
+      align-items: center;
+    }
+
+    .split-content > div:first-child p:not(.eyebrow) {
+      margin-top: 16px;
+    }
+
+    .content-stack {
+      display: grid;
+      gap: 12px;
+    }
+
+    .stack-item {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, .62);
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .stack-item b {
+      display: block;
+      margin-bottom: 6px;
+      letter-spacing: -.03em;
+    }
+
+    .stack-item span {
+      color: var(--muted);
+      line-height: 1.42;
+      font-size: .94rem;
+    }
+
+    .cta-section {
+      text-align: center;
+    }
+
+    .cta-section .eyebrow { justify-content: center; }
+
+    .cta-section h2 {
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 14ch;
+    }
+
+    .cta-section p:not(.eyebrow) {
+      margin: 14px auto 0;
+    }
+
+    .cta-actions {
+      margin-top: 22px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
     @media (max-width: 980px) {
-      .hero, .results { grid-template-columns: 1fr; }
+      .hero, .results, .broker-video, .split-content { grid-template-columns: 1fr; }
       .intro { min-height: auto; }
+      .broker-video-copy h2 { max-width: 18ch; }
+      .content-heading { display: block; }
+      .content-heading p { margin-top: 14px; }
+      .content-grid.three, .content-grid.four { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 
     @media (max-width: 680px) {
       .shell { width: min(100% - 22px, 1180px); padding-top: 18px; }
-      .topbar { align-items: flex-start; }
+      .topbar { align-items: flex-start; gap: 12px; }
       .pill { display: none; }
+      .brand { gap: 8px; }
+      .brand-logo-image { width: min(220px, 70vw); }
+      .logo-subtitle { font-size: .78rem; min-height: 30px; padding: 6px 9px; }
+      .top-actions { margin-left: 0; }
+      .menu-button { width: 46px; height: 46px; border-radius: 14px; }
       .principles { grid-template-columns: 1fr; }
-      .form-grid, .check-grid { grid-template-columns: 1fr; }
+      .form-grid, .check-grid, .content-grid.three, .content-grid.four { grid-template-columns: 1fr; }
       .property-card { grid-template-columns: 1fr; }
       .property-score { width: 100%; height: 46px; border-radius: 14px; }
+      .content-section { padding: 22px; }
+      .content-heading h2, .content-section > h2, .split-content h2 { max-width: none; }
     }
   </style>
 </head>
 <body>
-  <main class="shell">
+  <main class="shell" id="topo">
     <header class="topbar" aria-label="Cabeçalho do produto">
-      <div class="brand">
-        <div class="brand-mark" aria-hidden="true">M</div>
-        <div>
-          <h1>Mova Match</h1>
-          <p>MVP v8 - busca inteligente para corretores</p>
-        </div>
+      <a class="brand brand-link" href="#" aria-label="MatchR - início">
+        <img class="brand-logo-image" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NjAgMTY4IiByb2xlPSJpbWciIGFyaWEtbGFiZWw9Ik1hdGNoUiDigJQgSW50ZWxpZ8OqbmNpYSBwYXJhIG8gY29ycmV0b3IgaW1vYmlsacOhcmlvIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMzZDJjMjQiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjOGY1ZDNiIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGZpbHRlciBpZD0icyIgeD0iLTIwJSIgeT0iLTIwJSIgd2lkdGg9IjE0MCUiIGhlaWdodD0iMTQwJSI+CiAgICAgIDxmZURyb3BTaGFkb3cgZHg9IjAiIGR5PSIxMiIgc3RkRGV2aWF0aW9uPSIxMiIgZmxvb2QtY29sb3I9IiMzOTJiMjAiIGZsb29kLW9wYWNpdHk9IjAuMTUiLz4KICAgIDwvZmlsdGVyPgogIDwvZGVmcz4KICA8cmVjdCB3aWR0aD0iNjYwIiBoZWlnaHQ9IjE2OCIgcng9IjM0IiBmaWxsPSIjZmZmYWYzIi8+CiAgPGcgZmlsdGVyPSJ1cmwoI3MpIj4KICAgIDxyZWN0IHg9IjE4IiB5PSIxOCIgd2lkdGg9IjEzMiIgaGVpZ2h0PSIxMzIiIHJ4PSIzMiIgZmlsbD0idXJsKCNnKSIvPgogICAgPHBhdGggZD0iTTQ4IDkyIDg0IDU4bDM2IDM0djM3SDk2di0zMEg3MnYzMEg0OFY5MloiIGZpbGw9IiNmZmZhZjMiLz4KICAgIDxwYXRoIGQ9Ik02NiA4MSA4NCA2NGwxOCAxNyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmYWYzIiBzdHJva2Utd2lkdGg9IjEwIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KICA8L2c+CiAgPHRleHQgeD0iMTc0IiB5PSI5MCIgZm9udC1mYW1pbHk9IkludGVyLCBBcmlhbCwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjU0IiBmb250LXdlaWdodD0iODAwIiBsZXR0ZXItc3BhY2luZz0iLTIuNSIgZmlsbD0iIzI0MWYxYSI+TWF0Y2hSPC90ZXh0PgogIDx0ZXh0IHg9IjE3NiIgeT0iMTI2IiBmb250LWZhbWlseT0iSW50ZXIsIEFyaWFsLCBIZWx2ZXRpY2EsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjIiIGZvbnQtd2VpZ2h0PSI1MDAiIGZpbGw9IiM2ZDYyNTgiPkludGVsaWfDqm5jaWEgcGFyYSBvIGNvcnJldG9yIGltb2JpbGnDoXJpbzwvdGV4dD4KPC9zdmc+" alt="MatchR — Inteligência para o corretor imobiliário" />
+        <span class="logo-subtitle">MVP v11 • busca inteligente para corretores</span>
+      </a>
+      <div class="top-actions">
+        <span class="pill">Menu restaurado</span>
+        <button class="menu-button" id="menuButton" type="button" aria-controls="siteMenu" aria-expanded="false" aria-label="Abrir menu de navegação">
+          <span class="bar" aria-hidden="true"></span>
+          <span class="bar" aria-hidden="true"></span>
+          <span class="bar" aria-hidden="true"></span>
+        </button>
       </div>
-      <span class="pill">Tela simplificada</span>
     </header>
 
-    <section class="hero" aria-labelledby="hero-title">
+
+    <div class="menu-overlay" id="menuOverlay" hidden></div>
+    <nav class="menu-drawer" id="siteMenu" aria-label="Menu de navegação" aria-hidden="true">
+      <div class="drawer-header">
+        <div>
+          <p class="eyebrow">Navegação</p>
+          <h2>MatchR</h2>
+          <span>Menu restaurado para acessar todas as seções da página.</span>
+        </div>
+        <button class="drawer-close" id="menuClose" type="button" aria-label="Fechar menu">×</button>
+      </div>
+      <div class="drawer-nav" role="list">
+        <a href="#para-voce-corretor" data-menu-link role="listitem">Para você, corretor</a>
+        <a href="#motor-compatibilidade" data-menu-link role="listitem">Motor de compatibilidade</a>
+        <a href="#imoveis-sugeridos" data-menu-link role="listitem">Imóveis sugeridos</a>
+        <a href="#como-funciona" data-menu-link role="listitem">Como funciona</a>
+        <a href="#beneficios" data-menu-link role="listitem">Benefícios</a>
+        <a href="#para-imobiliarias" data-menu-link role="listitem">Para imobiliárias e incorporadoras</a>
+        <a href="#contato" data-menu-link role="listitem">Contato / próximos passos</a>
+      </div>
+      <p class="drawer-note">A interface do motor continua limpa; o conteúdo institucional fica acessível pelo menu.</p>
+    </nav>
+
+    <section class="panel broker-video" id="para-voce-corretor" aria-labelledby="broker-video-title">
+      <div class="broker-video-copy">
+        <p class="eyebrow">Para você, corretor</p>
+        <h2 id="broker-video-title">Assista ao vídeo de apresentação.</h2>
+        <p>
+          Aula de Renato Gosling, fundador do MatchR, sobre como corretores podem ganhar eficiência em follow-up, networking e técnicas de vendas.
+        </p>
+      </div>
+      <div class="video-frame" aria-label="Vídeo de apresentação para corretores">
+        <iframe
+          src="https://www.youtube.com/embed/7o9W3ATGCl4"
+          title="Vídeo para você, corretor - MatchR"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </section>
+
+    <section class="hero" id="motor-compatibilidade" aria-labelledby="hero-title">
       <article class="panel intro">
         <div>
           <p class="eyebrow">Encontre imóveis compatíveis com o cliente</p>
@@ -748,7 +1187,7 @@
       </aside>
     </section>
 
-    <section class="results" aria-labelledby="results-title">
+    <section class="results" id="imoveis-sugeridos" aria-labelledby="results-title">
       <aside class="panel summary-card">
         <div class="section-title">
           <h3 id="results-title">Resumo do match</h3>
@@ -770,11 +1209,121 @@
         <div class="properties" id="propertyList"></div>
       </article>
     </section>
+
+
+    <section class="panel content-section" id="como-funciona" aria-labelledby="como-funciona-title">
+      <p class="eyebrow">Como funciona</p>
+      <div class="content-heading">
+        <h2 id="como-funciona-title">Do briefing ao imóvel certo, sem virar um formulário infinito.</h2>
+        <p>O MatchR mantém o motor objetivo, mas preserva as seções de explicação da página para o usuário entender a proposta completa.</p>
+      </div>
+      <div class="content-grid three">
+        <article class="content-card">
+          <span>1</span>
+          <h3>Captura o briefing</h3>
+          <p>O corretor escreve o pedido do cliente em linguagem natural ou preenche os campos essenciais.</p>
+        </article>
+        <article class="content-card">
+          <span>2</span>
+          <h3>Mostra só o que faz sentido</h3>
+          <p>Áreas comuns aparecem para apartamento e casa de condomínio, com a terminologia correta em cada caso.</p>
+        </article>
+        <article class="content-card">
+          <span>3</span>
+          <h3>Prioriza compatibilidade</h3>
+          <p>A lista sugerida organiza imóveis por aderência ao perfil, evitando perda de tempo com opções desalinhadas.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel content-section" id="beneficios" aria-labelledby="beneficios-title">
+      <p class="eyebrow">Benefícios</p>
+      <div class="content-heading compact">
+        <h2 id="beneficios-title">Mais clareza para atender, argumentar e converter.</h2>
+      </div>
+      <div class="content-grid four">
+        <article class="content-card small">
+          <h3>Tela menos poluída</h3>
+          <p>Os filtros avançados ficam recolhidos e os campos condicionais aparecem no contexto certo.</p>
+        </article>
+        <article class="content-card small">
+          <h3>Follow-up melhor</h3>
+          <p>O corretor entende rapidamente por que um imóvel combina com o cliente.</p>
+        </article>
+        <article class="content-card small">
+          <h3>Busca mais inteligente</h3>
+          <p>Briefing por texto ajuda a transformar intenção em filtros acionáveis.</p>
+        </article>
+        <article class="content-card small">
+          <h3>Pronto para evoluir</h3>
+          <p>A base já permite novas regras, integrações e critérios de compatibilidade.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel content-section split-content" id="para-imobiliarias" aria-labelledby="para-imobiliarias-title">
+      <div>
+        <p class="eyebrow">Para imobiliárias e incorporadoras</p>
+        <h2 id="para-imobiliarias-title">Uma camada de inteligência comercial para equipes.</h2>
+        <p>Além do uso individual pelo corretor, o MatchR pode ajudar equipes a padronizar atendimento, registrar demanda real e entender quais características aparecem mais nas buscas dos clientes.</p>
+      </div>
+      <div class="content-stack">
+        <div class="stack-item"><b>Gestão de demanda</b><span>Briefings mais organizados e reaproveitáveis.</span></div>
+        <div class="stack-item"><b>Curadoria de carteira</b><span>Imóveis apresentados com lógica de aderência, não só por disponibilidade.</span></div>
+        <div class="stack-item"><b>Inteligência de produto</b><span>Sinais sobre bairros, faixas de preço e atributos mais procurados.</span></div>
+      </div>
+    </section>
+
+    <section class="panel content-section cta-section" id="contato" aria-labelledby="contato-title">
+      <p class="eyebrow">Contato / próximos passos</p>
+      <h2 id="contato-title">Próximo passo do MVP</h2>
+      <p>Validar a navegação completa, testar o fluxo com corretores e evoluir a base de imóveis compatíveis sem perder a simplicidade da interface.</p>
+      <div class="cta-actions" aria-label="Ações sugeridas">
+        <a class="btn primary" href="#motor-compatibilidade">Testar o motor</a>
+        <a class="btn secondary" href="#para-voce-corretor">Ver vídeo para corretores</a>
+      </div>
+    </section>
   </main>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script>
+
+    const menuButton = document.getElementById("menuButton");
+    const menuClose = document.getElementById("menuClose");
+    const menuOverlay = document.getElementById("menuOverlay");
+    const siteMenu = document.getElementById("siteMenu");
+    const menuLinks = document.querySelectorAll("[data-menu-link]");
+
+    function openMenu() {
+      menuOverlay.hidden = false;
+      document.body.classList.add("menu-open");
+      menuButton.setAttribute("aria-expanded", "true");
+      siteMenu.setAttribute("aria-hidden", "false");
+      const firstLink = siteMenu.querySelector("a, button");
+      if (firstLink) firstLink.focus({ preventScroll: true });
+    }
+
+    function closeMenu(restoreFocus = true) {
+      document.body.classList.remove("menu-open");
+      menuButton.setAttribute("aria-expanded", "false");
+      siteMenu.setAttribute("aria-hidden", "true");
+      menuOverlay.hidden = true;
+      if (restoreFocus) menuButton.focus({ preventScroll: true });
+    }
+
+    menuButton.addEventListener("click", () => {
+      const isOpen = menuButton.getAttribute("aria-expanded") === "true";
+      isOpen ? closeMenu() : openMenu();
+    });
+
+    menuClose.addEventListener("click", () => closeMenu());
+    menuOverlay.addEventListener("click", () => closeMenu());
+    menuLinks.forEach(link => link.addEventListener("click", () => closeMenu(false)));
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && document.body.classList.contains("menu-open")) closeMenu();
+    });
+
     const commonAreaConfig = {
       "apartamento": {
         title: "Áreas comuns do edifício",

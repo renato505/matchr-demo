@@ -1,33 +1,36 @@
-# Mova Match - MVP v8
+# MatchR - MVP v11
 
-Protótipo estático em HTML/CSS/JS para a tela **Encontre imóveis compatíveis com o cliente**.
+Protótipo estático em HTML/CSS/JS para a página do MatchR com motor de compatibilidade, navegação restaurada e conteúdo institucional.
 
 ## Ajustes incluídos nesta versão
 
-1. Tela menos poluída:
-   - Filtros avançados ficam recolhidos por padrão.
-   - A seção de áreas comuns não aparece para todos os tipos de imóvel.
+- Restaurado o **menu de navegação** em formato hambúrguer, abrindo pela lateral esquerda.
+- Mantida a interface limpa do motor da v8/v10.
+- Mantido o **logotipo no canto superior esquerdo**.
+- Mantida a seção **Para você, corretor** com vídeo embedado do YouTube.
+- Recriadas/organizadas as seções de página para não ficar “só motor”:
+  - Para você, corretor
+  - Motor de compatibilidade
+  - Imóveis sugeridos
+  - Como funciona
+  - Benefícios
+  - Para imobiliárias e incorporadoras
+  - Contato / próximos passos
+- Mantida a opção **Casa de condomínio** no combo box de tipo de imóvel.
+- Mantida a lógica condicional:
+  - **Apartamento** exibe **Áreas comuns do edifício**.
+  - **Casa de condomínio** exibe **Áreas comuns do condomínio**.
+  - Os demais tipos ocultam a seção de áreas comuns.
+- Mantida a opção **Infraestrutura para carregar carro elétrico** para Apartamento e Casa de condomínio.
+- Filtros avançados permanecem recolhidos por padrão para reduzir poluição visual.
 
-2. Combo box de tipo de imóvel:
-   - Incluída a opção **Casa de condomínio**.
+## Como publicar no GitHub Pages
 
-3. Regra condicional das áreas comuns:
-   - Se o usuário selecionar **Apartamento**, aparece o bloco **Áreas comuns do edifício**.
-   - Se o usuário selecionar **Casa de condomínio**, aparece o bloco **Áreas comuns do condomínio**.
-   - Para os demais tipos de imóvel, o bloco fica oculto.
-   - Ao trocar para um tipo que não usa essa seção, os filtros marcados em áreas comuns são limpos.
+1. Envie o arquivo `index.html` para a raiz do repositório.
+2. No GitHub, acesse **Settings > Pages**.
+3. Selecione a branch principal e a pasta raiz.
+4. Salve e aguarde a publicação.
 
-4. Carro elétrico:
-   - A opção **Infraestrutura para carregar carro elétrico** foi adicionada dentro das áreas comuns.
-   - Ela aparece tanto para **Apartamento** quanto para **Casa de condomínio**.
-   - O briefing inteligente reconhece termos como `carro elétrico`, `carregador`, `recarga`, `tomada para carro` e `EV charger`.
+## Observação sobre o vídeo
 
-## Como usar
-
-Abra o arquivo `index.html` no navegador.
-
-## Arquivos
-
-- `index.html`: protótipo completo em arquivo único.
-- `README.md`: este resumo.
-- `CHANGELOG.md`: histórico da versão.
+O link enviado era do YouTube Studio, que é a área de edição do criador. Para embed público na página, o HTML usa o ID do vídeo no formato padrão de incorporação do YouTube: `https://www.youtube.com/embed/7o9W3ATGCl4`. Se o vídeo estiver privado, ele não será exibido para visitantes externos.
