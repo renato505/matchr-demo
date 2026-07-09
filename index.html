@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>MatchR — MVP v2</title>
+<title>MatchR — MVP v3</title>
 <style>
 :root{
   --bg:#fffaf5;
@@ -54,7 +54,7 @@ nav button{
 nav button.active,nav button:hover{background:#111;color:#fff}.pill{font-size:11px;background:#fff1e8;color:var(--orange-dark);padding:3px 7px;border-radius:999px;border:1px solid #ffd9bf;font-weight:950}
 nav button.active .pill,nav button:hover .pill{background:#fff;color:#111;border-color:#fff}.side-card{margin-top:24px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow-soft)}
 .side-card p{margin:8px 0 0;font-size:13px;color:var(--muted);line-height:1.45}.side-card strong{font-size:13px}main{padding:28px;max-width:1520px;width:100%;margin:0 auto}.view{display:none}.view.active{display:block}
-.top{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:22px}h1{margin:0;font-size:36px;letter-spacing:-.05em;line-height:1.04}h2{margin:0 0 12px;font-size:21px;letter-spacing:-.025em}h3{margin:0 0 8px;font-size:16px}p{color:var(--muted);line-height:1.45}.lead{margin:8px 0 0;max-width:780px}.grid{display:grid;gap:16px}.cols2{grid-template-columns:repeat(2,minmax(0,1fr))}.cols3{grid-template-columns:repeat(3,minmax(0,1fr))}.cols4{grid-template-columns:repeat(4,minmax(0,1fr))}.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow-soft)}.card.soft{background:linear-gradient(180deg,#fff,#fff7ef)}.metric .n{font-size:38px;font-weight:950;letter-spacing:-.06em}.metric .label{font-size:13px;color:var(--muted);font-weight:800}.btn{border:0;border-radius:14px;padding:12px 16px;font-weight:950;font-size:14px;white-space:nowrap}.btn.primary{background:#111;color:#fff}.btn.orange{background:var(--orange);color:#fff}.btn.ghost{background:#fff;color:#111;border:1px solid var(--line)}.btn.soft{background:#fff4ec;color:var(--orange-dark);border:1px solid #ffd9bf}.btn:hover{transform:translateY(-1px)}.filters{display:grid;grid-template-columns:repeat(6,minmax(120px,1fr));gap:10px;margin-bottom:16px}input,select,textarea{width:100%;border:1px solid var(--line);background:#fff;color:#111;padding:12px 13px;border-radius:14px;outline:none;font-size:14px}textarea{resize:vertical;min-height:112px;line-height:1.45}input:focus,select:focus,textarea:focus{border-color:var(--orange);box-shadow:0 0 0 4px rgba(255,106,0,.10)}.voice-card{margin-bottom:16px;padding:18px;border:1px solid var(--line);border-radius:22px;background:#fff;box-shadow:var(--shadow)}.voice-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.voice-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}.badge,.tag,.score,.status,.chip{display:inline-flex;align-items:center;gap:4px;border-radius:999px;padding:6px 9px;font-size:12px;font-weight:850}.badge{background:#111;color:#fff}.tag{background:#f6f6f6;color:#333;margin:4px 4px 0 0}.tag.good{background:rgba(14,122,70,.10);color:var(--green);border:1px solid rgba(14,122,70,.18)}.tag.warn{background:#fff4ec;color:var(--orange-dark);border:1px solid #ffd9bf}.tag.bad{background:rgba(170,31,31,.08);color:var(--red);border:1px solid rgba(170,31,31,.18)}.score{background:rgba(255,106,0,.13);color:var(--orange-dark);border:1px solid rgba(255,106,0,.22)}.status{background:#f1f5f9;color:#334155}.status.hot{background:rgba(255,106,0,.13);color:var(--orange-dark)}.status.ok{background:rgba(14,122,70,.12);color:var(--green)}.criteria{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.criteria .chip{background:#fff4ec;color:var(--orange-dark);border:1px solid #ffd9bf}.criteria .chip.strict{background:rgba(14,122,70,.10);color:var(--green);border-color:rgba(14,122,70,.20)}.criteria .chip.empty{background:#f6f6f6;color:#666;border-color:#e5e5e5}.rules{display:grid;grid-template-columns:1.15fr .85fr;gap:16px;margin-bottom:16px}.rules-list{display:grid;gap:9px}.toggle{display:flex;align-items:flex-start;gap:10px;padding:10px;border:1px solid var(--line);border-radius:14px;background:#fff}.toggle input{width:auto;margin-top:3px}.toggle span{font-size:13px;color:#333}.toggle b{display:block;color:#111;margin-bottom:2px}.inventory{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.imovel{border:1px solid var(--line);border-radius:22px;overflow:hidden;background:#fff;box-shadow:var(--shadow-soft);display:flex;flex-direction:column}.photo{height:148px;background:linear-gradient(135deg,#f4ede4,#d7cec4 56%,#f7f7f7);position:relative}.photo:after{content:"";position:absolute;inset:18px;border:1px solid rgba(255,255,255,.65);border-radius:16px}.photo .kind{position:absolute;left:14px;top:14px;background:#111;color:#fff;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:950;z-index:2}.photo .match{position:absolute;right:14px;top:14px;background:#fff;color:var(--orange-dark);border-radius:999px;padding:7px 10px;font-size:12px;font-weight:950;box-shadow:var(--shadow-soft);z-index:2}.imovel-body{padding:16px;display:flex;flex-direction:column;gap:8px;flex:1}.imovel h3{font-size:17px;letter-spacing:-.02em;margin:0}.meta{font-size:13px;color:var(--muted);font-weight:780}.price{font-size:20px;font-weight:950;letter-spacing:-.04em}.why{border-top:1px solid var(--line);padding-top:12px;margin-top:auto}.why p{font-size:12px;margin:6px 0;color:#555}.split{display:grid;grid-template-columns:1.25fr .75fr;gap:16px}.mini-table{width:100%;border-collapse:collapse}.mini-table th,.mini-table td{border-bottom:1px solid var(--line);padding:11px;text-align:left;font-size:13px}.mini-table th{color:#555;font-size:12px;text-transform:uppercase;letter-spacing:.04em}.empty-state{padding:22px;border:1px dashed #e0b995;background:#fff8f0;border-radius:20px;color:#633900}.toast{position:fixed;right:24px;bottom:24px;background:#111;color:#fff;padding:14px 18px;border-radius:15px;box-shadow:var(--shadow);display:none;font-weight:850;z-index:50}.small{font-size:12px;color:var(--muted-2)}.divider{height:1px;background:var(--line);margin:14px 0}.callout{border:1px solid #ffd9bf;background:#fff4ec;border-radius:18px;padding:14px;color:#643700}.callout p{margin:6px 0 0}.kbd{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#f6f6f6;border:1px solid #e7e7e7;border-radius:7px;padding:2px 5px;font-size:12px}.client-grid{display:grid;grid-template-columns:1.1fr .9fr .7fr .7fr auto;gap:10px}.results-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin:8px 0 14px}.results-head p{margin:5px 0 0}.test-pass{font-size:12px;color:var(--green);font-weight:900}.test-fail{font-size:12px;color:var(--red);font-weight:900}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:22px}h1{margin:0;font-size:36px;letter-spacing:-.05em;line-height:1.04}h2{margin:0 0 12px;font-size:21px;letter-spacing:-.025em}h3{margin:0 0 8px;font-size:16px}p{color:var(--muted);line-height:1.45}.lead{margin:8px 0 0;max-width:780px}.grid{display:grid;gap:16px}.cols2{grid-template-columns:repeat(2,minmax(0,1fr))}.cols3{grid-template-columns:repeat(3,minmax(0,1fr))}.cols4{grid-template-columns:repeat(4,minmax(0,1fr))}.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow-soft)}.card.soft{background:linear-gradient(180deg,#fff,#fff7ef)}.metric .n{font-size:38px;font-weight:950;letter-spacing:-.06em}.metric .label{font-size:13px;color:var(--muted);font-weight:800}.btn{border:0;border-radius:14px;padding:12px 16px;font-weight:950;font-size:14px;white-space:nowrap}.btn.primary{background:#111;color:#fff}.btn.orange{background:var(--orange);color:#fff}.btn.ghost{background:#fff;color:#111;border:1px solid var(--line)}.btn.soft{background:#fff4ec;color:var(--orange-dark);border:1px solid #ffd9bf}.btn:hover{transform:translateY(-1px)}.filters{display:grid;grid-template-columns:repeat(6,minmax(120px,1fr));gap:10px;margin-bottom:16px}input,select,textarea{width:100%;border:1px solid var(--line);background:#fff;color:#111;padding:12px 13px;border-radius:14px;outline:none;font-size:14px}textarea{resize:vertical;min-height:112px;line-height:1.45}input:focus,select:focus,textarea:focus{border-color:var(--orange);box-shadow:0 0 0 4px rgba(255,106,0,.10)}.voice-card{margin-bottom:16px;padding:18px;border:1px solid var(--line);border-radius:22px;background:#fff;box-shadow:var(--shadow)}.voice-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.voice-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}.badge,.tag,.score,.status,.chip{display:inline-flex;align-items:center;gap:4px;border-radius:999px;padding:6px 9px;font-size:12px;font-weight:850}.badge{background:#111;color:#fff}.tag{background:#f6f6f6;color:#333;margin:4px 4px 0 0}.tag.good{background:rgba(14,122,70,.10);color:var(--green);border:1px solid rgba(14,122,70,.18)}.tag.warn{background:#fff4ec;color:var(--orange-dark);border:1px solid #ffd9bf}.tag.bad{background:rgba(170,31,31,.08);color:var(--red);border:1px solid rgba(170,31,31,.18)}.score{background:rgba(255,106,0,.13);color:var(--orange-dark);border:1px solid rgba(255,106,0,.22)}.status{background:#f1f5f9;color:#334155}.status.hot{background:rgba(255,106,0,.13);color:var(--orange-dark)}.status.ok{background:rgba(14,122,70,.12);color:var(--green)}.criteria{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.criteria .chip{background:#fff4ec;color:var(--orange-dark);border:1px solid #ffd9bf}.criteria .chip.strict{background:rgba(14,122,70,.10);color:var(--green);border-color:rgba(14,122,70,.20)}.criteria .chip.empty{background:#f6f6f6;color:#666;border-color:#e5e5e5}.rules{display:grid;grid-template-columns:1.15fr .85fr;gap:16px;margin-bottom:16px}.rules-list{display:grid;gap:9px}.toggle{display:flex;align-items:flex-start;gap:10px;padding:10px;border:1px solid var(--line);border-radius:14px;background:#fff}.toggle input{width:auto;margin-top:3px}.toggle span{font-size:13px;color:#333}.toggle b{display:block;color:#111;margin-bottom:2px}.inventory{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.imovel{border:1px solid var(--line);border-radius:22px;overflow:hidden;background:#fff;box-shadow:var(--shadow-soft);display:flex;flex-direction:column}.photo{height:148px;background:linear-gradient(135deg,#f4ede4,#d7cec4 56%,#f7f7f7);position:relative;overflow:hidden}.photo.with-image{background-size:cover;background-position:center}.photo.logo-photo{background:linear-gradient(135deg,#fff7ef,#ffffff 46%,#f0ebe5)}.photo:after{content:"";position:absolute;inset:18px;border:1px solid rgba(255,255,255,.72);border-radius:16px;pointer-events:none}.photo.logo-photo:after{border-color:rgba(17,17,17,.08)}.photo .kind{position:absolute;left:14px;top:14px;background:#111;color:#fff;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:950;z-index:3}.photo .match{position:absolute;right:14px;top:14px;background:#fff;color:var(--orange-dark);border-radius:999px;padding:7px 10px;font-size:12px;font-weight:950;box-shadow:var(--shadow-soft);z-index:3}.logo-photo-content{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:5px;padding:36px 18px 16px;z-index:1}.broker-logo-img{max-width:72%;max-height:54px;object-fit:contain;display:block;filter:drop-shadow(0 8px 18px rgba(17,17,17,.08))}.logo-fallback{min-width:76px;min-height:52px;border-radius:16px;background:#fff;border:1px solid rgba(17,17,17,.10);display:grid;place-items:center;font-weight:950;font-size:18px;letter-spacing:-.04em;color:#111;box-shadow:var(--shadow-soft);padding:0 14px}.broker-name{font-size:13px;font-weight:950;letter-spacing:-.02em;color:#111;max-width:90%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.broker-label{font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:var(--muted-2)}.imovel-body{padding:16px;display:flex;flex-direction:column;gap:8px;flex:1}.imovel h3{font-size:17px;letter-spacing:-.02em;margin:0}.meta{font-size:13px;color:var(--muted);font-weight:780}.price{font-size:20px;font-weight:950;letter-spacing:-.04em}.why{border-top:1px solid var(--line);padding-top:12px;margin-top:auto}.why p{font-size:12px;margin:6px 0;color:#555}.split{display:grid;grid-template-columns:1.25fr .75fr;gap:16px}.mini-table{width:100%;border-collapse:collapse}.mini-table th,.mini-table td{border-bottom:1px solid var(--line);padding:11px;text-align:left;font-size:13px}.mini-table th{color:#555;font-size:12px;text-transform:uppercase;letter-spacing:.04em}.empty-state{padding:22px;border:1px dashed #e0b995;background:#fff8f0;border-radius:20px;color:#633900}.toast{position:fixed;right:24px;bottom:24px;background:#111;color:#fff;padding:14px 18px;border-radius:15px;box-shadow:var(--shadow);display:none;font-weight:850;z-index:50}.small{font-size:12px;color:var(--muted-2)}.divider{height:1px;background:var(--line);margin:14px 0}.callout{border:1px solid #ffd9bf;background:#fff4ec;border-radius:18px;padding:14px;color:#643700}.callout p{margin:6px 0 0}.kbd{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#f6f6f6;border:1px solid #e7e7e7;border-radius:7px;padding:2px 5px;font-size:12px}.client-grid{display:grid;grid-template-columns:1.1fr .9fr .7fr .7fr auto;gap:10px}.results-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin:8px 0 14px}.results-head p{margin:5px 0 0}.test-pass{font-size:12px;color:var(--green);font-weight:900}.test-fail{font-size:12px;color:var(--red);font-weight:900}
 @media(max-width:1100px){.app{grid-template-columns:1fr}aside{position:relative;height:auto}.filters,.cols4,.cols3,.cols2,.inventory,.rules,.split,.client-grid{grid-template-columns:1fr}main{padding:18px}h1{font-size:31px}.top,.voice-head,.results-head{display:block}.voice-actions{margin-top:12px}}
 </style>
 </head>
@@ -63,7 +63,7 @@ nav button.active .pill,nav button:hover .pill{background:#fff;color:#111;border
   <aside>
     <a class="logo" onclick="goId('dashboard')" aria-label="Voltar ao início">
       <span class="logo-mark">MR</span>
-      <span class="logo-text"><b>MatchR</b><span>MVP v2 • motor criterioso</span></span>
+      <span class="logo-text"><b>MatchR</b><span>MVP v3 • motor + logos</span></span>
     </a>
     <nav>
       <button class="active" data-view="dashboard" onclick="goId('dashboard')">O MatchR <span class="pill">novo</span></button>
@@ -79,6 +79,10 @@ nav button.active .pill,nav button:hover .pill{background:#fff;color:#111;border
     <div class="side-card">
       <strong>Regra de ouro</strong>
       <p>Preferência do buscador × características disponíveis. O sistema cruza intenção, restrições e atributos do imóvel.</p>
+    </div>
+    <div class="side-card">
+      <strong>Imóveis sem foto</strong>
+      <p>Quando o card não tem imagem do imóvel, o MatchR exibe um logo de imobiliária distribuído de forma balanceada na base.</p>
     </div>
   </aside>
 
@@ -96,7 +100,7 @@ nav button.active .pill,nav button:hover .pill{background:#fff;color:#111;border
         <div class="card metric"><div class="n" id="totalImoveis">3.000</div><div class="label">imóveis simulados</div></div>
         <div class="card metric"><div class="n">0</div><div class="label">casas quando busca apartamento</div></div>
         <div class="card metric"><div class="n">2</div><div class="label">camadas: obrigatório + preferência</div></div>
-        <div class="card metric"><div class="n">90 dias</div><div class="label">piloto sugerido</div></div>
+        <div class="card metric"><div class="n">10</div><div class="label">logos distribuídos nos cards sem foto</div></div>
       </div>
 
       <div class="grid cols3" style="margin-top:16px">
@@ -125,7 +129,7 @@ nav button.active .pill,nav button:hover .pill{background:#fff;color:#111;border
       <div class="top">
         <div>
           <h1>Buscar imóvel ideal para o cliente</h1>
-          <p class="lead">Use filtros ou escreva como falaria no WhatsApp. O botão principal já aplica o briefing antes de buscar.</p>
+          <p class="lead">Use filtros ou escreva como falaria no WhatsApp. O botão principal já aplica o briefing antes de buscar. Imóveis sem foto exibem logos de imobiliárias distribuídos proporcionalmente.</p>
         </div>
         <button class="btn ghost" onclick="fillExample()">Usar exemplo bom</button>
       </div>
@@ -273,6 +277,18 @@ nav button.active .pill,nav button:hover .pill{background:#fff;color:#111;border
 <script>
 const bairros = ['Alto de Pinheiros','Bela Vista','Brooklin','Campo Belo','Chácara Flora','Higienópolis','Itaim Bibi','Jardim Europa','Jardins','Moema','Morumbi','Paraíso','Perdizes','Pinheiros','Real Parque','Vila Madalena','Vila Nova Conceição','Vila Olímpia'];
 const tipos = ['Apartamento','Casa','Cobertura','Garden','Loft','Studio'];
+const imobiliarias = [
+  {nome:'Pilar', slug:'pilar', logo:'assets/logos/pilar.svg'},
+  {nome:"Bossa Nova Sotheby's", slug:'bossa-nova-sothebys', logo:'assets/logos/bossa-nova-sothebys.svg'},
+  {nome:'Coelho da Fonseca', slug:'coelho-da-fonseca', logo:'assets/logos/coelho-da-fonseca.svg'},
+  {nome:'Local', slug:'local', logo:'assets/logos/local.svg'},
+  {nome:'Axpe', slug:'axpe', logo:'assets/logos/axpe.svg'},
+  {nome:'Cobogó', slug:'cobogo', logo:'assets/logos/cobogo.svg'},
+  {nome:'Refúgios', slug:'refugios', logo:'assets/logos/refugios.svg'},
+  {nome:'Anglo', slug:'anglo', logo:'assets/logos/anglo.svg'},
+  {nome:'Tamaras', slug:'tamaras', logo:'assets/logos/tamaras.svg'},
+  {nome:'Jardins & CO', slug:'jardins-co', logo:'assets/logos/jardins-co.svg'}
+];
 const numberWords = {um:1,uma:1,dois:2,duas:2,tres:3,treis:3,três:3,quatro:4,cinco:5,seis:6,sete:7,oito:8,nove:9,dez:10};
 const featureAliases = {
   'varanda gourmet':['varanda gourmet','espaco gourmet','espaço gourmet','gourmet'],
@@ -305,6 +321,42 @@ function money(mi){return new Intl.NumberFormat('pt-BR',{style:'currency',curren
 function miText(mi){if(mi == null)return ''; return `R$ ${String(Number(mi.toFixed(2))).replace('.', ',')} mi`;}
 function pick(arr,rnd){return arr[Math.floor(rnd()*arr.length)];}
 function seeded(seed){let s=seed; return function(){s=(s*9301+49297)%233280; return s/233280;};}
+function brokerInitials(name){
+  return String(name||'MR').replace(/&/g,' ').split(/\s+/).filter(Boolean).map(w=>w[0]).join('').slice(0,3).toUpperCase();
+}
+function balancedBrokerPool(total, seed=1207){
+  const pool=[];
+  const base=Math.floor(total/imobiliarias.length);
+  const extra=total%imobiliarias.length;
+  imobiliarias.forEach((broker,idx)=>{
+    const count=base+(idx<extra?1:0);
+    for(let i=0;i<count;i++) pool.push(broker);
+  });
+  const rnd=seeded(seed);
+  for(let i=pool.length-1;i>0;i--){
+    const j=Math.floor(rnd()*(i+1));
+    [pool[i],pool[j]]=[pool[j],pool[i]];
+  }
+  return pool;
+}
+function assignBrokerLogosToMissingImages(){
+  const missing = inventory.filter(imovel => !imovel.imagem);
+  const pool = balancedBrokerPool(missing.length, 5050);
+  missing.forEach((imovel,idx)=>{
+    const broker = pool[idx % pool.length];
+    imovel.imobiliaria = broker.nome;
+    imovel.imobiliariaSlug = broker.slug;
+    imovel.imobiliariaLogo = broker.logo;
+    imovel.placeholderLogo = true;
+  });
+}
+function logoDistribution(){
+  return inventory.reduce((acc,imovel)=>{
+    const nome = imovel.placeholderLogo ? imovel.imobiliaria : 'Com imagem do imóvel';
+    acc[nome] = (acc[nome]||0)+1;
+    return acc;
+  },{});
+}
 function priceBucket(maxPrice){if(!maxPrice)return ''; if(maxPrice<=3)return '3'; if(maxPrice<=5)return '5'; if(maxPrice<=8)return '8'; if(maxPrice<=10)return '10'; return 'acima10';}
 function numberFromToken(token){const clean=norm(token).replace(/[^\d,.a-z]/g,''); if(numberWords[clean]!=null)return numberWords[clean]; const n=Number(clean.replace(/\./g,'').replace(',','.')); return Number.isFinite(n)?n:null;}
 
@@ -663,6 +715,22 @@ function renderProfileChips(profile){
   el.innerHTML = strictHtml + prefHtml || '<span class="chip empty">Nenhum critério entendido ainda.</span>';
 }
 
+function renderPhoto(imovel, match){
+  const kind = `<span class="kind">${escapeHtml(imovel.tipo)}</span>`;
+  const score = `<span class="match">${match.score}% match</span>`;
+  if(imovel.imagem){
+    return `<div class="photo with-image" style="background-image:url('${escapeHtml(imovel.imagem)}')">${kind}${score}</div>`;
+  }
+  const brokerName = imovel.imobiliaria || 'Imobiliária parceira';
+  const logo = imovel.imobiliariaLogo || '';
+  return `<div class="photo logo-photo">${kind}${score}<div class="logo-photo-content">
+    <img class="broker-logo-img" src="${escapeHtml(logo)}" alt="Logo ${escapeHtml(brokerName)}" onerror="this.style.display='none';this.nextElementSibling.style.display='grid';">
+    <span class="logo-fallback" style="display:none">${escapeHtml(brokerInitials(brokerName))}</span>
+    <div class="broker-name">${escapeHtml(brokerName)}</div>
+    <div class="broker-label">sem foto do imóvel</div>
+  </div></div>`;
+}
+
 function renderCards(rows, profile){
   const container=document.getElementById('inventory');
   if(!rows.length){
@@ -674,13 +742,15 @@ function renderCards(rows, profile){
     const missing = match.missingPrefs.length ? `<p>Faltou: ${match.missingPrefs.map(escapeHtml).join(', ')}</p>` : '<p>Preferências principais atendidas ou não solicitadas.</p>';
     const boosts = match.boosts.length ? `<p>Perfil: ${match.boosts.map(escapeHtml).join(', ')}</p>` : '';
     const mandatory = match.mandatory.total ? `${match.mandatory.passed}/${match.mandatory.total} obrigatórios` : 'sem filtros duros';
+    const photo = renderPhoto(imovel, match);
+    const brokerTag = imovel.imobiliaria ? `<span class="tag warn">${escapeHtml(imovel.imobiliaria)}</span>` : '';
     return `<article class="imovel">
-      <div class="photo"><span class="kind">${escapeHtml(imovel.tipo)}</span><span class="match">${match.score}% match</span></div>
+      ${photo}
       <div class="imovel-body">
         <h3>${escapeHtml(imovel.titulo)}</h3>
         <div class="meta">${escapeHtml(imovel.bairro)} • ${imovel.area} m² • ${imovel.quartos} quarto(s) • ${imovel.suites} suíte(s) • ${imovel.vagas} vaga(s)</div>
         <div class="price">${money(imovel.preco)}</div>
-        <div>${imovel.features.slice(0,6).map(f=>`<span class="tag">${escapeHtml(f)}</span>`).join('')}</div>
+        <div>${brokerTag}${imovel.features.slice(0,6).map(f=>`<span class="tag">${escapeHtml(f)}</span>`).join('')}</div>
         <div class="why">
           <span class="status ok">${mandatory}</span>
           <div style="margin-top:8px">${matched}</div>
@@ -793,6 +863,7 @@ function runRegressionTest(){
 }
 
 generateInventory();
+assignBrokerLogosToMissingImages();
 initFilters();
 renderClients();
 renderHistory();
@@ -800,7 +871,7 @@ renderProfileChips({});
 searchWithProfile(false);
 runRegressionTest();
 document.getElementById('totalImoveis').textContent = inventory.length.toLocaleString('pt-BR');
-window.MatchRDebug = {parseBriefing, rankedResults, inventory, runRegressionTest};
+window.MatchRDebug = {parseBriefing, rankedResults, inventory, runRegressionTest, logoDistribution, imobiliarias};
 </script>
 </body>
 </html>

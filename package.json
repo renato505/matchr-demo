@@ -1,10 +1,10 @@
 {
-  "name": "matchr-mvp-v2",
-  "version": "2.0.0",
+  "name": "matchr-mvp-v3",
+  "version": "3.0.0",
   "private": true,
   "description": "MVP estático do MatchR pronto para GitHub Pages.",
   "scripts": {
-    "test": "node test-matchr-v2.js"
+    "test": "node test-matchr-v3.js"
   },
   "keywords": [
     "matchr",
