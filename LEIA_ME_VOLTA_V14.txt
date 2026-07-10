@@ -1,0 +1,18 @@
+MATCHR — VOLTAR PARA V14
+
+Arquivo principal: index.html
+
+Como subir no GitHub:
+1. Abra o repositório do site MatchR no GitHub.
+2. Entre na pasta onde está o site.
+3. Clique em Add file > Upload files.
+4. Envie o arquivo index.html deste pacote.
+5. Confirme que ele está substituindo o index.html antigo.
+6. Commit message sugerida: voltar para v14
+7. Clique em Commit changes.
+
+Importante:
+- O arquivo precisa se chamar exatamente index.html.
+- Não suba como index (1).html.
+- Não suba apenas o .zip, porque o GitHub Pages não extrai automaticamente.
+- Depois do commit, espere 1 a 3 minutos e atualize o site com Ctrl + F5.
