@@ -1,0 +1,15 @@
+ARQUIVO CORRETO PARA VOLTAR À V14
+
+1. Use o arquivo index.html deste pacote.
+2. No GitHub, ele precisa substituir o index.html atual do repositório.
+3. Não suba o arquivo como index (1).html.
+4. Não suba somente o .zip, pois o GitHub Pages não extrai zip automaticamente.
+5. Depois do commit, espere 1 a 3 minutos.
+6. Abra o site em janela anônima ou use Ctrl + F5 para limpar cache.
+
+Conferência visual da v14 correta:
+- Não aparece "Modo intermediário" no menu lateral.
+- Não aparece filtro "Origem" na busca.
+- Aparece "Demo • 3.000 imóveis simulados" no menu lateral.
+- Mantém o vídeo em "Para você corretor".
+- Mantém filtros de preço até R$ 3 milhões e até R$ 5 milhões.
