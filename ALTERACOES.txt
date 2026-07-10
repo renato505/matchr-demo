@@ -1,0 +1,10 @@
+MATCHR V15 — ALTERAÇÕES PRINCIPAIS
+
+1. Removidos da tela todos os campos separados de tipo, bairro, orçamento, dormitórios, suítes, vagas, metragem, áreas comuns e preferências.
+2. Criado um único campo central de briefing em linguagem natural, com comportamento de busca simples.
+3. Mantida a interpretação interna dos critérios e a confirmação em chips após a busca.
+4. Mantida a ordenação por aderência, com explicação do motivo de cada resultado.
+5. Mantida a seleção de imóveis e a preparação de mensagem para WhatsApp.
+6. Mantidos menu, conteúdo institucional e vídeo para corretores.
+7. Layout revisado para computador e celular.
+8. Arquivo autocontido e pronto para GitHub Pages.

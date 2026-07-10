@@ -1,0 +1,26 @@
+MATCHR — ATUALIZAÇÃO V15 / BRIEFING ÚNICO
+
+ARQUIVOS PARA PUBLICAR
+- index.html
+- .nojekyll
+
+COMO SUBSTITUIR NO GITHUB PAGES
+1. Antes de trocar, baixe uma cópia do index.html que está no ar.
+2. Abra o repositório do MatchR no GitHub.
+3. Faça upload do novo index.html na RAIZ do repositório.
+4. Confirme a substituição do arquivo antigo e mantenha o nome exatamente: index.html
+5. Envie também o arquivo .nojekyll para a raiz.
+6. Commit sugerido: simplifica busca para briefing unico
+7. Aguarde de 1 a 3 minutos.
+8. Abra o site em janela anônima ou atualize com Ctrl+F5 / Cmd+Shift+R.
+
+IMPORTANTE
+- Não envie apenas o ZIP.
+- Não deixe o arquivo com nomes como index (1).html.
+- O index.html é autocontido: CSS, JavaScript, logo, base demonstrativa e lógica de interpretação estão dentro dele.
+- A entrada agora tem somente o briefing em linguagem natural. Dormitórios, suítes, vagas, tipo, região, orçamento e preferências são interpretados internamente.
+- A versão mantém resultados por aderência, seleção de imóveis, envio pelo WhatsApp, menu e seções institucionais.
+- Os imóveis desta versão continuam demonstrativos; não há conexão com uma base ou API externa.
+
+COMO VOLTAR À VERSÃO ANTERIOR
+Suba novamente o backup do index.html antigo e faça um novo commit.
