@@ -1,0 +1,35 @@
+MATCHR — Atualização MVP: opção intermediária / índice público seguro
+
+O que mudou neste index.html:
+
+1. Adicionado filtro "Origem" na busca de imóveis.
+2. Cada card agora mostra a origem do imóvel, por exemplo:
+   - Pilar
+   - Bossa Nova Sotheby's
+   - Coelho da Fonseca
+   - Local
+   - Axpe
+   - Cobogó
+   - Refúgios
+   - Anglo
+   - Tamaras
+
+3. Os cards não exibem fotos reais importadas.
+4. Os cards não exibem endereço completo.
+5. Os cards não exibem telefone, e-mail, nome de corretor ou dados pessoais.
+6. A descrição foi trocada por um texto normalizado e genérico.
+7. O botão principal agora é "Ver no site da origem".
+8. Foi adicionada uma explicação no painel inicial sobre o modo índice seguro.
+
+Como subir no GitHub:
+
+1. Entre no repositório do MatchR.
+2. Abra o arquivo index.html atual.
+3. Clique em editar ou faça upload do novo index.html.
+4. Substitua o arquivo antigo por este novo.
+5. Escreva no commit: "adiciona modo indice publico seguro".
+6. Clique em Commit changes.
+7. Aguarde 1 ou 2 minutos e atualize o site.
+
+Observação:
+Esta versão ainda usa imóveis simulados. Ela mostra a arquitetura visual da opção intermediária: dados mínimos + link para a origem, sem republicar fotos, textos autorais, contatos ou endereço completo.
