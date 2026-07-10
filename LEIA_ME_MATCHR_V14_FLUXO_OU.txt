@@ -1,0 +1,16 @@
+Arquivo atualizado do MatchR MVP v14.
+
+O que foi ajustado:
+- O campo de briefing agora deixa claro que pode ser usado por texto ou voz.
+- O botão “Falar briefing” voltou.
+- O botão “Interpretar e preencher busca” fica logo abaixo da caixa de texto/voz.
+- A interface agora separa os dois caminhos com “ou”.
+- Abaixo do “ou”, aparece “Escolha as opções abaixo” para o preenchimento manual.
+- O botão final ficou como “Buscar compatíveis”.
+
+Como subir no GitHub:
+1. Baixe o arquivo index.html.
+2. No GitHub, suba o arquivo na raiz do repositório.
+3. Ele precisa substituir o index.html atual.
+4. O nome do arquivo precisa ficar exatamente: index.html
+5. Não suba como index (1).html.
