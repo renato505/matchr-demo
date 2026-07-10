@@ -16,18 +16,20 @@
       --brand: #3d2c24;
       --brand-soft: #efe5d8;
       --accent: #8f5d3b;
+      --accent-dark: #6f4228;
+      --orange: #ff6a00;
+      --orange-dark: #b84a00;
       --success: #276749;
       --warning: #a05a00;
       --shadow: 0 18px 45px rgba(57, 43, 32, 0.10);
+      --shadow-strong: 0 24px 70px rgba(57, 43, 32, 0.16);
       --radius: 22px;
       --radius-sm: 14px;
       --focus: 0 0 0 4px rgba(143, 93, 59, 0.22);
     }
 
     * { box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
-
     body {
       margin: 0;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -39,6 +41,8 @@
     }
 
     a { color: inherit; }
+    button, input, select, textarea { font: inherit; }
+    button { cursor: pointer; }
 
     .shell {
       width: min(1180px, calc(100% - 32px));
@@ -90,746 +94,26 @@
       white-space: nowrap;
     }
 
-    .brand-mark {
-      width: 42px;
-      height: 42px;
-      border-radius: 14px;
-      display: grid;
-      place-items: center;
-      color: #fff;
-      background: linear-gradient(145deg, var(--brand), var(--accent));
-      font-weight: 800;
-      letter-spacing: -.04em;
-      box-shadow: var(--shadow);
-      flex: 0 0 auto;
-    }
-
-    .brand h1 {
-      font-size: clamp(1.15rem, 2vw, 1.45rem);
-      margin: 0;
-      letter-spacing: -.045em;
-      line-height: 1;
-    }
-
-    .brand p {
-      margin: 4px 0 0;
-      color: var(--muted);
-      font-size: .88rem;
-    }
-
-    .pill {
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, .62);
-      color: var(--brand);
-      padding: 8px 12px;
-      border-radius: 999px;
-      font-weight: 700;
-      font-size: .82rem;
-      white-space: nowrap;
-    }
-
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.05fr) minmax(320px, .95fr);
-      gap: 24px;
-      align-items: stretch;
-    }
-
-    .broker-video {
-      display: grid;
-      grid-template-columns: minmax(260px, .72fr) minmax(320px, 1fr);
-      gap: 24px;
-      align-items: center;
-      padding: clamp(22px, 4vw, 34px);
-      margin-bottom: 24px;
-      overflow: hidden;
-    }
-
-    .broker-video-copy h2 {
-      margin: 0;
-      font-size: clamp(1.65rem, 3.4vw, 2.75rem);
-      line-height: 1;
-      letter-spacing: -.065em;
-      max-width: 13ch;
-    }
-
-    .broker-video-copy p:not(.eyebrow) {
-      margin: 16px 0 0;
-      color: var(--muted);
-      line-height: 1.52;
-      max-width: 52ch;
-    }
-
-    .video-frame {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      border-radius: 20px;
-      overflow: hidden;
-      border: 1px solid rgba(231, 222, 211, .95);
-      background: #1d1712;
-      box-shadow: 0 18px 38px rgba(57, 43, 32, .14);
-    }
-
-    .video-frame iframe {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-
-    .final-video {
-      margin-top: 24px;
-      margin-bottom: 0;
-    }
-
-    .panel {
-      background: rgba(255, 250, 243, .88);
-      border: 1px solid rgba(231, 222, 211, .9);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(18px);
-    }
-
-    .intro {
-      padding: clamp(24px, 4vw, 40px);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-height: 420px;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--accent);
-      font-weight: 800;
-      font-size: .82rem;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      margin: 0 0 18px;
-    }
-
-    .eyebrow::before {
-      content: "";
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 0 6px rgba(143, 93, 59, .13);
-    }
-
-    .intro h2 {
-      margin: 0;
-      font-size: clamp(2.1rem, 5vw, 4rem);
-      line-height: .96;
-      letter-spacing: -.075em;
-      max-width: 11ch;
-    }
-
-    .intro .lead {
-      margin: 20px 0 0;
-      color: var(--muted);
-      font-size: clamp(1rem, 1.8vw, 1.16rem);
-      line-height: 1.58;
-      max-width: 60ch;
-    }
-
-    .principles {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 26px;
-    }
-
-    .principle {
-      background: rgba(255, 255, 255, .64);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 14px;
-      min-height: 102px;
-    }
-
-    .principle b {
-      display: block;
-      margin-bottom: 6px;
-      letter-spacing: -.02em;
-    }
-
-    .principle span {
-      color: var(--muted);
-      font-size: .9rem;
-      line-height: 1.35;
-    }
-
-    .search-card { padding: 20px; }
-
-    .search-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 18px;
-      margin-bottom: 16px;
-    }
-
-    .search-header h3 {
-      margin: 0;
-      font-size: 1.35rem;
-      letter-spacing: -.045em;
-    }
-
-    .search-header p {
-      margin: 6px 0 0;
-      color: var(--muted);
-      font-size: .93rem;
-      line-height: 1.35;
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .field { min-width: 0; }
-
-    .field.full { grid-column: 1 / -1; }
-
-    label,
-    .legend-label {
-      display: block;
-      font-weight: 800;
-      font-size: .83rem;
-      letter-spacing: -.01em;
-      margin-bottom: 8px;
-    }
-
-    input,
-    select,
-    textarea,
-    button {
-      font: inherit;
-    }
-
-    input,
-    select,
-    textarea {
-      width: 100%;
-      border: 1px solid var(--line);
-      background: #fffdf9;
-      color: var(--ink);
-      border-radius: 14px;
-      padding: 12px 13px;
-      outline: none;
-      transition: border-color .16s ease, box-shadow .16s ease, background .16s ease;
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 112px;
-      line-height: 1.45;
-    }
-
-    input:focus,
-    select:focus,
-    textarea:focus {
-      border-color: rgba(143, 93, 59, .62);
-      box-shadow: var(--focus);
-      background: #fff;
-    }
-
-    .hint {
-      color: var(--muted);
-      font-size: .8rem;
-      margin-top: 7px;
-      line-height: 1.38;
-    }
-
-    details {
-      grid-column: 1 / -1;
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, .47);
-      border-radius: 18px;
-      overflow: hidden;
-    }
-
-    summary {
-      cursor: pointer;
-      list-style: none;
-      padding: 15px 16px;
-      font-weight: 850;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-    }
-
-    summary::-webkit-details-marker { display: none; }
-
-    summary::after {
-      content: "+";
-      color: var(--accent);
-      font-weight: 900;
-      font-size: 1.25rem;
-    }
-
-    details[open] summary::after { content: "-"; }
-
-    .details-body {
-      border-top: 1px solid var(--line);
-      padding: 16px;
-    }
-
-    .check-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    .check-pill {
-      position: relative;
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      padding: 11px 12px;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: #fffdf9;
-      color: var(--ink);
-      cursor: pointer;
-      min-height: 46px;
-      user-select: none;
-      transition: transform .16s ease, border-color .16s ease, background .16s ease;
-    }
-
-    .check-pill:hover {
-      transform: translateY(-1px);
-      border-color: rgba(143, 93, 59, .36);
-    }
-
-    .check-pill input {
-      width: 17px;
-      height: 17px;
-      accent-color: var(--accent);
-      flex: 0 0 auto;
-    }
-
-    .check-pill span { font-size: .91rem; line-height: 1.25; }
-
-    .check-pill.ev {
-      border-color: rgba(39, 103, 73, .36);
-      background: rgba(39, 103, 73, .055);
-    }
-
-    .conditional {
-      display: none;
-      animation: pop .18s ease-out;
-    }
-
-    .conditional.is-visible { display: block; }
-
-    @keyframes pop {
-      from { opacity: 0; transform: translateY(4px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      grid-column: 1 / -1;
-      margin-top: 4px;
-    }
-
-    .btn {
-      appearance: none;
-      border: 0;
-      border-radius: 14px;
-      padding: 12px 16px;
-      font-weight: 900;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-      transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
-    }
-
-    .btn:hover { transform: translateY(-1px); }
-
-    .btn.primary {
-      background: var(--brand);
-      color: white;
-      box-shadow: 0 12px 25px rgba(61, 44, 36, .18);
-    }
-
-    .btn.secondary {
-      background: var(--brand-soft);
-      color: var(--brand);
-    }
-
-    .btn.ghost {
-      background: transparent;
-      color: var(--muted);
-      border: 1px solid var(--line);
-    }
-
-    .results {
-      margin-top: 24px;
-      display: grid;
-      grid-template-columns: minmax(0, .36fr) minmax(0, .64fr);
-      gap: 24px;
-      align-items: start;
-    }
-
-    .summary-card,
-    .list-card {
-      padding: 20px;
-    }
-
-    .section-title {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 14px;
-    }
-
-    .section-title h3 {
-      margin: 0;
-      font-size: 1.22rem;
-      letter-spacing: -.04em;
-    }
-
-    .score-big {
-      width: 78px;
-      height: 78px;
-      border-radius: 24px;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(145deg, var(--brand-soft), #fff);
-      color: var(--brand);
-      border: 1px solid var(--line);
-      font-weight: 950;
-      letter-spacing: -.06em;
-      font-size: 1.4rem;
-      margin-bottom: 16px;
-    }
-
-    .summary-list {
-      display: grid;
-      gap: 11px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .summary-list li {
-      display: flex;
-      gap: 10px;
-      color: var(--muted);
-      line-height: 1.35;
-      font-size: .94rem;
-    }
-
-    .summary-list li::before {
-      content: "✓";
-      color: var(--success);
-      font-weight: 900;
-      flex: 0 0 auto;
-    }
-
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 16px;
-    }
-
-    .chip {
-      border: 1px solid var(--line);
-      background: #fffdf9;
-      border-radius: 999px;
-      padding: 7px 10px;
-      font-weight: 750;
-      font-size: .78rem;
-      color: var(--brand);
-    }
-
-    .properties {
-      display: grid;
-      gap: 14px;
-    }
-
-    .bulk-actions {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 10px;
-      margin: -2px 0 16px;
-      padding: 12px;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background: rgba(255, 255, 255, .52);
-    }
-
-    .selection-status {
-      font-weight: 850;
-      color: var(--brand);
-      font-size: .88rem;
-      margin-right: auto;
-    }
-
-    .bulk-actions .btn {
-      padding: 10px 12px;
-      border-radius: 12px;
-      font-size: .84rem;
-    }
-
-    .btn:disabled,
-    .btn[aria-disabled="true"] {
-      opacity: .48;
-      cursor: not-allowed;
-      transform: none;
-      box-shadow: none;
-    }
-
-    .btn:disabled:hover,
-    .btn[aria-disabled="true"]:hover {
-      transform: none;
-    }
-
-    .property-card {
-      border: 1px solid var(--line);
-      background: #fffdf9;
-      border-radius: 18px;
-      padding: 16px;
-      display: grid;
-      grid-template-columns: minmax(150px, 190px) minmax(0, 1fr) auto;
-      gap: 14px;
-      align-items: start;
-      transition: border-color .16s ease, box-shadow .16s ease, background .16s ease;
-    }
-
-    .property-card.is-selected {
-      border-color: rgba(39, 103, 73, .55);
-      background: rgba(39, 103, 73, .045);
-      box-shadow: 0 14px 32px rgba(39, 103, 73, .10);
-    }
-
-    .property-media {
-      position: relative;
-      min-height: 148px;
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1px solid rgba(143, 93, 59, .22);
-      background:
-        linear-gradient(145deg, rgba(36, 31, 26, .18), rgba(143, 93, 59, .18)),
-        radial-gradient(circle at 24% 22%, rgba(255,255,255,.95) 0 8%, transparent 9%),
-        linear-gradient(135deg, #ead9c2 0%, #c9a47f 48%, #8f6b4c 100%);
-      box-shadow: inset 0 -48px 60px rgba(36, 31, 26, .22);
-    }
-
-    .property-media.apartment {
-      background:
-        linear-gradient(145deg, rgba(36, 31, 26, .18), rgba(143, 93, 59, .18)),
-        repeating-linear-gradient(90deg, rgba(255,255,255,.28) 0 12px, transparent 12px 34px),
-        linear-gradient(135deg, #e9d9c5 0%, #c59b73 46%, #75563e 100%);
-    }
-
-    .property-media.house {
-      background:
-        linear-gradient(145deg, rgba(36, 31, 26, .16), rgba(143, 93, 59, .16)),
-        radial-gradient(circle at 76% 24%, rgba(255,255,255,.92) 0 10%, transparent 11%),
-        linear-gradient(135deg, #ead8bd 0%, #a98a63 44%, #46614b 100%);
-    }
-
-    .property-media.beach {
-      background:
-        linear-gradient(145deg, rgba(36, 31, 26, .12), rgba(143, 93, 59, .16)),
-        radial-gradient(circle at 80% 18%, rgba(255,255,255,.92) 0 9%, transparent 10%),
-        linear-gradient(135deg, #f3dfbd 0%, #b7d5cf 48%, #4c8c92 100%);
-    }
-
-    .property-media.country {
-      background:
-        linear-gradient(145deg, rgba(36, 31, 26, .15), rgba(143, 93, 59, .15)),
-        radial-gradient(circle at 22% 18%, rgba(255,255,255,.86) 0 9%, transparent 10%),
-        linear-gradient(135deg, #edd7b7 0%, #9bb574 48%, #536d3f 100%);
-    }
-
-    .photo-kicker {
-      position: absolute;
-      left: 12px;
-      top: 12px;
-      padding: 6px 9px;
-      border-radius: 999px;
-      background: rgba(255, 250, 243, .88);
-      color: var(--brand);
-      font-size: .72rem;
-      font-weight: 850;
-      box-shadow: 0 10px 18px rgba(57, 43, 32, .12);
-    }
-
-    .agency-badge {
-      position: absolute;
-      left: 10px;
-      right: 10px;
-      bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px;
-      border-radius: 13px;
-      background: rgba(255, 250, 243, .94);
-      border: 1px solid rgba(255, 255, 255, .6);
-      box-shadow: 0 14px 30px rgba(57, 43, 32, .18);
-    }
-
-    .agency-badge b {
-      display: grid;
-      place-items: center;
-      flex: 0 0 auto;
-      width: 34px;
-      height: 34px;
-      border-radius: 11px;
-      background: var(--brand);
-      color: #fffaf3;
-      font-size: .78rem;
-      letter-spacing: -.04em;
-    }
-
-    .agency-badge small {
-      color: var(--ink);
-      font-weight: 850;
-      line-height: 1.05;
-      font-size: .78rem;
-    }
-
-    .property-card h4 {
-      margin: 0 0 6px;
-      font-size: 1.05rem;
-      letter-spacing: -.035em;
-    }
-
-    .property-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      color: var(--muted);
-      font-size: .85rem;
-      margin-bottom: 10px;
-    }
-
-    .property-meta span {
-      background: rgba(239, 229, 216, .64);
-      border-radius: 999px;
-      padding: 5px 8px;
-    }
-
-    .property-card p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.42;
-      font-size: .92rem;
-    }
-
-    .property-actions {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 10px;
-      margin-top: 12px;
-    }
-
-    .select-property {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin: 0;
-      padding: 10px 12px;
-      border: 1px solid rgba(39, 103, 73, .28);
-      border-radius: 13px;
-      background: rgba(39, 103, 73, .055);
-      color: var(--brand);
-      font-size: .84rem;
-      font-weight: 850;
-      cursor: pointer;
-      user-select: none;
-    }
-
-    .select-property input {
-      width: 16px;
-      height: 16px;
-      accent-color: var(--success);
-      flex: 0 0 auto;
-    }
-
-    .btn.whatsapp {
-      background: var(--success);
-      color: #fff;
-      text-decoration: none;
-      box-shadow: 0 12px 24px rgba(39, 103, 73, .18);
-    }
-
-    .btn.whatsapp:hover {
-      box-shadow: 0 15px 28px rgba(39, 103, 73, .23);
-    }
-
-    .property-score {
-      width: 62px;
-      height: 62px;
-      border-radius: 18px;
-      display: grid;
-      place-items: center;
-      background: var(--brand);
-      color: white;
-      font-weight: 950;
-      letter-spacing: -.05em;
-    }
-
-    .empty-state {
-      border: 1px dashed rgba(143, 93, 59, .45);
-      border-radius: 18px;
-      padding: 22px;
-      color: var(--muted);
-      background: rgba(255, 255, 255, .42);
-      line-height: 1.45;
-    }
-
-    .toast {
-      position: fixed;
-      left: 50%;
-      bottom: 22px;
-      transform: translateX(-50%) translateY(10px);
-      background: var(--brand);
-      color: #fff;
-      border-radius: 999px;
-      padding: 11px 15px;
-      font-weight: 800;
-      box-shadow: var(--shadow);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .18s ease, transform .18s ease;
-      z-index: 20;
-      max-width: min(92vw, 660px);
-      text-align: center;
-    }
-
-    .toast.is-visible {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
-
-
-
     .top-actions {
       display: inline-flex;
       align-items: center;
       gap: 10px;
       margin-left: auto;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 34px;
+      padding: 7px 11px;
+      border: 1px solid rgba(143, 93, 59, .18);
+      border-radius: 999px;
+      background: rgba(255, 250, 243, .78);
+      color: var(--accent-dark);
+      font-size: .84rem;
+      font-weight: 850;
+      white-space: nowrap;
     }
 
     .menu-button {
@@ -857,7 +141,12 @@
 
     .menu-button:focus-visible,
     .drawer-close:focus-visible,
-    .drawer-nav a:focus-visible {
+    .drawer-nav a:focus-visible,
+    .btn:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible,
+    summary:focus-visible {
       outline: none;
       box-shadow: var(--focus);
     }
@@ -936,26 +225,20 @@
     .drawer-header span,
     .drawer-note {
       display: block;
-      color: var(--muted);
-      line-height: 1.42;
-      font-size: .93rem;
       margin-top: 8px;
+      color: var(--muted);
+      line-height: 1.45;
     }
 
     .drawer-close {
-      appearance: none;
       border: 1px solid var(--line);
-      background: #fffdf9;
-      color: var(--brand);
-      width: 42px;
-      height: 42px;
+      background: rgba(255, 255, 255, .74);
       border-radius: 14px;
-      cursor: pointer;
-      font-size: 1.65rem;
+      width: 44px;
+      height: 44px;
+      color: var(--brand);
+      font-size: 1.8rem;
       line-height: 1;
-      display: grid;
-      place-items: center;
-      flex: 0 0 auto;
     }
 
     .drawer-nav {
@@ -965,178 +248,592 @@
 
     .drawer-nav a {
       text-decoration: none;
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, .66);
-      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
       padding: 13px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(231, 222, 211, .8);
+      background: rgba(255,255,255,.58);
       font-weight: 850;
-      color: var(--brand);
-      transition: transform .16s ease, border-color .16s ease, background .16s ease;
     }
 
-    .drawer-nav a:hover {
-      transform: translateX(2px);
-      border-color: rgba(143, 93, 59, .42);
-      background: #fffdf9;
+    .drawer-nav a::after {
+      content: "→";
+      color: var(--accent);
     }
 
     .drawer-note {
-      margin: 18px 0 0;
+      font-size: .9rem;
+      border-top: 1px solid var(--line);
+      padding-top: 16px;
+      margin-top: 18px;
+    }
+
+    .panel {
+      border: 1px solid rgba(231, 222, 211, .82);
+      background: rgba(255, 250, 243, .76);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, .9fr) minmax(360px, 1.1fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .intro {
+      min-height: 550px;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background:
+        linear-gradient(140deg, rgba(255,250,243,.92), rgba(239,229,216,.72)),
+        radial-gradient(circle at bottom right, rgba(143,93,59,.12), transparent 24rem);
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--accent);
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-size: .76rem;
+    }
+
+    h1, h2, h3, h4, p { margin-top: 0; }
+
+    h2 {
+      font-size: clamp(2.5rem, 5.2vw, 5rem);
+      line-height: .94;
+      letter-spacing: -.08em;
+      margin-bottom: 18px;
+    }
+
+    h3 {
+      font-size: 1.18rem;
+      letter-spacing: -.035em;
+      margin-bottom: 7px;
+    }
+
+    h4 {
+      font-size: 1.15rem;
+      letter-spacing: -.04em;
+      margin-bottom: 8px;
+    }
+
+    .lead, p {
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .lead {
+      font-size: 1.05rem;
+      max-width: 34rem;
+    }
+
+    .principles {
+      display: grid;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .principle {
+      display: grid;
+      gap: 4px;
+      border: 1px solid rgba(231, 222, 211, .85);
+      background: rgba(255, 255, 255, .48);
+      border-radius: 18px;
       padding: 14px;
+    }
+
+    .principle b {
+      font-size: .96rem;
+      letter-spacing: -.02em;
+    }
+
+    .principle span,
+    .hint,
+    .property-meta,
+    .content-stack span,
+    .stat-label {
+      color: var(--muted);
+      font-size: .9rem;
+      line-height: 1.45;
+    }
+
+    .search-card {
+      padding: 22px;
+      background: rgba(255, 255, 255, .66);
+    }
+
+    .search-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .field { display: grid; gap: 7px; }
+    .field.full { grid-column: 1 / -1; }
+
+    label, summary {
+      font-weight: 850;
+      font-size: .92rem;
+      color: var(--brand);
+    }
+
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid rgba(231, 222, 211, .95);
+      background: #fffdf9;
+      border-radius: 14px;
+      padding: 12px 13px;
+      color: var(--ink);
+      outline: none;
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+      line-height: 1.45;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: rgba(143, 93, 59, .55);
+      box-shadow: var(--focus);
+    }
+
+    .conditional-block {
+      grid-column: 1 / -1;
+      display: none;
+      border: 1px solid rgba(143, 93, 59, .18);
+      background: rgba(239, 229, 216, .45);
+      padding: 14px;
+      border-radius: 18px;
+    }
+
+    .conditional-block.is-visible { display: block; }
+
+    .check-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .check-pill {
+      border: 1px solid rgba(231, 222, 211, .94);
+      background: rgba(255, 255, 255, .62);
+      border-radius: 999px;
+      padding: 8px 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      font-weight: 780;
+      color: var(--ink);
+      font-size: .86rem;
+    }
+
+    .check-pill input { width: auto; accent-color: var(--accent); }
+    .check-pill.ev { background: rgba(255, 250, 243, .92); border-color: rgba(143,93,59,.35); }
+
+    details {
+      grid-column: 1 / -1;
+      border: 1px solid rgba(231, 222, 211, .88);
+      border-radius: 18px;
+      background: rgba(255,255,255,.45);
+      overflow: hidden;
+    }
+
+    summary {
+      padding: 14px;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+    summary::-webkit-details-marker { display:none; }
+    summary::after { content: "+"; color: var(--accent); font-size: 1.2rem; }
+    details[open] summary::after { content: "–"; }
+    .details-body { padding: 0 14px 14px; }
+
+    .form-actions {
+      grid-column: 1 / -1;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 2px;
+    }
+
+    .btn {
+      appearance: none;
+      border: 1px solid rgba(231, 222, 211, .95);
+      border-radius: 14px;
+      min-height: 44px;
+      padding: 11px 14px;
+      font-weight: 950;
+      background: #fffdf9;
+      color: var(--brand);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+    }
+
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 12px 24px rgba(57,43,32,.11); }
+    .btn.primary { background: var(--brand); color: #fff; border-color: var(--brand); }
+    .btn.accent { background: var(--accent); color: #fffaf3; border-color: var(--accent); }
+    .btn.whatsapp { background: #276749; color: white; border-color: #276749; }
+    .btn[disabled] { opacity: .48; cursor: not-allowed; transform: none; box-shadow: none; }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      grid-column: 1 / -1;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(143, 93, 59, .18);
+      background: rgba(255, 250, 243, .8);
+      color: var(--accent-dark);
+      font-weight: 850;
+      font-size: .82rem;
+    }
+
+    .results {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(320px, .85fr);
+      gap: 18px;
+      margin-top: 18px;
+      align-items: start;
+    }
+
+    .results-list, .match-summary {
+      padding: 22px;
+    }
+
+    .results-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+
+    .stats {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      border: 1px solid rgba(231, 222, 211, .88);
+      background: rgba(255,255,255,.55);
+      border-radius: 18px;
+      padding: 12px 14px;
+      min-width: 120px;
+    }
+
+    .stat-value {
+      display: block;
+      font-weight: 980;
+      font-size: 1.8rem;
+      letter-spacing: -.05em;
+    }
+
+    .property-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .property-card {
+      display: grid;
+      grid-template-columns: 168px minmax(0, 1fr) auto;
+      gap: 16px;
+      align-items: start;
+      border: 1px solid rgba(231, 222, 211, .88);
+      background: rgba(255,255,255,.66);
+      border-radius: 20px;
+      padding: 14px;
+      transition: border-color .16s ease, background .16s ease, transform .16s ease;
+    }
+
+    .property-card.is-selected {
+      border-color: rgba(39, 103, 73, .38);
+      background: rgba(245, 255, 249, .78);
+    }
+
+    .property-card:hover { transform: translateY(-1px); }
+
+    .property-media {
+      min-height: 142px;
       border-radius: 16px;
-      background: rgba(239, 229, 216, .5);
-      border: 1px solid var(--line);
+      overflow: hidden;
+      position: relative;
+      background:
+        linear-gradient(135deg, rgba(61,44,36,.9), rgba(143,93,59,.72)),
+        radial-gradient(circle at 80% 15%, rgba(255,255,255,.28), transparent 7rem);
+      color: #fffaf3;
+      display: grid;
+      align-content: space-between;
+      padding: 12px;
     }
 
-    #para-voce-corretor,
-    #motor-compatibilidade,
-    #imoveis-sugeridos,
-    .content-section {
-      scroll-margin-top: 24px;
+    .property-media.apartment { background: linear-gradient(135deg, #6d6258, #b79270); }
+    .property-media.house { background: linear-gradient(135deg, #3d2c24, #8f5d3b); }
+    .property-media.country { background: linear-gradient(135deg, #276749, #8f5d3b); }
+    .property-media.beach { background: linear-gradient(135deg, #2f6f7f, #c99970); }
+
+    .property-media::after {
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(135deg, transparent 44%, rgba(255,255,255,.12) 45%, transparent 64%),
+        radial-gradient(circle at 25% 18%, rgba(255,255,255,.25), transparent 28%);
+      pointer-events:none;
     }
 
-    .content-section {
-      margin-top: 24px;
-      padding: clamp(24px, 4vw, 38px);
+    .photo-kicker,
+    .agency-badge {
+      position: relative;
+      z-index: 1;
+    }
+
+    .photo-kicker {
+      font-size: .72rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-weight: 900;
+      opacity: .85;
+    }
+
+    .agency-badge {
+      border: 1px solid rgba(255,255,255,.34);
+      background: rgba(255,255,255,.16);
+      backdrop-filter: blur(6px);
+      border-radius: 14px;
+      padding: 8px;
+      display: grid;
+      gap: 2px;
+    }
+
+    .agency-badge b {
+      display: inline-grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: rgba(255,255,255,.92);
+      color: var(--brand);
+      font-size: .78rem;
+    }
+
+    .agency-badge small {
+      display: block;
+      color: rgba(255,255,255,.88);
+      font-size: .76rem;
+      font-weight: 800;
+    }
+
+    .property-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 9px;
+    }
+
+    .property-meta span {
+      border: 1px solid rgba(231,222,211,.92);
+      border-radius: 999px;
+      background: rgba(255,250,243,.8);
+      padding: 5px 8px;
+      font-weight: 780;
+      font-size: .8rem;
+      color: var(--muted);
+    }
+
+    .property-actions {
+      display: flex;
+      gap: 9px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 12px;
+    }
+
+    .select-property {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      border: 1px solid rgba(231,222,211,.9);
+      background: rgba(255,255,255,.58);
+      padding: 9px 11px;
+      border-radius: 14px;
+      font-size: .86rem;
+      font-weight: 850;
+      cursor: pointer;
+    }
+
+    .select-property input { width: auto; accent-color: var(--success); }
+
+    .property-score {
+      width: 62px;
+      height: 62px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      background: var(--brand);
+      color: white;
+      font-weight: 950;
+      letter-spacing: -.05em;
+    }
+
+    .match-summary ul {
+      padding-left: 18px;
+      margin: 0 0 18px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .selection-tools {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(231,222,211,.9);
+    }
+
+    .empty-state {
+      border: 1px dashed rgba(143, 93, 59, .45);
+      border-radius: 18px;
+      padding: 22px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, .42);
+      line-height: 1.45;
+    }
+
+    .content-section,
+    .broker-video {
+      margin-top: 18px;
+      padding: 26px;
     }
 
     .content-heading {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 24px;
-      margin-bottom: 22px;
+      display: grid;
+      grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+      gap: 20px;
+      align-items: start;
+      margin-bottom: 18px;
     }
-
-    .content-heading.compact { align-items: flex-start; }
 
     .content-heading h2,
     .content-section > h2,
-    .split-content h2 {
-      margin: 0;
-      font-size: clamp(1.7rem, 3.4vw, 3rem);
-      line-height: 1;
-      letter-spacing: -.07em;
-      max-width: 15ch;
-    }
-
-    .content-heading p,
-    .content-section > p:not(.eyebrow),
-    .split-content p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.55;
-      max-width: 56ch;
+    .split-content h2,
+    .broker-video-copy h2 {
+      font-size: clamp(2rem, 3.8vw, 3.6rem);
+      max-width: 12ch;
     }
 
     .content-grid {
       display: grid;
       gap: 14px;
     }
-
     .content-grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .content-grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 
-    .content-card {
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, .58);
-      border-radius: 18px;
-      padding: 18px;
-      min-height: 174px;
-    }
-
-    .content-card.small { min-height: 150px; }
-
-    .content-card > span {
-      width: 38px;
-      height: 38px;
-      border-radius: 13px;
-      display: grid;
-      place-items: center;
-      background: var(--brand-soft);
-      color: var(--brand);
-      font-weight: 950;
-      margin-bottom: 18px;
-    }
-
-    .content-card h3 {
-      margin: 0 0 8px;
-      letter-spacing: -.04em;
-      font-size: 1.08rem;
-    }
-
-    .content-card p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.45;
-      font-size: .94rem;
-    }
-
-    .split-content {
-      display: grid;
-      grid-template-columns: minmax(260px, .85fr) minmax(300px, 1fr);
-      gap: 24px;
-      align-items: center;
-    }
-
-    .split-content > div:first-child p:not(.eyebrow) {
-      margin-top: 16px;
-    }
-
-    .content-stack {
-      display: grid;
-      gap: 12px;
-    }
-
+    .content-card,
     .stack-item {
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, .62);
+      border: 1px solid rgba(231,222,211,.88);
+      background: rgba(255,255,255,.55);
       border-radius: 18px;
       padding: 16px;
     }
 
+    .content-card b,
     .stack-item b {
       display: block;
-      margin-bottom: 6px;
-      letter-spacing: -.03em;
+      margin-bottom: 7px;
+      letter-spacing: -.02em;
     }
 
-    .stack-item span {
-      color: var(--muted);
-      line-height: 1.42;
-      font-size: .94rem;
+    .split-content,
+    .broker-video {
+      display: grid;
+      grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr);
+      gap: 18px;
+      align-items: center;
     }
 
-    .cta-section {
+    .content-stack { display: grid; gap: 12px; }
+
+    .video-frame {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 20px;
+      background: #000;
+      box-shadow: var(--shadow-strong);
+    }
+
+    .video-frame iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      transform: translateX(-50%) translateY(10px);
+      background: var(--brand);
+      color: #fff;
+      border-radius: 999px;
+      padding: 11px 15px;
+      font-weight: 800;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .18s ease, transform .18s ease;
+      z-index: 60;
+      max-width: min(92vw, 660px);
       text-align: center;
     }
 
-    .cta-section .eyebrow { justify-content: center; }
-
-    .cta-section h2 {
-      margin-left: auto;
-      margin-right: auto;
-      max-width: 14ch;
-    }
-
-    .cta-section p:not(.eyebrow) {
-      margin: 14px auto 0;
-    }
-
-    .cta-actions {
-      margin-top: 22px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
+    .toast.is-visible {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
     }
 
     @media (max-width: 980px) {
-      .hero, .results, .broker-video, .split-content { grid-template-columns: 1fr; }
+      .hero, .results, .broker-video, .split-content, .content-heading { grid-template-columns: 1fr; }
       .intro { min-height: auto; }
       .broker-video-copy h2 { max-width: 18ch; }
-      .content-heading { display: block; }
-      .content-heading p { margin-top: 14px; }
       .content-grid.three, .content-grid.four { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 
@@ -1162,7 +859,7 @@
 <body>
   <main class="shell" id="topo">
     <header class="topbar" aria-label="Cabeçalho do produto">
-      <a class="brand brand-link" href="#" aria-label="MatchR - início">
+      <a class="brand brand-link" href="#topo" aria-label="MatchR - início">
         <img class="brand-logo-image" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NjAgMTY4IiByb2xlPSJpbWciIGFyaWEtbGFiZWw9Ik1hdGNoUiDigJQgSW50ZWxpZ8OqbmNpYSBwYXJhIG8gY29ycmV0b3IgaW1vYmlsacOhcmlvIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMzZDJjMjQiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjOGY1ZDNiIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGZpbHRlciBpZD0icyIgeD0iLTIwJSIgeT0iLTIwJSIgd2lkdGg9IjE0MCUiIGhlaWdodD0iMTQwJSI+CiAgICAgIDxmZURyb3BTaGFkb3cgZHg9IjAiIGR5PSIxMiIgc3RkRGV2aWF0aW9uPSIxMiIgZmxvb2QtY29sb3I9IiMzOTJiMjAiIGZsb29kLW9wYWNpdHk9IjAuMTUiLz4KICAgIDwvZmlsdGVyPgogIDwvZGVmcz4KICA8cmVjdCB3aWR0aD0iNjYwIiBoZWlnaHQ9IjE2OCIgcng9IjM0IiBmaWxsPSIjZmZmYWYzIi8+CiAgPGcgZmlsdGVyPSJ1cmwoI3MpIj4KICAgIDxyZWN0IHg9IjE4IiB5PSIxOCIgd2lkdGg9IjEzMiIgaGVpZ2h0PSIxMzIiIHJ4PSIzMiIgZmlsbD0idXJsKCNnKSIvPgogICAgPHBhdGggZD0iTTQ4IDkyIDg0IDU4bDM2IDM0djM3SDk2di0zMEg3MnYzMEg0OFY5MloiIGZpbGw9IiNmZmZhZjMiLz4KICAgIDxwYXRoIGQ9Ik02NiA4MSA4NCA2NGwxOCAxNyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmYWYzIiBzdHJva2Utd2lkdGg9IjEwIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KICA8L2c+CiAgPHRleHQgeD0iMTc0IiB5PSI5MCIgZm9udC1mYW1pbHk9IkludGVyLCBBcmlhbCwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjU0IiBmb250LXdlaWdodD0iODAwIiBsZXR0ZXItc3BhY2luZz0iLTIuNSIgZmlsbD0iIzI0MWYxYSI+TWF0Y2hSPC90ZXh0PgogIDx0ZXh0IHg9IjE3NiIgeT0iMTI2IiBmb250LWZhbWlseT0iSW50ZXIsIEFyaWFsLCBIZWx2ZXRpY2EsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjIiIGZvbnQtd2VpZ2h0PSI1MDAiIGZpbGw9IiM2ZDYyNTgiPkludGVsaWfDqm5jaWEgcGFyYSBvIGNvcnJldG9yIGltb2JpbGnDoXJpbzwvdGV4dD4KPC9zdmc+" alt="MatchR — Inteligência para o corretor imobiliário" />
         <span class="logo-subtitle">MVP v14 • busca inteligente para corretores</span>
       </a>
@@ -1175,7 +872,6 @@
         </button>
       </div>
     </header>
-
 
     <div class="menu-overlay" id="menuOverlay" hidden></div>
     <nav class="menu-drawer" id="siteMenu" aria-label="Menu de navegação" aria-hidden="true">
@@ -1203,23 +899,12 @@
         <div>
           <p class="eyebrow">Encontre imóveis compatíveis com o cliente</p>
           <h2 id="hero-title">Menos ruído. Mais aderência.</h2>
-          <p class="lead">
-            Cadastre o briefing do cliente e use filtros essenciais primeiro. Campos específicos aparecem somente quando fazem sentido para o tipo de imóvel selecionado.
-          </p>
+          <p class="lead">Cadastre o briefing do cliente e use filtros essenciais primeiro. Campos específicos aparecem somente quando fazem sentido para o tipo de imóvel selecionado.</p>
         </div>
         <div class="principles" aria-label="Princípios da tela">
-          <div class="principle">
-            <b>Fluxo limpo</b>
-            <span>O corretor vê primeiro o que realmente move a busca.</span>
-          </div>
-          <div class="principle">
-            <b>Contexto certo</b>
-            <span>Áreas comuns aparecem para apartamento e casa de condomínio.</span>
-          </div>
-          <div class="principle">
-            <b>Carro elétrico</b>
-            <span>A opção de infraestrutura de recarga fica disponível nos dois casos.</span>
-          </div>
+          <div class="principle"><b>Fluxo limpo</b><span>O corretor vê primeiro o que realmente move a busca.</span></div>
+          <div class="principle"><b>Contexto certo</b><span>Áreas comuns aparecem para apartamento e casa de condomínio.</span></div>
+          <div class="principle"><b>Carro elétrico</b><span>A opção de infraestrutura de recarga fica disponível nos dois casos.</span></div>
         </div>
       </article>
 
@@ -1249,23 +934,23 @@
               <option value="casa-praia">Casa na praia</option>
               <option value="cobertura">Cobertura</option>
             </select>
-            <div id="typeHint" class="hint">Tipos comerciais e terrenos foram removidos; Casa de campo e Casa na praia foram incluídas.</div>
+            <div class="hint" id="typeHint">Áreas comuns aparecem só quando fizer sentido.</div>
           </div>
 
           <div class="field">
-            <label for="neighborhood">Bairro ou região</label>
-            <input id="neighborhood" name="neighborhood" type="text" placeholder="Ex.: Alto de Pinheiros, Itaim, Jardins" />
+            <label for="neighborhood">Região / bairro</label>
+            <input id="neighborhood" name="neighborhood" placeholder="Ex.: Itaim Bibi, Jardins, Alto de Pinheiros" />
           </div>
 
           <div class="field">
             <label for="budget">Orçamento máximo</label>
-            <input id="budget" name="budget" type="text" inputmode="numeric" placeholder="Ex.: 3500000" />
+            <input id="budget" name="budget" inputmode="numeric" placeholder="Ex.: 5000000 ou R$ 5 mi" />
           </div>
 
           <div class="field">
-            <label for="bedrooms">Dormitórios</label>
+            <label for="bedrooms">Dormitórios mínimos</label>
             <select id="bedrooms" name="bedrooms">
-              <option value="">Indiferente</option>
+              <option value="">Qualquer</option>
               <option value="1">1+</option>
               <option value="2">2+</option>
               <option value="3">3+</option>
@@ -1275,9 +960,9 @@
           </div>
 
           <div class="field">
-            <label for="suites">Suítes</label>
+            <label for="suites">Suítes mínimas</label>
             <select id="suites" name="suites">
-              <option value="">Indiferente</option>
+              <option value="">Qualquer</option>
               <option value="1">1+</option>
               <option value="2">2+</option>
               <option value="3">3+</option>
@@ -1286,9 +971,9 @@
           </div>
 
           <div class="field">
-            <label for="parking">Vagas</label>
+            <label for="parking">Vagas mínimas</label>
             <select id="parking" name="parking">
-              <option value="">Indiferente</option>
+              <option value="">Qualquer</option>
               <option value="1">1+</option>
               <option value="2">2+</option>
               <option value="3">3+</option>
@@ -1296,9 +981,9 @@
             </select>
           </div>
 
-          <div id="commonAreasBlock" class="field full conditional" aria-live="polite">
-            <span id="commonAreasTitle" class="legend-label">Áreas comuns</span>
-            <div class="check-grid" id="commonAreasGrid">
+          <div class="conditional-block" id="commonAreasBlock" hidden>
+            <h3 id="commonAreasTitle">Áreas comuns</h3>
+            <div class="check-grid">
               <label class="check-pill"><input type="checkbox" name="commonArea" value="piscina" /> <span>Piscina</span></label>
               <label class="check-pill"><input type="checkbox" name="commonArea" value="academia" /> <span>Academia</span></label>
               <label class="check-pill"><input type="checkbox" name="commonArea" value="salao-festas" /> <span>Salão de festas</span></label>
@@ -1327,9 +1012,9 @@
             <summary>Mais filtros e preferências</summary>
             <div class="details-body">
               <div class="check-grid">
-                <label class="check-pill"><input type="checkbox" name="preference" value="varanda" /> <span>Varanda</span></label>
+                <label class="check-pill"><input type="checkbox" name="preference" value="varanda" /> <span>Varanda / terraço</span></label>
                 <label class="check-pill"><input type="checkbox" name="preference" value="vista" /> <span>Vista aberta</span></label>
-                <label class="check-pill"><input type="checkbox" name="preference" value="pet-friendly" /> <span>Pet friendly</span></label>
+                <label class="check-pill"><input type="checkbox" name="preference" value="pet-friendly" /> <span>Aceita pet</span></label>
                 <label class="check-pill"><input type="checkbox" name="preference" value="reformado" /> <span>Reformado</span></label>
                 <label class="check-pill"><input type="checkbox" name="preference" value="mobiliado" /> <span>Mobiliado</span></label>
                 <label class="check-pill"><input type="checkbox" name="preference" value="andar-alto" /> <span>Andar alto</span></label>
@@ -1337,92 +1022,73 @@
             </div>
           </details>
 
-          <div class="actions">
-            <button type="button" class="btn secondary" id="interpretBriefing">Interpretar briefing</button>
-            <button type="submit" class="btn primary">Buscar compatíveis</button>
-            <button type="button" class="btn ghost" id="clearForm">Limpar</button>
+          <div class="form-actions">
+            <button class="btn primary" id="interpretBriefing" type="button">Interpretar briefing</button>
+            <button class="btn accent" type="submit">Buscar comparáveis</button>
+            <button class="btn" id="clearForm" type="button">Limpar</button>
           </div>
+          <div class="chips" id="selectedChips" aria-label="Filtros aplicados"><span class="chip">Nenhum filtro aplicado</span></div>
         </form>
       </aside>
     </section>
 
-    <section class="results" id="imoveis-sugeridos" aria-labelledby="results-title">
-      <aside class="panel summary-card">
-        <div class="section-title">
-          <h3 id="results-title">Resumo do match</h3>
+    <section class="results" id="imoveis-sugeridos" aria-label="Imóveis sugeridos">
+      <div class="panel results-list">
+        <div class="results-head">
+          <div>
+            <p class="eyebrow">Imóveis sugeridos</p>
+            <h3>Resultados compatíveis</h3>
+            <p>O motor respeita região e tipo; não mistura bairros só para preencher a lista.</p>
+          </div>
+          <div class="stats">
+            <div class="stat"><span class="stat-value" id="resultCount">--</span><span class="stat-label">encontrados</span></div>
+            <div class="stat"><span class="stat-value" id="averageScore">--</span><span class="stat-label">média de aderência</span></div>
+          </div>
         </div>
-        <div class="score-big" id="averageScore">--</div>
-        <ul class="summary-list" id="matchSummary">
-          <li>Selecione o tipo de imóvel para ativar a lógica condicional.</li>
-          <li>Casa de condomínio usa a terminologia “Áreas comuns do condomínio”.</li>
-          <li>A infraestrutura para carregar carro elétrico está disponível para apartamento e casa de condomínio.</li>
-        </ul>
-        <div class="chips" id="selectedChips" aria-label="Filtros selecionados"></div>
-      </aside>
+        <div class="property-list" id="propertyList"></div>
+      </div>
 
-      <article class="panel list-card">
-        <div class="section-title">
-          <h3>Imóveis sugeridos</h3>
-          <span class="pill" id="resultCount">0 encontrados</span>
+      <aside class="panel match-summary" aria-labelledby="summary-title">
+        <p class="eyebrow">Resumo do match</p>
+        <h3 id="summary-title">Por que a tela está mais limpa?</h3>
+        <ul id="matchSummary"></ul>
+        <div class="selection-tools">
+          <div class="hint" id="selectionCount">Nenhum imóvel selecionado</div>
+          <button class="btn primary" id="selectAllResults" type="button">Selecionar todos visíveis</button>
+          <button class="btn" id="clearSelectedResults" type="button">Limpar seleção</button>
+          <button class="btn whatsapp" id="sendSelectedWhatsApp" type="button">Enviar selecionados no Zap</button>
         </div>
-        <div class="bulk-actions" aria-label="Ações para imóveis selecionados">
-          <span class="selection-status" id="selectionCount">Nenhum imóvel selecionado</span>
-          <button type="button" class="btn secondary" id="selectAllResults">Selecionar todos</button>
-          <button type="button" class="btn ghost" id="clearSelectedResults">Limpar seleção</button>
-          <button type="button" class="btn whatsapp" id="sendSelectedWhatsApp" disabled>Enviar selecionados por WhatsApp</button>
-        </div>
-        <div class="properties" id="propertyList"></div>
-      </article>
+      </aside>
     </section>
 
-
-    <section class="panel content-section" id="como-funciona" aria-labelledby="como-funciona-title">
-      <p class="eyebrow">Como funciona</p>
+    <section class="panel content-section" id="como-funciona" aria-labelledby="como-title">
       <div class="content-heading">
-        <h2 id="como-funciona-title">Do briefing ao imóvel certo, sem virar um formulário infinito.</h2>
-        <p>O MatchR mantém o motor objetivo, mas preserva as seções de explicação da página para o usuário entender a proposta completa.</p>
+        <div>
+          <p class="eyebrow">Como funciona</p>
+          <h2 id="como-title">Simples na frente. Inteligente por trás.</h2>
+        </div>
+        <p>O MatchR transforma o briefing do cliente em filtros práticos e classifica os imóveis por aderência. O corretor continua no controle da curadoria, mas ganha velocidade para montar uma seleção boa.</p>
       </div>
       <div class="content-grid three">
-        <article class="content-card">
-          <span>1</span>
-          <h3>Captura o briefing</h3>
-          <p>O corretor escreve o pedido do cliente em linguagem natural ou preenche os campos essenciais.</p>
-        </article>
-        <article class="content-card">
-          <span>2</span>
-          <h3>Mostra só o que faz sentido</h3>
-          <p>Áreas comuns aparecem para apartamento e casa de condomínio, com a terminologia correta em cada caso.</p>
-        </article>
-        <article class="content-card">
-          <span>3</span>
-          <h3>Prioriza compatibilidade</h3>
-          <p>A lista sugerida organiza imóveis por aderência, com trava obrigatória de tipo e região quando esses campos são preenchidos.</p>
-        </article>
+        <div class="content-card"><b>1. Briefing</b><span>Digite ou cole o pedido do cliente como ele chegou no WhatsApp.</span></div>
+        <div class="content-card"><b>2. Interpretação</b><span>O sistema identifica tipo, bairro, preço, suítes, vagas e preferências.</span></div>
+        <div class="content-card"><b>3. Curadoria</b><span>Os imóveis aparecem com motivos claros e porcentagem de aderência.</span></div>
       </div>
     </section>
 
     <section class="panel content-section" id="beneficios" aria-labelledby="beneficios-title">
-      <p class="eyebrow">Benefícios</p>
-      <div class="content-heading compact">
-        <h2 id="beneficios-title">Mais clareza para atender, argumentar e converter.</h2>
+      <div class="content-heading">
+        <div>
+          <p class="eyebrow">Benefícios</p>
+          <h2 id="beneficios-title">Menos garimpo manual. Mais qualidade no envio.</h2>
+        </div>
+        <p>A proposta é reduzir o tempo gasto entrando em vários sites, planilhas e grupos, sem tirar a decisão final do corretor.</p>
       </div>
       <div class="content-grid four">
-        <article class="content-card small">
-          <h3>Tela menos poluída</h3>
-          <p>Os filtros avançados ficam recolhidos e os campos condicionais aparecem no contexto certo.</p>
-        </article>
-        <article class="content-card small">
-          <h3>Follow-up melhor</h3>
-          <p>O corretor entende rapidamente por que um imóvel combina com o cliente.</p>
-        </article>
-        <article class="content-card small">
-          <h3>Busca mais inteligente</h3>
-          <p>Briefing por texto ajuda a transformar intenção em filtros acionáveis.</p>
-        </article>
-        <article class="content-card small">
-          <h3>Pronto para evoluir</h3>
-          <p>A base já permite novas regras, integrações e critérios de compatibilidade.</p>
-        </article>
+        <div class="content-card"><b>Busca objetiva</b><span>Filtra por perfil real do cliente.</span></div>
+        <div class="content-card"><b>Menos ruído</b><span>Campos aparecem quando são necessários.</span></div>
+        <div class="content-card"><b>Zap mais rápido</b><span>Selecione opções e envie com contexto.</span></div>
+        <div class="content-card"><b>Validação clara</b><span>O MVP mede se o corretor economiza tempo.</span></div>
       </div>
     </section>
 
@@ -1443,19 +1109,10 @@
       <div class="broker-video-copy">
         <p class="eyebrow">Para você, corretor</p>
         <h2 id="broker-video-title">Assista ao vídeo de apresentação.</h2>
-        <p>
-          Aula de Renato Gosling, fundador do MatchR, sobre como corretores podem ganhar eficiência em follow-up, networking e técnicas de vendas.
-        </p>
+        <p>Aula de Renato Gosling, fundador do MatchR, sobre como corretores podem ganhar eficiência em follow-up, networking e técnicas de vendas.</p>
       </div>
       <div class="video-frame" aria-label="Vídeo de apresentação para corretores">
-        <iframe
-          src="https://www.youtube.com/embed/7o9W3ATGCl4"
-          title="Vídeo para você, corretor - MatchR"
-          loading="lazy"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen>
-        </iframe>
+        <iframe src="https://www.youtube.com/embed/7o9W3ATGCl4" title="Vídeo para você, corretor - MatchR" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
     </section>
   </main>
@@ -1463,7 +1120,6 @@
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script>
-
     const menuButton = document.getElementById("menuButton");
     const menuClose = document.getElementById("menuClose");
     const menuOverlay = document.getElementById("menuOverlay");
@@ -1500,14 +1156,8 @@
     });
 
     const commonAreaConfig = {
-      "apartamento": {
-        title: "Áreas comuns do edifício",
-        hint: "Exibido porque o tipo selecionado é Apartamento."
-      },
-      "casa-condominio": {
-        title: "Áreas comuns do condomínio",
-        hint: "Exibido porque o tipo selecionado é Casa de condomínio."
-      }
+      "apartamento": { title: "Áreas comuns do edifício", hint: "Exibido porque o tipo selecionado é Apartamento." },
+      "casa-condominio": { title: "Áreas comuns do condomínio", hint: "Exibido porque o tipo selecionado é Casa de condomínio." }
     };
 
     const typeLabel = {
@@ -1737,9 +1387,7 @@
         commonAreasBlock.classList.add("is-visible");
         commonAreasBlock.removeAttribute("hidden");
       } else {
-        if (commonAreasBlock.classList.contains("is-visible") || previousType in commonAreaConfig) {
-          uncheckCommonAreas();
-        }
+        if (commonAreasBlock.classList.contains("is-visible") || previousType in commonAreaConfig) uncheckCommonAreas();
         commonAreasBlock.classList.remove("is-visible");
         commonAreasBlock.setAttribute("hidden", "");
       }
@@ -1747,6 +1395,9 @@
 
     function normalizeCurrency(value) {
       if (!value) return 0;
+      let text = String(value).toLowerCase().replace(/\s+/g, " ").trim();
+      const millionMatch = text.match(/(?:r\$\s*)?(\d+(?:[,.]\d+)?)\s*(mi|milh(?:ões|ao|ão)?)/i);
+      if (millionMatch) return Math.round(Number(millionMatch[1].replace(",", ".")) * 1000000);
       const onlyNumbers = String(value).replace(/[^0-9]/g, "");
       return onlyNumbers ? Number(onlyNumbers) : 0;
     }
@@ -1779,10 +1430,7 @@
     }
 
     function compactLocation(value) {
-      return normalizeText(value)
-        .split(" ")
-        .filter(word => word && !["de", "da", "do", "das", "dos", "em", "no", "na"].includes(word))
-        .join(" ");
+      return normalizeText(value).replace(/\b(de|da|do|das|dos)\b/g, "").replace(/\s+/g, "").trim();
     }
 
     function locationCandidates(property) {
@@ -1793,11 +1441,10 @@
       const wanted = normalizeText(wantedRaw);
       const wantedCompact = compactLocation(wantedRaw);
       if (!wanted) return true;
-
       return locationCandidates(property).some(candidateRaw => {
         const candidate = normalizeText(candidateRaw);
         const candidateCompact = compactLocation(candidateRaw);
-        return candidate === wanted || candidateCompact === wantedCompact;
+        return candidate === wanted || candidate.includes(wanted) || wanted.includes(candidate) || candidateCompact === wantedCompact;
       });
     }
 
@@ -1816,8 +1463,7 @@
             <b>${escapeHTML(agency.initials || "IM")}</b>
             <small>${escapeHTML(agency.name)}</small>
           </div>
-        </div>
-      `;
+        </div>`;
     }
 
     function getPropertyKey(property) {
@@ -1829,10 +1475,7 @@
     }
 
     function buildSelectedWhatsAppUrl(items) {
-      const lines = [
-        "Olá! Separei estes imóveis compatíveis no MatchR:",
-      ];
-
+      const lines = ["Olá! Separei estes imóveis compatíveis no MatchR:"];
       items.forEach(({ property, score }, index) => {
         lines.push(
           "",
@@ -1843,24 +1486,8 @@
           `Aderência no match: ${score}%`
         );
       });
-
       lines.push("", "Quer que eu te envie mais detalhes ou agende uma visita?");
       return `https://wa.me/?text=${encodeURIComponent(lines.join("\n"))}`;
-    }
-
-    function updateSelectionUI() {
-      const selectedItems = getSelectedItems();
-      const count = selectedItems.length;
-      const visibleCount = currentRankedResults.length;
-
-      selectionCount.textContent = count
-        ? `${count} ${count === 1 ? "imóvel selecionado" : "imóveis selecionados"} para enviar no Zap`
-        : "Nenhum imóvel selecionado";
-
-      selectAllResults.disabled = visibleCount === 0;
-      clearSelectedResults.disabled = count === 0;
-      sendSelectedWhatsApp.disabled = count === 0;
-      sendSelectedWhatsApp.setAttribute("aria-disabled", count === 0 ? "true" : "false");
     }
 
     function buildWhatsAppUrl(property, score) {
@@ -1872,17 +1499,151 @@
         `${formatCurrency(property.price)} • ${property.bedrooms} dorms • ${property.suites} suítes • ${property.parking} vagas • ${property.area} m²`,
         `Aderência no match: ${score}%`
       ].join("\n");
-
       return `https://wa.me/?text=${encodeURIComponent(message)}`;
+    }
+
+    function updateSelectionUI() {
+      const selectedItems = getSelectedItems();
+      const count = selectedItems.length;
+      const visibleCount = currentRankedResults.length;
+      selectionCount.textContent = count ? `${count} ${count === 1 ? "imóvel selecionado" : "imóveis selecionados"} para enviar no Zap` : "Nenhum imóvel selecionado";
+      selectAllResults.disabled = visibleCount === 0;
+      clearSelectedResults.disabled = count === 0;
+      sendSelectedWhatsApp.disabled = count === 0;
+      sendSelectedWhatsApp.setAttribute("aria-disabled", count === 0 ? "true" : "false");
+    }
+
+    function calculateScore(property, criteria) {
+      let score = 42;
+      const reasons = [];
+      if (criteria.type) { score += 24; reasons.push("tipo compatível"); }
+      if (criteria.neighborhood) { score += 18; reasons.push("região compatível"); }
+      if (criteria.budget) {
+        if (property.price <= criteria.budget) { score += 10; reasons.push("dentro do orçamento"); }
+        else score -= Math.min(18, Math.round(((property.price - criteria.budget) / criteria.budget) * 35));
+      }
+      if (criteria.bedrooms && property.bedrooms >= criteria.bedrooms) { score += 7; reasons.push("dormitórios atendidos"); }
+      if (criteria.suites && property.suites >= criteria.suites) { score += 6; reasons.push("suítes atendidas"); }
+      if (criteria.parking && property.parking >= criteria.parking) { score += 6; reasons.push("vagas atendidas"); }
+      const areaMatches = criteria.commonAreas.filter(item => property.commonAreas.includes(item));
+      score += areaMatches.length * 4;
+      if (areaMatches.length) reasons.push(`${areaMatches.length} áreas comuns compatíveis`);
+      const prefMatches = criteria.preferences.filter(item => property.preferences.includes(item));
+      score += prefMatches.length * 3;
+      if (prefMatches.length) reasons.push(`${prefMatches.length} preferências compatíveis`);
+      return { score: Math.max(0, Math.min(99, score)), reasons };
+    }
+
+    function collectCriteria() {
+      return {
+        type: propertyType.value,
+        neighborhood: document.getElementById("neighborhood").value.trim(),
+        budget: normalizeCurrency(document.getElementById("budget").value),
+        bedrooms: Number(document.getElementById("bedrooms").value || 0),
+        suites: Number(document.getElementById("suites").value || 0),
+        parking: Number(document.getElementById("parking").value || 0),
+        commonAreas: commonAreaConfig[propertyType.value] ? getCheckedValues("commonArea") : [],
+        preferences: getCheckedValues("preference")
+      };
+    }
+
+    function buildChips(criteria) {
+      const chips = [];
+      if (criteria.type) chips.push(typeLabel[criteria.type]);
+      if (criteria.neighborhood) chips.push(criteria.neighborhood);
+      if (criteria.budget) chips.push(`Até ${formatCurrency(criteria.budget)}`);
+      if (criteria.bedrooms) chips.push(`${criteria.bedrooms}+ dormitórios`);
+      if (criteria.suites) chips.push(`${criteria.suites}+ suítes`);
+      if (criteria.parking) chips.push(`${criteria.parking}+ vagas`);
+      criteria.commonAreas.forEach(item => chips.push(commonAreaLabel[item] || item));
+      criteria.preferences.forEach(item => chips.push({
+        "varanda": "Varanda",
+        "vista": "Vista aberta",
+        "pet-friendly": "Aceita pet",
+        "reformado": "Reformado",
+        "mobiliado": "Mobiliado",
+        "andar-alto": "Andar alto"
+      }[item] || item));
+      selectedChips.innerHTML = chips.length ? chips.map(chip => `<span class="chip">${escapeHTML(chip)}</span>`).join("") : `<span class="chip">Nenhum filtro aplicado</span>`;
+    }
+
+    function renderResults() {
+      const criteria = collectCriteria();
+      buildChips(criteria);
+      const ranked = sampleProperties
+        .map(property => {
+          const blocked = hardFilterFailure(property, criteria);
+          return blocked ? null : { property, ...calculateScore(property, criteria) };
+        })
+        .filter(Boolean)
+        .filter(item => item.score >= 40)
+        .sort((a, b) => b.score - a.score);
+
+      currentRankedResults = ranked;
+      const visibleKeys = new Set(ranked.map(({ property }) => getPropertyKey(property)));
+      selectedPropertyKeys = new Set(Array.from(selectedPropertyKeys).filter(key => visibleKeys.has(key)));
+
+      resultCount.textContent = `${ranked.length}`;
+      averageScore.textContent = ranked.length ? `${Math.round(ranked.reduce((sum, item) => sum + item.score, 0) / ranked.length)}%` : "--";
+
+      if (!ranked.length) {
+        propertyList.innerHTML = `<div class="empty-state"><strong>Nenhum imóvel compatível dentro da região/tipo selecionados.</strong><br>Não trouxemos imóveis de outras regiões para preencher a lista. Se a busca pedir um bairro específico, regiões incompatíveis ficam bloqueadas automaticamente.</div>`;
+      } else {
+        propertyList.innerHTML = ranked.map(({ property, score, reasons }) => {
+          const key = getPropertyKey(property);
+          const isSelected = selectedPropertyKeys.has(key);
+          const checkedAttr = isSelected ? "checked" : "";
+          const meta = [
+            typeLabel[property.type],
+            property.neighborhood,
+            formatCurrency(property.price),
+            `${property.bedrooms} dorms`,
+            `${property.suites} suítes`,
+            `${property.parking} vagas`,
+            `${property.area} m²`
+          ].map(item => `<span>${escapeHTML(item)}</span>`).join("");
+          const relevantAreas = property.commonAreas.slice(0, 5).map(item => commonAreaLabel[item]).filter(Boolean).join(", ");
+          const whatsappUrl = buildWhatsAppUrl(property, score);
+          return `
+            <article class="property-card${isSelected ? " is-selected" : ""}" data-property-key="${escapeHTML(key)}">
+              ${renderPropertyMedia(property)}
+              <div>
+                <h4>${escapeHTML(property.title)}</h4>
+                <div class="property-meta">${meta}</div>
+                <p>${escapeHTML(property.description)}</p>
+                <div class="hint">${reasons.length ? `Por que apareceu: ${escapeHTML(reasons.join(", "))}.` : "Sugestão inicial da base demonstrativa."}</div>
+                ${relevantAreas ? `<div class="hint">Áreas: ${escapeHTML(relevantAreas)}</div>` : ""}
+                <div class="property-actions">
+                  <label class="select-property">
+                    <input class="property-select-input" type="checkbox" value="${escapeHTML(key)}" ${checkedAttr} />
+                    <span>Selecionar para Zap</span>
+                  </label>
+                  <a class="btn whatsapp" href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" aria-label="Enviar ${escapeHTML(property.title)} pelo WhatsApp">💬 WhatsApp</a>
+                </div>
+              </div>
+              <div class="property-score" aria-label="Aderência ${score}%">${score}%</div>
+            </article>`;
+        }).join("");
+      }
+
+      updateSelectionUI();
+      const visibleType = propertyType.value;
+      const bullets = [];
+      if (visibleType === "apartamento") bullets.push("Apartamento selecionado: o bloco aparece como “Áreas comuns do edifício”.");
+      else if (visibleType === "casa-condominio") bullets.push("Casa de condomínio selecionada: o bloco aparece como “Áreas comuns do condomínio”.");
+      else if (visibleType) bullets.push(`${typeLabel[visibleType]} selecionado: o bloco de áreas comuns fica oculto para reduzir poluição visual.`);
+      else bullets.push("Selecione um tipo de imóvel para ativar a lógica condicional da tela.");
+
+      if (criteria.commonAreas.includes("carregador-eletrico")) bullets.push("Infraestrutura para carregar carro elétrico marcada como requisito do cliente.");
+      else bullets.push("A opção de infraestrutura para carregar carro elétrico fica disponível para Apartamento e Casa de condomínio.");
+      if (criteria.neighborhood) bullets.push("Região preenchida: a busca usa trava obrigatória e não mistura imóveis de outros bairros ou cidades.");
+      bullets.push("Filtros avançados permanecem recolhidos por padrão para deixar o MVP mais limpo.");
+      matchSummary.innerHTML = bullets.map(item => `<li>${item}</li>`).join("");
     }
 
     function parseBriefing() {
       const text = document.getElementById("briefing").value.toLowerCase();
-      if (!text.trim()) {
-        showToast("Digite um briefing para interpretar.");
-        return;
-      }
-
+      if (!text.trim()) { showToast("Digite um briefing para interpretar."); return; }
       const typeRules = [
         { value: "casa-condominio", regex: /(casa\s+de\s+condom[ií]nio|condom[ií]nio\s+de\s+casas|casa\s+em\s+condom[ií]nio)/i },
         { value: "apartamento", regex: /(apartamento|apto|edif[ií]cio|pr[eé]dio)/i },
@@ -1891,13 +1652,8 @@
         { value: "casa-campo", regex: /(casa\s+(de|no)\s+campo|s[ií]tio|fazenda|ch[aá]cara|s[aã]o\s+roque|atibaia|serra)/i },
         { value: "casa", regex: /\bcasa\b/i }
       ];
-
       for (const rule of typeRules) {
-        if (rule.regex.test(text)) {
-          propertyType.value = rule.value;
-          updateCommonAreasVisibility();
-          break;
-        }
+        if (rule.regex.test(text)) { propertyType.value = rule.value; updateCommonAreasVisibility(); break; }
       }
 
       const neighborhoods = ["alto de pinheiros", "vila nova conceição", "campo belo", "itaim bibi", "granja viana", "são roque", "sao roque", "são sebastião", "sao sebastiao", "alphaville", "pinheiros", "jardins", "juquehy", "juqueí", "guarujá", "guaruja", "moema", "itaim"];
@@ -1929,46 +1685,37 @@
 
       const bedroomsMatch = text.match(/(\d+)\s*(quartos|dormit[oó]rios|dorms)/i);
       if (bedroomsMatch) document.getElementById("bedrooms").value = Math.min(Number(bedroomsMatch[1]), 5).toString();
-
       const suitesMatch = text.match(/(\d+)\s*su[ií]tes?/i);
       if (suitesMatch) document.getElementById("suites").value = Math.min(Number(suitesMatch[1]), 4).toString();
-
       const parkingMatch = text.match(/(\d+)\s*(vagas?|garagens?)/i);
       if (parkingMatch) document.getElementById("parking").value = Math.min(Number(parkingMatch[1]), 4).toString();
-
       const millionMatch = text.match(/(?:r\$\s*)?(\d+(?:[,.]\d+)?)\s*(mi|milh(?:ões|ao|ão)?)/i);
       if (millionMatch) {
         const number = Number(millionMatch[1].replace(",", "."));
         document.getElementById("budget").value = String(Math.round(number * 1000000));
       }
-
       const areaKeywords = [
         ["piscina", /(piscina)/i],
         ["academia", /(academia|fitness)/i],
         ["salao-festas", /(sal[aã]o\s+de\s+festas?)/i],
-        ["espaco-gourmet", /(gourmet|espa[cç]o\s+gourmet)/i],
-        ["churrasqueira", /(churrasqueira|churrasco)/i],
+        ["espaco-gourmet", /(espa[cç]o\s+gourmet|gourmet)/i],
+        ["churrasqueira", /(churrasqueira)/i],
         ["playground", /(playground|parquinho)/i],
-        ["quadra", /(quadra|t[eê]nis|beach\s+tennis)/i],
+        ["quadra", /(quadra)/i],
         ["sauna", /(sauna)/i],
-        ["coworking", /(coworking|home\s+office\s+coletivo)/i],
-        ["pet-place", /(pet\s+place|espa[cç]o\s+pet|pet)/i],
+        ["jardim", /(jardim|área\s+verde|area\s+verde)/i],
         ["rooftop", /(rooftop)/i],
-        ["bicicletario", /(biciclet[aá]rio|bike)/i],
-        ["portaria-24h", /(portaria\s*24|porteiro\s*24)/i],
-        ["seguranca", /(seguran[cç]a|controle\s+de\s+acesso)/i],
-        ["gerador", /(gerador)/i],
-        ["lazer-completo", /(lazer\s+completo|condom[ií]nio\s+clube)/i],
-        ["carregador-eletrico", /(carro\s+el[eé]trico|carregador|recarga|vaga\s+com\s+tomada|tomada\s+para\s+carro|ev\s*charger)/i]
+        ["bicicletario", /(biciclet[aá]rio)/i],
+        ["seguranca", /(seguran[cç]a|portaria)/i],
+        ["lazer-completo", /(lazer\s+completo|clube)/i],
+        ["carregador-eletrico", /(carregador|carro\s+el[eé]trico|recarga|wallbox)/i]
       ];
-
       areaKeywords.forEach(([value, regex]) => {
         if (regex.test(text)) {
           const checkbox = form.querySelector(`input[name="commonArea"][value="${value}"]`);
-          if (checkbox && commonAreaConfig[propertyType.value]) checkbox.checked = true;
+          if (checkbox) checkbox.checked = true;
         }
       });
-
       const preferenceKeywords = [
         ["varanda", /(varanda|sacada|terra[cç]o)/i],
         ["vista", /(vista|vista\s+aberta)/i],
@@ -1977,202 +1724,21 @@
         ["mobiliado", /(mobiliado|decorado)/i],
         ["andar-alto", /(andar\s+alto)/i]
       ];
-
       preferenceKeywords.forEach(([value, regex]) => {
         if (regex.test(text)) {
           const checkbox = form.querySelector(`input[name="preference"][value="${value}"]`);
           if (checkbox) checkbox.checked = true;
         }
       });
-
       showToast("Briefing interpretado e filtros preenchidos.");
       renderResults();
-    }
-
-    function calculateScore(property, criteria) {
-      let score = 42;
-      const reasons = [];
-
-      if (criteria.type) {
-        score += 24;
-        reasons.push("tipo compatível");
-      }
-
-      if (criteria.neighborhood) {
-        score += 18;
-        reasons.push("região compatível");
-      }
-
-      if (criteria.budget) {
-        if (property.price <= criteria.budget) {
-          score += 10;
-          reasons.push("dentro do orçamento");
-        } else {
-          score -= Math.min(18, Math.round(((property.price - criteria.budget) / criteria.budget) * 35));
-        }
-      }
-
-      if (criteria.bedrooms && property.bedrooms >= criteria.bedrooms) {
-        score += 7;
-        reasons.push("dormitórios atendidos");
-      }
-
-      if (criteria.suites && property.suites >= criteria.suites) {
-        score += 6;
-        reasons.push("suítes atendidas");
-      }
-
-      if (criteria.parking && property.parking >= criteria.parking) {
-        score += 6;
-        reasons.push("vagas atendidas");
-      }
-
-      const areaMatches = criteria.commonAreas.filter(item => property.commonAreas.includes(item));
-      score += areaMatches.length * 4;
-      if (areaMatches.length) reasons.push(`${areaMatches.length} áreas comuns compatíveis`);
-
-      const prefMatches = criteria.preferences.filter(item => property.preferences.includes(item));
-      score += prefMatches.length * 3;
-      if (prefMatches.length) reasons.push(`${prefMatches.length} preferências compatíveis`);
-
-      return { score: Math.max(0, Math.min(99, score)), reasons };
-    }
-
-    function collectCriteria() {
-      return {
-        type: propertyType.value,
-        neighborhood: document.getElementById("neighborhood").value.trim(),
-        budget: normalizeCurrency(document.getElementById("budget").value),
-        bedrooms: Number(document.getElementById("bedrooms").value || 0),
-        suites: Number(document.getElementById("suites").value || 0),
-        parking: Number(document.getElementById("parking").value || 0),
-        commonAreas: commonAreaConfig[propertyType.value] ? getCheckedValues("commonArea") : [],
-        preferences: getCheckedValues("preference")
-      };
-    }
-
-    function buildChips(criteria) {
-      const chips = [];
-      if (criteria.type) chips.push(typeLabel[criteria.type]);
-      if (criteria.neighborhood) chips.push(criteria.neighborhood);
-      if (criteria.budget) chips.push(`Até ${formatCurrency(criteria.budget)}`);
-      if (criteria.bedrooms) chips.push(`${criteria.bedrooms}+ dorms`);
-      if (criteria.suites) chips.push(`${criteria.suites}+ suítes`);
-      if (criteria.parking) chips.push(`${criteria.parking}+ vagas`);
-      criteria.commonAreas.forEach(item => chips.push(commonAreaLabel[item]));
-      criteria.preferences.forEach(item => chips.push(item.replace("-", " ")));
-
-      selectedChips.innerHTML = chips.length
-        ? chips.map(chip => `<span class="chip">${escapeHTML(chip)}</span>`).join("")
-        : `<span class="chip">Nenhum filtro aplicado</span>`;
-    }
-
-    function renderResults() {
-      const criteria = collectCriteria();
-      buildChips(criteria);
-
-      const ranked = sampleProperties
-        .map(property => {
-          const blocked = hardFilterFailure(property, criteria);
-          return blocked ? null : { property, ...calculateScore(property, criteria) };
-        })
-        .filter(Boolean)
-        .filter(item => item.score >= 40)
-        .sort((a, b) => b.score - a.score);
-
-      currentRankedResults = ranked;
-      const visibleKeys = new Set(ranked.map(({ property }) => getPropertyKey(property)));
-      selectedPropertyKeys = new Set(Array.from(selectedPropertyKeys).filter(key => visibleKeys.has(key)));
-
-      resultCount.textContent = `${ranked.length} ${ranked.length === 1 ? "encontrado" : "encontrados"}`;
-      averageScore.textContent = ranked.length ? `${Math.round(ranked.reduce((sum, item) => sum + item.score, 0) / ranked.length)}%` : "--";
-
-      if (!ranked.length) {
-        propertyList.innerHTML = `<div class="empty-state"><strong>Nenhum imóvel compatível dentro da região/tipo selecionados.</strong><br>Não trouxemos imóveis de outras regiões para preencher a lista. Se a busca pedir um bairro específico, regiões incompatíveis ficam bloqueadas automaticamente.</div>`;
-      } else {
-        propertyList.innerHTML = ranked.map(({ property, score, reasons }) => {
-          const key = getPropertyKey(property);
-          const isSelected = selectedPropertyKeys.has(key);
-          const checkedAttr = isSelected ? "checked" : "";
-
-          const meta = [
-            typeLabel[property.type],
-            property.neighborhood,
-            formatCurrency(property.price),
-            `${property.bedrooms} dorms`,
-            `${property.suites} suítes`,
-            `${property.parking} vagas`,
-            `${property.area} m²`
-          ].map(item => `<span>${escapeHTML(item)}</span>`).join("");
-
-          const relevantAreas = property.commonAreas
-            .slice(0, 5)
-            .map(item => commonAreaLabel[item])
-            .join(", ");
-
-          const whatsappUrl = buildWhatsAppUrl(property, score);
-
-          return `
-            <article class="property-card${isSelected ? " is-selected" : ""}" data-property-key="${escapeHTML(key)}">
-              ${renderPropertyMedia(property)}
-              <div>
-                <h4>${escapeHTML(property.title)}</h4>
-                <div class="property-meta">${meta}</div>
-                <p>${escapeHTML(property.description)}</p>
-                <div class="hint">${reasons.length ? `Por que apareceu: ${escapeHTML(reasons.join(", "))}.` : "Sugestão inicial da base demonstrativa."}</div>
-                ${relevantAreas ? `<div class="hint">Áreas: ${escapeHTML(relevantAreas)}</div>` : ""}
-                <div class="property-actions">
-                  <label class="select-property">
-                    <input class="property-select-input" type="checkbox" value="${escapeHTML(key)}" ${checkedAttr} />
-                    <span>Selecionar para Zap</span>
-                  </label>
-                  <a class="btn whatsapp" href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" aria-label="Enviar ${escapeHTML(property.title)} pelo WhatsApp">💬 WhatsApp</a>
-                </div>
-              </div>
-              <div class="property-score" aria-label="Aderência ${score}%">${score}%</div>
-            </article>
-          `;
-        }).join("");
-      }
-
-      updateSelectionUI();
-
-      const visibleType = propertyType.value;
-      const bullets = [];
-      if (visibleType === "apartamento") {
-        bullets.push("Apartamento selecionado: o bloco aparece como “Áreas comuns do edifício”.");
-      } else if (visibleType === "casa-condominio") {
-        bullets.push("Casa de condomínio selecionada: o bloco aparece como “Áreas comuns do condomínio”.");
-      } else if (visibleType) {
-        bullets.push(`${typeLabel[visibleType]} selecionado: o bloco de áreas comuns fica oculto para reduzir poluição visual.`);
-      } else {
-        bullets.push("Selecione um tipo de imóvel para ativar a lógica condicional da tela.");
-      }
-
-      if (criteria.commonAreas.includes("carregador-eletrico")) {
-        bullets.push("Infraestrutura para carregar carro elétrico marcada como requisito do cliente.");
-      } else {
-        bullets.push("A opção de infraestrutura para carregar carro elétrico fica disponível para Apartamento e Casa de condomínio.");
-      }
-
-      if (criteria.neighborhood) {
-        bullets.push("Região preenchida: a busca usa trava obrigatória e não mistura imóveis de outros bairros ou cidades.");
-      }
-
-      bullets.push("Filtros avançados permanecem recolhidos por padrão para deixar o MVP mais limpo.");
-      matchSummary.innerHTML = bullets.map(item => `<li>${item}</li>`).join("");
     }
 
     propertyList.addEventListener("change", event => {
       const target = event.target;
       if (!target.classList || !target.classList.contains("property-select-input")) return;
-
-      if (target.checked) {
-        selectedPropertyKeys.add(target.value);
-      } else {
-        selectedPropertyKeys.delete(target.value);
-      }
-
+      if (target.checked) selectedPropertyKeys.add(target.value);
+      else selectedPropertyKeys.delete(target.value);
       const card = target.closest(".property-card");
       if (card) card.classList.toggle("is-selected", target.checked);
       updateSelectionUI();
@@ -2202,10 +1768,7 @@
 
     sendSelectedWhatsApp.addEventListener("click", () => {
       const selectedItems = getSelectedItems();
-      if (!selectedItems.length) {
-        showToast("Selecione pelo menos um imóvel para enviar por WhatsApp.");
-        return;
-      }
+      if (!selectedItems.length) { showToast("Selecione pelo menos um imóvel para enviar por WhatsApp."); return; }
       window.open(buildSelectedWhatsAppUrl(selectedItems), "_blank", "noopener,noreferrer");
     });
 

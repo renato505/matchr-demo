@@ -1,0 +1,12 @@
+INSTRUÇÕES PARA RESTAURAR A V14 ORIGINAL NO GITHUB
+
+1. Baixe o arquivo index.html.
+2. No GitHub, entre no repositório renato505/matchr-demo.
+3. Abra o arquivo index.html atual.
+4. Clique em Edit ou Upload files e substitua pelo novo arquivo.
+5. O nome final precisa ficar exatamente: index.html
+6. Não suba como index (1).html e não suba o ZIP no lugar do index.html.
+7. Faça commit na branch main.
+8. Aguarde 1 a 3 minutos e abra o site em janela anônima ou use Ctrl + F5.
+
+Versão: v14 original restaurada, fundo bege, sem modo intermediário e sem filtro Origem.
