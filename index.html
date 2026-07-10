@@ -1,371 +1,2240 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>MatchR — Inteligência para o corretor imobiliário</title>
-<style>
-:root{
-  --bg:#ffffff;
-  --panel:#ffffff;
-  --panel2:#f7f7f8;
-  --panel3:#fbfbfc;
-  --text:#000000;
-  --muted:#444444;
-  --muted2:#6b7280;
-  --orange:#ff6a00;
-  --orange2:#b84a00;
-  --line:#e5e7eb;
-  --green:#0f7a4a;
-  --blue:#2454ff;
-  --shadow:0 14px 42px rgba(0,0,0,.08);
-  --shadow2:0 22px 55px rgba(0,0,0,.12);
-  --radius:22px;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-}
-.app{display:grid;grid-template-columns:292px 1fr;min-height:100vh}
-aside{
-  border-right:1px solid var(--line);
-  background:#fff;
-  padding:24px;
-  position:sticky;
-  top:0;
-  height:100vh;
-}
-.logo{display:block;margin-bottom:28px;text-decoration:none;cursor:pointer}
-.logo-img{width:190px;max-width:100%;height:auto;display:block}
-.logo-subtitle{display:block;color:#444;font-size:12px;margin-top:8px;font-weight:800}
-nav button{
-  width:100%;
-  border:0;
-  background:transparent;
-  color:#111;
-  padding:13px 14px;
-  text-align:left;
-  border-radius:14px;
-  margin:3px 0;
-  cursor:pointer;
-  font-weight:800;
-  font-size:14px;
-}
-nav button.active,nav button:hover{background:#111;color:#fff}
-.pill{font-size:11px;background:#fff1e8;color:var(--orange2);padding:3px 7px;border-radius:999px;float:right;border:1px solid #ffd9bf;font-weight:900}
-nav button.active .pill,nav button:hover .pill{background:#fff;color:#111;border-color:#fff}
-.side-card{margin-top:24px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
-.side-card p{font-size:13px;margin-bottom:0;color:#444}
-main{padding:28px;max-width:1500px;width:100%;margin:0 auto;background:#fff}
-h1{margin:0;font-size:34px;letter-spacing:-.04em;color:#000;line-height:1.05}
-h2{margin:0 0 14px;font-size:21px;letter-spacing:-.02em;color:#000}
-h3{color:#000;margin:0 0 8px}
-p{color:#444;line-height:1.45}
-.top{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;margin-bottom:22px}
-.btn{border:0;border-radius:14px;padding:12px 16px;cursor:pointer;font-weight:900;font-size:14px;white-space:nowrap}
-.btn.primary{background:#111;color:#fff}
-.btn.orange{background:var(--orange);color:#fff}
-.btn.ghost{background:#fff;color:#111;border:1px solid var(--line)}
-.btn:hover{transform:translateY(-1px)}
-.view{display:none}
-.view.active{display:block}
-.grid{display:grid;gap:16px}
-.cols2{grid-template-columns:repeat(2,minmax(0,1fr))}
-.cols3{grid-template-columns:repeat(3,minmax(0,1fr))}
-.cols4{grid-template-columns:repeat(4,minmax(0,1fr))}
-.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
-.card.soft{background:linear-gradient(180deg,#fff,#fafafa)}
-.metric .n{font-size:38px;font-weight:950;letter-spacing:-.05em;color:#000}
-.metric .label{font-size:13px;color:#555;font-weight:750}
-.filters{display:grid;grid-template-columns:repeat(7,minmax(120px,1fr));gap:10px;margin-bottom:16px}
-input,select,textarea{
-  border:1px solid var(--line);
-  background:#fff;
-  color:#111;
-  padding:12px 13px;
-  border-radius:14px;
-  font:inherit;
-  font-size:14px;
-  outline:none;
-  width:100%;
-}
-textarea{resize:vertical;min-height:96px;line-height:1.4}
-input:focus,select:focus,textarea:focus{border-color:var(--orange);box-shadow:0 0 0 4px rgba(255,106,0,.10)}
-.voice-card{margin:0 0 16px;padding:18px;border:1px solid var(--line);border-radius:22px;background:#fff;box-shadow:var(--shadow)}
-.voice-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
-.voice-card h2{margin-bottom:4px}
-.voice-card p{margin:0 0 12px;font-size:13px}
-.voice-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
-.criteria{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
-.criteria span,.tag,.score,.status{display:inline-flex;align-items:center;gap:4px;border-radius:999px;padding:6px 9px;font-size:12px;font-weight:850}
-.criteria span{background:#fff4ec;color:var(--orange2);border:1px solid #ffd9bf}
-.tag{background:#f4f4f5;color:#333;margin:4px 4px 0 0}
-.score{background:rgba(255,106,0,.13);color:var(--orange2);border:1px solid rgba(255,106,0,.24)}
-.status{background:#f1f5f9;color:#334155}
-.status.hot{background:rgba(255,106,0,.13);color:var(--orange2)}
-.status.ok{background:rgba(15,122,74,.12);color:var(--green)}
-.status.cold{background:rgba(107,114,128,.12);color:#4b5563}
-.inventory{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-.imovel{border:1px solid var(--line);border-radius:22px;overflow:hidden;background:#fff;box-shadow:var(--shadow)}
-.photo{height:150px;background:linear-gradient(135deg,#ece7df,#c8c0b7 55%,#f4f4f4);position:relative}
-.photo:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 25% 20%,rgba(255,255,255,.65),transparent 28%),linear-gradient(135deg,transparent 35%,rgba(255,106,0,.18) 36%,transparent 58%)}
-.body{padding:16px}
-.meta{font-size:13px;color:#555;line-height:1.4}
-.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-.actions button{flex:1;min-width:115px}
-.table{width:100%;border-collapse:collapse}
-.table th,.table td{padding:14px 10px;border-bottom:1px solid var(--line);text-align:left;font-size:14px;vertical-align:top}
-.table th{color:var(--muted2);font-size:12px;text-transform:uppercase;letter-spacing:.08em}
-.clientpage{background:#f6f3ec;color:#171717;border-radius:30px;padding:26px}
-.clientpage p{color:#5f615f}
-.client-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.client-card{background:#fff;border:1px solid #e6e1d6;border-radius:20px;overflow:hidden;color:#171717}
-.client-img{height:140px;background:linear-gradient(135deg,#ddd,#aaa)}
-.client-body{padding:15px}
-.mini-actions{display:flex;gap:8px;margin-top:12px}
-.mini-actions button{flex:1;border:1px solid #ddd;border-radius:12px;padding:10px;background:#fff;cursor:pointer;font-weight:850}
-.video-card{margin-top:22px;background:#fff;border:1px solid var(--line);border-radius:28px;padding:22px;box-shadow:var(--shadow2)}
-.video-wrap{position:relative;width:100%;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:20px;background:#000;box-shadow:0 20px 45px rgba(0,0,0,.18)}
-.video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
-.toast{position:fixed;right:24px;bottom:24px;background:#111;color:#fff;padding:14px 18px;border-radius:15px;box-shadow:var(--shadow2);display:none;font-weight:850;z-index:50}
-@media(max-width:1050px){
-  .app{grid-template-columns:1fr}
-  aside{position:relative;height:auto}
-  main{padding:18px}
-  .top{display:block}
-  .cols4,.cols3,.cols2,.inventory,.client-grid,.filters{grid-template-columns:1fr}
-  h1{font-size:30px}
-  .logo-img{width:170px}
-}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MatchR - MVP v14</title>
+  <meta name="description" content="MVP MatchR - busca inteligente de imóveis compatíveis com o cliente." />
+  <style>
+    :root {
+      --bg: #f7f4ef;
+      --surface: #fffaf3;
+      --surface-strong: #ffffff;
+      --ink: #241f1a;
+      --muted: #6d6258;
+      --line: #e7ded3;
+      --brand: #3d2c24;
+      --brand-soft: #efe5d8;
+      --accent: #8f5d3b;
+      --success: #276749;
+      --warning: #a05a00;
+      --shadow: 0 18px 45px rgba(57, 43, 32, 0.10);
+      --radius: 22px;
+      --radius-sm: 14px;
+      --focus: 0 0 0 4px rgba(143, 93, 59, 0.22);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(143, 93, 59, .13), transparent 34rem),
+        linear-gradient(135deg, #f8f3ec 0%, #f6f1ea 47%, #fbf8f2 100%);
+      min-height: 100vh;
+    }
+
+    a { color: inherit; }
+
+    .shell {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 56px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 26px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-link {
+      text-decoration: none;
+      flex-wrap: wrap;
+    }
+
+    .brand-logo-image {
+      display: block;
+      width: min(280px, 58vw);
+      height: auto;
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      background: var(--surface);
+      flex: 0 0 auto;
+    }
+
+    .logo-subtitle {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 7px 11px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .62);
+      color: var(--muted);
+      font-size: .86rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: linear-gradient(145deg, var(--brand), var(--accent));
+      font-weight: 800;
+      letter-spacing: -.04em;
+      box-shadow: var(--shadow);
+      flex: 0 0 auto;
+    }
+
+    .brand h1 {
+      font-size: clamp(1.15rem, 2vw, 1.45rem);
+      margin: 0;
+      letter-spacing: -.045em;
+      line-height: 1;
+    }
+
+    .brand p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: .88rem;
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, .62);
+      color: var(--brand);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: .82rem;
+      white-space: nowrap;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, .95fr);
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .broker-video {
+      display: grid;
+      grid-template-columns: minmax(260px, .72fr) minmax(320px, 1fr);
+      gap: 24px;
+      align-items: center;
+      padding: clamp(22px, 4vw, 34px);
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+
+    .broker-video-copy h2 {
+      margin: 0;
+      font-size: clamp(1.65rem, 3.4vw, 2.75rem);
+      line-height: 1;
+      letter-spacing: -.065em;
+      max-width: 13ch;
+    }
+
+    .broker-video-copy p:not(.eyebrow) {
+      margin: 16px 0 0;
+      color: var(--muted);
+      line-height: 1.52;
+      max-width: 52ch;
+    }
+
+    .video-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(231, 222, 211, .95);
+      background: #1d1712;
+      box-shadow: 0 18px 38px rgba(57, 43, 32, .14);
+    }
+
+    .video-frame iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .final-video {
+      margin-top: 24px;
+      margin-bottom: 0;
+    }
+
+    .panel {
+      background: rgba(255, 250, 243, .88);
+      border: 1px solid rgba(231, 222, 211, .9);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .intro {
+      padding: clamp(24px, 4vw, 40px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 420px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent);
+      font-weight: 800;
+      font-size: .82rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin: 0 0 18px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(143, 93, 59, .13);
+    }
+
+    .intro h2 {
+      margin: 0;
+      font-size: clamp(2.1rem, 5vw, 4rem);
+      line-height: .96;
+      letter-spacing: -.075em;
+      max-width: 11ch;
+    }
+
+    .intro .lead {
+      margin: 20px 0 0;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.8vw, 1.16rem);
+      line-height: 1.58;
+      max-width: 60ch;
+    }
+
+    .principles {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .principle {
+      background: rgba(255, 255, 255, .64);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px;
+      min-height: 102px;
+    }
+
+    .principle b {
+      display: block;
+      margin-bottom: 6px;
+      letter-spacing: -.02em;
+    }
+
+    .principle span {
+      color: var(--muted);
+      font-size: .9rem;
+      line-height: 1.35;
+    }
+
+    .search-card { padding: 20px; }
+
+    .search-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 16px;
+    }
+
+    .search-header h3 {
+      margin: 0;
+      font-size: 1.35rem;
+      letter-spacing: -.045em;
+    }
+
+    .search-header p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: .93rem;
+      line-height: 1.35;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .field { min-width: 0; }
+
+    .field.full { grid-column: 1 / -1; }
+
+    label,
+    .legend-label {
+      display: block;
+      font-weight: 800;
+      font-size: .83rem;
+      letter-spacing: -.01em;
+      margin-bottom: 8px;
+    }
+
+    input,
+    select,
+    textarea,
+    button {
+      font: inherit;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: #fffdf9;
+      color: var(--ink);
+      border-radius: 14px;
+      padding: 12px 13px;
+      outline: none;
+      transition: border-color .16s ease, box-shadow .16s ease, background .16s ease;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 112px;
+      line-height: 1.45;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: rgba(143, 93, 59, .62);
+      box-shadow: var(--focus);
+      background: #fff;
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: .8rem;
+      margin-top: 7px;
+      line-height: 1.38;
+    }
+
+    details {
+      grid-column: 1 / -1;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, .47);
+      border-radius: 18px;
+      overflow: hidden;
+    }
+
+    summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 15px 16px;
+      font-weight: 850;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    summary::-webkit-details-marker { display: none; }
+
+    summary::after {
+      content: "+";
+      color: var(--accent);
+      font-weight: 900;
+      font-size: 1.25rem;
+    }
+
+    details[open] summary::after { content: "-"; }
+
+    .details-body {
+      border-top: 1px solid var(--line);
+      padding: 16px;
+    }
+
+    .check-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .check-pill {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 11px 12px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fffdf9;
+      color: var(--ink);
+      cursor: pointer;
+      min-height: 46px;
+      user-select: none;
+      transition: transform .16s ease, border-color .16s ease, background .16s ease;
+    }
+
+    .check-pill:hover {
+      transform: translateY(-1px);
+      border-color: rgba(143, 93, 59, .36);
+    }
+
+    .check-pill input {
+      width: 17px;
+      height: 17px;
+      accent-color: var(--accent);
+      flex: 0 0 auto;
+    }
+
+    .check-pill span { font-size: .91rem; line-height: 1.25; }
+
+    .check-pill.ev {
+      border-color: rgba(39, 103, 73, .36);
+      background: rgba(39, 103, 73, .055);
+    }
+
+    .conditional {
+      display: none;
+      animation: pop .18s ease-out;
+    }
+
+    .conditional.is-visible { display: block; }
+
+    @keyframes pop {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      grid-column: 1 / -1;
+      margin-top: 4px;
+    }
+
+    .btn {
+      appearance: none;
+      border: 0;
+      border-radius: 14px;
+      padding: 12px 16px;
+      font-weight: 900;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn.primary {
+      background: var(--brand);
+      color: white;
+      box-shadow: 0 12px 25px rgba(61, 44, 36, .18);
+    }
+
+    .btn.secondary {
+      background: var(--brand-soft);
+      color: var(--brand);
+    }
+
+    .btn.ghost {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--line);
+    }
+
+    .results {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: minmax(0, .36fr) minmax(0, .64fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .summary-card,
+    .list-card {
+      padding: 20px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .section-title h3 {
+      margin: 0;
+      font-size: 1.22rem;
+      letter-spacing: -.04em;
+    }
+
+    .score-big {
+      width: 78px;
+      height: 78px;
+      border-radius: 24px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(145deg, var(--brand-soft), #fff);
+      color: var(--brand);
+      border: 1px solid var(--line);
+      font-weight: 950;
+      letter-spacing: -.06em;
+      font-size: 1.4rem;
+      margin-bottom: 16px;
+    }
+
+    .summary-list {
+      display: grid;
+      gap: 11px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .summary-list li {
+      display: flex;
+      gap: 10px;
+      color: var(--muted);
+      line-height: 1.35;
+      font-size: .94rem;
+    }
+
+    .summary-list li::before {
+      content: "✓";
+      color: var(--success);
+      font-weight: 900;
+      flex: 0 0 auto;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .chip {
+      border: 1px solid var(--line);
+      background: #fffdf9;
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-weight: 750;
+      font-size: .78rem;
+      color: var(--brand);
+    }
+
+    .properties {
+      display: grid;
+      gap: 14px;
+    }
+
+    .bulk-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin: -2px 0 16px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, .52);
+    }
+
+    .selection-status {
+      font-weight: 850;
+      color: var(--brand);
+      font-size: .88rem;
+      margin-right: auto;
+    }
+
+    .bulk-actions .btn {
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-size: .84rem;
+    }
+
+    .btn:disabled,
+    .btn[aria-disabled="true"] {
+      opacity: .48;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .btn:disabled:hover,
+    .btn[aria-disabled="true"]:hover {
+      transform: none;
+    }
+
+    .property-card {
+      border: 1px solid var(--line);
+      background: #fffdf9;
+      border-radius: 18px;
+      padding: 16px;
+      display: grid;
+      grid-template-columns: minmax(150px, 190px) minmax(0, 1fr) auto;
+      gap: 14px;
+      align-items: start;
+      transition: border-color .16s ease, box-shadow .16s ease, background .16s ease;
+    }
+
+    .property-card.is-selected {
+      border-color: rgba(39, 103, 73, .55);
+      background: rgba(39, 103, 73, .045);
+      box-shadow: 0 14px 32px rgba(39, 103, 73, .10);
+    }
+
+    .property-media {
+      position: relative;
+      min-height: 148px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(143, 93, 59, .22);
+      background:
+        linear-gradient(145deg, rgba(36, 31, 26, .18), rgba(143, 93, 59, .18)),
+        radial-gradient(circle at 24% 22%, rgba(255,255,255,.95) 0 8%, transparent 9%),
+        linear-gradient(135deg, #ead9c2 0%, #c9a47f 48%, #8f6b4c 100%);
+      box-shadow: inset 0 -48px 60px rgba(36, 31, 26, .22);
+    }
+
+    .property-media.apartment {
+      background:
+        linear-gradient(145deg, rgba(36, 31, 26, .18), rgba(143, 93, 59, .18)),
+        repeating-linear-gradient(90deg, rgba(255,255,255,.28) 0 12px, transparent 12px 34px),
+        linear-gradient(135deg, #e9d9c5 0%, #c59b73 46%, #75563e 100%);
+    }
+
+    .property-media.house {
+      background:
+        linear-gradient(145deg, rgba(36, 31, 26, .16), rgba(143, 93, 59, .16)),
+        radial-gradient(circle at 76% 24%, rgba(255,255,255,.92) 0 10%, transparent 11%),
+        linear-gradient(135deg, #ead8bd 0%, #a98a63 44%, #46614b 100%);
+    }
+
+    .property-media.beach {
+      background:
+        linear-gradient(145deg, rgba(36, 31, 26, .12), rgba(143, 93, 59, .16)),
+        radial-gradient(circle at 80% 18%, rgba(255,255,255,.92) 0 9%, transparent 10%),
+        linear-gradient(135deg, #f3dfbd 0%, #b7d5cf 48%, #4c8c92 100%);
+    }
+
+    .property-media.country {
+      background:
+        linear-gradient(145deg, rgba(36, 31, 26, .15), rgba(143, 93, 59, .15)),
+        radial-gradient(circle at 22% 18%, rgba(255,255,255,.86) 0 9%, transparent 10%),
+        linear-gradient(135deg, #edd7b7 0%, #9bb574 48%, #536d3f 100%);
+    }
+
+    .photo-kicker {
+      position: absolute;
+      left: 12px;
+      top: 12px;
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: rgba(255, 250, 243, .88);
+      color: var(--brand);
+      font-size: .72rem;
+      font-weight: 850;
+      box-shadow: 0 10px 18px rgba(57, 43, 32, .12);
+    }
+
+    .agency-badge {
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px;
+      border-radius: 13px;
+      background: rgba(255, 250, 243, .94);
+      border: 1px solid rgba(255, 255, 255, .6);
+      box-shadow: 0 14px 30px rgba(57, 43, 32, .18);
+    }
+
+    .agency-badge b {
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      width: 34px;
+      height: 34px;
+      border-radius: 11px;
+      background: var(--brand);
+      color: #fffaf3;
+      font-size: .78rem;
+      letter-spacing: -.04em;
+    }
+
+    .agency-badge small {
+      color: var(--ink);
+      font-weight: 850;
+      line-height: 1.05;
+      font-size: .78rem;
+    }
+
+    .property-card h4 {
+      margin: 0 0 6px;
+      font-size: 1.05rem;
+      letter-spacing: -.035em;
+    }
+
+    .property-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      color: var(--muted);
+      font-size: .85rem;
+      margin-bottom: 10px;
+    }
+
+    .property-meta span {
+      background: rgba(239, 229, 216, .64);
+      border-radius: 999px;
+      padding: 5px 8px;
+    }
+
+    .property-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.42;
+      font-size: .92rem;
+    }
+
+    .property-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .select-property {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0;
+      padding: 10px 12px;
+      border: 1px solid rgba(39, 103, 73, .28);
+      border-radius: 13px;
+      background: rgba(39, 103, 73, .055);
+      color: var(--brand);
+      font-size: .84rem;
+      font-weight: 850;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .select-property input {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--success);
+      flex: 0 0 auto;
+    }
+
+    .btn.whatsapp {
+      background: var(--success);
+      color: #fff;
+      text-decoration: none;
+      box-shadow: 0 12px 24px rgba(39, 103, 73, .18);
+    }
+
+    .btn.whatsapp:hover {
+      box-shadow: 0 15px 28px rgba(39, 103, 73, .23);
+    }
+
+    .property-score {
+      width: 62px;
+      height: 62px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      background: var(--brand);
+      color: white;
+      font-weight: 950;
+      letter-spacing: -.05em;
+    }
+
+    .empty-state {
+      border: 1px dashed rgba(143, 93, 59, .45);
+      border-radius: 18px;
+      padding: 22px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, .42);
+      line-height: 1.45;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      transform: translateX(-50%) translateY(10px);
+      background: var(--brand);
+      color: #fff;
+      border-radius: 999px;
+      padding: 11px 15px;
+      font-weight: 800;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .18s ease, transform .18s ease;
+      z-index: 20;
+      max-width: min(92vw, 660px);
+      text-align: center;
+    }
+
+    .toast.is-visible {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+
+
+    .top-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: auto;
+    }
+
+    .menu-button {
+      appearance: none;
+      width: 50px;
+      height: 50px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, .72);
+      box-shadow: 0 10px 24px rgba(57, 43, 32, .08);
+      cursor: pointer;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+    }
+
+    .menu-button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 28px rgba(57, 43, 32, .12);
+      background: #fffdf9;
+    }
+
+    .menu-button:focus-visible,
+    .drawer-close:focus-visible,
+    .drawer-nav a:focus-visible {
+      outline: none;
+      box-shadow: var(--focus);
+    }
+
+    .menu-button .bar {
+      display: block;
+      width: 22px;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--brand);
+    }
+
+    .menu-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(36, 31, 26, .36);
+      backdrop-filter: blur(5px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .18s ease;
+      z-index: 30;
+    }
+
+    .menu-overlay[hidden] { display: none; }
+
+    .menu-drawer {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: min(390px, 90vw);
+      padding: 24px;
+      background:
+        radial-gradient(circle at top left, rgba(143, 93, 59, .16), transparent 18rem),
+        rgba(255, 250, 243, .98);
+      border-right: 1px solid rgba(231, 222, 211, .95);
+      box-shadow: 20px 0 50px rgba(57, 43, 32, .18);
+      transform: translateX(-104%);
+      transition: transform .22s ease;
+      z-index: 31;
+      overflow-y: auto;
+      pointer-events: none;
+    }
+
+    body.menu-open { overflow: hidden; }
+
+    body.menu-open .menu-overlay {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    body.menu-open .menu-drawer {
+      transform: translateX(0);
+      pointer-events: auto;
+    }
+
+    .drawer-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 18px;
+    }
+
+    .drawer-header .eyebrow { margin-bottom: 10px; }
+
+    .drawer-header h2 {
+      margin: 0;
+      font-size: 2rem;
+      letter-spacing: -.07em;
+      line-height: 1;
+    }
+
+    .drawer-header span,
+    .drawer-note {
+      display: block;
+      color: var(--muted);
+      line-height: 1.42;
+      font-size: .93rem;
+      margin-top: 8px;
+    }
+
+    .drawer-close {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: #fffdf9;
+      color: var(--brand);
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      cursor: pointer;
+      font-size: 1.65rem;
+      line-height: 1;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+    }
+
+    .drawer-nav {
+      display: grid;
+      gap: 10px;
+    }
+
+    .drawer-nav a {
+      text-decoration: none;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, .66);
+      border-radius: 16px;
+      padding: 13px 14px;
+      font-weight: 850;
+      color: var(--brand);
+      transition: transform .16s ease, border-color .16s ease, background .16s ease;
+    }
+
+    .drawer-nav a:hover {
+      transform: translateX(2px);
+      border-color: rgba(143, 93, 59, .42);
+      background: #fffdf9;
+    }
+
+    .drawer-note {
+      margin: 18px 0 0;
+      padding: 14px;
+      border-radius: 16px;
+      background: rgba(239, 229, 216, .5);
+      border: 1px solid var(--line);
+    }
+
+    #para-voce-corretor,
+    #motor-compatibilidade,
+    #imoveis-sugeridos,
+    .content-section {
+      scroll-margin-top: 24px;
+    }
+
+    .content-section {
+      margin-top: 24px;
+      padding: clamp(24px, 4vw, 38px);
+    }
+
+    .content-heading {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 22px;
+    }
+
+    .content-heading.compact { align-items: flex-start; }
+
+    .content-heading h2,
+    .content-section > h2,
+    .split-content h2 {
+      margin: 0;
+      font-size: clamp(1.7rem, 3.4vw, 3rem);
+      line-height: 1;
+      letter-spacing: -.07em;
+      max-width: 15ch;
+    }
+
+    .content-heading p,
+    .content-section > p:not(.eyebrow),
+    .split-content p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.55;
+      max-width: 56ch;
+    }
+
+    .content-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .content-grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .content-grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    .content-card {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, .58);
+      border-radius: 18px;
+      padding: 18px;
+      min-height: 174px;
+    }
+
+    .content-card.small { min-height: 150px; }
+
+    .content-card > span {
+      width: 38px;
+      height: 38px;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      background: var(--brand-soft);
+      color: var(--brand);
+      font-weight: 950;
+      margin-bottom: 18px;
+    }
+
+    .content-card h3 {
+      margin: 0 0 8px;
+      letter-spacing: -.04em;
+      font-size: 1.08rem;
+    }
+
+    .content-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.45;
+      font-size: .94rem;
+    }
+
+    .split-content {
+      display: grid;
+      grid-template-columns: minmax(260px, .85fr) minmax(300px, 1fr);
+      gap: 24px;
+      align-items: center;
+    }
+
+    .split-content > div:first-child p:not(.eyebrow) {
+      margin-top: 16px;
+    }
+
+    .content-stack {
+      display: grid;
+      gap: 12px;
+    }
+
+    .stack-item {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, .62);
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .stack-item b {
+      display: block;
+      margin-bottom: 6px;
+      letter-spacing: -.03em;
+    }
+
+    .stack-item span {
+      color: var(--muted);
+      line-height: 1.42;
+      font-size: .94rem;
+    }
+
+    .cta-section {
+      text-align: center;
+    }
+
+    .cta-section .eyebrow { justify-content: center; }
+
+    .cta-section h2 {
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 14ch;
+    }
+
+    .cta-section p:not(.eyebrow) {
+      margin: 14px auto 0;
+    }
+
+    .cta-actions {
+      margin-top: 22px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    @media (max-width: 980px) {
+      .hero, .results, .broker-video, .split-content { grid-template-columns: 1fr; }
+      .intro { min-height: auto; }
+      .broker-video-copy h2 { max-width: 18ch; }
+      .content-heading { display: block; }
+      .content-heading p { margin-top: 14px; }
+      .content-grid.three, .content-grid.four { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 680px) {
+      .shell { width: min(100% - 22px, 1180px); padding-top: 18px; }
+      .topbar { align-items: flex-start; gap: 12px; }
+      .pill { display: none; }
+      .brand { gap: 8px; }
+      .brand-logo-image { width: min(220px, 70vw); }
+      .logo-subtitle { font-size: .78rem; min-height: 30px; padding: 6px 9px; }
+      .top-actions { margin-left: 0; }
+      .menu-button { width: 46px; height: 46px; border-radius: 14px; }
+      .principles { grid-template-columns: 1fr; }
+      .form-grid, .check-grid, .content-grid.three, .content-grid.four { grid-template-columns: 1fr; }
+      .property-card { grid-template-columns: 1fr; }
+      .property-media { min-height: 176px; }
+      .property-score { width: 100%; height: 46px; border-radius: 14px; }
+      .content-section { padding: 22px; }
+      .content-heading h2, .content-section > h2, .split-content h2 { max-width: none; }
+    }
+  </style>
 </head>
 <body>
-<div class="app">
-<aside>
-  <a class="logo" onclick="goId('dashboard')" aria-label="Voltar para o início">
-    <img class="logo-img" src="data:image/webp;base64,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" alt="MatchR — Inteligência para o corretor imobiliário">
-    <span class="logo-subtitle">Demo • 3.000 imóveis simulados</span>
-  </a>
-  <nav>
-    <button class="active" onclick="go('dashboard',this)">O MatchR</button>
-    <button onclick="go('inventario',this)">Encontrar imóvel ideal <span class="pill">3000</span></button>
-    <button onclick="go('matches',this)">Resultados de buscas</button>
-    <button onclick="go('clientes',this)">Leads / Clientes</button>
-    <button onclick="go('analytics',this)">Para você corretor</button>
-  </nav>
-  <div class="side-card"><b>Para você corretor</b><p>Base simulada para validar eficiência com corretores e imobiliárias.</p></div>
-</aside>
-<main>
-  <section id="dashboard" class="view active">
-    <div class="top"><div><h1>O que é o MatchR e números.</h1><p>O MatchR ajuda corretores imobiliários de alto padrão a encontrar o imóvel certo para cada cliente, com rapidez, contexto e menos perda de tempo.</p></div><button class="btn primary" onclick="goId('inventario')">Encontrar imóvel ideal</button></div>
-    <div class="grid cols4">
-      <div class="card metric"><div class="n">3.000</div><div class="label">imóveis simulados</div></div>
-      <div class="card metric"><div class="n">18</div><div class="label">bairros prime</div></div>
-      <div class="card metric"><div class="n" id="dashboardScore">83%</div><div class="label">compatibilidade média top 20</div></div>
-      <div class="card metric"><div class="n">90 dias</div><div class="label">piloto sugerido</div></div>
-    </div>
-    <div class="grid cols2" style="margin-top:18px">
-      <div class="card soft"><h2>Para o corretor</h2><p>Menos planilha, menos WhatsApp perdido e mais curadoria com contexto. A busca vira uma rotina simples: briefing, filtros, match e seleção para o cliente.</p></div>
-      <div class="card soft"><h2>Para a imobiliária</h2><p>Inventário mais bem aproveitado, com apresentação qualificada e rastreável. A base aparece para corretores com demanda compatível, não para curiosos.</p></div>
-    </div>
-    <div class="card" style="margin-top:18px"><h2>A tese do MVP</h2><p>A pergunta que o piloto precisa responder é simples: o corretor consegue encontrar opções melhores e mais rápido do que entrando em vários sites, grupos e planilhas?</p></div>
-  </section>
-
-  <section id="inventario" class="view">
-    <div class="top"><div><h1>Buscar imóvel ideal para o cliente</h1><p>Use filtros ou escreva a busca como se estivesse falando no WhatsApp com outro corretor.</p></div></div>
-    <div class="filters">
-      <input id="clienteNome" placeholder="Cliente — nome da busca">
-      <select id="bairro"><option value="">Todos bairros</option></select>
-      <select id="tipo"><option value="">Tipo</option></select>
-      <select id="preco">
-        <option value="">Valor</option><option value="3">Imóveis até R$ 3 milhões</option><option value="5">Imóveis até R$ 5 milhões</option><option value="8">Até R$ 8 milhões</option><option value="10">Até R$ 10 milhões</option><option value="acima10">Acima de R$ 10 milhões</option>
-      </select>
-      <select id="suites"><option value="">Suítes</option><option value="1">1+ suíte</option><option value="2">2+ suítes</option><option value="3">3+ suítes</option><option value="4">4+ suítes</option><option value="5">5+ suítes</option></select>
-      <select id="vagas"><option value="">Vagas</option><option value="1">1+ vaga</option><option value="2">2+ vagas</option><option value="3">3+ vagas</option><option value="4">4+ vagas</option><option value="mais4">5+ vagas</option></select>
-      <select id="ordem"><option value="score">Critérios</option><option value="preco_asc">Menor preço</option><option value="preco_desc">Maior preço</option><option value="area_desc">Maior metragem</option><option value="area_asc">Menor metragem</option></select>
-    </div>
-
-    <div class="voice-card" id="voiceSearchCard">
-      <div class="voice-head"><div><h2>Busca por voz ou texto</h2><p>Exemplo: Cliente Mariana quer apartamento em Moema até 3 milhões ou até 5 milhões, 3 suítes, 2 vagas, varanda gourmet e vista aberta.</p></div><span class="score">Novo motor</span></div>
-      <textarea id="voiceSearchText" placeholder="Digite ou fale a busca do cliente..."></textarea>
-      <div class="voice-actions">
-        <button class="btn primary" type="button" onclick="startVoiceSearch()">🎙️ Falar busca</button>
-        <button class="btn ghost" type="button" onclick="applyNaturalSearch()">Aplicar aos filtros</button>
-        <button class="btn ghost" type="button" onclick="clearSearch()">Limpar</button>
-        <button class="btn orange" type="button" onclick="selectTop()">Buscar imóveis compatíveis</button>
+  <main class="shell" id="topo">
+    <header class="topbar" aria-label="Cabeçalho do produto">
+      <a class="brand brand-link" href="#" aria-label="MatchR - início">
+        <img class="brand-logo-image" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NjAgMTY4IiByb2xlPSJpbWciIGFyaWEtbGFiZWw9Ik1hdGNoUiDigJQgSW50ZWxpZ8OqbmNpYSBwYXJhIG8gY29ycmV0b3IgaW1vYmlsacOhcmlvIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMzZDJjMjQiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjOGY1ZDNiIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGZpbHRlciBpZD0icyIgeD0iLTIwJSIgeT0iLTIwJSIgd2lkdGg9IjE0MCUiIGhlaWdodD0iMTQwJSI+CiAgICAgIDxmZURyb3BTaGFkb3cgZHg9IjAiIGR5PSIxMiIgc3RkRGV2aWF0aW9uPSIxMiIgZmxvb2QtY29sb3I9IiMzOTJiMjAiIGZsb29kLW9wYWNpdHk9IjAuMTUiLz4KICAgIDwvZmlsdGVyPgogIDwvZGVmcz4KICA8cmVjdCB3aWR0aD0iNjYwIiBoZWlnaHQ9IjE2OCIgcng9IjM0IiBmaWxsPSIjZmZmYWYzIi8+CiAgPGcgZmlsdGVyPSJ1cmwoI3MpIj4KICAgIDxyZWN0IHg9IjE4IiB5PSIxOCIgd2lkdGg9IjEzMiIgaGVpZ2h0PSIxMzIiIHJ4PSIzMiIgZmlsbD0idXJsKCNnKSIvPgogICAgPHBhdGggZD0iTTQ4IDkyIDg0IDU4bDM2IDM0djM3SDk2di0zMEg3MnYzMEg0OFY5MloiIGZpbGw9IiNmZmZhZjMiLz4KICAgIDxwYXRoIGQ9Ik02NiA4MSA4NCA2NGwxOCAxNyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmYWYzIiBzdHJva2Utd2lkdGg9IjEwIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KICA8L2c+CiAgPHRleHQgeD0iMTc0IiB5PSI5MCIgZm9udC1mYW1pbHk9IkludGVyLCBBcmlhbCwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjU0IiBmb250LXdlaWdodD0iODAwIiBsZXR0ZXItc3BhY2luZz0iLTIuNSIgZmlsbD0iIzI0MWYxYSI+TWF0Y2hSPC90ZXh0PgogIDx0ZXh0IHg9IjE3NiIgeT0iMTI2IiBmb250LWZhbWlseT0iSW50ZXIsIEFyaWFsLCBIZWx2ZXRpY2EsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjIiIGZvbnQtd2VpZ2h0PSI1MDAiIGZpbGw9IiM2ZDYyNTgiPkludGVsaWfDqm5jaWEgcGFyYSBvIGNvcnJldG9yIGltb2JpbGnDoXJpbzwvdGV4dD4KPC9zdmc+" alt="MatchR — Inteligência para o corretor imobiliário" />
+        <span class="logo-subtitle">MVP v14 • busca inteligente para corretores</span>
+      </a>
+      <div class="top-actions">
+        <span class="pill">Menu restaurado</span>
+        <button class="menu-button" id="menuButton" type="button" aria-controls="siteMenu" aria-expanded="false" aria-label="Abrir menu de navegação">
+          <span class="bar" aria-hidden="true"></span>
+          <span class="bar" aria-hidden="true"></span>
+          <span class="bar" aria-hidden="true"></span>
+        </button>
       </div>
-      <p id="voiceSearchStatus" style="margin-top:12px">Digite uma frase ou clique em “Falar busca”.</p>
-      <div id="voiceSearchChips" class="criteria"></div>
-    </div>
+    </header>
 
-    <div class="top" style="margin-top:10px"><div><h2 id="resultTitle">Imóveis compatíveis</h2><p id="resultSub">Mostrando os melhores resultados da base simulada.</p></div></div>
-    <div id="inventory" class="inventory"></div>
-  </section>
 
-  <section id="matches" class="view">
-    <div class="top"><div><h1>Resultados de buscas</h1><p>Histórico das seleções criadas para clientes e leads.</p></div><button class="btn primary" onclick="goId('inventario')">Nova busca</button></div>
-    <div class="grid cols2">
-      <div class="card"><h2>Histórico</h2><div id="searchHistory"></div></div>
-      <div class="card"><h2>Resultado selecionado</h2><div id="selectedSearch"></div></div>
-    </div>
-  </section>
-
-  <section id="clientes" class="view">
-    <div class="top"><div><h1>Leads / Clientes</h1><p>Cadastro simples para organizar quem está procurando, quem já comprou e o que cada pessoa busca.</p></div></div>
-    <div class="card">
-      <div class="filters" style="grid-template-columns:repeat(5,minmax(120px,1fr));margin-bottom:0">
-        <input id="pessoaNome" placeholder="Nome">
-        <select id="pessoaTipo"><option>Lead</option><option>Cliente</option><option>Parceiro</option></select>
-        <input id="pessoaBusca" placeholder="Busca resumida">
-        <input id="pessoaBudget" placeholder="Budget">
-        <select id="pessoaStatus"><option value="quente">Quente</option><option value="morno">Morno</option><option value="frio">Frio</option><option value="comprou">Comprou</option></select>
+    <div class="menu-overlay" id="menuOverlay" hidden></div>
+    <nav class="menu-drawer" id="siteMenu" aria-label="Menu de navegação" aria-hidden="true">
+      <div class="drawer-header">
+        <div>
+          <p class="eyebrow">Navegação</p>
+          <h2>MatchR</h2>
+          <span>Menu restaurado para acessar todas as seções da página.</span>
+        </div>
+        <button class="drawer-close" id="menuClose" type="button" aria-label="Fechar menu">×</button>
       </div>
-      <div style="margin-top:12px"><button class="btn primary" onclick="addPessoa()">Adicionar cadastro</button></div>
-    </div>
-    <div class="card" style="margin-top:18px"><h2>Base de relacionamento</h2><div id="pessoasTable"></div></div>
-  </section>
-
-  <section id="analytics" class="view">
-    <div class="top"><div><h1>Para você corretor</h1><p>Validação prática das funcionalidades para aumentar a eficiência do corretor de imóveis.</p></div></div>
-    <div class="card">
-      <h2>Mensagem para você corretor</h2>
-      <p>Este projeto piloto serve para validar, no uso real, se o sistema ajuda o corretor a ganhar velocidade, organizar melhor leads e clientes, encontrar imóveis compatíveis com mais precisão e apresentar uma curadoria mais profissional.</p>
-      <p>A ideia é medir eficiência: menos tempo perdido em planilhas, menos informação espalhada no WhatsApp, mais clareza sobre o perfil do comprador e mais rapidez para transformar uma busca em uma seleção de imóveis relevante.</p>
-    </div>
-    <div class="grid cols4" style="margin-top:18px">
-      <div class="card metric"><div class="n">3.000</div><div class="label">imóveis simulados</div></div>
-      <div class="card metric"><div class="n" id="above90">38</div><div class="label">resultados acima de 90%</div></div>
-      <div class="card metric"><div class="n">64%</div><div class="label">abertura estimada de links</div></div>
-      <div class="card metric"><div class="n">3.1x</div><div class="label">mais imóveis avaliados</div></div>
-    </div>
-    <div class="video-card" id="video-corretor">
-      <h2>Assista: Para você, corretor</h2>
-      <p>Aula de Renato Gosling fundador do MatchR falando sobre como os corretores podem ter mais sucesso em follow-up, networking e técnicas de vendas.</p>
-      <div class="video-wrap">
-        <iframe src="https://www.youtube.com/embed/7o9W3ATGCl4" title="Para você, corretor — MatchR" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      <div class="drawer-nav" role="list">
+        <a href="#motor-compatibilidade" data-menu-link role="listitem">Motor de compatibilidade</a>
+        <a href="#imoveis-sugeridos" data-menu-link role="listitem">Imóveis sugeridos</a>
+        <a href="#como-funciona" data-menu-link role="listitem">Como funciona</a>
+        <a href="#beneficios" data-menu-link role="listitem">Benefícios</a>
+        <a href="#para-imobiliarias" data-menu-link role="listitem">Para imobiliárias e incorporadoras</a>
+        <a href="#para-voce-corretor" data-menu-link role="listitem">Para você, corretor / vídeo</a>
       </div>
-    </div>
-  </section>
-</main>
-</div>
-<div class="toast" id="toast"></div>
-<script>
-const bairros=['Alto de Pinheiros','Boaçava','Brooklin','Cidade Jardim','Higienópolis','Itaim Bibi','Jardim América','Jardim Europa','Jardim Paulistano','Jardim Paulista','Moema','Moema Pássaros','Pacaembu','Paraíso','Pinheiros','Real Parque','Vila Madalena','Vila Nova Conceição'];
-const tipos=['Apartamento','Casa','Casa de condomínio','Cobertura','Garden','Studio','Terreno'];
-const ruas=['Rua Alemanha','Rua Canadá','Rua Hungria','Rua Alvorada','Rua Pedroso Alvarenga','Rua Groenlândia','Rua Tucumã','Rua Manduri','Rua Adolfo Tabacow','Praça General San Martin','Rua Ministro Rocha Azevedo','Rua Atlântica','Rua Estados Unidos','Rua Sampaio Vidal','Rua Jesuíno Arruda','Rua Doutor Renato Paes de Barros'];
-const statusList=['Pronto','Oportunidade','Lançamento','Em reforma','Off-market'];
-const diffs=['muita luz natural','privacidade','jardim','piscina','rooftop','sauna','vista aberta','rua tranquila','academia','elevador privativo','varanda integrada','área gourmet','pé-direito alto','arquitetura autoral','reforma contemporânea','segurança','janelas piso-teto'];
-const numberWords={um:1,uma:1,dois:2,duas:2,tres:3,'três':3,quatro:4,cinco:5,seis:6,sete:7,oito:8,nove:9,dez:10,quinze:15,vinte:20,trinta:30,quarenta:40,cinquenta:50};
-let voiceState={text:'',cliente:'',bairro:'',tipo:'',priceMaxMi:null,priceMinMi:null,priceBucket:'',suitesMin:null,vagasMin:null,areaMin:null,features:[],order:''};
-let activeSearchId=null;
-let searchHistory=[];
-let pessoas=[
-  {nome:'Ana Paula',tipo:'Cliente',busca:'Apartamento em Jardim Paulista, 3 suítes, pronto para morar',budget:'Até R$ 8 mi',status:'quente'},
-  {nome:'Família Silva',tipo:'Lead',busca:'Casa em Alto de Pinheiros com jardim e privacidade',budget:'Acima de R$ 10 mi',status:'morno'},
-  {nome:'Mariana',tipo:'Cliente',busca:'Moema, varanda gourmet, 2 vagas',budget:'Até R$ 5 mi',status:'quente'}
-];
-function pick(arr,i,step=1){return arr[Math.abs(i*step)%arr.length]}
-function unique(arr){return [...new Set(arr)]}
-function makeImovel(i){
- const tipo=pick(tipos,i,7), bairro=pick(bairros,i,11), rua=pick(ruas,i,13);
- const area=70+((i*37)%870), terreno=tipo.includes('Casa')?260+((i*71)%1500):null;
- const suites=1+((i*5)%6), vagas=((i*3)%8)+1;
- const preco=Number((1.8+(((i*19)%430)/10)).toFixed(1));
- const score=62+((i*29)%36);
- const selected=unique([pick(diffs,i,5),pick(diffs,i+2,7),pick(diffs,i+4,9),pick(diffs,i+7,11),pick(diffs,i+9,13)]);
- return {id:'MTR-'+String(i).padStart(4,'0'),tipo,bairro,endereco:`${rua}, ${80+((i*17)%920)}`,area,terreno,suites,vagas,preco,status:pick(statusList,i,3),score,diferenciais:selected,descricao:`${tipo} em ${bairro}, com ${area} m², ${suites} suítes e ${vagas} vagas. Destaques: ${selected.slice(0,3).join(', ')}.`};
-}
-const IMOVEIS=Array.from({length:3000},(_,i)=>makeImovel(i+1));
-function norm(value){return String(value||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,' ').trim()}
-function escapeHtml(value){return String(value||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;')}
-function money(v){return 'R$ '+Number(v).toFixed(1).replace('.',',')+' mi'}
-function br(n){return Number(n).toLocaleString('pt-BR')}
-function labelOf(el){return el&&el.options&&el.selectedIndex>=0?el.options[el.selectedIndex].text:''}
-function populateFilters(){
- document.getElementById('bairro').innerHTML='<option value="">Todos bairros</option>'+bairros.map(b=>`<option value="${escapeHtml(b)}">${escapeHtml(b)}</option>`).join('');
- document.getElementById('tipo').innerHTML='<option value="">Tipo</option>'+tipos.map(t=>`<option value="${escapeHtml(t)}">${escapeHtml(t)}</option>`).join('');
- ['bairro','tipo','preco','suites','vagas','ordem'].forEach(id=>document.getElementById(id).addEventListener('change',render));
-}
-function numberFromToken(token){
- const clean=norm(token).replace(/[^\d,.a-z]/g,'');
- if(numberWords[clean]!=null)return numberWords[clean];
- const n=Number(clean.replace(/\./g,'').replace(',','.'));
- return Number.isFinite(n)?n:null;
-}
-function priceBucket(price){if(!price)return ''; if(price<=3)return '3'; if(price<=5)return '5'; if(price<=8)return '8'; if(price<=10)return '10'; return 'acima10'}
-function parseBudget(text){
- const s=norm(text); const token='(\\d+(?:[\\.,]\\d+)?|um|uma|dois|duas|tres|três|quatro|cinco|seis|sete|oito|nove|dez|quinze|vinte|trinta|quarenta|cinquenta)';
- let m=s.match(new RegExp('(?:acima de|acima|mais de|maior que|a partir de|apartir de)\\s*(?:r\\$)?\\s*'+token+'\\s*(milhoes|milhao|mi|m)?'));
- if(m){const min=numberFromToken(m[1]); if(min!=null)return {min,max:null,bucket:'acima10'};}
- const patterns=[new RegExp('(?:ate|até|no maximo|maximo|budget|orcamento|orçamento|valor|preco|preço|teto de)\\s*(?:r\\$)?\\s*'+token+'\\s*(milhoes|milhao|mi|m|mil)?'),new RegExp('r\\$\\s*'+token+'\\s*(milhoes|milhao|mi|m|mil)?'),new RegExp(token+'\\s*(milhoes|milhao|mi)\\b')];
- for(const p of patterns){m=s.match(p); if(!m)continue; let value=numberFromToken(m[1]); if(value==null)continue; const unit=m[2]||''; const nearby=s.slice(m.index,m.index+80); if(unit==='mil')value=value/1000; if(!unit&&value>100)value=value/1000; if(/meio/.test(nearby)&&value<100)value+=0.5; value=Math.round(value*10)/10; return {min:null,max:value,bucket:priceBucket(value)};}
- return {min:null,max:null,bucket:''};
-}
-function parseMin(text,words){const m=norm(text).match(new RegExp('(\\d+|um|uma|dois|duas|tres|três|quatro|cinco|seis|sete|oito|nove|dez)\\s*(?:'+words.join('|')+')')); return m?numberFromToken(m[1]):null}
-function parseArea(text){const m=norm(text).match(/(\d{2,4})\s*(m2|m²|metros|metro|metros quadrados|metragem)/); return m?Number(m[1]):null}
-function parseCliente(text){const m=String(text||'').match(/cliente\s+([A-Za-zÀ-ÿ]+(?:\s+[A-Za-zÀ-ÿ]+){0,2})/i); if(!m)return ''; const stops=['quer','procura','busca','precisa','gostaria','deseja']; return m[1].split(/\s+/).filter(p=>!stops.includes(norm(p))).join(' ').trim()}
-function parseBairro(text){
- const s=norm(text); const aliases=[['Jardim América',['jardins','jardim america']],['Vila Nova Conceição',['vila nova','vila nova conceicao']],['Itaim Bibi',['itaim']],['Moema Pássaros',['moema passaros','passaros']],['Alto de Pinheiros',['alto pinheiros']],['Vila Madalena',['madalena']]];
- for(const b of bairros.slice().sort((a,b)=>b.length-a.length)){if(s.includes(norm(b)))return b;}
- for(const [bairro,terms] of aliases){if(terms.some(t=>s.includes(norm(t))))return bairro;}
- return '';
-}
-function parseTipo(text){
- const s=norm(text); const checks=[['Casa de condomínio',['casa de condominio','condominio fechado','condominio']],['Cobertura',['cobertura','penthouse']],['Apartamento',['apartamento','apto','ape']],['Garden',['garden']],['Studio',['studio','estudio']],['Terreno',['terreno','lote']],['Casa',['casa','sobrado']]];
- for(const [tipo,terms] of checks){if(terms.some(t=>s.includes(norm(t))))return tipo;}
- return '';
-}
-function parseFeatures(text){const s=norm(text); const found=[]; const map={'muita luz natural':['muita luz natural','luz natural','iluminado','bem iluminado'],privacidade:['privacidade','privativo'],jardim:['jardim'],piscina:['piscina'],rooftop:['rooftop'],sauna:['sauna'],'vista aberta':['vista aberta','vista livre'],'rua tranquila':['rua tranquila','rua silenciosa','silencioso'],academia:['academia'],'elevador privativo':['elevador privativo'],'varanda integrada':['varanda integrada','varanda'],'área gourmet':['area gourmet','área gourmet','varanda gourmet','gourmet'],'pé-direito alto':['pe direito alto','pé direito alto','pé-direito alto'],'arquitetura autoral':['arquitetura autoral'],'reforma contemporânea':['reforma contemporanea','reforma contemporânea','reformado','reformada'],segurança:['seguranca','segurança'],'janelas piso-teto':['janelas piso teto','janelas piso-teto']}; Object.entries(map).forEach(([label,terms])=>{if(terms.some(t=>s.includes(norm(t))))found.push(label)}); return found}
-function parseOrder(text){const s=norm(text); if(/menor\s+preco|mais\s+barato/.test(s))return 'preco_asc'; if(/maior\s+preco|mais\s+caro/.test(s))return 'preco_desc'; if(/menor\s+(metragem|area)/.test(s))return 'area_asc'; if(/maior\s+(metragem|area)/.test(s))return 'area_desc'; return ''}
-function parseSearch(text){const budget=parseBudget(text); return {text:String(text||'').trim(),cliente:parseCliente(text),bairro:parseBairro(text),tipo:parseTipo(text),priceMaxMi:budget.max,priceMinMi:budget.min,priceBucket:budget.bucket,suitesMin:parseMin(text,['suite','suites']),vagasMin:parseMin(text,['vaga','vagas','garagem','garagens']),areaMin:parseArea(text),features:parseFeatures(text),order:parseOrder(text)}}
-function setSelect(id,value){const el=document.getElementById(id); if(!el)return; const exists=[...el.options].some(o=>o.value===value); if(exists)el.value=value||''}
-function chipsHtml(parsed){const chips=[]; if(parsed.cliente)chips.push('Cliente: '+parsed.cliente); if(parsed.bairro)chips.push('Bairro: '+parsed.bairro); if(parsed.tipo)chips.push('Tipo: '+parsed.tipo); if(parsed.priceMinMi)chips.push('Preço: acima de R$ '+String(parsed.priceMinMi).replace('.',',')+' mi'); if(parsed.priceMaxMi)chips.push('Preço: até R$ '+String(parsed.priceMaxMi).replace('.',',')+' mi'); if(parsed.suitesMin)chips.push('Suítes: '+parsed.suitesMin+'+'); if(parsed.vagasMin)chips.push('Vagas: '+parsed.vagasMin+'+'); if(parsed.areaMin)chips.push('Área: '+parsed.areaMin+'+ m²'); if(parsed.features.length)chips.push('Desejos: '+parsed.features.join(', ')); if(parsed.order)chips.push('Critério: '+orderLabel(parsed.order)); return chips.map(x=>`<span>${escapeHtml(x)}</span>`).join('')}
-function orderLabel(value){return {score:'Critérios',preco_desc:'Maior preço',preco_asc:'Menor preço',area_desc:'Maior metragem',area_asc:'Menor metragem'}[value]||''}
-function applyNaturalSearch(){
- const raw=document.getElementById('voiceSearchText').value.trim(); if(!raw){toast('Digite ou fale uma busca primeiro.'); return;}
- voiceState=parseSearch(raw);
- if(voiceState.cliente)document.getElementById('clienteNome').value=voiceState.cliente;
- if(voiceState.bairro)setSelect('bairro',voiceState.bairro);
- if(voiceState.tipo)setSelect('tipo',voiceState.tipo);
- setSelect('preco',voiceState.priceBucket||''); if(voiceState.order)setSelect('ordem',voiceState.order);
- document.getElementById('voiceSearchChips').innerHTML=chipsHtml(voiceState);
- document.getElementById('voiceSearchStatus').textContent='Busca aplicada aos filtros. Clique em “Buscar imóveis compatíveis” para salvar no histórico.';
- render();
-}
-function clearSearch(){voiceState={text:'',cliente:'',bairro:'',tipo:'',priceMaxMi:null,priceMinMi:null,priceBucket:'',suitesMin:null,vagasMin:null,areaMin:null,features:[],order:''}; document.getElementById('voiceSearchText').value=''; document.getElementById('voiceSearchChips').innerHTML=''; document.getElementById('clienteNome').value=''; ['bairro','tipo','preco','suites','vagas'].forEach(id=>setSelect(id,'')); setSelect('ordem','score'); document.getElementById('voiceSearchStatus').textContent='Busca limpa.'; render();}
-function propertyHasFeature(x,feature){const all=(x.diferenciais.join(' ')+' '+x.descricao).toLowerCase(); return all.includes(String(feature||'').toLowerCase())}
-function filtered(){
- let data=IMOVEIS.slice(); const bairro=document.getElementById('bairro').value||voiceState.bairro; const tipo=document.getElementById('tipo').value||voiceState.tipo; const preco=document.getElementById('preco').value; const vagas=document.getElementById('vagas').value; const suites=document.getElementById('suites').value; const ordem=voiceState.order||document.getElementById('ordem').value||'score';
- if(bairro)data=data.filter(x=>x.bairro===bairro); if(tipo)data=data.filter(x=>x.tipo===tipo);
- if(voiceState.priceMaxMi)data=data.filter(x=>x.preco<=voiceState.priceMaxMi); else if(voiceState.priceMinMi)data=data.filter(x=>x.preco>voiceState.priceMinMi); else if(preco){ if(preco==='acima10')data=data.filter(x=>x.preco>10); else data=data.filter(x=>x.preco<=Number(preco)); }
- const suitesMin=voiceState.suitesMin||Number(suites||0); if(suitesMin)data=data.filter(x=>x.suites>=suitesMin);
- if(vagas){ if(vagas==='mais4')data=data.filter(x=>x.vagas>=5); else data=data.filter(x=>x.vagas>=Number(vagas)); } if(voiceState.vagasMin)data=data.filter(x=>x.vagas>=voiceState.vagasMin);
- if(voiceState.areaMin)data=data.filter(x=>x.area>=voiceState.areaMin); if(voiceState.features.length)data=data.filter(x=>voiceState.features.every(f=>propertyHasFeature(x,f)));
- if(ordem==='preco_desc')data.sort((a,b)=>b.preco-a.preco); else if(ordem==='preco_asc')data.sort((a,b)=>a.preco-b.preco); else if(ordem==='area_desc')data.sort((a,b)=>b.area-a.area); else if(ordem==='area_asc')data.sort((a,b)=>a.area-b.area); else data.sort((a,b)=>b.score-a.score);
- return data;
-}
-function card(x,client=false){return `<div class="${client?'client-card':'imovel'}"><div class="${client?'client-img':'photo'}"></div><div class="${client?'client-body':'body'}"><h3>${escapeHtml(x.tipo)} • ${escapeHtml(x.bairro)}</h3><div class="meta">${escapeHtml(x.endereco)}<br>${br(x.area)} m²${x.terreno?' • terreno '+br(x.terreno)+' m²':''} • ${x.suites} suítes • ${x.vagas} vagas</div><p style="font-size:13px;margin:10px 0">${escapeHtml(x.descricao)}</p><div><span class="score">Match ${x.score}%</span> <b>${money(x.preco)}</b></div><div>${x.diferenciais.slice(0,4).map(t=>`<span class="tag">${escapeHtml(t)}</span>`).join('')}</div>${client?'<div class="mini-actions"><button onclick="toast(&quot;Gostei registrado.&quot;)">❤️ Gostei</button><button onclick="toast(&quot;Pedido de visita enviado.&quot;)">Agendar</button></div>':'<div class="actions"><button class="btn ghost" onclick="toast(&quot;Imóvel favoritado.&quot;)">Favoritar</button><button class="btn primary" onclick="toast(&quot;Contato com parceiro iniciado.&quot;)">Tenho cliente</button></div>'}</div></div>`}
-function render(){const data=filtered(); document.getElementById('inventory').innerHTML=data.slice(0,18).map(x=>card(x)).join('')||'<div class="card"><h2>Nenhum imóvel encontrado</h2><p>Altere os filtros ou limpe a busca.</p></div>'; document.getElementById('resultTitle').textContent=`${br(data.length)} imóveis compatíveis`; document.getElementById('resultSub').textContent=data.length?'Mostrando os melhores resultados da base simulada.':'Nenhum resultado com esses critérios.'; const top=data.slice(0,20); const avg=top.length?Math.round(top.reduce((s,x)=>s+x.score,0)/top.length):0; document.getElementById('dashboardScore').textContent=avg+'%'; document.getElementById('above90').textContent=String(IMOVEIS.filter(x=>x.score>=90).length);}
-function currentCriteria(){const c={cliente:document.getElementById('clienteNome').value.trim()||'Cliente sem nome',bairro:document.getElementById('bairro').value,tipo:document.getElementById('tipo').value,preco:labelOf(document.getElementById('preco')),vagas:labelOf(document.getElementById('vagas')),suites:labelOf(document.getElementById('suites')),ordem:labelOf(document.getElementById('ordem')),area:voiceState.areaMin?voiceState.areaMin+'+ m²':'',desejos:voiceState.features.join(', '),fala:voiceState.text}; if(!document.getElementById('preco').value&&!voiceState.priceMaxMi&&!voiceState.priceMinMi)c.preco=''; if(!document.getElementById('vagas').value&&!voiceState.vagasMin)c.vagas=''; if(!document.getElementById('suites').value&&!voiceState.suitesMin)c.suites=''; if(c.ordem==='Critérios')c.ordem=''; return c}
-function criteriaList(c){const arr=[]; if(c.bairro)arr.push('Bairro: '+c.bairro); if(c.tipo)arr.push('Tipo: '+c.tipo); if(c.preco)arr.push('Preço: '+c.preco); if(c.vagas)arr.push('Vagas: '+c.vagas); if(c.suites)arr.push('Suítes: '+c.suites); if(c.area)arr.push('Área: '+c.area); if(c.desejos)arr.push('Desejos: '+c.desejos); if(c.ordem)arr.push('Critério: '+c.ordem); return arr.length?arr:['Busca geral em toda a base']}
-function criteriaBadges(c){return criteriaList(c).map(i=>`<span>${escapeHtml(i)}</span>`).join('')}
-function makeSearchRecord(data,criteria){const id='BUSCA-'+Date.now(); return {id,created:new Date().toLocaleDateString('pt-BR'),criteria,total:data.length,top:data.slice(0,6)}}
-function selectTop(){const data=filtered(); const rec=makeSearchRecord(data,currentCriteria()); searchHistory.unshift(rec); activeSearchId=rec.id; renderSearchHistory(); goId('matches'); viewSearchResult(rec.id,false); toast('Resultado de busca criado para '+rec.criteria.cliente+'.')}
-function renderSearchHistory(){const el=document.getElementById('searchHistory'); if(!searchHistory.length){el.innerHTML='<p>Nenhuma busca salva ainda.</p>';return;} el.innerHTML='<table class="table"><thead><tr><th>Cliente</th><th>Critérios</th><th>Resultados</th><th></th></tr></thead><tbody>'+searchHistory.map(r=>`<tr><td><b>${escapeHtml(r.criteria.cliente)}</b><br><small>${r.created}</small></td><td><div class="criteria">${criteriaBadges(r.criteria)}</div></td><td>${br(r.total)}</td><td><button class="btn ghost" onclick="viewSearchResult('${r.id}')">Ver</button></td></tr>`).join('')+'</tbody></table>'}
-function viewSearchResult(id,toastIt=true){const rec=searchHistory.find(r=>r.id===id)||searchHistory[0]; if(!rec)return; activeSearchId=rec.id; document.getElementById('selectedSearch').innerHTML=`<h3>${escapeHtml(rec.criteria.cliente)}</h3><div class="criteria">${criteriaBadges(rec.criteria)}</div><p>${br(rec.total)} imóveis encontrados. Top 6 para curadoria:</p><div class="client-grid">${rec.top.map(x=>card(x,true)).join('')}</div><div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap"><button class="btn primary" onclick="copyLink()">Copiar link privado</button><button class="btn ghost" onclick="goId('inventario')">Ajustar busca</button></div>`; if(toastIt)toast('Resultado aberto.')}
-function seedSearchHistory(){const samples=[{cliente:'Ana Paula',bairro:'Jardim Paulista',tipo:'Apartamento',preco:'Até R$ 8 mi',vagas:'2+ vagas',suites:'3+ suítes',ordem:'Maior metragem'},{cliente:'Família Silva',bairro:'Alto de Pinheiros',tipo:'Casa',preco:'Acima de R$ 10 mi',vagas:'4+ vagas',suites:'4+ suítes',ordem:''}]; samples.forEach((c,i)=>{let data=IMOVEIS.filter(x=>(!c.bairro||x.bairro===c.bairro)&&(!c.tipo||x.tipo===c.tipo)).sort((a,b)=>b.score-a.score); searchHistory.push({id:'DEMO-'+i,created:new Date().toLocaleDateString('pt-BR'),criteria:c,total:data.length,top:data.slice(0,6)})}); activeSearchId=searchHistory[0].id;}
-function renderPessoas(){const el=document.getElementById('pessoasTable'); el.innerHTML='<table class="table"><thead><tr><th>Nome</th><th>Tipo</th><th>Busca</th><th>Budget</th><th>Status</th></tr></thead><tbody>'+pessoas.map(p=>`<tr><td><b>${escapeHtml(p.nome)}</b></td><td>${escapeHtml(p.tipo)}</td><td>${escapeHtml(p.busca)}</td><td>${escapeHtml(p.budget)}</td><td><span class="status ${p.status==='quente'?'hot':p.status==='comprou'?'ok':'cold'}">${escapeHtml(p.status)}</span></td></tr>`).join('')+'</tbody></table>'}
-function addPessoa(){const nome=document.getElementById('pessoaNome').value.trim(); if(!nome){toast('Digite o nome para cadastrar.');return;} pessoas.unshift({nome,tipo:document.getElementById('pessoaTipo').value,busca:document.getElementById('pessoaBusca').value.trim()||'Busca ainda não informada',budget:document.getElementById('pessoaBudget').value.trim()||'Budget a definir',status:document.getElementById('pessoaStatus').value}); document.getElementById('pessoaNome').value=''; document.getElementById('pessoaBusca').value=''; document.getElementById('pessoaBudget').value=''; renderPessoas(); toast('Cadastro adicionado em Leads / Clientes.')}
-function startVoiceSearch(){const Recognition=window.SpeechRecognition||window.webkitSpeechRecognition; if(!Recognition){toast('Este navegador não liberou voz. Digite a frase e clique em aplicar.');return;} const rec=new Recognition(); rec.lang='pt-BR'; rec.interimResults=false; rec.maxAlternatives=1; document.getElementById('voiceSearchStatus').textContent='Pode falar...'; rec.onresult=e=>{document.getElementById('voiceSearchText').value=e.results[0][0].transcript; applyNaturalSearch();}; rec.onerror=()=>toast('Não consegui captar o áudio. Tente de novo ou digite.'); rec.start();}
-function go(id,btn){document.querySelectorAll('.view').forEach(v=>v.classList.remove('active')); document.getElementById(id).classList.add('active'); document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active')); if(btn)btn.classList.add('active'); window.scrollTo(0,0)}
-function goId(id){const btn=[...document.querySelectorAll('nav button')].find(b=>b.getAttribute('onclick')&&b.getAttribute('onclick').includes(`'${id}'`)); go(id,btn)}
-function toast(t){const el=document.getElementById('toast'); el.textContent=t; el.style.display='block'; clearTimeout(window.toastTimer); window.toastTimer=setTimeout(()=>el.style.display='none',2400)}
-function copyLink(){if(navigator.clipboard)navigator.clipboard.writeText('https://matchr.demo/curadoria/cliente'); toast('Link privado copiado.')}
-populateFilters(); seedSearchHistory(); render(); renderSearchHistory(); viewSearchResult(activeSearchId,false); renderPessoas();
-</script>
+      <p class="drawer-note">A interface do motor continua limpa; as seções institucionais e o vídeo ficam acessíveis pelo menu.</p>
+    </nav>
+
+    <section class="hero" id="motor-compatibilidade" aria-labelledby="hero-title">
+      <article class="panel intro">
+        <div>
+          <p class="eyebrow">Encontre imóveis compatíveis com o cliente</p>
+          <h2 id="hero-title">Menos ruído. Mais aderência.</h2>
+          <p class="lead">
+            Cadastre o briefing do cliente e use filtros essenciais primeiro. Campos específicos aparecem somente quando fazem sentido para o tipo de imóvel selecionado.
+          </p>
+        </div>
+        <div class="principles" aria-label="Princípios da tela">
+          <div class="principle">
+            <b>Fluxo limpo</b>
+            <span>O corretor vê primeiro o que realmente move a busca.</span>
+          </div>
+          <div class="principle">
+            <b>Contexto certo</b>
+            <span>Áreas comuns aparecem para apartamento e casa de condomínio.</span>
+          </div>
+          <div class="principle">
+            <b>Carro elétrico</b>
+            <span>A opção de infraestrutura de recarga fica disponível nos dois casos.</span>
+          </div>
+        </div>
+      </article>
+
+      <aside class="panel search-card" aria-labelledby="search-title">
+        <div class="search-header">
+          <div>
+            <h3 id="search-title">Briefing da busca</h3>
+            <p>Preencha o essencial. Os detalhes ficam recolhidos para não poluir a tela.</p>
+          </div>
+        </div>
+
+        <form id="matchForm" class="form-grid" autocomplete="off">
+          <div class="field full">
+            <label for="briefing">Briefing inteligente por texto</label>
+            <textarea id="briefing" name="briefing" placeholder="Ex.: Cliente procura casa de condomínio no Alto de Pinheiros, até R$ 6 mi, 4 quartos, 3 vagas, segurança e carregador para carro elétrico."></textarea>
+            <div class="hint">O texto reconhece tipo, bairro, preço, quartos, vagas e preferências como piscina, academia e carro elétrico.</div>
+          </div>
+
+          <div class="field">
+            <label for="propertyType">Tipo de imóvel</label>
+            <select id="propertyType" name="propertyType" aria-describedby="typeHint">
+              <option value="">Selecione</option>
+              <option value="apartamento">Apartamento</option>
+              <option value="casa">Casa</option>
+              <option value="casa-condominio">Casa de condomínio</option>
+              <option value="casa-campo">Casa de campo</option>
+              <option value="casa-praia">Casa na praia</option>
+              <option value="cobertura">Cobertura</option>
+            </select>
+            <div id="typeHint" class="hint">Tipos comerciais e terrenos foram removidos; Casa de campo e Casa na praia foram incluídas.</div>
+          </div>
+
+          <div class="field">
+            <label for="neighborhood">Bairro ou região</label>
+            <input id="neighborhood" name="neighborhood" type="text" placeholder="Ex.: Alto de Pinheiros, Itaim, Jardins" />
+          </div>
+
+          <div class="field">
+            <label for="budget">Orçamento máximo</label>
+            <input id="budget" name="budget" type="text" inputmode="numeric" placeholder="Ex.: 3500000" />
+          </div>
+
+          <div class="field">
+            <label for="bedrooms">Dormitórios</label>
+            <select id="bedrooms" name="bedrooms">
+              <option value="">Indiferente</option>
+              <option value="1">1+</option>
+              <option value="2">2+</option>
+              <option value="3">3+</option>
+              <option value="4">4+</option>
+              <option value="5">5+</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="suites">Suítes</label>
+            <select id="suites" name="suites">
+              <option value="">Indiferente</option>
+              <option value="1">1+</option>
+              <option value="2">2+</option>
+              <option value="3">3+</option>
+              <option value="4">4+</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="parking">Vagas</label>
+            <select id="parking" name="parking">
+              <option value="">Indiferente</option>
+              <option value="1">1+</option>
+              <option value="2">2+</option>
+              <option value="3">3+</option>
+              <option value="4">4+</option>
+            </select>
+          </div>
+
+          <div id="commonAreasBlock" class="field full conditional" aria-live="polite">
+            <span id="commonAreasTitle" class="legend-label">Áreas comuns</span>
+            <div class="check-grid" id="commonAreasGrid">
+              <label class="check-pill"><input type="checkbox" name="commonArea" value="piscina" /> <span>Piscina</span></label>
+              <label class="check-pill"><input type="checkbox" name="commonArea" value="academia" /> <span>Academia</span></label>
+              <label class="check-pill"><input type="checkbox" name="commonArea" value="salao-festas" /> <span>Salão de festas</span></label>
+              <label class="check-pill"><input type="checkbox" name="commonArea" value="espaco-gourmet" /> <span>Espaço gourmet</span></label>
+              <label class="check-pill"><input type="checkbox" name="commonArea" value="churrasqueira" /> <span>Churrasqueira</span></label>
+              <label class="check-pill"><input type="checkbox" name="commonArea" value="playground" /> <span>Playground</span></label>
+              <label class="check-pill"><input type="checkbox" name="commonArea" value="brinquedoteca" /> <span>Brinquedoteca</span></label>
+              <label class="check-pill"><input type="checkbox" name="commonArea" value="quadra" /> <span>Quadra</span></label>
+              <label class="check-pill"><input type="checkbox" name="commonArea" value="sauna" /> <span>Sauna</span></label>
+              <label class="check-pill"><input type="checkbox" name="commonArea" value="coworking" /> <span>Coworking</span></label>
+              <label class="check-pill"><input type="checkbox" name="commonArea" value="pet-place" /> <span>Pet place</span></label>
+              <label class="check-pill"><input type="checkbox" name="commonArea" value="jardim" /> <span>Jardim</span></label>
+              <label class="check-pill"><input type="checkbox" name="commonArea" value="rooftop" /> <span>Rooftop</span></label>
+              <label class="check-pill"><input type="checkbox" name="commonArea" value="bicicletario" /> <span>Bicicletário</span></label>
+              <label class="check-pill"><input type="checkbox" name="commonArea" value="portaria-24h" /> <span>Portaria 24h</span></label>
+              <label class="check-pill"><input type="checkbox" name="commonArea" value="seguranca" /> <span>Segurança</span></label>
+              <label class="check-pill"><input type="checkbox" name="commonArea" value="vagas-visitantes" /> <span>Vagas para visitantes</span></label>
+              <label class="check-pill"><input type="checkbox" name="commonArea" value="gerador" /> <span>Gerador</span></label>
+              <label class="check-pill"><input type="checkbox" name="commonArea" value="lazer-completo" /> <span>Lazer completo</span></label>
+              <label class="check-pill ev"><input type="checkbox" name="commonArea" value="carregador-eletrico" /> <span>Infraestrutura para carregar carro elétrico</span></label>
+            </div>
+            <div class="hint" id="commonAreasHint">Este bloco aparece apenas quando o tipo de imóvel selecionado aceita áreas comuns.</div>
+          </div>
+
+          <details>
+            <summary>Mais filtros e preferências</summary>
+            <div class="details-body">
+              <div class="check-grid">
+                <label class="check-pill"><input type="checkbox" name="preference" value="varanda" /> <span>Varanda</span></label>
+                <label class="check-pill"><input type="checkbox" name="preference" value="vista" /> <span>Vista aberta</span></label>
+                <label class="check-pill"><input type="checkbox" name="preference" value="pet-friendly" /> <span>Pet friendly</span></label>
+                <label class="check-pill"><input type="checkbox" name="preference" value="reformado" /> <span>Reformado</span></label>
+                <label class="check-pill"><input type="checkbox" name="preference" value="mobiliado" /> <span>Mobiliado</span></label>
+                <label class="check-pill"><input type="checkbox" name="preference" value="andar-alto" /> <span>Andar alto</span></label>
+              </div>
+            </div>
+          </details>
+
+          <div class="actions">
+            <button type="button" class="btn secondary" id="interpretBriefing">Interpretar briefing</button>
+            <button type="submit" class="btn primary">Buscar compatíveis</button>
+            <button type="button" class="btn ghost" id="clearForm">Limpar</button>
+          </div>
+        </form>
+      </aside>
+    </section>
+
+    <section class="results" id="imoveis-sugeridos" aria-labelledby="results-title">
+      <aside class="panel summary-card">
+        <div class="section-title">
+          <h3 id="results-title">Resumo do match</h3>
+        </div>
+        <div class="score-big" id="averageScore">--</div>
+        <ul class="summary-list" id="matchSummary">
+          <li>Selecione o tipo de imóvel para ativar a lógica condicional.</li>
+          <li>Casa de condomínio usa a terminologia “Áreas comuns do condomínio”.</li>
+          <li>A infraestrutura para carregar carro elétrico está disponível para apartamento e casa de condomínio.</li>
+        </ul>
+        <div class="chips" id="selectedChips" aria-label="Filtros selecionados"></div>
+      </aside>
+
+      <article class="panel list-card">
+        <div class="section-title">
+          <h3>Imóveis sugeridos</h3>
+          <span class="pill" id="resultCount">0 encontrados</span>
+        </div>
+        <div class="bulk-actions" aria-label="Ações para imóveis selecionados">
+          <span class="selection-status" id="selectionCount">Nenhum imóvel selecionado</span>
+          <button type="button" class="btn secondary" id="selectAllResults">Selecionar todos</button>
+          <button type="button" class="btn ghost" id="clearSelectedResults">Limpar seleção</button>
+          <button type="button" class="btn whatsapp" id="sendSelectedWhatsApp" disabled>Enviar selecionados por WhatsApp</button>
+        </div>
+        <div class="properties" id="propertyList"></div>
+      </article>
+    </section>
+
+
+    <section class="panel content-section" id="como-funciona" aria-labelledby="como-funciona-title">
+      <p class="eyebrow">Como funciona</p>
+      <div class="content-heading">
+        <h2 id="como-funciona-title">Do briefing ao imóvel certo, sem virar um formulário infinito.</h2>
+        <p>O MatchR mantém o motor objetivo, mas preserva as seções de explicação da página para o usuário entender a proposta completa.</p>
+      </div>
+      <div class="content-grid three">
+        <article class="content-card">
+          <span>1</span>
+          <h3>Captura o briefing</h3>
+          <p>O corretor escreve o pedido do cliente em linguagem natural ou preenche os campos essenciais.</p>
+        </article>
+        <article class="content-card">
+          <span>2</span>
+          <h3>Mostra só o que faz sentido</h3>
+          <p>Áreas comuns aparecem para apartamento e casa de condomínio, com a terminologia correta em cada caso.</p>
+        </article>
+        <article class="content-card">
+          <span>3</span>
+          <h3>Prioriza compatibilidade</h3>
+          <p>A lista sugerida organiza imóveis por aderência, com trava obrigatória de tipo e região quando esses campos são preenchidos.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel content-section" id="beneficios" aria-labelledby="beneficios-title">
+      <p class="eyebrow">Benefícios</p>
+      <div class="content-heading compact">
+        <h2 id="beneficios-title">Mais clareza para atender, argumentar e converter.</h2>
+      </div>
+      <div class="content-grid four">
+        <article class="content-card small">
+          <h3>Tela menos poluída</h3>
+          <p>Os filtros avançados ficam recolhidos e os campos condicionais aparecem no contexto certo.</p>
+        </article>
+        <article class="content-card small">
+          <h3>Follow-up melhor</h3>
+          <p>O corretor entende rapidamente por que um imóvel combina com o cliente.</p>
+        </article>
+        <article class="content-card small">
+          <h3>Busca mais inteligente</h3>
+          <p>Briefing por texto ajuda a transformar intenção em filtros acionáveis.</p>
+        </article>
+        <article class="content-card small">
+          <h3>Pronto para evoluir</h3>
+          <p>A base já permite novas regras, integrações e critérios de compatibilidade.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel content-section split-content" id="para-imobiliarias" aria-labelledby="para-imobiliarias-title">
+      <div>
+        <p class="eyebrow">Para imobiliárias e incorporadoras</p>
+        <h2 id="para-imobiliarias-title">Uma camada de inteligência comercial para equipes.</h2>
+        <p>Além do uso individual pelo corretor, o MatchR pode ajudar equipes a padronizar atendimento, registrar demanda real e entender quais características aparecem mais nas buscas dos clientes.</p>
+      </div>
+      <div class="content-stack">
+        <div class="stack-item"><b>Gestão de demanda</b><span>Briefings mais organizados e reaproveitáveis.</span></div>
+        <div class="stack-item"><b>Curadoria de carteira</b><span>Imóveis apresentados com lógica de aderência, não só por disponibilidade.</span></div>
+        <div class="stack-item"><b>Inteligência de produto</b><span>Sinais sobre bairros, faixas de preço e atributos mais procurados.</span></div>
+      </div>
+    </section>
+
+    <section class="panel broker-video final-video" id="para-voce-corretor" aria-labelledby="broker-video-title">
+      <div class="broker-video-copy">
+        <p class="eyebrow">Para você, corretor</p>
+        <h2 id="broker-video-title">Assista ao vídeo de apresentação.</h2>
+        <p>
+          Aula de Renato Gosling, fundador do MatchR, sobre como corretores podem ganhar eficiência em follow-up, networking e técnicas de vendas.
+        </p>
+      </div>
+      <div class="video-frame" aria-label="Vídeo de apresentação para corretores">
+        <iframe
+          src="https://www.youtube.com/embed/7o9W3ATGCl4"
+          title="Vídeo para você, corretor - MatchR"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+
+    const menuButton = document.getElementById("menuButton");
+    const menuClose = document.getElementById("menuClose");
+    const menuOverlay = document.getElementById("menuOverlay");
+    const siteMenu = document.getElementById("siteMenu");
+    const menuLinks = document.querySelectorAll("[data-menu-link]");
+
+    function openMenu() {
+      menuOverlay.hidden = false;
+      document.body.classList.add("menu-open");
+      menuButton.setAttribute("aria-expanded", "true");
+      siteMenu.setAttribute("aria-hidden", "false");
+      const firstLink = siteMenu.querySelector("a, button");
+      if (firstLink) firstLink.focus({ preventScroll: true });
+    }
+
+    function closeMenu(restoreFocus = true) {
+      document.body.classList.remove("menu-open");
+      menuButton.setAttribute("aria-expanded", "false");
+      siteMenu.setAttribute("aria-hidden", "true");
+      menuOverlay.hidden = true;
+      if (restoreFocus) menuButton.focus({ preventScroll: true });
+    }
+
+    menuButton.addEventListener("click", () => {
+      const isOpen = menuButton.getAttribute("aria-expanded") === "true";
+      isOpen ? closeMenu() : openMenu();
+    });
+
+    menuClose.addEventListener("click", () => closeMenu());
+    menuOverlay.addEventListener("click", () => closeMenu());
+    menuLinks.forEach(link => link.addEventListener("click", () => closeMenu(false)));
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && document.body.classList.contains("menu-open")) closeMenu();
+    });
+
+    const commonAreaConfig = {
+      "apartamento": {
+        title: "Áreas comuns do edifício",
+        hint: "Exibido porque o tipo selecionado é Apartamento."
+      },
+      "casa-condominio": {
+        title: "Áreas comuns do condomínio",
+        hint: "Exibido porque o tipo selecionado é Casa de condomínio."
+      }
+    };
+
+    const typeLabel = {
+      "apartamento": "Apartamento",
+      "casa": "Casa",
+      "casa-condominio": "Casa de condomínio",
+      "casa-campo": "Casa de campo",
+      "casa-praia": "Casa na praia",
+      "cobertura": "Cobertura"
+    };
+
+    const commonAreaLabel = {
+      "piscina": "Piscina",
+      "academia": "Academia",
+      "salao-festas": "Salão de festas",
+      "espaco-gourmet": "Espaço gourmet",
+      "churrasqueira": "Churrasqueira",
+      "playground": "Playground",
+      "brinquedoteca": "Brinquedoteca",
+      "quadra": "Quadra",
+      "sauna": "Sauna",
+      "coworking": "Coworking",
+      "pet-place": "Pet place",
+      "jardim": "Jardim",
+      "rooftop": "Rooftop",
+      "bicicletario": "Bicicletário",
+      "portaria-24h": "Portaria 24h",
+      "seguranca": "Segurança",
+      "vagas-visitantes": "Vagas para visitantes",
+      "gerador": "Gerador",
+      "lazer-completo": "Lazer completo",
+      "carregador-eletrico": "Infraestrutura para carregar carro elétrico"
+    };
+
+    const sampleProperties = [
+      {
+        title: "Apartamento no Itaim com lazer completo",
+        type: "apartamento",
+        neighborhood: "Itaim Bibi",
+        city: "São Paulo",
+        locationAliases: ["Itaim"],
+        price: 3400000,
+        bedrooms: 3,
+        suites: 2,
+        parking: 2,
+        area: 156,
+        commonAreas: ["piscina", "academia", "salao-festas", "carregador-eletrico", "portaria-24h", "lazer-completo"],
+        preferences: ["varanda", "vista", "pet-friendly"],
+        agency: { name: "Prime SP Imóveis", initials: "PS" },
+        visual: "apartment",
+        description: "Boa aderência para cliente que valoriza prédio completo, recarga para carro elétrico e localização premium."
+      },
+      {
+        title: "Casa de condomínio no Alto de Pinheiros",
+        type: "casa-condominio",
+        neighborhood: "Alto de Pinheiros",
+        city: "São Paulo",
+        locationAliases: ["Alto de Pinheiros", "City Boaçava"],
+        price: 5900000,
+        bedrooms: 4,
+        suites: 3,
+        parking: 4,
+        area: 360,
+        commonAreas: ["seguranca", "vagas-visitantes", "jardim", "carregador-eletrico", "playground"],
+        preferences: ["pet-friendly", "reformado", "jardim"],
+        agency: { name: "Alto Prime Imóveis", initials: "AP" },
+        visual: "house",
+        description: "Resultado demonstrativo correto para casa de condomínio em Alto de Pinheiros, com tipo e região respeitados."
+      },
+      {
+        title: "Casa de condomínio familiar em Alphaville",
+        type: "casa-condominio",
+        neighborhood: "Alphaville",
+        city: "Barueri",
+        price: 5200000,
+        bedrooms: 4,
+        suites: 4,
+        parking: 4,
+        area: 420,
+        commonAreas: ["seguranca", "quadra", "playground", "carregador-eletrico", "vagas-visitantes", "jardim"],
+        preferences: ["pet-friendly", "reformado"],
+        agency: { name: "Vila Real Estate", initials: "VR" },
+        visual: "house",
+        description: "Casa em condomínio com segurança, estrutura familiar e infraestrutura para carregar carro elétrico."
+      },
+      {
+        title: "Cobertura duplex em Moema",
+        type: "cobertura",
+        neighborhood: "Moema",
+        city: "São Paulo",
+        price: 4100000,
+        bedrooms: 3,
+        suites: 3,
+        parking: 3,
+        area: 240,
+        commonAreas: [],
+        preferences: ["varanda", "vista", "reformado"],
+        agency: { name: "Bairro Nobre Realty", initials: "BN" },
+        visual: "apartment",
+        description: "Opção com terraço e vista aberta. Áreas comuns ficam ocultas no formulário para este tipo."
+      },
+      {
+        title: "Apartamento nos Jardins com academia e piscina",
+        type: "apartamento",
+        neighborhood: "Jardins",
+        city: "São Paulo",
+        locationAliases: ["Jardim Paulista", "Jardim América"],
+        price: 2950000,
+        bedrooms: 3,
+        suites: 1,
+        parking: 2,
+        area: 142,
+        commonAreas: ["piscina", "academia", "bicicletario", "gerador"],
+        preferences: ["andar-alto", "vista"],
+        agency: { name: "Jardins Collection", initials: "JC" },
+        visual: "apartment",
+        description: "Perfil bom para cliente urbano que prioriza serviços do edifício e mobilidade."
+      },
+      {
+        title: "Casa térrea no Alto de Pinheiros",
+        type: "casa",
+        neighborhood: "Alto de Pinheiros",
+        city: "São Paulo",
+        price: 3900000,
+        bedrooms: 4,
+        suites: 2,
+        parking: 3,
+        area: 310,
+        commonAreas: [],
+        preferences: ["pet-friendly", "reformado", "jardim"],
+        agency: { name: "Pinheiros Casas", initials: "PC" },
+        visual: "house",
+        description: "Casa fora de condomínio; por isso, o formulário não exibe áreas comuns."
+      },
+      {
+        title: "Casa de condomínio compacta na Granja Viana",
+        type: "casa-condominio",
+        neighborhood: "Granja Viana",
+        city: "Cotia",
+        price: 2450000,
+        bedrooms: 3,
+        suites: 2,
+        parking: 2,
+        area: 220,
+        commonAreas: ["seguranca", "piscina", "playground", "carregador-eletrico", "espaco-gourmet"],
+        preferences: ["pet-friendly", "varanda"],
+        agency: { name: "Reserva Oeste", initials: "RO" },
+        visual: "house",
+        description: "Alternativa com condomínio completo, boa área externa e recarga para carro elétrico."
+      },
+      {
+        title: "Casa de campo em São Roque com vista verde",
+        type: "casa-campo",
+        neighborhood: "São Roque",
+        city: "São Roque",
+        price: 3200000,
+        bedrooms: 4,
+        suites: 2,
+        parking: 5,
+        area: 680,
+        commonAreas: [],
+        preferences: ["vista", "pet-friendly", "jardim"],
+        agency: { name: "Serra & Campo", initials: "SC" },
+        visual: "country",
+        description: "Perfil para cliente que quer natureza, privacidade e área externa ampla."
+      },
+      {
+        title: "Casa na praia em Juquehy perto do mar",
+        type: "casa-praia",
+        neighborhood: "Juquehy",
+        city: "São Sebastião",
+        locationAliases: ["Juqueí", "Litoral Norte"],
+        price: 4800000,
+        bedrooms: 5,
+        suites: 4,
+        parking: 4,
+        area: 410,
+        commonAreas: [],
+        preferences: ["varanda", "vista", "mobiliado"],
+        agency: { name: "Litoral Prime", initials: "LP" },
+        visual: "beach",
+        description: "Casa para cliente buscando litoral, conforto e uso familiar nos fins de semana."
+      }
+    ];
+
+    const form = document.getElementById("matchForm");
+    const propertyType = document.getElementById("propertyType");
+    const commonAreasBlock = document.getElementById("commonAreasBlock");
+    const commonAreasTitle = document.getElementById("commonAreasTitle");
+    const commonAreasHint = document.getElementById("commonAreasHint");
+    const propertyList = document.getElementById("propertyList");
+    const resultCount = document.getElementById("resultCount");
+    const averageScore = document.getElementById("averageScore");
+    const matchSummary = document.getElementById("matchSummary");
+    const selectedChips = document.getElementById("selectedChips");
+    const selectionCount = document.getElementById("selectionCount");
+    const selectAllResults = document.getElementById("selectAllResults");
+    const clearSelectedResults = document.getElementById("clearSelectedResults");
+    const sendSelectedWhatsApp = document.getElementById("sendSelectedWhatsApp");
+    const toast = document.getElementById("toast");
+
+    let currentRankedResults = [];
+    let selectedPropertyKeys = new Set();
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("is-visible");
+      window.clearTimeout(showToast.timer);
+      showToast.timer = window.setTimeout(() => toast.classList.remove("is-visible"), 2400);
+    }
+
+    function getCheckedValues(name) {
+      return Array.from(form.querySelectorAll(`input[name="${name}"]:checked`)).map(item => item.value);
+    }
+
+    function uncheckCommonAreas() {
+      form.querySelectorAll('input[name="commonArea"]').forEach(item => item.checked = false);
+    }
+
+    function updateCommonAreasVisibility(previousType = "") {
+      const currentType = propertyType.value;
+      const config = commonAreaConfig[currentType];
+
+      if (config) {
+        commonAreasTitle.textContent = config.title;
+        commonAreasHint.textContent = config.hint + " A opção de infraestrutura para carregar carro elétrico está disponível aqui.";
+        commonAreasBlock.classList.add("is-visible");
+        commonAreasBlock.removeAttribute("hidden");
+      } else {
+        if (commonAreasBlock.classList.contains("is-visible") || previousType in commonAreaConfig) {
+          uncheckCommonAreas();
+        }
+        commonAreasBlock.classList.remove("is-visible");
+        commonAreasBlock.setAttribute("hidden", "");
+      }
+    }
+
+    function normalizeCurrency(value) {
+      if (!value) return 0;
+      const onlyNumbers = String(value).replace(/[^0-9]/g, "");
+      return onlyNumbers ? Number(onlyNumbers) : 0;
+    }
+
+    function formatCurrency(value) {
+      return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 }).format(value);
+    }
+
+    function escapeHTML(value) {
+      return String(value ?? "").replace(/[&<>"']/g, char => {
+        switch (char) {
+          case "&": return "&amp;";
+          case "<": return "&lt;";
+          case ">": return "&gt;";
+          case '"': return "&quot;";
+          case "'": return "&#039;";
+          default: return char;
+        }
+      });
+    }
+
+    function normalizeText(value) {
+      return String(value || "")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9\s]/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function compactLocation(value) {
+      return normalizeText(value)
+        .split(" ")
+        .filter(word => word && !["de", "da", "do", "das", "dos", "em", "no", "na"].includes(word))
+        .join(" ");
+    }
+
+    function locationCandidates(property) {
+      return [property.neighborhood, property.city, ...(property.locationAliases || [])].filter(Boolean);
+    }
+
+    function matchesNeighborhood(property, wantedRaw) {
+      const wanted = normalizeText(wantedRaw);
+      const wantedCompact = compactLocation(wantedRaw);
+      if (!wanted) return true;
+
+      return locationCandidates(property).some(candidateRaw => {
+        const candidate = normalizeText(candidateRaw);
+        const candidateCompact = compactLocation(candidateRaw);
+        return candidate === wanted || candidateCompact === wantedCompact;
+      });
+    }
+
+    function hardFilterFailure(property, criteria) {
+      if (criteria.type && property.type !== criteria.type) return "tipo diferente";
+      if (criteria.neighborhood && !matchesNeighborhood(property, criteria.neighborhood)) return "região diferente";
+      return "";
+    }
+
+    function renderPropertyMedia(property) {
+      const agency = property.agency || { name: "Imobiliária parceira", initials: "IM" };
+      return `
+        <div class="property-media ${escapeHTML(property.visual || "")}" role="img" aria-label="Imagem do imóvel ${escapeHTML(property.title)} com logo da imobiliária ${escapeHTML(agency.name)}">
+          <span class="photo-kicker">Imagem do imóvel</span>
+          <div class="agency-badge" aria-label="Logo da imobiliária ${escapeHTML(agency.name)}">
+            <b>${escapeHTML(agency.initials || "IM")}</b>
+            <small>${escapeHTML(agency.name)}</small>
+          </div>
+        </div>
+      `;
+    }
+
+    function getPropertyKey(property) {
+      return normalizeText(property.title).replace(/\s+/g, "-") || String(property.title || "imovel");
+    }
+
+    function getSelectedItems() {
+      return currentRankedResults.filter(item => selectedPropertyKeys.has(getPropertyKey(item.property)));
+    }
+
+    function buildSelectedWhatsAppUrl(items) {
+      const lines = [
+        "Olá! Separei estes imóveis compatíveis no MatchR:",
+      ];
+
+      items.forEach(({ property, score }, index) => {
+        lines.push(
+          "",
+          `${index + 1}. ${property.title}`,
+          `${typeLabel[property.type]} em ${property.neighborhood}`,
+          `Imobiliária: ${(property.agency && property.agency.name) || "parceira"}`,
+          `${formatCurrency(property.price)} • ${property.bedrooms} dorms • ${property.suites} suítes • ${property.parking} vagas • ${property.area} m²`,
+          `Aderência no match: ${score}%`
+        );
+      });
+
+      lines.push("", "Quer que eu te envie mais detalhes ou agende uma visita?");
+      return `https://wa.me/?text=${encodeURIComponent(lines.join("\n"))}`;
+    }
+
+    function updateSelectionUI() {
+      const selectedItems = getSelectedItems();
+      const count = selectedItems.length;
+      const visibleCount = currentRankedResults.length;
+
+      selectionCount.textContent = count
+        ? `${count} ${count === 1 ? "imóvel selecionado" : "imóveis selecionados"} para enviar no Zap`
+        : "Nenhum imóvel selecionado";
+
+      selectAllResults.disabled = visibleCount === 0;
+      clearSelectedResults.disabled = count === 0;
+      sendSelectedWhatsApp.disabled = count === 0;
+      sendSelectedWhatsApp.setAttribute("aria-disabled", count === 0 ? "true" : "false");
+    }
+
+    function buildWhatsAppUrl(property, score) {
+      const message = [
+        "Olá! Quero falar sobre este imóvel encontrado no MatchR:",
+        property.title,
+        `${typeLabel[property.type]} em ${property.neighborhood}`,
+        `Imobiliária: ${(property.agency && property.agency.name) || "parceira"}`,
+        `${formatCurrency(property.price)} • ${property.bedrooms} dorms • ${property.suites} suítes • ${property.parking} vagas • ${property.area} m²`,
+        `Aderência no match: ${score}%`
+      ].join("\n");
+
+      return `https://wa.me/?text=${encodeURIComponent(message)}`;
+    }
+
+    function parseBriefing() {
+      const text = document.getElementById("briefing").value.toLowerCase();
+      if (!text.trim()) {
+        showToast("Digite um briefing para interpretar.");
+        return;
+      }
+
+      const typeRules = [
+        { value: "casa-condominio", regex: /(casa\s+de\s+condom[ií]nio|condom[ií]nio\s+de\s+casas|casa\s+em\s+condom[ií]nio)/i },
+        { value: "apartamento", regex: /(apartamento|apto|edif[ií]cio|pr[eé]dio)/i },
+        { value: "cobertura", regex: /(cobertura|duplex)/i },
+        { value: "casa-praia", regex: /(casa\s+(na|de)\s+praia|litoral|juquehy|juque[ií]|guaruj[aá]|maresias|s[aã]o\s+sebasti[aã]o)/i },
+        { value: "casa-campo", regex: /(casa\s+(de|no)\s+campo|s[ií]tio|fazenda|ch[aá]cara|s[aã]o\s+roque|atibaia|serra)/i },
+        { value: "casa", regex: /\bcasa\b/i }
+      ];
+
+      for (const rule of typeRules) {
+        if (rule.regex.test(text)) {
+          propertyType.value = rule.value;
+          updateCommonAreasVisibility();
+          break;
+        }
+      }
+
+      const neighborhoods = ["alto de pinheiros", "vila nova conceição", "campo belo", "itaim bibi", "granja viana", "são roque", "sao roque", "são sebastião", "sao sebastiao", "alphaville", "pinheiros", "jardins", "juquehy", "juqueí", "guarujá", "guaruja", "moema", "itaim"];
+      const matchedNeighborhood = neighborhoods.find(item => normalizeText(text).includes(normalizeText(item)));
+      if (matchedNeighborhood) {
+        const locationLabels = {
+          "alto de pinheiros": "Alto de Pinheiros",
+          "vila nova conceicao": "Vila Nova Conceição",
+          "campo belo": "Campo Belo",
+          "itaim bibi": "Itaim Bibi",
+          "granja viana": "Granja Viana",
+          "sao roque": "São Roque",
+          "são roque": "São Roque",
+          "sao sebastiao": "São Sebastião",
+          "são sebastião": "São Sebastião",
+          "alphaville": "Alphaville",
+          "pinheiros": "Pinheiros",
+          "jardins": "Jardins",
+          "juquehy": "Juquehy",
+          "juquei": "Juquehy",
+          "juqueí": "Juquehy",
+          "guaruja": "Guarujá",
+          "guarujá": "Guarujá",
+          "moema": "Moema",
+          "itaim": "Itaim Bibi"
+        };
+        document.getElementById("neighborhood").value = locationLabels[normalizeText(matchedNeighborhood)] || matchedNeighborhood.replace(/\b\w/g, letter => letter.toUpperCase());
+      }
+
+      const bedroomsMatch = text.match(/(\d+)\s*(quartos|dormit[oó]rios|dorms)/i);
+      if (bedroomsMatch) document.getElementById("bedrooms").value = Math.min(Number(bedroomsMatch[1]), 5).toString();
+
+      const suitesMatch = text.match(/(\d+)\s*su[ií]tes?/i);
+      if (suitesMatch) document.getElementById("suites").value = Math.min(Number(suitesMatch[1]), 4).toString();
+
+      const parkingMatch = text.match(/(\d+)\s*(vagas?|garagens?)/i);
+      if (parkingMatch) document.getElementById("parking").value = Math.min(Number(parkingMatch[1]), 4).toString();
+
+      const millionMatch = text.match(/(?:r\$\s*)?(\d+(?:[,.]\d+)?)\s*(mi|milh(?:ões|ao|ão)?)/i);
+      if (millionMatch) {
+        const number = Number(millionMatch[1].replace(",", "."));
+        document.getElementById("budget").value = String(Math.round(number * 1000000));
+      }
+
+      const areaKeywords = [
+        ["piscina", /(piscina)/i],
+        ["academia", /(academia|fitness)/i],
+        ["salao-festas", /(sal[aã]o\s+de\s+festas?)/i],
+        ["espaco-gourmet", /(gourmet|espa[cç]o\s+gourmet)/i],
+        ["churrasqueira", /(churrasqueira|churrasco)/i],
+        ["playground", /(playground|parquinho)/i],
+        ["quadra", /(quadra|t[eê]nis|beach\s+tennis)/i],
+        ["sauna", /(sauna)/i],
+        ["coworking", /(coworking|home\s+office\s+coletivo)/i],
+        ["pet-place", /(pet\s+place|espa[cç]o\s+pet|pet)/i],
+        ["rooftop", /(rooftop)/i],
+        ["bicicletario", /(biciclet[aá]rio|bike)/i],
+        ["portaria-24h", /(portaria\s*24|porteiro\s*24)/i],
+        ["seguranca", /(seguran[cç]a|controle\s+de\s+acesso)/i],
+        ["gerador", /(gerador)/i],
+        ["lazer-completo", /(lazer\s+completo|condom[ií]nio\s+clube)/i],
+        ["carregador-eletrico", /(carro\s+el[eé]trico|carregador|recarga|vaga\s+com\s+tomada|tomada\s+para\s+carro|ev\s*charger)/i]
+      ];
+
+      areaKeywords.forEach(([value, regex]) => {
+        if (regex.test(text)) {
+          const checkbox = form.querySelector(`input[name="commonArea"][value="${value}"]`);
+          if (checkbox && commonAreaConfig[propertyType.value]) checkbox.checked = true;
+        }
+      });
+
+      const preferenceKeywords = [
+        ["varanda", /(varanda|sacada|terra[cç]o)/i],
+        ["vista", /(vista|vista\s+aberta)/i],
+        ["pet-friendly", /(pet\s*friendly|aceita\s+pet|cachorro|gato)/i],
+        ["reformado", /(reformado|novo|modernizado)/i],
+        ["mobiliado", /(mobiliado|decorado)/i],
+        ["andar-alto", /(andar\s+alto)/i]
+      ];
+
+      preferenceKeywords.forEach(([value, regex]) => {
+        if (regex.test(text)) {
+          const checkbox = form.querySelector(`input[name="preference"][value="${value}"]`);
+          if (checkbox) checkbox.checked = true;
+        }
+      });
+
+      showToast("Briefing interpretado e filtros preenchidos.");
+      renderResults();
+    }
+
+    function calculateScore(property, criteria) {
+      let score = 42;
+      const reasons = [];
+
+      if (criteria.type) {
+        score += 24;
+        reasons.push("tipo compatível");
+      }
+
+      if (criteria.neighborhood) {
+        score += 18;
+        reasons.push("região compatível");
+      }
+
+      if (criteria.budget) {
+        if (property.price <= criteria.budget) {
+          score += 10;
+          reasons.push("dentro do orçamento");
+        } else {
+          score -= Math.min(18, Math.round(((property.price - criteria.budget) / criteria.budget) * 35));
+        }
+      }
+
+      if (criteria.bedrooms && property.bedrooms >= criteria.bedrooms) {
+        score += 7;
+        reasons.push("dormitórios atendidos");
+      }
+
+      if (criteria.suites && property.suites >= criteria.suites) {
+        score += 6;
+        reasons.push("suítes atendidas");
+      }
+
+      if (criteria.parking && property.parking >= criteria.parking) {
+        score += 6;
+        reasons.push("vagas atendidas");
+      }
+
+      const areaMatches = criteria.commonAreas.filter(item => property.commonAreas.includes(item));
+      score += areaMatches.length * 4;
+      if (areaMatches.length) reasons.push(`${areaMatches.length} áreas comuns compatíveis`);
+
+      const prefMatches = criteria.preferences.filter(item => property.preferences.includes(item));
+      score += prefMatches.length * 3;
+      if (prefMatches.length) reasons.push(`${prefMatches.length} preferências compatíveis`);
+
+      return { score: Math.max(0, Math.min(99, score)), reasons };
+    }
+
+    function collectCriteria() {
+      return {
+        type: propertyType.value,
+        neighborhood: document.getElementById("neighborhood").value.trim(),
+        budget: normalizeCurrency(document.getElementById("budget").value),
+        bedrooms: Number(document.getElementById("bedrooms").value || 0),
+        suites: Number(document.getElementById("suites").value || 0),
+        parking: Number(document.getElementById("parking").value || 0),
+        commonAreas: commonAreaConfig[propertyType.value] ? getCheckedValues("commonArea") : [],
+        preferences: getCheckedValues("preference")
+      };
+    }
+
+    function buildChips(criteria) {
+      const chips = [];
+      if (criteria.type) chips.push(typeLabel[criteria.type]);
+      if (criteria.neighborhood) chips.push(criteria.neighborhood);
+      if (criteria.budget) chips.push(`Até ${formatCurrency(criteria.budget)}`);
+      if (criteria.bedrooms) chips.push(`${criteria.bedrooms}+ dorms`);
+      if (criteria.suites) chips.push(`${criteria.suites}+ suítes`);
+      if (criteria.parking) chips.push(`${criteria.parking}+ vagas`);
+      criteria.commonAreas.forEach(item => chips.push(commonAreaLabel[item]));
+      criteria.preferences.forEach(item => chips.push(item.replace("-", " ")));
+
+      selectedChips.innerHTML = chips.length
+        ? chips.map(chip => `<span class="chip">${escapeHTML(chip)}</span>`).join("")
+        : `<span class="chip">Nenhum filtro aplicado</span>`;
+    }
+
+    function renderResults() {
+      const criteria = collectCriteria();
+      buildChips(criteria);
+
+      const ranked = sampleProperties
+        .map(property => {
+          const blocked = hardFilterFailure(property, criteria);
+          return blocked ? null : { property, ...calculateScore(property, criteria) };
+        })
+        .filter(Boolean)
+        .filter(item => item.score >= 40)
+        .sort((a, b) => b.score - a.score);
+
+      currentRankedResults = ranked;
+      const visibleKeys = new Set(ranked.map(({ property }) => getPropertyKey(property)));
+      selectedPropertyKeys = new Set(Array.from(selectedPropertyKeys).filter(key => visibleKeys.has(key)));
+
+      resultCount.textContent = `${ranked.length} ${ranked.length === 1 ? "encontrado" : "encontrados"}`;
+      averageScore.textContent = ranked.length ? `${Math.round(ranked.reduce((sum, item) => sum + item.score, 0) / ranked.length)}%` : "--";
+
+      if (!ranked.length) {
+        propertyList.innerHTML = `<div class="empty-state"><strong>Nenhum imóvel compatível dentro da região/tipo selecionados.</strong><br>Não trouxemos imóveis de outras regiões para preencher a lista. Se a busca pedir um bairro específico, regiões incompatíveis ficam bloqueadas automaticamente.</div>`;
+      } else {
+        propertyList.innerHTML = ranked.map(({ property, score, reasons }) => {
+          const key = getPropertyKey(property);
+          const isSelected = selectedPropertyKeys.has(key);
+          const checkedAttr = isSelected ? "checked" : "";
+
+          const meta = [
+            typeLabel[property.type],
+            property.neighborhood,
+            formatCurrency(property.price),
+            `${property.bedrooms} dorms`,
+            `${property.suites} suítes`,
+            `${property.parking} vagas`,
+            `${property.area} m²`
+          ].map(item => `<span>${escapeHTML(item)}</span>`).join("");
+
+          const relevantAreas = property.commonAreas
+            .slice(0, 5)
+            .map(item => commonAreaLabel[item])
+            .join(", ");
+
+          const whatsappUrl = buildWhatsAppUrl(property, score);
+
+          return `
+            <article class="property-card${isSelected ? " is-selected" : ""}" data-property-key="${escapeHTML(key)}">
+              ${renderPropertyMedia(property)}
+              <div>
+                <h4>${escapeHTML(property.title)}</h4>
+                <div class="property-meta">${meta}</div>
+                <p>${escapeHTML(property.description)}</p>
+                <div class="hint">${reasons.length ? `Por que apareceu: ${escapeHTML(reasons.join(", "))}.` : "Sugestão inicial da base demonstrativa."}</div>
+                ${relevantAreas ? `<div class="hint">Áreas: ${escapeHTML(relevantAreas)}</div>` : ""}
+                <div class="property-actions">
+                  <label class="select-property">
+                    <input class="property-select-input" type="checkbox" value="${escapeHTML(key)}" ${checkedAttr} />
+                    <span>Selecionar para Zap</span>
+                  </label>
+                  <a class="btn whatsapp" href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" aria-label="Enviar ${escapeHTML(property.title)} pelo WhatsApp">💬 WhatsApp</a>
+                </div>
+              </div>
+              <div class="property-score" aria-label="Aderência ${score}%">${score}%</div>
+            </article>
+          `;
+        }).join("");
+      }
+
+      updateSelectionUI();
+
+      const visibleType = propertyType.value;
+      const bullets = [];
+      if (visibleType === "apartamento") {
+        bullets.push("Apartamento selecionado: o bloco aparece como “Áreas comuns do edifício”.");
+      } else if (visibleType === "casa-condominio") {
+        bullets.push("Casa de condomínio selecionada: o bloco aparece como “Áreas comuns do condomínio”.");
+      } else if (visibleType) {
+        bullets.push(`${typeLabel[visibleType]} selecionado: o bloco de áreas comuns fica oculto para reduzir poluição visual.`);
+      } else {
+        bullets.push("Selecione um tipo de imóvel para ativar a lógica condicional da tela.");
+      }
+
+      if (criteria.commonAreas.includes("carregador-eletrico")) {
+        bullets.push("Infraestrutura para carregar carro elétrico marcada como requisito do cliente.");
+      } else {
+        bullets.push("A opção de infraestrutura para carregar carro elétrico fica disponível para Apartamento e Casa de condomínio.");
+      }
+
+      if (criteria.neighborhood) {
+        bullets.push("Região preenchida: a busca usa trava obrigatória e não mistura imóveis de outros bairros ou cidades.");
+      }
+
+      bullets.push("Filtros avançados permanecem recolhidos por padrão para deixar o MVP mais limpo.");
+      matchSummary.innerHTML = bullets.map(item => `<li>${item}</li>`).join("");
+    }
+
+    propertyList.addEventListener("change", event => {
+      const target = event.target;
+      if (!target.classList || !target.classList.contains("property-select-input")) return;
+
+      if (target.checked) {
+        selectedPropertyKeys.add(target.value);
+      } else {
+        selectedPropertyKeys.delete(target.value);
+      }
+
+      const card = target.closest(".property-card");
+      if (card) card.classList.toggle("is-selected", target.checked);
+      updateSelectionUI();
+    });
+
+    selectAllResults.addEventListener("click", () => {
+      currentRankedResults.forEach(({ property }) => selectedPropertyKeys.add(getPropertyKey(property)));
+      propertyList.querySelectorAll(".property-select-input").forEach(input => {
+        input.checked = true;
+        const card = input.closest(".property-card");
+        if (card) card.classList.add("is-selected");
+      });
+      updateSelectionUI();
+      showToast("Todos os imóveis visíveis foram selecionados para envio no Zap.");
+    });
+
+    clearSelectedResults.addEventListener("click", () => {
+      selectedPropertyKeys.clear();
+      propertyList.querySelectorAll(".property-select-input").forEach(input => {
+        input.checked = false;
+        const card = input.closest(".property-card");
+        if (card) card.classList.remove("is-selected");
+      });
+      updateSelectionUI();
+      showToast("Seleção de imóveis limpa.");
+    });
+
+    sendSelectedWhatsApp.addEventListener("click", () => {
+      const selectedItems = getSelectedItems();
+      if (!selectedItems.length) {
+        showToast("Selecione pelo menos um imóvel para enviar por WhatsApp.");
+        return;
+      }
+      window.open(buildSelectedWhatsAppUrl(selectedItems), "_blank", "noopener,noreferrer");
+    });
+
+    let previousType = propertyType.value;
+    propertyType.addEventListener("change", () => {
+      updateCommonAreasVisibility(previousType);
+      previousType = propertyType.value;
+      renderResults();
+    });
+
+    form.addEventListener("change", renderResults);
+    form.addEventListener("submit", event => {
+      event.preventDefault();
+      renderResults();
+      showToast("Busca atualizada com os filtros selecionados.");
+    });
+
+    document.getElementById("interpretBriefing").addEventListener("click", parseBriefing);
+    document.getElementById("clearForm").addEventListener("click", () => {
+      form.reset();
+      previousType = "";
+      selectedPropertyKeys.clear();
+      updateCommonAreasVisibility();
+      renderResults();
+      showToast("Filtros limpos.");
+    });
+
+    updateCommonAreasVisibility();
+    renderResults();
+  </script>
 </body>
 </html>
