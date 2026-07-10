@@ -1,0 +1,20 @@
+INSTRUÇÕES RÁPIDAS — MATCHR MVP CORRIGIDO
+
+1. Baixe o arquivo index.html.
+2. No GitHub, abra o repositório do site.
+3. Entre no arquivo index.html atual.
+4. Clique para editar ou use Upload files.
+5. Substitua o conteúdo/arquivo pelo novo index.html.
+6. O nome final no GitHub precisa ser exatamente: index.html
+
+IMPORTANTE:
+- Não suba o arquivo como index (1).html, index (2).html ou qualquer variação.
+- Não suba o .zip direto esperando que o GitHub extraia. Se usar o zip, primeiro extraia e suba o index.html de dentro.
+- Depois do commit, aguarde 1 a 3 minutos e atualize o site com Ctrl+F5 ou abra com ?v=2 no final da URL.
+
+O que foi corrigido:
+- Mantido modo índice intermediário.
+- Mantido filtro por Origem.
+- Mantidos filtros até R$ 3 milhões e até R$ 5 milhões.
+- Corrigida a distribuição dos tipos de imóvel, que antes podia concentrar tudo como Apartamento.
+- Adicionada marca visual "versão corrigida" no subtítulo do menu lateral.
