@@ -1,0 +1,24 @@
+LANDING PAGE MATCHER — ATUALIZADA
+
+Arquivos principais:
+- index.html
+- CNAME
+
+O que foi ajustado:
+- Frase principal: "Seu próximo cliente já está esperando o match certo."
+- Logo do Matcher mantido no topo da página.
+- Formulário com campos: Nome, Telefone / WhatsApp e CRECI.
+- Card "Feito para corretor" posicionado como o primeiro dos três benefícios.
+- Formulário direcionado para: renato@renatogosling.com.br
+
+Como subir no GitHub:
+1. Abra o repositório do site.
+2. Substitua o arquivo index.html da raiz por este novo index.html.
+3. Se estiver usando GitHub Pages com domínio próprio, mantenha o arquivo CNAME com:
+   www.matchr.com.br
+4. Faça commit na branch principal.
+5. Aguarde 1 a 3 minutos e atualize o site.
+
+Atenção:
+O arquivo deve se chamar exatamente index.html.
+Não suba como index (1).html.
