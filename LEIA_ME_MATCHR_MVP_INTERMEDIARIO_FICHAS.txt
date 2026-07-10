@@ -1,0 +1,8 @@
+MATCHR — MVP intermediário com links específicos de imóveis
+
+1. Suba o arquivo index.html na raiz do repositório do GitHub Pages.
+2. Ele precisa substituir o index.html atual. Não suba como index (1).html.
+3. O botão dos cards agora abre uma ficha específica do imóvel na origem, quando existe ficha pública.
+4. A busca por texto continua funcionando e também reconhece nomes de origens como Coelho, Bossa, Pilar, Local, Axpe, Refúgios, Anglo e Tamaras.
+5. A base é demonstrativa: não importa fotos, não copia descrições autorais e não exibe endereço completo.
+6. Para produção, o ideal é trocar PUBLIC_SOURCE_SAMPLES por uma importação autorizada via planilha/API/feed.
