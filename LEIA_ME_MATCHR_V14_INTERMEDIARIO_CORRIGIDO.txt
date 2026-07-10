@@ -1,0 +1,10 @@
+MatchR — V14 bege intermediário corrigido
+
+Ajustes desta versão:
+- manteve a comunicação visual bege da V14;
+- manteve a busca por texto/voz;
+- manteve o modo intermediário com dados mínimos e botão para abrir a ficha específica do imóvel na origem;
+- corrigiu a pertinência da busca: bairro/região, origem, tipo, orçamento, metragem, dormitórios, suítes e vagas agora funcionam como travas rígidas;
+- se não houver resultado compatível, o MVP mostra "nenhum imóvel compatível" em vez de completar com bairros, valores ou metragens diferentes.
+
+Suba o arquivo index.html na raiz do GitHub, substituindo o atual. Não suba como index (1).html.
