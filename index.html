@@ -387,6 +387,95 @@
     .field { display: grid; gap: 7px; }
     .field.full { grid-column: 1 / -1; }
 
+    .briefing-actions,
+    .voice-recorder {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 2px;
+      align-items: center;
+    }
+
+    .voice-recorder {
+      border: 1px solid rgba(231, 222, 211, .95);
+      border-radius: 18px;
+      padding: 10px;
+      background: rgba(255, 253, 249, .72);
+    }
+
+    .btn.voice {
+      background: var(--brand);
+      color: #fff;
+      box-shadow: 0 12px 24px rgba(61, 44, 36, .16);
+    }
+
+    .btn.voice.is-listening {
+      background: var(--orange-dark);
+      color: #fff;
+    }
+
+    .btn.stop-voice:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .voice-recorder .voice-status {
+      flex: 1 1 260px;
+      min-width: 220px;
+      margin: 0;
+      color: var(--muted);
+      font-size: .88rem;
+      line-height: 1.35;
+    }
+
+    .choice-divider {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 2px 0 0;
+      color: var(--muted);
+      font-size: .82rem;
+      font-weight: 950;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .choice-divider::before,
+    .choice-divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: rgba(143, 93, 59, .18);
+    }
+
+    .choice-divider span {
+      border: 1px solid rgba(231, 222, 211, .95);
+      background: rgba(255, 253, 249, .78);
+      border-radius: 999px;
+      padding: 5px 10px;
+    }
+
+    .manual-intro {
+      border: 1px solid rgba(143, 93, 59, .16);
+      background: rgba(239, 229, 216, .34);
+      border-radius: 16px;
+      padding: 12px 13px;
+    }
+
+    .manual-intro strong {
+      color: var(--brand);
+      font-size: .94rem;
+      letter-spacing: -.01em;
+    }
+
+    .manual-intro span {
+      color: var(--muted);
+      font-size: .88rem;
+      line-height: 1.35;
+    }
+
     label, summary {
       font-weight: 850;
       font-size: .92rem;
@@ -912,15 +1001,29 @@
         <div class="search-header">
           <div>
             <h3 id="search-title">Briefing da busca</h3>
-            <p>Preencha o essencial. Os detalhes ficam recolhidos para não poluir a tela.</p>
+            <p>Use um caminho por vez: fale/digite o briefing para preencher a busca ou escolha os filtros manualmente.</p>
           </div>
         </div>
 
         <form id="matchForm" class="form-grid" autocomplete="off">
           <div class="field full">
-            <label for="briefing">Briefing inteligente por texto</label>
+            <label for="briefing">Briefing inteligente por texto ou voz</label>
             <textarea id="briefing" name="briefing" placeholder="Ex.: Cliente procura casa de condomínio no Alto de Pinheiros, até R$ 6 mi, 4 quartos, 3 vagas, segurança e carregador para carro elétrico."></textarea>
-            <div class="hint">O texto reconhece tipo, bairro, preço, quartos, vagas e preferências como piscina, academia e carro elétrico.</div>
+            <div class="hint">Caminho rápido: digite, cole ou fale o pedido do cliente. Primeiro o áudio vira texto; depois você interpreta para preencher os filtros.</div>
+            <div class="voice-recorder" aria-label="Gravar áudio do briefing e transcrever no campo">
+              <button class="btn voice" id="speakBriefing" type="button">🎙️ Falar com áudio</button>
+              <button class="btn stop-voice" id="stopBriefing" type="button" disabled>⏹️ Parar</button>
+              <p class="voice-status" id="briefingVoiceStatus">Clique em “Falar com áudio” para ditar o briefing. O texto aparece automaticamente na caixa acima.</p>
+            </div>
+            <div class="briefing-actions" aria-label="Ações do briefing inteligente">
+              <button class="btn primary" id="interpretBriefing" type="button">Interpretar e preencher busca</button>
+            </div>
+          </div>
+
+          <div class="choice-divider"><span>ou</span></div>
+          <div class="field full manual-intro">
+            <strong>Escolha as opções abaixo</strong>
+            <span>Use esse caminho quando preferir montar a busca manualmente, sem usar o briefing inteligente.</span>
           </div>
 
           <div class="field">
@@ -1023,8 +1126,7 @@
           </details>
 
           <div class="form-actions">
-            <button class="btn primary" id="interpretBriefing" type="button">Interpretar briefing</button>
-            <button class="btn accent" type="submit">Buscar comparáveis</button>
+            <button class="btn accent" type="submit">Buscar compatíveis</button>
             <button class="btn" id="clearForm" type="button">Limpar</button>
           </div>
           <div class="chips" id="selectedChips" aria-label="Filtros aplicados"><span class="chip">Nenhum filtro aplicado</span></div>
@@ -1641,6 +1743,91 @@
       matchSummary.innerHTML = bullets.map(item => `<li>${item}</li>`).join("");
     }
 
+    let briefingRecognition = null;
+    let briefingListening = false;
+
+    function resetVoiceButtons() {
+      const speakButton = document.getElementById("speakBriefing");
+      const stopButton = document.getElementById("stopBriefing");
+      if (speakButton) {
+        speakButton.textContent = "🎙️ Falar com áudio";
+        speakButton.classList.remove("is-listening");
+      }
+      if (stopButton) stopButton.disabled = true;
+      briefingListening = false;
+      briefingRecognition = null;
+    }
+
+    function startVoiceBriefing() {
+      const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      const status = document.getElementById("briefingVoiceStatus");
+      const briefingField = document.getElementById("briefing");
+      const speakButton = document.getElementById("speakBriefing");
+      const stopButton = document.getElementById("stopBriefing");
+
+      if (!Recognition) {
+        showToast("Seu navegador não liberou busca por voz. Digite o briefing e clique em interpretar.");
+        if (status) status.textContent = "Busca por voz indisponível neste navegador. Você ainda pode digitar o briefing.";
+        return;
+      }
+
+      if (briefingListening && briefingRecognition) {
+        briefingRecognition.stop();
+        return;
+      }
+
+      const recognition = new Recognition();
+      briefingRecognition = recognition;
+      briefingListening = true;
+      recognition.lang = "pt-BR";
+      recognition.interimResults = true;
+      recognition.continuous = false;
+      recognition.maxAlternatives = 1;
+
+      const initialText = briefingField.value.trim();
+      let finalTranscript = "";
+
+      if (speakButton) {
+        speakButton.textContent = "🎙️ Ouvindo...";
+        speakButton.classList.add("is-listening");
+      }
+      if (stopButton) stopButton.disabled = false;
+      if (status) status.textContent = "Pode falar. Estou transcrevendo o áudio no campo de briefing...";
+
+      recognition.onresult = event => {
+        let interimTranscript = "";
+        for (let i = event.resultIndex; i < event.results.length; i += 1) {
+          const part = event.results[i][0].transcript.trim();
+          if (event.results[i].isFinal) finalTranscript += `${finalTranscript ? " " : ""}${part}`;
+          else interimTranscript += `${interimTranscript ? " " : ""}${part}`;
+        }
+        const composed = [initialText, finalTranscript, interimTranscript].filter(Boolean).join(" ").replace(/\s+/g, " ").trim();
+        briefingField.value = composed;
+      };
+
+      recognition.onerror = event => {
+        const blocked = event.error === "not-allowed" || event.error === "service-not-allowed";
+        showToast(blocked ? "Microfone bloqueado pelo navegador." : "Não consegui captar o áudio. Tente novamente ou digite o briefing.");
+        if (status) status.textContent = blocked ? "Permita o microfone no navegador e clique em Falar com áudio novamente." : "Não consegui captar o áudio. Tente de novo ou digite o briefing.";
+      };
+
+      recognition.onend = () => {
+        const hasText = briefingField.value.trim().length > 0;
+        resetVoiceButtons();
+        if (status) status.textContent = hasText ? "Áudio transcrito. Agora clique em “Interpretar e preencher busca”." : "Não entrou texto. Clique em Falar com áudio novamente ou digite o briefing.";
+      };
+
+      recognition.start();
+    }
+
+    function stopVoiceBriefing() {
+      if (briefingRecognition) {
+        briefingRecognition.stop();
+        const status = document.getElementById("briefingVoiceStatus");
+        if (status) status.textContent = "Gravação encerrada. Se o texto apareceu, clique em Interpretar e preencher busca.";
+      }
+    }
+
     function parseBriefing() {
       const text = document.getElementById("briefing").value.toLowerCase();
       if (!text.trim()) { showToast("Digite um briefing para interpretar."); return; }
@@ -1730,6 +1917,8 @@
           if (checkbox) checkbox.checked = true;
         }
       });
+      const status = document.getElementById("briefingVoiceStatus");
+      if (status) status.textContent = "Briefing interpretado. Os filtros abaixo foram preenchidos/atualizados.";
       showToast("Briefing interpretado e filtros preenchidos.");
       renderResults();
     }
@@ -1787,11 +1976,17 @@
     });
 
     document.getElementById("interpretBriefing").addEventListener("click", parseBriefing);
+    document.getElementById("speakBriefing").addEventListener("click", startVoiceBriefing);
+    const stopBriefingButton = document.getElementById("stopBriefing");
+    if (stopBriefingButton) stopBriefingButton.addEventListener("click", stopVoiceBriefing);
     document.getElementById("clearForm").addEventListener("click", () => {
       form.reset();
       previousType = "";
       selectedPropertyKeys.clear();
       updateCommonAreasVisibility();
+      resetVoiceButtons();
+      const voiceStatus = document.getElementById("briefingVoiceStatus");
+      if (voiceStatus) voiceStatus.textContent = "Clique em “Falar com áudio” para ditar o briefing. O texto aparece automaticamente na caixa acima.";
       renderResults();
       showToast("Filtros limpos.");
     });
